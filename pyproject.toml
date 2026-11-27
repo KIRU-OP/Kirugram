@@ -14,6 +14,7 @@ authors = [{ name = "Dan", email = "dan@kirugram.org" }]
 maintainers = [
     { name = "KurimuzonAkuma" },
     { name = "Danipulok", email = "danipulok@gmail.com" },
+    { name = "KIRU-OP", email = "240163269+KIRU-OP@users.noreply.github.com" },
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -68,7 +69,6 @@ Homepage = "https://github.com/KIRU-OP/Kirugram"
 Documentation = "https://github.com/KIRU-OP/Kirugram#readme"
 Source = "https://github.com/KIRU-OP/Kirugram"
 Issues = "https://github.com/KIRU-OP/Kirugram/issues"
-Community = "https://t.me/kurigram_chat"
 
 [project.optional-dependencies]
 fast = [
