@@ -53,6 +53,19 @@ jobs:
       - name: Run tests
         run: make test-unit
 
+  package-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v10.0.1
+      - name: Build wheel and source distribution
+        run: make build
+      - name: Verify build artifacts
+        run: |
+          test -n "$(find dist -maxdepth 1 -type f -name '*.whl' -print -quit)"
+          test -n "$(find dist -maxdepth 1 -type f -name '*.tar.gz' -print -quit)"
+
   lint:
     runs-on: ubuntu-latest
     steps:
