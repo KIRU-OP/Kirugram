@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://github.com/KIRU-OP/Kirugram">
-    <img src="https://raw.githubusercontent.com/kurigram-org/artwork/master/kurigram_logo_github.png" width="128" alt="Kirugram project artwork">
+    <img src="https://raw.githubusercontent.com/KIRU-OP/Kirugram/main/assets/kirugram-symbol.svg" width="112" alt="Kirugram custom project symbol">
   </a>
 </p>
 
