@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 """A client that stops at its first request, so a test reads what a method built."""
 
 from __future__ import annotations as _annotations
@@ -23,12 +23,12 @@ from typing import TYPE_CHECKING, NoReturn, Protocol
 
 import pytest
 
-from pyrogram import Client, raw, types
+from kirugram import Client, raw, types
 
 if TYPE_CHECKING:
     from collections.abc import Awaitable
 
-    from pyrogram.raw.core import TLObject
+    from kirugram.raw.core import TLObject
 
 
 class _InvokeReached(Exception):

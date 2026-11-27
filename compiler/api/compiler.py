@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -31,7 +31,7 @@ if TYPE_CHECKING:
 # from black import format_str, FileMode
 
 HOME_PATH = Path("compiler/api")
-DESTINATION_PATH = Path("pyrogram/raw")
+DESTINATION_PATH = Path("kirugram/raw")
 NOTICE_PATH = "NOTICE"
 
 SECTION_RE = re.compile(r"---(\w+)---")
@@ -46,7 +46,7 @@ INT_RE = re.compile(r"int(\d+)")
 CORE_TYPES = ["int", "long", "int128", "int256", "double", "bytes", "string", "Bool", "true"]
 
 # The TL core return types have no module under `raw.base`: `Bool`, `int` and `long` decode
-#  to Python builtins, and `future_salts` is hand-written in `pyrogram/raw/core` because its
+#  to Python builtins, and `future_salts` is hand-written in `kirugram/raw/core` because its
 #  constructor is parsed manually (see `source/sys_msgs.tl`).
 CORE_RETURN_TYPE_HINTS: Final[Mapping[str, str]] = {
     "Bool": "bool",
@@ -217,13 +217,13 @@ def get_docstring_arg_type(t: str):
         else:
             return f"``{t.lower()}``"
     elif t == "TLObject" or t == "X":
-        return "Any object from :obj:`~pyrogram.raw.types`"
+        return "Any object from :obj:`~kirugram.raw.types`"
     elif t == "!X":
-        return "Any function from :obj:`~pyrogram.raw.functions`"
+        return "Any function from :obj:`~kirugram.raw.functions`"
     elif t.lower().startswith("vector"):
         return "List of " + get_docstring_arg_type(t.split("<", 1)[1][:-1])
     else:
-        return f":obj:`{t} <pyrogram.raw.base.{t}>`"
+        return f":obj:`{t} <kirugram.raw.base.{t}>`"
 
 
 def get_references(t: str, kind: str):
@@ -402,7 +402,7 @@ def start(format: bool = False):
         docstring += (
             f"\n\n    Constructors:\n"
             f"        This base type has {constr_count} constructor{'s' if constr_count > 1 else ''} available.\n\n"
-            f"        .. currentmodule:: pyrogram.raw.types\n\n"
+            f"        .. currentmodule:: kirugram.raw.types\n\n"
             f"        .. autosummary::\n"
             f"            :nosignatures:\n\n"
             f"            {items}"
@@ -414,7 +414,7 @@ def start(format: bool = False):
             docstring += (
                 f"\n\n    Functions:\n        This object can be returned by "
                 f"{ref_count} function{'s' if ref_count > 1 else ''}.\n\n"
-                f"        .. currentmodule:: pyrogram.raw.functions\n\n"
+                f"        .. currentmodule:: kirugram.raw.functions\n\n"
                 f"        .. autosummary::\n"
                 f"            :nosignatures:\n\n"
                 f"            " + references
@@ -477,7 +477,7 @@ def start(format: bool = False):
         if c.section == "types":
             constructor_docs = combinator_doc.get("desc", "Telegram API type.")
             docstring += indent_desc(constructor_docs) + "\n"
-            docstring += f"\n    Constructor of :obj:`~pyrogram.raw.base.{c.qualtype}`."
+            docstring += f"\n    Constructor of :obj:`~kirugram.raw.base.{c.qualtype}`."
         else:
             function_docs = combinator_doc
 
@@ -518,7 +518,7 @@ def start(format: bool = False):
                         error["description"].replace("\\", "\\\\").replace('"""', '\\"\\"\\"')
                     )
                     docstring += (
-                        f"        :obj:`~pyrogram.errors.{error['exception']}`: {description}\n"
+                        f"        :obj:`~kirugram.errors.{error['exception']}`: {description}\n"
                     )
 
             docstring += "\n    Returns:\n        " + get_docstring_arg_type(c.qualtype)
@@ -529,7 +529,7 @@ def start(format: bool = False):
                 docstring += (
                     f"\n    Functions:\n        This object can be returned by "
                     f"{count} function{'s' if count > 1 else ''}.\n\n"
-                    f"        .. currentmodule:: pyrogram.raw.functions\n\n"
+                    f"        .. currentmodule:: kirugram.raw.functions\n\n"
                     f"        .. autosummary::\n"
                     f"            :nosignatures:\n\n"
                     f"            " + references
@@ -748,23 +748,23 @@ def start(format: bool = False):
         f.write("objects = {")
 
         for c in combinators:
-            f.write(f'\n    {c.id}: "pyrogram.raw.{c.section}.{c.qualname}",')
+            f.write(f'\n    {c.id}: "kirugram.raw.{c.section}.{c.qualname}",')
 
-        f.write('\n    0xbc799737: "pyrogram.raw.core.BoolFalse",')
-        f.write('\n    0x997275b5: "pyrogram.raw.core.BoolTrue",')
-        f.write('\n    0x1cb5c415: "pyrogram.raw.core.Vector",')
-        f.write('\n    0x73f1f8dc: "pyrogram.raw.core.MsgContainer",')
-        f.write('\n    0xae500895: "pyrogram.raw.core.FutureSalts",')
-        f.write('\n    0x0949d9dc: "pyrogram.raw.core.FutureSalt",')
-        f.write('\n    0x3072cfa1: "pyrogram.raw.core.GzipPacked",')
-        f.write('\n    0x5bb8e511: "pyrogram.raw.core.Message",')
+        f.write('\n    0xbc799737: "kirugram.raw.core.BoolFalse",')
+        f.write('\n    0x997275b5: "kirugram.raw.core.BoolTrue",')
+        f.write('\n    0x1cb5c415: "kirugram.raw.core.Vector",')
+        f.write('\n    0x73f1f8dc: "kirugram.raw.core.MsgContainer",')
+        f.write('\n    0xae500895: "kirugram.raw.core.FutureSalts",')
+        f.write('\n    0x0949d9dc: "kirugram.raw.core.FutureSalt",')
+        f.write('\n    0x3072cfa1: "kirugram.raw.core.GzipPacked",')
+        f.write('\n    0x5bb8e511: "kirugram.raw.core.Message",')
 
         f.write("\n}\n")
 
 
 if "__main__" == __name__:
     HOME_PATH = Path()
-    DESTINATION_PATH = Path("../../pyrogram/raw")
+    DESTINATION_PATH = Path("../../kirugram/raw")
     NOTICE_PATH = Path("../../NOTICE")
 
     start(format=False)

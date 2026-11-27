@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -24,8 +24,8 @@ from http import HTTPStatus
 
 import pytest
 
-from pyrogram.connection.transport.tcp import web_proxy_carrier
-from pyrogram.connection.transport.tcp.web_proxy_carrier import (
+from kirugram.connection.transport.tcp import web_proxy_carrier
+from kirugram.connection.transport.tcp.web_proxy_carrier import (
     FRAME_HEADER_SIZE,
     FRAME_MAX_PAYLOAD,
     Frame,
@@ -173,7 +173,7 @@ def test_derive_bridge_capability_is_sensitive_to_host_and_secret() -> None:
 
 
 # Proxy config parsing (dict form, string link forms, dd-marker handling,
-#  secret validation) now lives in pyrogram.connection.proxy.normalize_proxy
+#  secret validation) now lives in kirugram.connection.proxy.normalize_proxy
 #  and is covered in tests/unit/connection/test_proxy.py; TCP itself only
 #  takes an already-normalized Proxy dataclass, covered in
 #  tests/unit/connection/transport/tcp/test_tcp.py.

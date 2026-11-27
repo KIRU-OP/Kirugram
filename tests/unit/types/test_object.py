@@ -1,27 +1,27 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import pytest
 
-import pyrogram
-from pyrogram import enums, types
+import kirugram
+from kirugram import enums, types
 
 
 def test_two_objects_of_one_class_holding_the_same_values_are_equal() -> None:
@@ -84,7 +84,7 @@ def test_an_object_never_equals_a_value_that_is_not_an_object(other: str | int |
 
 
 def test_the_bound_client_is_not_part_of_the_comparison() -> None:
-    client = pyrogram.Client(
+    client = kirugram.Client(
         "test",
         api_id=1,
         api_hash="0" * 32,

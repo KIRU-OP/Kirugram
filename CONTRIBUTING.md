@@ -1,11 +1,11 @@
-# Contributing to Kurigram
+# Contributing to Kirugram
 
 Thanks for taking the time to contribute! This document covers how to set up a development
 environment, the expected workflow, and what we look for in a pull request.
 
 ## Getting started
 
-Kurigram requires Python `>=3.10` and [`uv`](https://docs.astral.sh/uv/getting-started/installation/).
+Kirugram requires Python `>=3.10` and [`uv`](https://docs.astral.sh/uv/getting-started/installation/).
 
 Nothing else has to be set up. Every `make` recipe below runs through `uv run`, which creates
 `.venv` from `uv.lock` and brings it up to date whenever the lock file moves, so there is no
@@ -25,9 +25,9 @@ page while you edit.
 
 ### Generated code
 
-`pyrogram/raw/{types,functions,base,all.py}` and `pyrogram/errors/exceptions/` are generated from
+`kirugram/raw/{types,functions,base,all.py}` and `kirugram/errors/exceptions/` are generated from
 TL schema files and are not tracked in git. Run the generator before working on anything that
-touches type checking or code that imports from `pyrogram.raw`, and again after any change
+touches type checking or code that imports from `kirugram.raw`, and again after any change
 under `compiler/api/source`:
 
 ```bash
@@ -48,7 +48,7 @@ make typecheck     # ty check (requires `make api` to have been run first)
 make test-unit     # the offline suite, no relay or session needed
 ```
 
-`make test-unit` reports coverage of `pyrogram/` as it runs. Which paths are measured, whether a
+`make test-unit` reports coverage of `kirugram/` as it runs. Which paths are measured, whether a
 minimum is enforced, and why, all live in the `[tool.coverage]` blocks of `pyproject.toml`.
 
 `make format` rewrites the tree and `make lint` fails on anything it would still change, so
@@ -170,7 +170,7 @@ A few conventions that have come up repeatedly in code review but aren't enforce
   `tests/guards/test_public_exports.py` fails on that, on a repeated entry, and on an `__all__`
   built by concatenation or comprehension, which reads as a declaration while leaving the other
   two checks nothing to read. Declaring one is not required: the aggregator `__init__.py` files
-  under `pyrogram/methods/` collect mixins for `Client` rather than exporting an API.
+  under `kirugram/methods/` collect mixins for `Client` rather than exporting an API.
 - **Every `# ty: ignore[rule]` carries a reason** after a single `-`, as in
   `# ty: ignore[unresolved-import] - optional, not a project dependency`. Only the `[rule]`
   bracket is `ty`'s own syntax; the reason is ours, so nobody has to reconstruct why the

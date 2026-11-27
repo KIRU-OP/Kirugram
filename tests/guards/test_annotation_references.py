@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 """Every name an annotation writes exists where the annotation is written.
 
@@ -31,7 +31,7 @@ import importlib
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
 
-import pyrogram
+import kirugram
 from tests.guards.name_resolution import (
     REPOSITORY_ROOT,
     attribute_chain,
@@ -160,7 +160,7 @@ def names_in(node: ast.expr, *, line: int) -> Iterator[tuple[tuple[str, ...], in
 def type_checking_imports(tree: ast.Module, *, package: str) -> dict[str, Any]:
     """The names a module binds under `if TYPE_CHECKING:`, imported for real.
 
-    Most of this package imports `pyrogram`, `types`, `raw` and `enums` only there, to break
+    Most of this package imports `kirugram`, `types`, `raw` and `enums` only there, to break
     the import cycle they would otherwise close. Those names are absent from the imported
     module at runtime, so a namespace built from it alone reports every annotation that uses
     one as dead.
@@ -272,7 +272,7 @@ def test_a_literal_holds_values_rather_than_names() -> None:
 
 
 def test_a_name_resolves_against_the_namespace_it_was_written_in() -> None:
-    namespace: dict[str, Any] = {"types": pyrogram.types}
+    namespace: dict[str, Any] = {"types": kirugram.types}
 
     assert resolves_where_written(("types", "Chat"), namespace=namespace)
     assert resolves_where_written(("int",), namespace=namespace)

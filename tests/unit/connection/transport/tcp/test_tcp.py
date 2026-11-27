@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -28,7 +28,7 @@ import pytest
 
 from python_socks import ProxyError, ProxyType
 
-from pyrogram.connection.proxy import (
+from kirugram.connection.proxy import (
     HTTPProxy,
     MTProxy,
     Proxy,
@@ -36,21 +36,21 @@ from pyrogram.connection.proxy import (
     SOCKS5Proxy,
     WebProxy,
 )
-from pyrogram.connection.transport.tcp import TCPAbridged, TCPIntermediatePadded
-from pyrogram.connection.transport.tcp.faketls_records import (
+from kirugram.connection.transport.tcp import TCPAbridged, TCPIntermediatePadded
+from kirugram.connection.transport.tcp.faketls_records import (
     APPLICATION_DATA_PREFIX,
     CHANGE_CIPHER_SPEC,
     RECORD_HEADER_SIZE,
     RECORD_LENGTH_SIZE,
 )
-from pyrogram.connection.transport.tcp.tcp import (
+from kirugram.connection.transport.tcp.tcp import (
     ABRIDGED_OBFUSCATE_TAG,
     INTERMEDIATE_PADDED_OBFUSCATE_TAG,
     TCP,
     _OBFUSCATED2_RESERVED_PREFIXES,
     generate_obfuscated2_nonce,
 )
-from pyrogram.crypto import aes
+from kirugram.crypto import aes
 
 from tests.unit.proxy_values import DD_SECRET_HEX, PLAIN_SECRET_HEX, SNI_DOMAIN
 

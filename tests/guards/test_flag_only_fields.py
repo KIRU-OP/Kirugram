@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 """`value or None` on a `flags.N?true` field writes the same bytes as `value`.
 
@@ -69,7 +69,7 @@ _SECTIONS: Final[tuple[str, ...]] = ("types", "functions")
 #  `?true` field, a chained `or`, a renamed field, three fields that are optional but carry
 #  a payload, and four forms that are not an `or None` on a constructor keyword at all.
 _SAMPLE_CALLS: Final[str] = (
-    "from pyrogram.raw.types import DocumentAttributeVideo\n"
+    "from kirugram.raw.types import DocumentAttributeVideo\n"
     "DocumentAttributeVideo(round_message=value or None)\n"
     "raw.types.DocumentAttributeVideo(supports_streaming=value or None)\n"
     "raw.types.InputMediaUploadedDocument(force_file=first or second or None)\n"
@@ -153,9 +153,9 @@ def ends_in_none(node: ast.expr) -> bool:
 
 
 def imported_constructors(tree: ast.AST) -> dict[str, str]:
-    """Local name -> constructor path, for the `from pyrogram.raw.<section> import Name` form.
+    """Local name -> constructor path, for the `from kirugram.raw.<section> import Name` form.
 
-    `pyrogram/session/internals/msg_factory.py` writes `Ping(...)` that way, so a walk that
+    `kirugram/session/internals/msg_factory.py` writes `Ping(...)` that way, so a walk that
     only followed the `raw.` namespace would be blind to a whole module rather than to a line.
     """
     bound: dict[str, str] = {}
@@ -164,7 +164,7 @@ def imported_constructors(tree: ast.AST) -> dict[str, str]:
         if not isinstance(node, ast.ImportFrom) or node.module is None:
             continue
 
-        inside_raw = node.module.removeprefix("pyrogram.raw.")
+        inside_raw = node.module.removeprefix("kirugram.raw.")
 
         if inside_raw == node.module or inside_raw.split(".")[0] not in _SECTIONS:
             continue
@@ -226,21 +226,21 @@ def raw_bound_under_another_name(tree: ast.AST) -> Iterator[str]:
     """Import forms that would put a constructor call beyond both routes `or_none_sites` follows."""
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
-            yield from (alias.name for alias in node.names if alias.name.startswith("pyrogram.raw"))
+            yield from (alias.name for alias in node.names if alias.name.startswith("kirugram.raw"))
 
         if not isinstance(node, ast.ImportFrom) or node.module is None:
             continue
 
-        if node.module == "pyrogram":
+        if node.module == "kirugram":
             yield from (
                 f"raw as {alias.asname}"
                 for alias in node.names
                 if alias.name == "raw" and alias.asname is not None
             )
 
-        elif node.module == "pyrogram.raw":
+        elif node.module == "kirugram.raw":
             yield from (
-                f"pyrogram.raw.{alias.name}" for alias in node.names if alias.name in _SECTIONS
+                f"kirugram.raw.{alias.name}" for alias in node.names if alias.name in _SECTIONS
             )
 
 

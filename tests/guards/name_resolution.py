@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 """What the sweeps share: which files they read, and how they read a name.
 
@@ -34,9 +34,9 @@ if TYPE_CHECKING:
     from collections.abc import Iterator, Sequence
 
 REPOSITORY_ROOT: Final[pathlib.Path] = pathlib.Path(__file__).resolve().parents[2]
-PACKAGE_ROOT: Final[pathlib.Path] = REPOSITORY_ROOT / "pyrogram"
+PACKAGE_ROOT: Final[pathlib.Path] = REPOSITORY_ROOT / "kirugram"
 
-# What `make api` writes, and only that: `pyrogram/raw/core` sits inside `raw` and is
+# What `make api` writes, and only that: `kirugram/raw/core` sits inside `raw` and is
 #  hand-written. A repair anywhere below lives until the next schema update and no longer.
 #  Same list as `[tool.ruff].extend-exclude` and `[tool.ty.src].exclude` in `pyproject.toml`.
 GENERATED: Final[tuple[pathlib.Path, ...]] = (
@@ -49,7 +49,7 @@ GENERATED: Final[tuple[pathlib.Path, ...]] = (
 
 
 # Everything a person maintains that is not the package. Nothing here is generated, and
-#  nothing here ships: `[tool.hatch.build.targets.wheel]` packages `pyrogram` alone.
+#  nothing here ships: `[tool.hatch.build.targets.wheel]` packages `kirugram` alone.
 TOOLING_ROOTS: Final[tuple[pathlib.Path, ...]] = (
     REPOSITORY_ROOT / "tests",
     REPOSITORY_ROOT / "compiler",
@@ -58,7 +58,7 @@ TOOLING_ROOTS: Final[tuple[pathlib.Path, ...]] = (
 
 # Where a `#` comment lives outside the package: the tooling configuration at the repository
 #  root, `.gitignore` beside it, and the workflows and issue templates under `.github`. Nothing
-#  under `pyrogram/`, `tests/` or `compiler/` is one of these formats. The root is read flat on
+#  under `kirugram/`, `tests/` or `compiler/` is one of these formats. The root is read flat on
 #  purpose, since a recursive walk from there descends into `.venv` and into every ignored
 #  directory.
 CONFIGURATION_GLOBS: Final[tuple[str, ...]] = ("*.toml", "*.yml", "*.yaml")

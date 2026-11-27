@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 """Every handler names the type it is handed, and that type is an `Update`.
 
@@ -33,14 +33,14 @@ from collections.abc import Callable, Iterator
 from re import Pattern
 from typing import Final
 
-import pyrogram
-from pyrogram import handlers, types
-from pyrogram.filters import Filter
-from pyrogram.types import Update
+import kirugram
+from kirugram import handlers, types
+from kirugram.filters import Filter
+from kirugram.types import Update
 
 # The `Other parameters:` block of a handler docstring names the type the callback is
 #  handed, which is the same claim the annotation makes a few lines below it.
-_DOCUMENTED_TYPE: Final[Pattern[str]] = re.compile(r":obj:`~pyrogram\.types\.([A-Za-z]+)`")
+_DOCUMENTED_TYPE: Final[Pattern[str]] = re.compile(r":obj:`~kirugram\.types\.([A-Za-z]+)`")
 
 _OTHER_PARAMETERS: Final[str] = "Other parameters:"
 
@@ -82,13 +82,13 @@ def handed_to(handler: type[handlers.Handler]) -> str | None:
     nor `stop_propagation()`: a separate shape, and a separate decision.
     """
     # Every module carries `from __future__ import annotations`, so the signature is a set
-    #  of strings until something evaluates them. A handler module imports `pyrogram`/`types`
+    #  of strings until something evaluates them. A handler module imports `kirugram`/`types`
     #  and, where the callback signature names it, `Callable`/`Filter`, under `TYPE_CHECKING`
     #  only, so its own globals cannot resolve those names: hand them in.
     signature = inspect.signature(
         handler.__init__,
         globals=vars(sys.modules[handler.__module__]),
-        locals={"pyrogram": pyrogram, "types": types, "Callable": Callable, "Filter": Filter},
+        locals={"kirugram": kirugram, "types": types, "Callable": Callable, "Filter": Filter},
         eval_str=True,
     )
 
@@ -104,7 +104,7 @@ def handed_to(handler: type[handlers.Handler]) -> str | None:
 
 
 def documented_by(handler: type[handlers.Handler]) -> set[str]:
-    """The `pyrogram.types` names the handler's `Other parameters:` block points at."""
+    """The `kirugram.types` names the handler's `Other parameters:` block points at."""
     documentation: str = handler.__doc__ or ""
 
     if _OTHER_PARAMETERS not in documentation:

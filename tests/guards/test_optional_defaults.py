@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -39,23 +39,23 @@ if TYPE_CHECKING:
 # The exemptions are the cases where both really are true, keyed by file and parameter name.
 _EXEMPTIONS: Final[dict[tuple[str, str], str]] = {
     (
-        "pyrogram/filters.py",
+        "kirugram/filters.py",
         "prefixes",
     ): "`None` matches commands written with no prefix at all, `'/'` is the ordinary one.",
     (
-        "pyrogram/methods/messages/copy_message.py",
+        "kirugram/methods/messages/copy_message.py",
         "reply_markup",
     ): "`object` is the not-specified sentinel, so `None` is free to mean remove the markup.",
     (
-        "pyrogram/types/messages_and_media/message.py",
+        "kirugram/types/messages_and_media/message.py",
         "reply_markup",
     ): "`object` is the not-specified sentinel, so `None` is free to mean remove the markup.",
     (
-        "pyrogram/storage/storage.py",
+        "kirugram/storage/storage.py",
         "value",
     ): "`object` is the not-specified sentinel, so `None` is free to mean clear the stored value.",
     (
-        "pyrogram/storage/sqlite_storage.py",
+        "kirugram/storage/sqlite_storage.py",
         "value",
     ): "`object` is the not-specified sentinel, so `None` is free to mean clear the stored value.",
 }
@@ -181,11 +181,11 @@ def test_the_sweep_reads_the_package_and_not_the_generated_tree() -> None:
     files = list(hand_written_files())
 
     assert len(files) > 100
-    assert REPOSITORY_ROOT / "pyrogram" / "client.py" in files
+    assert REPOSITORY_ROOT / "kirugram" / "client.py" in files
 
-    # `pyrogram/raw/core` is hand-written and sits inside the tree `make api` writes into,
+    # `kirugram/raw/core` is hand-written and sits inside the tree `make api` writes into,
     #  so the two halves of `raw` are asserted separately.
-    assert REPOSITORY_ROOT / "pyrogram" / "raw" / "core" / "tl_object.py" in files
+    assert REPOSITORY_ROOT / "kirugram" / "raw" / "core" / "tl_object.py" in files
     assert not [path for path in files if is_generated(path)]
 
 

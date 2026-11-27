@@ -6,11 +6,11 @@ body:
       label: Checklist
       description: Invalid, incomplete or inadequate issue reports may not be taken into consideration
       options:
-        - label: I am sure the error is coming from Kurigram's code and not elsewhere
+        - label: I am sure the error is coming from Kirugram's code and not elsewhere
           required: true
         - label: I have searched in the issue tracker for similar bug reports, including closed ones
           required: true
-        - label: I ran `pip install -U https://github.com/kurigram-org/kurigram/archive/main.zip` and reproduced the issue using the latest development version
+        - label: I ran `pip install -U https://github.com/KIRU-OP/Kirugram/archive/refs/heads/rebrand/kirugram.zip` and reproduced the issue using the latest development version
           required: true
 
   - type: textarea
@@ -37,7 +37,7 @@ body:
       label: Code example
       description: Provide a [minimal, complete, consistently reproducible](https://stackoverflow.com/help/minimal-reproducible-example) and properly formatted example involving normal usages (if applicable)
       placeholder: |
-        from pyrogram import Client
+        from kirugram import Client
         ...
       render: python
 

@@ -1,22 +1,22 @@
-#  Kurigram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #  Copyright (C) 2024-present KurimuzonAkuma <https://github.com/KurimuzonAkuma>
 #
-#  This file is part of Kurigram.
+#  This file is part of Kirugram.
 #
-#  Kurigram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Kurigram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Kurigram. If not, see <https://www.gnu.org/licenses/>.
+#  along with Kirugram. If not, see <https://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -29,11 +29,11 @@ from typing import Literal
 
 HOME = "compiler/docs"
 DESTINATION = "docs/source/telegram"
-PYROGRAM_API_DEST = "docs/source/api"
+KIRUGRAM_API_DEST = "docs/source/api"
 
-FUNCTIONS_PATH = "pyrogram/raw/functions"
-TYPES_PATH = "pyrogram/raw/types"
-BASE_PATH = "pyrogram/raw/base"
+FUNCTIONS_PATH = "kirugram/raw/functions"
+TYPES_PATH = "kirugram/raw/types"
+BASE_PATH = "kirugram/raw/base"
 
 FUNCTIONS_BASE = "functions"
 TYPES_BASE = "types"
@@ -151,7 +151,7 @@ def generate(source_path: str, *, base: str, page_template: str, toctree: str) -
 
                 with open(DESTINATION + "/" + full_path, "w", encoding="utf-8") as f:
                     title_markup = "=" * len(full_name)
-                    full_class_path = "pyrogram.raw.{}".format(
+                    full_class_path = "kirugram.raw.{}".format(
                         ".".join(full_path.split("/")[:-1]) + "." + node_info.name
                     )
 
@@ -195,14 +195,14 @@ def generate(source_path: str, *, base: str, page_template: str, toctree: str) -
 
         if k != base:
             inner_path = base + "/" + k + "/index" + ".rst"
-            module = f"pyrogram.raw.{base}.{k}"
+            module = f"kirugram.raw.{base}.{k}"
         else:
             for i in sorted(all_entities, reverse=True):
                 if i != base:
                     entities.insert(0, f"{i}/index")
 
             inner_path = base + "/index" + ".rst"
-            module = f"pyrogram.raw.{base}"
+            module = f"kirugram.raw.{base}"
 
         with open(DESTINATION + "/" + inner_path, "w", encoding="utf-8") as f:
             title = k
@@ -223,7 +223,7 @@ def generate(source_path: str, *, base: str, page_template: str, toctree: str) -
             f.write("\n")
 
 
-def pyrogram_api():
+def kirugram_api():
     def get_title_list(s: str) -> list:
         return [i.strip() for i in [j.strip() for j in s.split("\n") if j] if i]
 
@@ -719,7 +719,7 @@ def pyrogram_api():
         """,
     }
 
-    root = PYROGRAM_API_DEST + "/methods"
+    root = KIRUGRAM_API_DEST + "/methods"
 
     shutil.rmtree(root, ignore_errors=True)
     os.mkdir(root)
@@ -739,7 +739,7 @@ def pyrogram_api():
                     title = f"{method}()"
 
                     f2.write(title + "\n" + "=" * len(title) + "\n\n")
-                    f2.write(f".. automethod:: pyrogram.Client.{method}()")
+                    f2.write(f".. automethod:: kirugram.Client.{method}()")
 
             functions = ["idle", "compose"]
 
@@ -748,7 +748,7 @@ def pyrogram_api():
                     title = f"{func}()"
 
                     f2.write(title + "\n" + "=" * len(title) + "\n\n")
-                    f2.write(f".. autofunction:: pyrogram.{func}()")
+                    f2.write(f".. autofunction:: kirugram.{func}()")
 
         f.write(template.format(**fmt_keys))
 
@@ -1282,7 +1282,7 @@ def pyrogram_api():
         """,
     }
 
-    root = PYROGRAM_API_DEST + "/types"
+    root = KIRUGRAM_API_DEST + "/types"
 
     shutil.rmtree(root, ignore_errors=True)
     os.mkdir(root)
@@ -1304,7 +1304,7 @@ def pyrogram_api():
                     title = type
 
                     f2.write(title + "\n" + "=" * len(title) + "\n\n")
-                    f2.write(f".. autoclass:: pyrogram.types.{type}()\n")
+                    f2.write(f".. autoclass:: kirugram.types.{type}()\n")
 
         f.write(template.format(**fmt_keys))
 
@@ -1503,7 +1503,7 @@ def pyrogram_api():
         """,
     }
 
-    root = PYROGRAM_API_DEST + "/bound-methods"
+    root = KIRUGRAM_API_DEST + "/bound-methods"
 
     shutil.rmtree(root, ignore_errors=True)
     os.mkdir(root)
@@ -1535,7 +1535,7 @@ def pyrogram_api():
                     title = f"{bm}()"
 
                     f2.write(title + "\n" + "=" * len(title) + "\n\n")
-                    f2.write(f".. automethod:: pyrogram.types.{bm}()")
+                    f2.write(f".. automethod:: kirugram.types.{bm}()")
 
         f.write(template.format(**fmt_keys))
 
@@ -1588,7 +1588,7 @@ def pyrogram_api():
         """,
     }
 
-    root = PYROGRAM_API_DEST + "/enums"
+    root = KIRUGRAM_API_DEST + "/enums"
 
     shutil.rmtree(root, ignore_errors=True)
     os.mkdir(root)
@@ -1623,7 +1623,7 @@ def pyrogram_api():
                     title = enum
 
                     f2.write(title + "\n" + "=" * len(title) + "\n\n")
-                    f2.write(f".. autoclass:: pyrogram.enums.{enum}()")
+                    f2.write(f".. autoclass:: kirugram.enums.{enum}()")
                     f2.write("\n    :members:\n")
 
                     f2.write("\n.. raw:: html\n    :file: ./cleanup.html\n")
@@ -1658,15 +1658,15 @@ def start():
         page_template=page_template,
         toctree=toctree,
     )
-    pyrogram_api()
+    kirugram_api()
 
 
 if "__main__" == __name__:
-    FUNCTIONS_PATH = "../../pyrogram/raw/functions"
-    TYPES_PATH = "../../pyrogram/raw/types"
-    BASE_PATH = "../../pyrogram/raw/base"
+    FUNCTIONS_PATH = "../../kirugram/raw/functions"
+    TYPES_PATH = "../../kirugram/raw/types"
+    BASE_PATH = "../../kirugram/raw/base"
     HOME = "."
     DESTINATION = "../../docs/source/telegram"
-    PYROGRAM_API_DEST = "../../docs/source/api"
+    KIRUGRAM_API_DEST = "../../docs/source/api"
 
     start()

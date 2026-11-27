@@ -1,22 +1,22 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Every method mixin under `pyrogram/methods/` is a base of `pyrogram.Client`.
+"""Every method mixin under `kirugram/methods/` is a base of `kirugram.Client`.
 
 A mixin there holds one method and nothing else, and it reaches a caller only once a package
 `__init__.py` both imports it and names it among the bases of that package's aggregate class.
@@ -38,7 +38,7 @@ import ast
 import importlib
 from typing import Final, TYPE_CHECKING
 
-import pyrogram
+import kirugram
 
 from tests.guards.name_resolution import PACKAGE_ROOT, REPOSITORY_ROOT, source_of
 
@@ -56,7 +56,7 @@ _UNREACHABLE_MIXINS: Final[tuple[str, ...]] = ()
 def defines_a_public_method(node: ast.ClassDef) -> bool:
     """Whether the class contributes a method to `Client`, which is what makes it a mixin.
 
-    The discriminator, rather than a list of what to skip: a class under `pyrogram/methods/`
+    The discriminator, rather than a list of what to skip: a class under `kirugram/methods/`
     exists to put a method on `Client`, so one that contributes none is a helper. That drops
     the two `decorators` dataclasses, whose bodies are field declarations, and every aggregate
     class, whose body is `pass`.
@@ -99,12 +99,12 @@ def declared_mixins() -> list[str]:
 def reaches_the_client(dotted: str) -> bool:
     """Import the mixin by its dotted name and ask whether `Client` inherits from it.
 
-    The import is what the sweep needs and `pyrogram` cannot give: a mixin nobody wired up is
+    The import is what the sweep needs and `kirugram` cannot give: a mixin nobody wired up is
     by construction absent from every package the client pulls in.
     """
     module, _, name = dotted.rpartition(".")
 
-    return issubclass(pyrogram.Client, getattr(importlib.import_module(module), name))
+    return issubclass(kirugram.Client, getattr(importlib.import_module(module), name))
 
 
 def unreachable_mixins() -> list[str]:
@@ -136,9 +136,9 @@ def test_the_sweep_reads_the_mixins_it_claims_to() -> None:
     assert len(declared) > 380
 
     for expected in (
-        "pyrogram.methods.chats.edit_folder_invite_link.EditFolderInviteLink",
-        "pyrogram.methods.decorators.on_message.OnMessage",
-        "pyrogram.methods.utilities.stop_transmission.StopTransmission",
+        "kirugram.methods.chats.edit_folder_invite_link.EditFolderInviteLink",
+        "kirugram.methods.decorators.on_message.OnMessage",
+        "kirugram.methods.utilities.stop_transmission.StopTransmission",
     ):
         assert expected in declared
 
@@ -147,11 +147,11 @@ def test_the_sweep_takes_a_helper_for_what_it_is() -> None:
     declared = declared_mixins()
 
     # Both are return types of the decorator helpers, read inside their own module.
-    assert "pyrogram.methods.decorators.unbound_arguments.UnboundArguments" not in declared
-    assert "pyrogram.methods.decorators.unbound_arguments.UnboundErrorArguments" not in declared
+    assert "kirugram.methods.decorators.unbound_arguments.UnboundArguments" not in declared
+    assert "kirugram.methods.decorators.unbound_arguments.UnboundErrorArguments" not in declared
 
     # An aggregate class inherits its methods and declares none, so it is not a mixin either.
-    assert "pyrogram.methods.chats.Chats" not in declared
+    assert "kirugram.methods.chats.Chats" not in declared
 
 
 def test_the_discriminator_reads_both_halves_of_what_it_asks() -> None:
@@ -170,6 +170,6 @@ def test_the_sweep_resolves_a_name_the_client_does_not_carry() -> None:
     # The sweep would report nothing at all if `reaches_the_client` answered `True` for
     #  everything, which is the way a guard like this fails silently.
     assert reaches_the_client(
-        "pyrogram.methods.chats.create_folder_invite_link.CreateFolderInviteLink"
+        "kirugram.methods.chats.create_folder_invite_link.CreateFolderInviteLink"
     )
-    assert not reaches_the_client("pyrogram.methods.decorators.unbound_arguments.UnboundArguments")
+    assert not reaches_the_client("kirugram.methods.decorators.unbound_arguments.UnboundArguments")

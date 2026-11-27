@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -28,7 +28,7 @@ from typing import Final
 # Resolved from this file rather than from the working directory, which is the repository root
 # under `hatch_build.py` and `compiler/errors` under `make errors`.
 _HOME: Final[Path] = Path(__file__).resolve().parent
-_DEST: Final[Path] = _HOME.parents[1] / "pyrogram" / "errors" / "exceptions"
+_DEST: Final[Path] = _HOME.parents[1] / "kirugram" / "errors" / "exceptions"
 _NOTICE: Final[Path] = _HOME.parents[1] / "NOTICE"
 
 # The name an error carries its value under when its own message names none. `value` is the
@@ -36,7 +36,7 @@ _NOTICE: Final[Path] = _HOME.parents[1] / "NOTICE"
 #  is written.
 _PLAIN_VALUE_NAME: Final[str] = "value"
 
-# `pyrogram/errors/__init__.py` imports the hand-written errors after the generated ones, so a
+# `kirugram/errors/__init__.py` imports the hand-written errors after the generated ones, so a
 # generated class of either name never reaches the caller: a 400 `UNKNOWN_ERROR` used to arrive as
 # the hand-written `UnknownError`, which reports code 520 and is no `BadRequest`.
 _RESERVED_CLASS_NAMES: Final[tuple[str, ...]] = ("RPCError", "UnknownError")

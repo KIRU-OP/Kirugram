@@ -2,8 +2,8 @@ from io import BytesIO
 
 import pytest
 
-from pyrogram import Client, raw, types
-from pyrogram.raw.core import TLObject
+from kirugram import Client, raw, types
+from kirugram.raw.core import TLObject
 
 
 @pytest.mark.parametrize(

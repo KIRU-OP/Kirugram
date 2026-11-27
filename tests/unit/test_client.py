@@ -1,22 +1,22 @@
-#  Kurigram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #  Copyright (C) 2024-present KurimuzonAkuma <https://github.com/KurimuzonAkuma>
 #
-#  This file is part of Kurigram.
+#  This file is part of Kirugram.
 #
-#  Kurigram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Kurigram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Kurigram. If not, see <https://www.gnu.org/licenses/>.
+#  along with Kirugram. If not, see <https://www.gnu.org/licenses/>.
 
 """What `Client` does without a network: plugin loading, the download path and proxy assignment.
 
@@ -39,20 +39,20 @@ from typing import TYPE_CHECKING, Final, Protocol
 
 import pytest
 
-import pyrogram.client
-from pyrogram import Client, StopTransmission, filters, raw
-from pyrogram.client import _plugin_handlers
-from pyrogram.connection.proxy import HTTPProxy, SOCKS5Proxy
-from pyrogram.file_id import FileId, FileType
-from pyrogram.handlers import MessageHandler
+import kirugram.client
+from kirugram import Client, StopTransmission, filters, raw
+from kirugram.client import _plugin_handlers
+from kirugram.connection.proxy import HTTPProxy, SOCKS5Proxy
+from kirugram.file_id import FileId, FileType
+from kirugram.handlers import MessageHandler
 
 if TYPE_CHECKING:
     from concurrent.futures import Executor
 
-    from pyrogram.connection.proxy import Proxy, ProxyDict
+    from kirugram.connection.proxy import Proxy, ProxyDict
 
 _PLUGIN_SOURCE: Final[str] = """
-from pyrogram import Client
+from kirugram import Client
 
 
 class AnyAttribute:
@@ -72,7 +72,7 @@ async def greet(client, message):
 
 
 _KEYWORD_PLUGIN_SOURCE: Final[str] = """
-from pyrogram import Client, filters
+from kirugram import Client, filters
 
 
 @Client.on_message(filters=filters.text, group=1)
@@ -172,7 +172,7 @@ def test_load_plugins_reports_the_pair_it_refuses(
 ) -> None:
     client = _plugin_client(write_plugin("refused_plugins", source=_REFUSED_PLUGIN_SOURCE))
 
-    with caplog.at_level(logging.WARNING, logger="pyrogram.client"):
+    with caplog.at_level(logging.WARNING, logger="kirugram.client"):
         client.load_plugins()
 
     assert client.dispatcher.groups == {}
@@ -404,7 +404,7 @@ class FullDisk:
 async def test_a_failed_write_releases_the_download_slot_at_once(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    monkeypatch.setattr(pyrogram.client, "BytesIO", FullDisk)
+    monkeypatch.setattr(kirugram.client, "BytesIO", FullDisk)
     downloader = Downloader(b"x" * _PAYLOAD_SIZE)
     packet = (_document_file_id(), "", "file", True, _PAYLOAD_SIZE, None, ())
 

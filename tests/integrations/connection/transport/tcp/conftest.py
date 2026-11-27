@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 
 """Live-relay fixtures. Every value is required and comes from the environment
@@ -35,14 +35,14 @@ from typing import TYPE_CHECKING, Final
 
 import pytest
 
-from pyrogram import Client
-from pyrogram.connection.connection import transport_class_for
-from pyrogram.connection.proxy import MTProxy, Proxy, WebProxy, normalize_proxy
+from kirugram import Client
+from kirugram.connection.connection import transport_class_for
+from kirugram.connection.proxy import MTProxy, Proxy, WebProxy, normalize_proxy
 
 if TYPE_CHECKING:
     from collections.abc import AsyncGenerator, AsyncIterator
 
-    from pyrogram.connection.transport.tcp import TCP
+    from kirugram.connection.transport.tcp import TCP
 
 # Every integration test shares one session name, so a stray session file left
 #  behind by a crashed run is always the same one.

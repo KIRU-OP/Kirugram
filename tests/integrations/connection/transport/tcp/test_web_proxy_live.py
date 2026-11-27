@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 
 """End-to-end smoke test for the WEB proxy scheme against a real,
@@ -31,7 +31,7 @@ three ways:
    reviewer can see exactly which bytes cross the wire without needing to
    trust anything else in this codebase.
 2. A full, real Diffie-Hellman key exchange via kurigram's own
-   ``pyrogram.session.auth.Auth``, proving a *sustained*, multi-message,
+   ``kirugram.session.auth.Auth``, proving a *sustained*, multi-message,
    partially-encrypted exchange works end to end through the same transport -
    not just one request/response.
 3. An ordinary high-level API call on an existing, already-authorized session,
@@ -52,8 +52,8 @@ from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-from pyrogram.connection.proxy import WebProxy, normalize_proxy
-from pyrogram.session.auth import Auth
+from kirugram.connection.proxy import WebProxy, normalize_proxy
+from kirugram.session.auth import Auth
 from tests.integrations.connection.transport.tcp.conftest import (
     AUTH_KEY_SIZE,
     MTPROTO_PORT,
@@ -62,8 +62,8 @@ from tests.integrations.connection.transport.tcp.conftest import (
 )
 
 if TYPE_CHECKING:
-    from pyrogram import Client
-    from pyrogram.connection.transport.tcp import TCP
+    from kirugram import Client
+    from kirugram.connection.transport.tcp import TCP
 
 
 async def test_req_pq_multi_round_trip_through_live_relay(

@@ -6,15 +6,15 @@ from typing import TYPE_CHECKING, cast
 
 import pytest
 
-import pyrogram
-from pyrogram import types
-from pyrogram.file_id import FileId, FileType
-from pyrogram.methods.messages.stream_media import StreamMedia
+import kirugram
+from kirugram import types
+from kirugram.file_id import FileId, FileType
+from kirugram.methods.messages.stream_media import StreamMedia
 
 if TYPE_CHECKING:
     from collections.abc import AsyncGenerator
 
-stream_media_module = importlib.import_module("pyrogram.methods.messages.stream_media")
+stream_media_module = importlib.import_module("kirugram.methods.messages.stream_media")
 
 
 class FakeClient(StreamMedia):
@@ -68,7 +68,7 @@ async def test_stream_media_passes_zero_for_an_unknown_file_size(
         animation=animation,
     )
 
-    chunks = [chunk async for chunk in cast("pyrogram.Client", client).stream_media(message)]
+    chunks = [chunk async for chunk in cast("kirugram.Client", client).stream_media(message)]
 
     assert chunks == [b"chunk"]
     assert client.file_sizes == [0]
@@ -83,7 +83,7 @@ async def test_closing_the_stream_closes_the_download_at_once(
         lambda _: SimpleNamespace(file_type=FileType.DOCUMENT),
     )
     client = FakeClient()
-    stream = cast("pyrogram.Client", client).stream_media("id")
+    stream = cast("kirugram.Client", client).stream_media("id")
 
     assert await anext(stream) == b"chunk"
     await stream.aclose()
