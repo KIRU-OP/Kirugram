@@ -1,31 +1,31 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw
-from pyrogram.errors import Timeout503
+import kirugram
+from kirugram import raw
+from kirugram.errors import Timeout503
 
 
 class GetInlineBotResults:
     async def get_inline_bot_results(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         bot: int | str,
         query: str = "",
         offset: str = "",
@@ -33,7 +33,7 @@ class GetInlineBotResults:
         longitude: float | None = None,
     ) -> raw.base.messages.BotResults:
         """Get bot results via inline queries.
-        You can then send a result using :meth:`~pyrogram.Client.send_inline_bot_result`
+        You can then send a result using :meth:`~kirugram.Client.send_inline_bot_result`
 
         .. include:: /_includes/usable-by/users.rst
 
@@ -58,7 +58,7 @@ class GetInlineBotResults:
                 Useful for location-based results only.
 
         Returns:
-            :obj:`~pyrogram.raw.base.messages.BotResults`: On Success.
+            :obj:`~kirugram.raw.base.messages.BotResults`: On Success.
 
         Raises:
             TimeoutError: In case the bot fails to answer within 10 seconds.

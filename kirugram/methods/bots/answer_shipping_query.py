@@ -1,37 +1,37 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw
-from pyrogram import types
+import kirugram
+from kirugram import raw
+from kirugram import types
 
 
 class AnswerShippingQuery:
     async def answer_shipping_query(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         shipping_query_id: str,
         ok: bool,
         shipping_options: list[types.ShippingOption] | None = None,
         error_message: str | None = None,
     ) -> bool:
-        """If you sent an invoice requesting a shipping address and the parameter ``is_flexible`` was specified, the API sends the confirmation in the form of an :obj:`~pyrogram.handlers.ShippingQueryHandler`.
+        """If you sent an invoice requesting a shipping address and the parameter ``is_flexible`` was specified, the API sends the confirmation in the form of an :obj:`~kirugram.handlers.ShippingQueryHandler`.
 
         Use this method to reply to shipping queries.
 
@@ -44,7 +44,7 @@ class AnswerShippingQuery:
             ok (``bool``):
                 Specify True if everything is alright (goods are available, etc.) and the bot is ready to proceed with the order. Use False if there are any problems.
 
-            shipping_options (List of :obj:`~pyrogram.types.ShippingOption`, *optional*):
+            shipping_options (List of :obj:`~kirugram.types.ShippingOption`, *optional*):
                 Required if ok is True. A array of available shipping options.
 
             error_message (``str``, *optional*):

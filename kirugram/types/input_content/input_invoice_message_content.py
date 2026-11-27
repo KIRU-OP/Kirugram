@@ -1,27 +1,27 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import logging
 
-import pyrogram
-from pyrogram import raw, types, utils
+import kirugram
+from kirugram import raw, types, utils
 
 from .input_message_content import InputMessageContent
 
@@ -44,7 +44,7 @@ class InputInvoiceMessageContent(InputMessageContent):
         currency (``str``):
             Three-letter ISO 4217 currency code, see `more on currencies <https://core.telegram.org/bots/payments#supported-currencies>`_. Pass ``XTR`` for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
 
-        prices (List of :obj:`~pyrogram.types.LabeledPrice`):
+        prices (List of :obj:`~kirugram.types.LabeledPrice`):
             Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
 
         provider_token (``str``, *optional*):
@@ -139,7 +139,7 @@ class InputInvoiceMessageContent(InputMessageContent):
         self.send_email_to_provider = send_email_to_provider
         self.is_flexible = is_flexible
 
-    async def write(self, client: pyrogram.Client, reply_markup):
+    async def write(self, client: kirugram.Client, reply_markup):
         max_tip_amount = utils.get_max_tip_amount(
             self.max_tip_amount,
             suggested_tip_amounts=self.suggested_tip_amounts,

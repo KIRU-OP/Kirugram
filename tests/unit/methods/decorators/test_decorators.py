@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -26,15 +26,15 @@ from typing import Any, Final
 
 import pytest
 
-import pyrogram
-from pyrogram import filters
-from pyrogram.filters import Filter
-from pyrogram.methods import decorators
-from pyrogram.methods.decorators.handler_type import HandlerType
+import kirugram
+from kirugram import filters
+from kirugram.filters import Filter
+from kirugram.methods import decorators
+from kirugram.methods.decorators.handler_type import HandlerType
 
 # The production `HandlerType` is a bare `TypeVar`, which names no concrete callable;
 #  this is the shape the `handler` fixture actually returns.
-HandlerCallback = Callable[[pyrogram.Client, pyrogram.types.Update], Coroutine[Any, Any, None]]
+HandlerCallback = Callable[[kirugram.Client, kirugram.types.Update], Coroutine[Any, Any, None]]
 
 
 def _decorator_names() -> list[str]:
@@ -57,7 +57,7 @@ def _filtered_decorator_names() -> list[str]:
     return [
         name
         for name in _decorator_names()
-        if list(inspect.signature(getattr(pyrogram.Client, name)).parameters) == _FILTERED_SIGNATURE
+        if list(inspect.signature(getattr(kirugram.Client, name)).parameters) == _FILTERED_SIGNATURE
     ]
 
 
@@ -73,9 +73,9 @@ def test_every_module_contributes_the_decorator_named_after_it() -> None:
 
 @pytest.mark.parametrize("decorator_name", _decorator_names())
 def test_decorator_gives_back_the_function_it_was_handed(decorator_name: str) -> None:
-    async def handler(client: pyrogram.Client, update: pyrogram.types.Update) -> None: ...
+    async def handler(client: kirugram.Client, update: kirugram.types.Update) -> None: ...
 
-    decorated = getattr(pyrogram.Client, decorator_name)()(handler)
+    decorated = getattr(kirugram.Client, decorator_name)()(handler)
 
     assert decorated is handler
     assert len(handler.handlers) == 1
@@ -85,7 +85,7 @@ def test_decorator_gives_back_the_function_it_was_handed(decorator_name: str) ->
 def test_decorator_binds_the_callback_signature_to_one_type_variable(decorator_name: str) -> None:
     # A module added later starts from a sibling that still reads `-> Callable`, and the two
     #  tests above pass either way: they check what the decorator returns, not what it promises.
-    decorator = getattr(pyrogram.Client, decorator_name)
+    decorator = getattr(kirugram.Client, decorator_name)
 
     # `from __future__ import annotations` leaves the return annotation a string, and
     #  `eval_str` is what turns it back into the object this compares against. A decorator
@@ -109,7 +109,7 @@ def test_decorator_binds_the_callback_signature_to_one_type_variable(decorator_n
 
 @pytest.fixture
 def handler() -> HandlerCallback:
-    async def callback(client: pyrogram.Client, update: pyrogram.types.Update) -> None: ...
+    async def callback(client: kirugram.Client, update: kirugram.types.Update) -> None: ...
 
     return callback
 
@@ -121,7 +121,7 @@ def test_the_positional_form_stores_the_filter_and_the_group(
     decorator_name: str,
     handler: HandlerCallback,
 ) -> None:
-    getattr(pyrogram.Client, decorator_name)(filters.text, 1)(handler)
+    getattr(kirugram.Client, decorator_name)(filters.text, 1)(handler)
 
     ((built, group),) = handler.handlers
 
@@ -134,7 +134,7 @@ def test_the_mixed_form_stores_the_filter_and_the_group(
     decorator_name: str,
     handler: HandlerCallback,
 ) -> None:
-    getattr(pyrogram.Client, decorator_name)(filters.text, group=1)(handler)
+    getattr(kirugram.Client, decorator_name)(filters.text, group=1)(handler)
 
     ((built, group),) = handler.handlers
 
@@ -147,7 +147,7 @@ def test_the_keyword_form_stores_the_filter_and_the_group(
     decorator_name: str,
     handler: HandlerCallback,
 ) -> None:
-    getattr(pyrogram.Client, decorator_name)(filters=filters.text, group=1)(handler)
+    getattr(kirugram.Client, decorator_name)(filters=filters.text, group=1)(handler)
 
     ((built, group),) = handler.handlers
 
@@ -162,7 +162,7 @@ def test_a_decorator_called_with_no_arguments_stores_the_default_group(
     decorator_name: str,
     handler: HandlerCallback,
 ) -> None:
-    getattr(pyrogram.Client, decorator_name)()(handler)
+    getattr(kirugram.Client, decorator_name)()(handler)
 
     ((_, group),) = handler.handlers
 
@@ -172,7 +172,7 @@ def test_a_decorator_called_with_no_arguments_stores_the_default_group(
 # `on_error` carries an `exceptions` argument its siblings do not, so an unbound call
 #  shifts three slots instead of two.
 def test_on_error_reads_the_positional_form(handler: HandlerCallback) -> None:
-    pyrogram.Client.on_error(ValueError, filters.text, 1)(handler)
+    kirugram.Client.on_error(ValueError, filters.text, 1)(handler)
 
     ((built, group),) = handler.handlers
 
@@ -182,7 +182,7 @@ def test_on_error_reads_the_positional_form(handler: HandlerCallback) -> None:
 
 
 def test_on_error_reads_the_keyword_form(handler: HandlerCallback) -> None:
-    pyrogram.Client.on_error(exceptions=ValueError, filters=filters.text, group=1)(handler)
+    kirugram.Client.on_error(exceptions=ValueError, filters=filters.text, group=1)(handler)
 
     ((built, group),) = handler.handlers
 
@@ -192,7 +192,7 @@ def test_on_error_reads_the_keyword_form(handler: HandlerCallback) -> None:
 
 
 def test_on_error_keeps_the_only_exception_it_was_given(handler: HandlerCallback) -> None:
-    pyrogram.Client.on_error(ValueError)(handler)
+    kirugram.Client.on_error(ValueError)(handler)
 
     ((built, group),) = handler.handlers
 

@@ -1,38 +1,38 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import logging
 from typing import TYPE_CHECKING, BinaryIO
 
-import pyrogram
-from pyrogram import raw, types
+import kirugram
+from kirugram import raw, types
 
 if TYPE_CHECKING:
-    from pyrogram._typing import PathType
+    from kirugram._typing import PathType
 
 log = logging.getLogger(__name__)
 
 
 class SetProfilePhoto:
     async def set_profile_photo(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         photo: types.InputChatPhoto | None = None,
         is_public: bool | None = None,
         *,
@@ -43,7 +43,7 @@ class SetProfilePhoto:
         .. include:: /_includes/usable-by/users-bots.rst
 
         Parameters:
-            photo (:obj:`~pyrogram.types.InputChatPhoto`, *optional*):
+            photo (:obj:`~kirugram.types.InputChatPhoto`, *optional*):
                 Profile photo to set.
 
             is_public (``bool``, *optional*):
@@ -115,7 +115,7 @@ class SetProfilePhoto:
 
 class SetBotProfilePhoto:
     async def set_bot_profile_photo(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         bot_user_id: int | str,
         photo: types.InputChatPhoto | None = None,
     ) -> bool:
@@ -127,7 +127,7 @@ class SetBotProfilePhoto:
             bot_user_id (``int`` | ``str``):
                 Unique identifier (int) or username (str) of the target bot.
 
-            photo (:obj:`~pyrogram.types.InputChatPhoto`, *optional*):
+            photo (:obj:`~kirugram.types.InputChatPhoto`, *optional*):
                 Profile photo to set.
                 Pass None to remove the profile photo.
 

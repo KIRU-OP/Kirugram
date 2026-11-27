@@ -1,30 +1,30 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
+import kirugram
+from kirugram import enums, raw, types, utils
 
 
 class EditFolder:
     async def edit_folder(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         folder_id: int,
         name: str | None = None,
         parse_mode: enums.ParseMode | None = None,
@@ -55,11 +55,11 @@ class EditFolder:
             name (``str``, *optional*):
                 The text of the chat folder name, 1-12 characters without line feeds.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 Special entities like bold, italic, etc. that appear in the folder name.
 
             animate_custom_emoji (``bool``, *optional*):
@@ -69,21 +69,21 @@ class EditFolder:
                 The chosen icon for the chat folder.
                 Pass None to leave the folder icon as default.
 
-            color (:obj:`~pyrogram.enums.FolderColor`, *optional*):
-                Pass :obj:`~pyrogram.enums.FolderColor` to set folder color.
+            color (:obj:`~kirugram.enums.FolderColor`, *optional*):
+                Pass :obj:`~kirugram.enums.FolderColor` to set folder color.
                 Can't be changed if folder tags are disabled or the current user doesn't have Telegram Premium subscription.
 
-            pinned_chats (List of :obj:`~pyrogram.types.Chat`, *optional*):
+            pinned_chats (List of :obj:`~kirugram.types.Chat`, *optional*):
                 The pinned chats in the folder.
                 You can pass an ID (int), username (str) or phone number (str).
                 There can be up to getOption("chat_folder_chosen_chat_count_max") pinned and always included non-secret chats and the same number of secret chats, but the limit can be increased with Telegram Premium.
 
-            included_chats (List of :obj:`~pyrogram.types.Chat`, *optional*):
+            included_chats (List of :obj:`~kirugram.types.Chat`, *optional*):
                 The always included chats in the folder.
                 You can pass an ID (int), username (str) or phone number (str).
                 There can be up to getOption("chat_folder_chosen_chat_count_max") pinned and always included non-secret chats and the same number of secret chats, but the limit can be increased with Telegram Premium.
 
-            excluded_chats (List of :obj:`~pyrogram.types.Chat`, *optional*):
+            excluded_chats (List of :obj:`~kirugram.types.Chat`, *optional*):
                 The always excluded chats in the folder.
                 You can pass an ID (int), username (str) or phone number (str).
                 There can be up to getOption("chat_folder_chosen_chat_count_max") always excluded non-secret chats and the same number of secret chats, but the limit can be increased with Telegram Premium.

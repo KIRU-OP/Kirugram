@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -23,11 +23,11 @@ import functools
 import inspect
 from typing import TYPE_CHECKING, Any
 
-from pyrogram import types
-from pyrogram.methods import Methods
-from pyrogram.methods.utilities import compose as compose_module
-from pyrogram.methods.utilities import idle as idle_module
-from pyrogram.utils import loops
+from kirugram import types
+from kirugram.methods import Methods
+from kirugram.methods.utilities import compose as compose_module
+from kirugram.methods.utilities import idle as idle_module
+from kirugram.utils import loops
 
 if TYPE_CHECKING:
     from collections.abc import AsyncIterator, Coroutine, Generator
@@ -127,7 +127,7 @@ def async_to_sync(obj, name):
     @functools.wraps(function)
     def async_to_sync_wrap(*args, **kwargs):
         # Both loops are resolved here rather than in `async_to_sync`: `wrap()` below runs
-        #  during `import pyrogram`, when there is no client and no loop to ask yet.
+        #  during `import kirugram`, when there is no client and no loop to ask yet.
         target_loop = _bridge_loop(args)
         caller_loop = _running_loop()
 

@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -24,9 +24,9 @@ import re
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
-from pyrogram.file_id import FileType
+import kirugram
+from kirugram import enums, raw, types, utils
+from kirugram.file_id import FileType
 
 if TYPE_CHECKING:
     from datetime import datetime, timedelta
@@ -37,7 +37,7 @@ log = logging.getLogger(__name__)
 class SendPaidMedia:
     # TODO: Add progress parameter
     async def send_paid_media(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         stars_amount: int,
         media: list[types.InputMediaPhoto | types.InputMediaVideo],
@@ -71,7 +71,7 @@ class SendPaidMedia:
             stars_amount (``int``):
                 The number of Telegram Stars that must be paid to buy access to the media.
 
-            media (List of :obj:`~pyrogram.types.InputMediaPhoto`, :obj:`~pyrogram.types.InputMediaVideo`):
+            media (List of :obj:`~kirugram.types.InputMediaPhoto`, :obj:`~kirugram.types.InputMediaVideo`):
                 A list describing photos and videos to be sent, must include 1–10 items.
 
             caption (``str``, *optional*):
@@ -80,11 +80,11 @@ class SendPaidMedia:
             payload (``str``, *optional*):
                 Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             disable_notification (``bool``, *optional*):
@@ -95,10 +95,10 @@ class SendPaidMedia:
                 Unique identifier of the topic in a channel direct messages chat administered by the current user.
                 For direct chats only.only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -124,7 +124,7 @@ class SendPaidMedia:
                 This parameter is deprecated and should not be used.
                 Use `reply_parameters` instead.
 
-            quote_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            quote_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the quote, which can be specified instead of *parse_mode*.
                 This parameter is deprecated and should not be used.
                 Use `reply_parameters` instead.
@@ -135,7 +135,7 @@ class SendPaidMedia:
                 Use `reply_parameters` instead.
 
         Returns:
-            List of :obj:`~pyrogram.types.Message`: On success, a list of messages is returned.
+            List of :obj:`~kirugram.types.Message`: On success, a list of messages is returned.
 
         Raises:
             FileNotFoundError: In case a local ``os.PathLike`` doesn't point to an existing file.
@@ -143,7 +143,7 @@ class SendPaidMedia:
         Example:
             .. code-block:: python
 
-                from pyrogram.types import InputMediaPhoto, InputMediaVideo
+                from kirugram.types import InputMediaPhoto, InputMediaVideo
 
                 await app.send_paid_media(
                     chat_id,

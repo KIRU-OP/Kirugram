@@ -1,26 +1,26 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-from pyrogram import raw, types, utils
+from kirugram import raw, types, utils
 from ..object import Object
 
 if TYPE_CHECKING:
@@ -43,10 +43,10 @@ class CheckedGiftCode(Object):
         via_giveaway (``bool``, *optional*):
             True if the gift code is received via giveaway.
 
-        from_chat (:obj:`~pyrogram.types.Chat`, *optional*):
+        from_chat (:obj:`~kirugram.types.Chat`, *optional*):
             The channel where the gift code was won.
 
-        winner (:obj:`~pyrogram.types.User`, *optional*):
+        winner (:obj:`~kirugram.types.User`, *optional*):
             The user who won the giveaway.
 
         giveaway_message_id (``int``, *optional*):

@@ -1,22 +1,22 @@
-#  Kurigram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #  Copyright (C) 2024-present KurimuzonAkuma <https://github.com/KurimuzonAkuma>
 #
-#  This file is part of Kurigram.
+#  This file is part of Kirugram.
 #
-#  Kurigram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Kurigram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Kurigram. If not, see <https://www.gnu.org/licenses/>.
+#  along with Kirugram. If not, see <https://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -26,7 +26,7 @@ from typing import TYPE_CHECKING
 from ..object import Object
 
 if TYPE_CHECKING:
-    from pyrogram import raw
+    from kirugram import raw
 
 
 class Widget(Object):
@@ -34,7 +34,7 @@ class Widget(Object):
 
     Parameters:
         id (``str``, *optional*):
-            Unique identifier of the shared widget, which can be used to send the widget again using the method :meth:`~pyrogram.Client.send_shared_widget` to send the widget again.
+            Unique identifier of the shared widget, which can be used to send the widget again using the method :meth:`~kirugram.Client.send_shared_widget` to send the widget again.
             Omitted if the widget isn't shared.
 
         width (``int``, *optional*):
@@ -55,7 +55,7 @@ class Widget(Object):
         chat_data (``str``, *optional*):
             Data of the widget, which is specific to the message.
 
-        raw (:obj:`~pyrogram.raw.types.MessageMediaWidget`, *optional*):
+        raw (:obj:`~kirugram.raw.types.MessageMediaWidget`, *optional*):
             The raw widget object, as received from the Telegram API.
     """
 

@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -23,23 +23,23 @@ import os
 import re
 from typing import TYPE_CHECKING, BinaryIO
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
-from pyrogram.errors import FilePartMissing
-from pyrogram.file_id import FileType
+import kirugram
+from kirugram import enums, raw, types, utils
+from kirugram.errors import FilePartMissing
+from kirugram.file_id import FileType
 
 if TYPE_CHECKING:
     from collections.abc import Callable
     from datetime import datetime, timedelta
 
-    from pyrogram._typing import PathType
+    from kirugram._typing import PathType
 
 log = logging.getLogger(__name__)
 
 
 class SendPhoto:
     async def send_photo(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         photo: PathType | BinaryIO,
         caption: str = "",
@@ -98,11 +98,11 @@ class SendPhoto:
             caption (``str``, *optional*):
                 Photo caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             has_spoiler (``bool``, *optional*):
@@ -125,7 +125,7 @@ class SendPhoto:
                 Unique identifier of the topic in a channel direct messages chat administered by the current user.
                 For direct chats only.only.
 
-            ephemeral_message_parameters (:obj:`~pyrogram.types.EphemeralMessageParameters`, *optional*):
+            ephemeral_message_parameters (:obj:`~kirugram.types.EphemeralMessageParameters`, *optional*):
                 Parameters of the ephemeral message to send.
 
             effect_id (``int``, *optional*):
@@ -135,7 +135,7 @@ class SendPhoto:
             show_caption_above_media (``bool``, *optional*):
                 Pass True, if the caption must be shown above the message media.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -164,10 +164,10 @@ class SendPhoto:
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -202,7 +202,7 @@ class SendPhoto:
                 This parameter is deprecated and should not be used.
                 Use `reply_parameters` instead.
 
-            quote_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            quote_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the quote, which can be specified instead of *parse_mode*.
                 This parameter is deprecated and should not be used.
                 Use `reply_parameters` instead.
@@ -224,8 +224,8 @@ class SendPhoto:
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent photo message is returned, otherwise, in
-            case the upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent photo message is returned, otherwise, in
+            case the upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             FileNotFoundError: In case a local ``os.PathLike`` doesn't point to an existing file.
@@ -395,5 +395,5 @@ class SendPhoto:
                     messages = await utils.parse_messages(client=self, messages=r)
 
                     return messages[0] if messages else None
-        except pyrogram.StopTransmission:
+        except kirugram.StopTransmission:
             return None

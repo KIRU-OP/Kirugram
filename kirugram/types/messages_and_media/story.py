@@ -1,28 +1,28 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING, BinaryIO, Literal, cast, overload
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
-from pyrogram.errors import ChannelInvalid, ChannelPrivate
+import kirugram
+from kirugram import enums, raw, types, utils
+from kirugram.errors import ChannelInvalid, ChannelPrivate
 
 from ..object import Object
 from ..update import Update
@@ -32,7 +32,7 @@ if TYPE_CHECKING:
     from datetime import datetime, timedelta
     from io import BytesIO
 
-    from pyrogram._typing import PathType
+    from kirugram._typing import PathType
 
 
 class Story(Object, Update):
@@ -42,25 +42,25 @@ class Story(Object, Update):
         id (``int``):
             Unique story identifier.
 
-        from_user (:obj:`~pyrogram.types.User`, *optional*):
+        from_user (:obj:`~kirugram.types.User`, *optional*):
             Sender of the story.
 
-        sender_chat (:obj:`~pyrogram.types.Chat`, *optional*):
+        sender_chat (:obj:`~kirugram.types.Chat`, *optional*):
             Sender of the story, sent on behalf of a chat.
 
         date (:py:obj:`~datetime.datetime`, *optional*):
             Date the story was sent.
 
-        chat (:obj:`~pyrogram.types.Chat`, *optional*):
+        chat (:obj:`~kirugram.types.Chat`, *optional*):
             Conversation the story belongs to.
 
-        forward_from (:obj:`~pyrogram.types.User`, *optional*):
+        forward_from (:obj:`~kirugram.types.User`, *optional*):
             For forwarded stories, sender of the original story.
 
         forward_sender_name (``str``, *optional*):
             For stories forwarded from users who have hidden their accounts, name of the user.
 
-        forward_from_chat (:obj:`~pyrogram.types.Chat`, *optional*):
+        forward_from_chat (:obj:`~kirugram.types.Chat`, *optional*):
             For stories forwarded from channels, information about the original channel.
 
         forward_from_story_id (``int``, *optional*):
@@ -69,7 +69,7 @@ class Story(Object, Update):
         expire_date (:py:obj:`~datetime.datetime`, *optional*):
             Date the story will be expired.
 
-        media (:obj:`~pyrogram.enums.MessageMediaType`, *optional*):
+        media (:obj:`~kirugram.enums.MessageMediaType`, *optional*):
             The media type of the Story.
             This field will contain the enumeration type of the media message.
             You can use ``media = getattr(story, story.media.value)`` to access the media message.
@@ -77,10 +77,10 @@ class Story(Object, Update):
         has_protected_content (``bool``, *optional*):
             True, if the story can't be forwarded.
 
-        photo (:obj:`~pyrogram.types.Photo`, *optional*):
+        photo (:obj:`~kirugram.types.Photo`, *optional*):
             Story is a photo, information about the photo.
 
-        video (:obj:`~pyrogram.types.Video`, *optional*):
+        video (:obj:`~kirugram.types.Video`, *optional*):
             Story is a video, information about the video.
 
         edited (``bool``, *optional*):
@@ -104,7 +104,7 @@ class Story(Object, Update):
         caption (``str``, *optional*):
             Caption for the Story, 0-1024 characters.
 
-        caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+        caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
             For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the caption.
 
         views (``int``, *optional*):
@@ -118,7 +118,7 @@ class Story(Object, Update):
             Story received from others are incoming (*outgoing* is False).
             Story sent from yourself are outgoing (*outgoing* is True).
 
-        privacy (:obj:`~pyrogram.enums.StoriesPrivacyRules`, *optional*):
+        privacy (:obj:`~kirugram.enums.StoriesPrivacyRules`, *optional*):
             Story privacy.
 
         allowed_users (List of ``int`` | ``str``, *optional*):
@@ -127,7 +127,7 @@ class Story(Object, Update):
         disallowed_users (List of ``int`` | ``str``, *optional*):
             List of user_ids whos denied to view the story.
 
-        reactions (List of :obj:`~pyrogram.types.Reaction`):
+        reactions (List of :obj:`~kirugram.types.Reaction`):
             List of the reactions to this story.
 
         reactions_count (``int``, *optional*):
@@ -141,10 +141,10 @@ class Story(Object, Update):
             The story is deleted.
             A story can be deleted in case it was deleted or you tried to retrieve a story that doesn't exist yet.
 
-        media_areas (List of :obj:`~pyrogram.types.MediaArea`, *optional*):
+        media_areas (List of :obj:`~kirugram.types.MediaArea`, *optional*):
             List of media areas.
 
-        raw (:obj:`~pyrogram.raw.types.StoryItem`, *optional*):
+        raw (:obj:`~kirugram.raw.types.StoryItem`, *optional*):
             The raw story object, as received from the Telegram API.
     """
 
@@ -152,7 +152,7 @@ class Story(Object, Update):
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         id: int,
         from_user: types.User | None = None,
         sender_chat: types.Chat | None = None,
@@ -227,7 +227,7 @@ class Story(Object, Update):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         story: raw.types.StoryItem,
         peer: raw.base.Peer | raw.base.InputPeer,
         users: dict[int, raw.base.User],
@@ -539,7 +539,7 @@ class Story(Object, Update):
         ) = None,
         disable_web_page_preview: bool | None = None,
     ) -> types.Message | None:
-        """Bound method *reply_text* of :obj:`~pyrogram.types.Story`.
+        """Bound method *reply_text* of :obj:`~kirugram.types.Story`.
 
         An alias exists as *reply*.
 
@@ -565,14 +565,14 @@ class Story(Object, Update):
             text (``str``):
                 Text of the message to be sent.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in message text, which can be specified instead of *parse_mode*.
 
-            link_preview_options (:obj:`~pyrogram.types.LinkPreviewOptions`, *optional*):
+            link_preview_options (:obj:`~kirugram.types.LinkPreviewOptions`, *optional*):
                 Options used for link preview generation for the message.
 
             disable_notification (``bool``, *optional*):
@@ -592,7 +592,7 @@ class Story(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -602,7 +602,7 @@ class Story(Object, Update):
                 Use `link_preview_options` instead.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
 
         Raises:
@@ -652,7 +652,7 @@ class Story(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> types.Message | None:
-        """Bound method *reply_animation* :obj:`~pyrogram.types.Story`.
+        """Bound method *reply_animation* :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 
@@ -682,11 +682,11 @@ class Story(Object, Update):
             caption (``str``, *optional*):
                 Animation caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             has_spoiler (``bool``, *optional*):
@@ -725,7 +725,7 @@ class Story(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -752,8 +752,8 @@ class Story(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -805,7 +805,7 @@ class Story(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> types.Message | None:
-        """Bound method *reply_audio* of :obj:`~pyrogram.types.Story`.
+        """Bound method *reply_audio* of :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 
@@ -835,11 +835,11 @@ class Story(Object, Update):
             caption (``str``, *optional*):
                 Audio caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             duration (``int``, *optional*):
@@ -875,7 +875,7 @@ class Story(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -902,8 +902,8 @@ class Story(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -945,7 +945,7 @@ class Story(Object, Update):
             | None
         ) = None,
     ) -> types.Message | None:
-        """Bound method *reply_cached_media* of :obj:`~pyrogram.types.Story`.
+        """Bound method *reply_cached_media* of :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 
@@ -973,11 +973,11 @@ class Story(Object, Update):
             caption (``bool``, *optional*):
                 Media caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             disable_notification (``bool``, *optional*):
@@ -987,12 +987,12 @@ class Story(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent media message is returned, otherwise, in
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent media message is returned, otherwise, in
             case the server answered with no message, None is returned.
 
         Raises:
@@ -1021,7 +1021,7 @@ class Story(Object, Update):
         paid_message_star_count: int | None = None,
         disable_notification: bool | None = None,
     ) -> list[types.Message]:
-        """Bound method *reply_media_group* of :obj:`~pyrogram.types.Story`.
+        """Bound method *reply_media_group* of :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 
@@ -1043,8 +1043,8 @@ class Story(Object, Update):
 
         Parameters:
             media (``list``):
-                A list containing either :obj:`~pyrogram.types.InputMediaPhoto` or
-                :obj:`~pyrogram.types.InputMediaVideo` objects
+                A list containing either :obj:`~kirugram.types.InputMediaPhoto` or
+                :obj:`~kirugram.types.InputMediaVideo` objects
                 describing photos and videos to be sent, must include 2–10 items.
 
             paid_message_star_count (``int``, *optional*):
@@ -1055,7 +1055,7 @@ class Story(Object, Update):
                 Users will receive a notification with no sound.
 
         Returns:
-            List of :obj:`~pyrogram.types.Message`: On success, a list of the sent messages is returned.
+            List of :obj:`~kirugram.types.Message`: On success, a list of the sent messages is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -1091,7 +1091,7 @@ class Story(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> types.Message | None:
-        """Bound method *reply_photo* of :obj:`~pyrogram.types.Story`.
+        """Bound method *reply_photo* of :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 
@@ -1121,11 +1121,11 @@ class Story(Object, Update):
             caption (``str``, *optional*):
                 Photo caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             has_spoiler (``bool``, *optional*):
@@ -1154,7 +1154,7 @@ class Story(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -1181,8 +1181,8 @@ class Story(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -1223,7 +1223,7 @@ class Story(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> types.Message | None:
-        """Bound method *reply_sticker* of :obj:`~pyrogram.types.Story`.
+        """Bound method *reply_sticker* of :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 
@@ -1264,7 +1264,7 @@ class Story(Object, Update):
             repeat_period (``int``, *optional*):
                 Period after which the message will be sent again in seconds.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -1291,8 +1291,8 @@ class Story(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -1342,7 +1342,7 @@ class Story(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> types.Message | None:
-        """Bound method *reply_video* of :obj:`~pyrogram.types.Story`.
+        """Bound method *reply_video* of :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 
@@ -1372,11 +1372,11 @@ class Story(Object, Update):
             caption (``str``, *optional*):
                 Video caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             has_spoiler (``bool``, *optional*):
@@ -1441,7 +1441,7 @@ class Story(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -1468,8 +1468,8 @@ class Story(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -1523,7 +1523,7 @@ class Story(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> types.Message | None:
-        """Bound method *reply_video_note* of :obj:`~pyrogram.types.Story`.
+        """Bound method *reply_video_note* of :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 
@@ -1580,7 +1580,7 @@ class Story(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -1607,8 +1607,8 @@ class Story(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -1652,7 +1652,7 @@ class Story(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> types.Message | None:
-        """Bound method *reply_voice* of :obj:`~pyrogram.types.Story`.
+        """Bound method *reply_voice* of :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 
@@ -1682,11 +1682,11 @@ class Story(Object, Update):
             caption (``str``, *optional*):
                 Voice message caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             duration (``int``, *optional*):
@@ -1710,7 +1710,7 @@ class Story(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -1737,8 +1737,8 @@ class Story(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -1774,7 +1774,7 @@ class Story(Object, Update):
         disallowed_users: list[int] | None = None,
         protect_content: bool | None = None,
     ) -> types.Story | None:
-        """Bound method *copy* of :obj:`~pyrogram.types.Story`.
+        """Bound method *copy* of :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 
@@ -1801,41 +1801,41 @@ class Story(Object, Update):
                 If not specified, the original caption is kept.
                 Pass "" (empty string) to remove the caption.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the new caption, which can be specified instead of *parse_mode*.
 
             period (``int``, *optional*):
                 How long the story will posted, in secs.
                 only for premium users.
 
-            media_areas (List of :obj:`~pyrogram.types.MediaArea`, *optional*):
+            media_areas (List of :obj:`~kirugram.types.MediaArea`, *optional*):
                 List of media areas to add to the story.
 
-            privacy (:obj:`~pyrogram.enums.StoriesPrivacyRules`, *optional*):
+            privacy (:obj:`~kirugram.enums.StoriesPrivacyRules`, *optional*):
                 Story privacy.
-                Defaults to :obj:`~pyrogram.enums.StoriesPrivacyRules.PUBLIC`
+                Defaults to :obj:`~kirugram.enums.StoriesPrivacyRules.PUBLIC`
 
             allowed_users (List of ``int``, *optional*):
                 List of user_id or chat_id of chat users who are allowed to view stories.
-                Note: chat_id available only with :obj:`~pyrogram.enums.StoriesPrivacyRules.SELECTED_USERS`.
-                Works with :obj:`~pyrogram.enums.StoriesPrivacyRules.CLOSE_FRIENDS`
-                and :obj:`~pyrogram.enums.StoriesPrivacyRules.SELECTED_USERS` only
+                Note: chat_id available only with :obj:`~kirugram.enums.StoriesPrivacyRules.SELECTED_USERS`.
+                Works with :obj:`~kirugram.enums.StoriesPrivacyRules.CLOSE_FRIENDS`
+                and :obj:`~kirugram.enums.StoriesPrivacyRules.SELECTED_USERS` only
 
             disallowed_users (List of ``int``, *optional*):
                 List of user_id whos disallow to view the stories.
-                Note: Works with :obj:`~pyrogram.enums.StoriesPrivacyRules.PUBLIC`
-                and :obj:`~pyrogram.enums.StoriesPrivacyRules.CONTACTS` only
+                Note: Works with :obj:`~kirugram.enums.StoriesPrivacyRules.PUBLIC`
+                and :obj:`~kirugram.enums.StoriesPrivacyRules.CONTACTS` only
 
             protect_content (``bool``, *optional*):
                 Protects the contents of the sent story from forwarding and saving.
 
         Returns:
-            :obj:`~pyrogram.types.Story` | ``None``: On success, the copied story is returned, otherwise, in case
-            the upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Story` | ``None``: On success, the copied story is returned, otherwise, in case
+            the upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -1862,7 +1862,7 @@ class Story(Object, Update):
         )
 
     async def delete(self) -> list[int]:
-        """Bound method *delete* of :obj:`~pyrogram.types.Story`.
+        """Bound method *delete* of :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 
@@ -1889,7 +1889,7 @@ class Story(Object, Update):
         self,
         media: PathType | BinaryIO | None = None,
     ) -> types.Story | None:
-        """Bound method *edit_media* of :obj:`~pyrogram.types.Story`.
+        """Bound method *edit_media* of :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 
@@ -1915,8 +1915,8 @@ class Story(Object, Update):
                 pass a binary file-like object with its attribute ".name" set for in-memory uploads.
 
         Returns:
-            :obj:`~pyrogram.types.Story` | ``None``: On success, the edited story is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Story` | ``None``: On success, the edited story is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -1931,7 +1931,7 @@ class Story(Object, Update):
         parse_mode: enums.ParseMode | None = None,
         caption_entities: list[types.MessageEntity] | None = None,
     ) -> types.Story:
-        """Bound method *edit_caption* of :obj:`~pyrogram.types.Story`.
+        """Bound method *edit_caption* of :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 
@@ -1951,15 +1951,15 @@ class Story(Object, Update):
             caption (``str``):
                 New caption of the story.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
         Returns:
-            On success, the edited :obj:`~pyrogram.types.Story` is returned.
+            On success, the edited :obj:`~kirugram.types.Story` is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -1978,7 +1978,7 @@ class Story(Object, Update):
         allowed_users: list[int | str] | None = None,
         disallowed_users: list[int | str] | None = None,
     ) -> types.Story:
-        """Bound method *edit_privacy* of :obj:`~pyrogram.types.Story`.
+        """Bound method *edit_privacy* of :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 
@@ -1995,22 +1995,22 @@ class Story(Object, Update):
                 await story.edit_privacy(enums.StoriesPrivacyRules.PUBLIC)
 
         Parameters:
-            privacy (:obj:`~pyrogram.enums.StoriesPrivacyRules`, *optional*):
-                Story privacy. Defaults to :obj:`~pyrogram.enums.StoriesPrivacyRules.PUBLIC`.
+            privacy (:obj:`~kirugram.enums.StoriesPrivacyRules`, *optional*):
+                Story privacy. Defaults to :obj:`~kirugram.enums.StoriesPrivacyRules.PUBLIC`.
 
             allowed_users (List of ``int`` | ``str``, *optional*):
                 List of user_id or chat_id of chat users who are allowed to view stories.
-                Note: chat_id available only with :obj:`~pyrogram.enums.StoriesPrivacyRules.SELECTED_USERS`.
-                Works with :obj:`~pyrogram.enums.StoriesPrivacyRules.CLOSE_FRIENDS`
-                and :obj:`~pyrogram.enums.StoriesPrivacyRules.SELECTED_USERS` only
+                Note: chat_id available only with :obj:`~kirugram.enums.StoriesPrivacyRules.SELECTED_USERS`.
+                Works with :obj:`~kirugram.enums.StoriesPrivacyRules.CLOSE_FRIENDS`
+                and :obj:`~kirugram.enums.StoriesPrivacyRules.SELECTED_USERS` only
 
             disallowed_users (List of ``int`` | ``str``, *optional*):
                 List of user_id whos disallow to view the stories.
-                Note: Works with :obj:`~pyrogram.enums.StoriesPrivacyRules.PUBLIC`
-                and :obj:`~pyrogram.enums.StoriesPrivacyRules.CONTACTS` only
+                Note: Works with :obj:`~kirugram.enums.StoriesPrivacyRules.PUBLIC`
+                and :obj:`~kirugram.enums.StoriesPrivacyRules.CONTACTS` only
 
         Returns:
-            On success, the edited :obj:`~pyrogram.types.Story` is returned.
+            On success, the edited :obj:`~kirugram.types.Story` is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -2024,7 +2024,7 @@ class Story(Object, Update):
         )
 
     async def react(self, emoji: int | str | None = None) -> bool:
-        """Bound method *react* of :obj:`~pyrogram.types.Story`.
+        """Bound method *react* of :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 
@@ -2063,7 +2063,7 @@ class Story(Object, Update):
         repeat_period: int | None = None,
         paid_message_star_count: int | None = None,
     ) -> types.Message | None:
-        """Bound method *forward* of :obj:`~pyrogram.types.Story`.
+        """Bound method *forward* of :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 
@@ -2105,7 +2105,7 @@ class Story(Object, Update):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent story message is returned, otherwise, in
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent story message is returned, otherwise, in
             case the server answered with no message, None is returned.
 
         Raises:
@@ -2181,7 +2181,7 @@ class Story(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> str | BytesIO | None:
-        """Bound method *download* of :obj:`~pyrogram.types.Story`.
+        """Bound method *download* of :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 
@@ -2236,7 +2236,7 @@ class Story(Object, Update):
             ``str`` | ``BytesIO`` | ``None``: On success, the absolute path of the downloaded file is returned,
             otherwise, in case ``in_memory=True``, a binary file-like object with its attribute ".name" set is returned.
             In case the download failed or was deliberately stopped with
-            :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -2256,7 +2256,7 @@ class Story(Object, Update):
         )
 
     async def read(self) -> list[int]:
-        """Bound method *read* of :obj:`~pyrogram.types.Story`.
+        """Bound method *read* of :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 
@@ -2278,7 +2278,7 @@ class Story(Object, Update):
         return await self._client.read_chat_stories(chat_id=self.chat.id, max_id=self.id)
 
     async def view(self) -> bool:
-        """Bound method *view* of :obj:`~pyrogram.types.Story`.
+        """Bound method *view* of :obj:`~kirugram.types.Story`.
 
         Use as a shortcut for:
 

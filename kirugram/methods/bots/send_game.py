@@ -1,34 +1,34 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import logging
 
-import pyrogram
-from pyrogram import raw, types, utils
+import kirugram
+from kirugram import raw, types, utils
 
 log = logging.getLogger(__name__)
 
 
 class SendGame:
     async def send_game(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         game_short_name: str,
         disable_notification: bool | None = None,
@@ -72,7 +72,7 @@ class SendGame:
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             protect_content (``bool``, *optional*):
@@ -84,7 +84,7 @@ class SendGame:
                 The relevant Stars will be withdrawn from the bot's balance.
                 For bots only.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup`, *optional*):
                 An object for an inline keyboard. If empty, one ‘Play game_title’ button will be shown automatically.
                 If not empty, the first button must launch the game.
 
@@ -99,7 +99,7 @@ class SendGame:
                 Use `reply_parameters` instead.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent game message is returned,
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent game message is returned,
             otherwise, in case the server answered with no message, None is returned.
 
         Example:

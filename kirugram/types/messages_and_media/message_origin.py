@@ -1,27 +1,27 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present <https://github.com/TelegramPlayGround>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
+import kirugram
+from kirugram import enums, raw, types, utils
 
 from ..object import Object
 
@@ -34,11 +34,11 @@ class MessageOrigin(Object):
 
     It can be one of:
 
-    - :obj:`~pyrogram.types.MessageOriginChannel`
-    - :obj:`~pyrogram.types.MessageOriginChat`
-    - :obj:`~pyrogram.types.MessageOriginHiddenUser`
-    - :obj:`~pyrogram.types.MessageOriginImport`
-    - :obj:`~pyrogram.types.MessageOriginUser`
+    - :obj:`~kirugram.types.MessageOriginChannel`
+    - :obj:`~kirugram.types.MessageOriginChat`
+    - :obj:`~kirugram.types.MessageOriginHiddenUser`
+    - :obj:`~kirugram.types.MessageOriginImport`
+    - :obj:`~kirugram.types.MessageOriginUser`
     """
 
     def __init__(self, type: enums.MessageOriginType, date: datetime | None = None):
@@ -49,7 +49,7 @@ class MessageOrigin(Object):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         fwd_from: raw.types.MessageFwdHeader,
         users: dict[int, raw.base.User],
         chats: dict[int, raw.base.Chat],

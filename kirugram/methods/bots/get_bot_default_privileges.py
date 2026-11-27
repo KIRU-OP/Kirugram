@@ -1,31 +1,31 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw
-from pyrogram import types
+import kirugram
+from kirugram import raw
+from kirugram import types
 
 
 class GetBotDefaultPrivileges:
     async def get_bot_default_privileges(
-        self: pyrogram.Client, for_channels: bool | None = None
+        self: kirugram.Client, for_channels: bool | None = None
     ) -> types.ChatAdministratorRights | None:
         """Get the current default privileges of the bot.
 
@@ -37,7 +37,7 @@ class GetBotDefaultPrivileges:
                 for groups and supergroups will be returned.
 
         Returns:
-            :obj:`~pyrogram.types.ChatAdministratorRights` | ``None``: On success, the default privileges of
+            :obj:`~kirugram.types.ChatAdministratorRights` | ``None``: On success, the default privileges of
             the bot are returned, otherwise, in case the bot has no default privileges set, None is returned.
 
         Example:

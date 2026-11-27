@@ -1,34 +1,34 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import logging
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
+import kirugram
+from kirugram import enums, raw, types, utils
 
 log = logging.getLogger(__name__)
 
 
 class EditInlineText:
     async def edit_inline_text(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         inline_message_id: str,
         text: str | None = None,
         parse_mode: enums.ParseMode | None = None,
@@ -50,21 +50,21 @@ class EditInlineText:
                 New text of the message.
                 Required if ``rich_message`` isn't specified.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in message text, which can be specified instead of *parse_mode*.
 
-            link_preview_options (:obj:`~pyrogram.types.LinkPreviewOptions`, *optional*):
+            link_preview_options (:obj:`~kirugram.types.LinkPreviewOptions`, *optional*):
                 Options used for link preview generation for the message.
 
-            rich_message (:obj:`~pyrogram.types.InputRichMessage`, *optional*):
+            rich_message (:obj:`~kirugram.types.InputRichMessage`, *optional*):
                 New rich content of the message.
                 Required if ``text`` isn't specified.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup`, *optional*):
                 An InlineKeyboardMarkup object.
 
             disable_web_page_preview (``bool``, *optional*):
@@ -92,7 +92,7 @@ class EditInlineText:
                 )
 
                 # Take the same text message, remove the web page preview only
-                from pyrogram import types
+                from kirugram import types
 
                 await app.edit_inline_text(
                     inline_message_id,

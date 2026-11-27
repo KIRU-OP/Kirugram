@@ -1,30 +1,30 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, types
+import kirugram
+from kirugram import raw, types
 
 
 class SendPaymentForm:
     async def send_payment_form(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         payment_form_id: int,
         input_invoice: types.InputInvoice,
         credentials: types.InputCredentials | None = None,
@@ -35,17 +35,17 @@ class SendPaymentForm:
 
         Parameters:
             payment_form_id (``int``):
-                Payment form identifier returned by :meth:`~pyrogram.Client.get_payment_form`.
+                Payment form identifier returned by :meth:`~kirugram.Client.get_payment_form`.
 
-            input_invoice (:obj:`~pyrogram.types.InputInvoice`):
+            input_invoice (:obj:`~kirugram.types.InputInvoice`):
                 The invoice.
 
-            credentials (:obj:`~pyrogram.types.InputCredentials`, *optional*):
+            credentials (:obj:`~kirugram.types.InputCredentials`, *optional*):
                 The credentials chosen by user for payment.
                 Pass None for a payment in Telegram Stars.
 
         Returns:
-            :obj:`~pyrogram.types.PaymentResult`: On success, the payment result is returned.
+            :obj:`~kirugram.types.PaymentResult`: On success, the payment result is returned.
 
         Example:
             .. code-block:: python

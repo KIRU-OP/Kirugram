@@ -1,25 +1,25 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 """The sync bridge sends a call to the loop the object it was made on runs on.
 
-`pyrogram.sync` wraps every client method and every bound method of every type while
-`import pyrogram` is still running, so the loop cannot be resolved there. Resolving it from
+`kirugram.sync` wraps every client method and every bound method of every type while
+`import kirugram` is still running, so the loop cannot be resolved there. Resolving it from
 a process-wide record instead answers for whichever client asked first, and hands an async
 generator to the caller's loop while its coroutine sibling goes to the client's. Both end
 in `RuntimeError: ... got Future ... attached to a different loop`.
@@ -41,9 +41,9 @@ from typing import TYPE_CHECKING, Final, Protocol
 
 import pytest
 
-import pyrogram
-from pyrogram import Client, sync, types
-from pyrogram.sync import _bridge_loop, async_to_sync
+import kirugram
+from kirugram import Client, sync, types
+from kirugram.sync import _bridge_loop, async_to_sync
 
 if TYPE_CHECKING:
     from collections.abc import AsyncGenerator, Iterator
@@ -182,7 +182,7 @@ def _client_started_on(loop: asyncio.AbstractEventLoop, *, name: str) -> Client:
 
 
 def test_importing_pyrogram_resolves_no_loop() -> None:
-    probe: str = "import pyrogram; print(pyrogram.sync._sync_caller_loop)"
+    probe: str = "import kirugram; print(kirugram.sync._sync_caller_loop)"
     recorded = subprocess.run(
         [sys.executable, "-c", probe],
         capture_output=True,
@@ -402,9 +402,9 @@ def test_idle_called_from_sync_code_runs_on_the_loop_it_resolves_and_stops_on_a_
 
     try:
         # `idle` is declared `async def`, so `ty` sees a coroutine function here: it can't
-        #  know `pyrogram.sync` has patched it into a blocking sync wrapper, which is the
+        #  know `kirugram.sync` has patched it into a blocking sync wrapper, which is the
         #  whole subject of this test.
-        pyrogram.idle()  # ty: ignore[unused-awaitable]
+        kirugram.idle()  # ty: ignore[unused-awaitable]
 
     finally:
         interrupter.join()

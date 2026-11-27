@@ -1,27 +1,27 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram.filters import Filter
+import kirugram
+from kirugram.filters import Filter
 from .unbound_arguments import unbound_arguments
 
 if TYPE_CHECKING:
@@ -38,13 +38,13 @@ class OnChatJoinRequest:
     ) -> Callable[[HandlerType], HandlerType]:
         """Decorator for handling chat join requests.
 
-        This does the same thing as :meth:`~pyrogram.Client.add_handler` using the
-        :obj:`~pyrogram.handlers.ChatJoinRequestHandler`.
+        This does the same thing as :meth:`~kirugram.Client.add_handler` using the
+        :obj:`~kirugram.handlers.ChatJoinRequestHandler`.
 
         .. include:: /_includes/usable-by/bots.rst
 
         Parameters:
-            filters (:obj:`~pyrogram.filters`, *optional*):
+            filters (:obj:`~kirugram.filters`, *optional*):
                 Pass one or more filters to allow only a subset of updates to be passed in your function.
 
             group (``int``, *optional*):
@@ -52,8 +52,8 @@ class OnChatJoinRequest:
         """
 
         def decorator(func: HandlerType) -> HandlerType:
-            if isinstance(self, pyrogram.Client):
-                self.add_handler(pyrogram.handlers.ChatJoinRequestHandler(func, filters), group)
+            if isinstance(self, kirugram.Client):
+                self.add_handler(kirugram.handlers.ChatJoinRequestHandler(func, filters), group)
             elif isinstance(self, Filter) or self is None:
                 if not hasattr(func, "handlers"):
                     func.handlers = []
@@ -62,7 +62,7 @@ class OnChatJoinRequest:
 
                 func.handlers.append(
                     (
-                        pyrogram.handlers.ChatJoinRequestHandler(func, arguments.filters),
+                        kirugram.handlers.ChatJoinRequestHandler(func, arguments.filters),
                         arguments.group,
                     )
                 )

@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -24,9 +24,9 @@ import re
 from re import Pattern
 from typing import TYPE_CHECKING, Any, Final, cast
 
-import pyrogram
-from pyrogram import enums
-from pyrogram.types import (
+import kirugram
+from kirugram import enums
+from kirugram.types import (
     BusinessConnection,
     CallbackQuery,
     Chat,
@@ -55,14 +55,14 @@ from pyrogram.types import (
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-    from pyrogram.raw.base import Update as RawUpdate
+    from kirugram.raw.base import Update as RawUpdate
 
 
 # A filter is handed a raw update as well as a parsed one: `Dispatcher.handler_worker`
 #  checks a `RawUpdateHandler` against the `raw.base.Update` it was dispatched on, never
-#  against a `pyrogram.types` one.
+#  against a `kirugram.types` one.
 class Filter:
-    async def __call__(self, client: pyrogram.Client, update: Update | RawUpdate) -> bool:
+    async def __call__(self, client: kirugram.Client, update: Update | RawUpdate) -> bool:
         raise NotImplementedError
 
     def __invert__(self) -> InvertFilter:
@@ -77,7 +77,7 @@ class Filter:
 
 async def _resolve_filter(
     flt: Filter,
-    client: pyrogram.Client,
+    client: kirugram.Client,
     update: Update | RawUpdate,
 ) -> bool:
     if inspect.iscoroutinefunction(flt.__call__):
@@ -94,7 +94,7 @@ class InvertFilter(Filter):
     def __init__(self, base: Filter) -> None:
         self.base = base
 
-    async def __call__(self, client: pyrogram.Client, update: Update | RawUpdate) -> bool:
+    async def __call__(self, client: kirugram.Client, update: Update | RawUpdate) -> bool:
         return not await _resolve_filter(self.base, client, update)
 
 
@@ -103,7 +103,7 @@ class AndFilter(Filter):
         self.base = base
         self.other = other
 
-    async def __call__(self, client: pyrogram.Client, update: Update | RawUpdate) -> bool:
+    async def __call__(self, client: kirugram.Client, update: Update | RawUpdate) -> bool:
         # short circuit
         if not await _resolve_filter(self.base, client, update):
             return False
@@ -116,7 +116,7 @@ class OrFilter(Filter):
         self.base = base
         self.other = other
 
-    async def __call__(self, client: pyrogram.Client, update: Update | RawUpdate) -> bool:
+    async def __call__(self, client: kirugram.Client, update: Update | RawUpdate) -> bool:
         # short circuit
         if await _resolve_filter(self.base, client, update):
             return True
@@ -253,9 +253,9 @@ def create(func: Callable[..., Any], name: str | None = None, **kwargs: Any) -> 
             A function that accepts three positional arguments *(filter, client, update)* and returns a boolean: True if the
             update should be handled, False otherwise.
             The *filter* argument refers to the filter itself and can be used to access keyword arguments (read below).
-            The *client* argument refers to the :obj:`~pyrogram.Client` that received the update.
+            The *client* argument refers to the :obj:`~kirugram.Client` that received the update.
             The *update* argument type will vary depending on which `Handler <handlers>`_ is coming from.
-            For example, in a :obj:`~pyrogram.handlers.MessageHandler` the *update* argument will be a :obj:`~pyrogram.types.Message`; in a :obj:`~pyrogram.handlers.CallbackQueryHandler` the *update* will be a :obj:`~pyrogram.types.CallbackQuery`.
+            For example, in a :obj:`~kirugram.handlers.MessageHandler` the *update* argument will be a :obj:`~kirugram.types.Message`; in a :obj:`~kirugram.handlers.CallbackQueryHandler` the *update* will be a :obj:`~kirugram.types.CallbackQuery`.
             Your function body can then access the incoming update attributes and decide whether to allow it or not.
 
         name (``str``, *optional*):
@@ -264,7 +264,7 @@ def create(func: Callable[..., Any], name: str | None = None, **kwargs: Any) -> 
 
         **kwargs (``any``, *optional*):
             Any keyword argument you would like to pass. Useful when creating parameterized custom filters, such as
-            :meth:`~pyrogram.filters.command` or :meth:`~pyrogram.filters.regex`.
+            :meth:`~kirugram.filters.command` or :meth:`~kirugram.filters.regex`.
     """
     return type(
         name or func.__name__ or CUSTOM_FILTER_NAME, (Filter,), {"__call__": func, **kwargs}
@@ -412,7 +412,7 @@ async def audio_filter(_, __, message: Message):
 
 
 audio = create(audio_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.Audio` objects."""
+"""Filter messages that contain :obj:`~kirugram.types.Audio` objects."""
 
 
 # endregion
@@ -424,7 +424,7 @@ async def document_filter(_, __, message: Message):
 
 
 document = create(document_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.Document` objects."""
+"""Filter messages that contain :obj:`~kirugram.types.Document` objects."""
 
 
 # endregion
@@ -436,7 +436,7 @@ async def photo_filter(_, __, message: Message):
 
 
 photo = create(photo_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.Photo` objects."""
+"""Filter messages that contain :obj:`~kirugram.types.Photo` objects."""
 
 
 # endregion
@@ -448,7 +448,7 @@ async def sticker_filter(_, __, message: Message):
 
 
 sticker = create(sticker_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.Sticker` objects."""
+"""Filter messages that contain :obj:`~kirugram.types.Sticker` objects."""
 
 
 # endregion
@@ -460,7 +460,7 @@ async def animation_filter(_, __, message: Message):
 
 
 animation = create(animation_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.Animation` objects."""
+"""Filter messages that contain :obj:`~kirugram.types.Animation` objects."""
 
 
 # endregion
@@ -472,7 +472,7 @@ async def game_filter(_, __, message: Message):
 
 
 game = create(game_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.Game` objects."""
+"""Filter messages that contain :obj:`~kirugram.types.Game` objects."""
 
 
 # endregion
@@ -484,7 +484,7 @@ async def giveaway_filter(_, __, message: Message):
 
 
 giveaway = create(giveaway_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.Giveaway` objects."""
+"""Filter messages that contain :obj:`~kirugram.types.Giveaway` objects."""
 
 
 # endregion
@@ -496,7 +496,7 @@ async def giveaway_winners_filter(_, __, message: Message):
 
 
 giveaway_winners = create(giveaway_winners_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.GiveawayWinners` objects."""
+"""Filter messages that contain :obj:`~kirugram.types.GiveawayWinners` objects."""
 
 
 # endregion
@@ -508,7 +508,7 @@ async def gift_code_filter(_, __, message: Message):
 
 
 gift_code = create(gift_code_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.GiftCode` objects."""
+"""Filter messages that contain :obj:`~kirugram.types.GiftCode` objects."""
 
 
 # endregion
@@ -520,7 +520,7 @@ async def gift_filter(_, __, message: Message):
 
 
 gift = create(gift_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.Gift` objects."""
+"""Filter messages that contain :obj:`~kirugram.types.Gift` objects."""
 
 
 # endregion
@@ -556,7 +556,7 @@ async def video_filter(_, __, message: Message):
 
 
 video = create(video_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.Video` objects."""
+"""Filter messages that contain :obj:`~kirugram.types.Video` objects."""
 
 
 # endregion
@@ -580,7 +580,7 @@ async def voice_filter(_, __, message: Message):
 
 
 voice = create(voice_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.Voice` note objects."""
+"""Filter messages that contain :obj:`~kirugram.types.Voice` note objects."""
 
 
 # endregion
@@ -592,7 +592,7 @@ async def video_note_filter(_, __, message: Message):
 
 
 video_note = create(video_note_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.VideoNote` objects."""
+"""Filter messages that contain :obj:`~kirugram.types.VideoNote` objects."""
 
 
 # endregion
@@ -604,7 +604,7 @@ async def contact_filter(_, __, message: Message):
 
 
 contact = create(contact_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.Contact` objects."""
+"""Filter messages that contain :obj:`~kirugram.types.Contact` objects."""
 
 
 # endregion
@@ -616,7 +616,7 @@ async def location_filter(_, __, message: Message):
 
 
 location = create(location_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.Location` objects."""
+"""Filter messages that contain :obj:`~kirugram.types.Location` objects."""
 
 
 # endregion
@@ -628,7 +628,7 @@ async def live_location_filter(_, __, message: Message):
 
 
 live_location = create(live_location_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.Location` objects with a live period."""
+"""Filter messages that contain :obj:`~kirugram.types.Location` objects with a live period."""
 
 
 # endregion
@@ -640,7 +640,7 @@ async def venue_filter(_, __, message: Message):
 
 
 venue = create(venue_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.Venue` objects."""
+"""Filter messages that contain :obj:`~kirugram.types.Venue` objects."""
 
 
 # endregion
@@ -664,7 +664,7 @@ async def poll_filter(_, __, message: Message):
 
 
 poll = create(poll_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.Poll` objects."""
+"""Filter messages that contain :obj:`~kirugram.types.Poll` objects."""
 
 
 # endregion
@@ -676,7 +676,7 @@ async def dice_filter(_, __, message: Message):
 
 
 dice = create(dice_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.Dice` objects."""
+"""Filter messages that contain :obj:`~kirugram.types.Dice` objects."""
 
 
 # endregion
@@ -783,7 +783,7 @@ async def story_filter(_, __, message: Message):
 
 
 story = create(story_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.Story` objects."""
+"""Filter messages that contain :obj:`~kirugram.types.Story` objects."""
 
 
 # endregion
@@ -1209,7 +1209,7 @@ def command(
             The command or list of commands as string the filter should look for.
             Examples: "start", ["start", "help", "settings"]. When a message text containing
             a command arrives, the command itself and its arguments will be stored in the *command*
-            field of the :obj:`~pyrogram.types.Message`.
+            field of the :obj:`~kirugram.types.Message`.
 
         prefixes (``str`` | ``list``, *optional*):
             A prefix or a list of prefixes as string the filter should look for.
@@ -1222,7 +1222,7 @@ def command(
     """
     command_re = re.compile(r"([\"'])(.*?)(?<!\\)\1|(\S+)")
 
-    async def func(flt, client: pyrogram.Client, message: Message):
+    async def func(flt, client: kirugram.Client, message: Message):
         escaped_username = re.escape(client.me.username or "")
         text = message.text or message.caption
         message.command = None
@@ -1287,11 +1287,11 @@ def regex(pattern: str | Pattern, flags: int = 0) -> Filter:
 
     Can be applied to handlers that receive one of the following updates:
 
-    - :obj:`~pyrogram.types.Message`: The filter will match ``text`` or ``caption``.
-    - :obj:`~pyrogram.types.CallbackQuery`: The filter will match ``data``.
-    - :obj:`~pyrogram.types.ChosenInlineResult`: The filter will match ``query``.
-    - :obj:`~pyrogram.types.InlineQuery`: The filter will match ``query``.
-    - :obj:`~pyrogram.types.PreCheckoutQuery`: The filter will match ``payload``.
+    - :obj:`~kirugram.types.Message`: The filter will match ``text`` or ``caption``.
+    - :obj:`~kirugram.types.CallbackQuery`: The filter will match ``data``.
+    - :obj:`~kirugram.types.ChosenInlineResult`: The filter will match ``query``.
+    - :obj:`~kirugram.types.InlineQuery`: The filter will match ``query``.
+    - :obj:`~kirugram.types.PreCheckoutQuery`: The filter will match ``payload``.
 
     When a pattern matches, all the `Match Objects <https://docs.python.org/3/library/re.html#match-objects>`_ are
     stored in the ``matches`` field of the update object itself.
@@ -1352,7 +1352,7 @@ class user(Filter, set):  # ty: ignore[invalid-method-override]
             for u in users
         )
 
-    async def __call__(self, client: pyrogram.Client, update: Update | RawUpdate) -> bool:
+    async def __call__(self, client: kirugram.Client, update: Update | RawUpdate) -> bool:
         sender = _sender_of(update)
         if not sender:
             return False
@@ -1383,7 +1383,7 @@ class chat(Filter, set):  # ty: ignore[invalid-method-override]
             for c in chats
         )
 
-    async def __call__(self, client: pyrogram.Client, update: Update | RawUpdate) -> bool:
+    async def __call__(self, client: kirugram.Client, update: Update | RawUpdate) -> bool:
         chat_of_update = _chat_of(update)
         if not chat_of_update:
             return False
@@ -1421,7 +1421,7 @@ class topic(Filter, set):  # ty: ignore[invalid-method-override]
 
         super().__init__(t for t in topics)
 
-    async def __call__(self, client: pyrogram.Client, update: Update | RawUpdate) -> bool:
+    async def __call__(self, client: kirugram.Client, update: Update | RawUpdate) -> bool:
         message = _message_of(update)
 
         return bool(message and message.topic and message.topic.id in self)

@@ -1,28 +1,28 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import logging
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import enums, types
+import kirugram
+from kirugram import enums, types
 
 if TYPE_CHECKING:
     from datetime import datetime, timedelta
@@ -32,7 +32,7 @@ log = logging.getLogger(__name__)
 
 class SendWebPage:
     async def send_web_page(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         text: str = "",
         url: str | None = None,
@@ -92,14 +92,14 @@ class SendWebPage:
                 True, if the media in the link preview is supposed to be shrunk.
                 Ignored if the URL isn't explicitly specified or media size change isn't supported for the preview.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in message text, which can be specified instead of *parse_mode*.
 
-            link_preview_options (:obj:`~pyrogram.types.LinkPreviewOptions`, *optional*):
+            link_preview_options (:obj:`~kirugram.types.LinkPreviewOptions`, *optional*):
                 Options used for link preview generation for the message.
 
             disable_notification (``bool``, *optional*):
@@ -122,7 +122,7 @@ class SendWebPage:
                 True, if the link preview must be shown above the message text.
                 Otherwise, the link preview will be shown below the message text.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -147,7 +147,7 @@ class SendWebPage:
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -171,7 +171,7 @@ class SendWebPage:
                 This parameter is deprecated and should not be used.
                 Use `reply_parameters` instead.
 
-            quote_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            quote_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the quote, which can be specified instead of *parse_mode*.
                 This parameter is deprecated and should not be used.
                 Use `reply_parameters` instead.
@@ -182,7 +182,7 @@ class SendWebPage:
                 Use `reply_parameters` instead.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
 
         Example:

@@ -1,25 +1,25 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw
+import kirugram
+from kirugram import raw
 
 from ..object import Object
 
@@ -48,7 +48,7 @@ class Reaction(Object):
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         emoji: str | None = None,
         custom_emoji_id: str | None = None,
         count: int | None = None,
@@ -66,7 +66,7 @@ class Reaction(Object):
     # `None` input and `ReactionEmpty` both mean "no reaction", so the optional
     #  contract is the real one: `StoryView` already passes a maybe-missing value.
     @staticmethod
-    def _parse(client: pyrogram.Client, reaction: raw.base.Reaction | None) -> Reaction | None:
+    def _parse(client: kirugram.Client, reaction: raw.base.Reaction | None) -> Reaction | None:
         if isinstance(reaction, raw.types.ReactionEmoji):
             return Reaction(client=client, emoji=reaction.emoticon)
 
@@ -79,7 +79,7 @@ class Reaction(Object):
         return None
 
     @staticmethod
-    def _parse_count(client: pyrogram.Client, reaction_count: raw.base.ReactionCount) -> Reaction:
+    def _parse_count(client: kirugram.Client, reaction_count: raw.base.ReactionCount) -> Reaction:
         reaction = Reaction._parse(client, reaction_count.reaction)
 
         # A `ReactionCount` always carries a concrete reaction, never an empty one.

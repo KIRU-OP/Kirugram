@@ -1,28 +1,28 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import random
 
-import pyrogram
-from pyrogram import raw, types, utils
-from pyrogram.errors import MessageIdsEmpty, ChannelPrivate
+import kirugram
+from kirugram import raw, types, utils
+from kirugram.errors import MessageIdsEmpty, ChannelPrivate
 
 from ..object import Object
 
@@ -38,19 +38,19 @@ class GiveawayPrizeStars(Object):
             Identifier of the transaction for Telegram Stars purchase.
             For receiver only
 
-        boosted_chat (:obj:`~pyrogram.types.Chat`):
+        boosted_chat (:obj:`~kirugram.types.Chat`):
             Supergroup or channel chat, which was automatically boosted by the winners of the giveaway.
 
         giveaway_message_id (``int``):
             Identifier of the message with the giveaway in the boosted chat.
 
-        giveaway_message (:obj:`~pyrogram.types.Message`, *optional*):
+        giveaway_message (:obj:`~kirugram.types.Message`, *optional*):
             Message with the giveaway in the boosted chat.
 
         is_unclaimed (``bool``, *optional*):
             True, if the corresponding winner wasn't chosen and the Telegram Stars were received by the owner of the boosted chat.
 
-        sticker (:obj:`~pyrogram.types.Sticker`):
+        sticker (:obj:`~kirugram.types.Sticker`):
             A sticker to be shown in the message.
     """
 
@@ -77,7 +77,7 @@ class GiveawayPrizeStars(Object):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         action: raw.types.MessageActionPrizeStars,
         chats: dict[int, raw.base.Chat],
     ) -> GiveawayPrizeStars:

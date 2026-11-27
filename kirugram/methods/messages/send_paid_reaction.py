@@ -1,30 +1,30 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import enums, raw
+import kirugram
+from kirugram import enums, raw
 
 
 class SendPaidReaction:
     async def send_paid_reaction(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         message_id: int,
         amount: int,
@@ -45,12 +45,12 @@ class SendPaidReaction:
             amount (``int``):
                 Amount of stars to send.
 
-            privacy (:obj:`~pyrogram.enums.PaidReactionPrivacy`, *optional*):
+            privacy (:obj:`~kirugram.enums.PaidReactionPrivacy`, *optional*):
                 Reaction privacy type.
 
             send_as (``int`` | ``str``, *optional*):
                 Unique identifier (int) or username (str) of the send_as chat.
-                Applicable when privacy is :obj:`~pyrogram.enums.PaidReactionPrivacy.CHAT`.
+                Applicable when privacy is :obj:`~kirugram.enums.PaidReactionPrivacy.CHAT`.
 
         Returns:
             ``bool``: On success, True is returned.

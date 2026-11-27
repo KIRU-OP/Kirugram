@@ -1,33 +1,33 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING, BinaryIO, cast
 
-import pyrogram
-from pyrogram import raw, utils
-from pyrogram.file_id import FileType
+import kirugram
+from kirugram import raw, utils
+from kirugram.file_id import FileType
 
 from ..object import Object
 
 if TYPE_CHECKING:
-    from pyrogram._typing import PathType
+    from kirugram._typing import PathType
 
 
 class InputChatPhoto(Object):
@@ -35,19 +35,19 @@ class InputChatPhoto(Object):
 
     It should be one of:
 
-    - :obj:`~pyrogram.types.InputChatPhotoPrevious`
-    - :obj:`~pyrogram.types.InputChatPhotoStatic`
-    - :obj:`~pyrogram.types.InputChatPhotoAnimation`
+    - :obj:`~kirugram.types.InputChatPhotoPrevious`
+    - :obj:`~kirugram.types.InputChatPhotoStatic`
+    - :obj:`~kirugram.types.InputChatPhotoAnimation`
     """
 
-    # TODO: - :obj:`~pyrogram.types.InputChatPhotoSticker`
+    # TODO: - :obj:`~kirugram.types.InputChatPhotoSticker`
 
     def __init__(
         self,
     ):
         super().__init__()
 
-    async def write(self, client: pyrogram.Client) -> raw.base.InputFile | raw.base.InputPhoto:
+    async def write(self, client: kirugram.Client) -> raw.base.InputFile | raw.base.InputPhoto:
         raise NotImplementedError
 
 
@@ -64,7 +64,7 @@ class InputChatPhotoPrevious(InputChatPhoto):
 
         self.chat_photo_file_id = chat_photo_file_id
 
-    async def write(self, client: pyrogram.Client) -> raw.base.InputPhoto:
+    async def write(self, client: kirugram.Client) -> raw.base.InputPhoto:
         photo = utils.get_input_media_from_file_id(self.chat_photo_file_id, FileType.PHOTO)
 
         # The helper rejects any other file type when it is given one to expect, so the
@@ -85,7 +85,7 @@ class InputChatPhotoStatic(InputChatPhoto):
 
         self.photo = photo
 
-    async def write(self, client: pyrogram.Client) -> raw.base.InputFile:
+    async def write(self, client: kirugram.Client) -> raw.base.InputFile:
         return await client.save_file(self.photo)
 
 
@@ -110,5 +110,5 @@ class InputChatPhotoAnimation(InputChatPhoto):
         self.animation = animation
         self.main_frame_timestamp = main_frame_timestamp
 
-    async def write(self, client: pyrogram.Client) -> raw.base.InputFile:
+    async def write(self, client: kirugram.Client) -> raw.base.InputFile:
         return await client.save_file(self.animation)

@@ -1,40 +1,40 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import asyncio
 import logging
 
-import pyrogram
-from pyrogram import raw
-from pyrogram.storage import UpdateState
+import kirugram
+from kirugram import raw
+from kirugram.storage import UpdateState
 
 log = logging.getLogger(__name__)
 
 
 class Start:
     async def start(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         *,
         use_qr: bool = False,
         except_ids: list[int] | None = None,
-    ) -> pyrogram.Client:
+    ) -> kirugram.Client:
         """Start the client.
 
         This method connects the client to Telegram and, in case of new sessions, automatically manages the
@@ -54,7 +54,7 @@ class Start:
                 List of already logged-in user IDs, to prevent logging in twice with the same user.
 
         Returns:
-            :obj:`~pyrogram.Client`: The started client itself.
+            :obj:`~kirugram.Client`: The started client itself.
 
         Raises:
             ConnectionError: In case you try to start an already started client.
@@ -65,7 +65,7 @@ class Start:
 
                 import asyncio
 
-                from pyrogram import Client
+                from kirugram import Client
 
 
                 async def main():
@@ -77,7 +77,7 @@ class Start:
 
                 asyncio.run(main())
         """
-        # The one loop reference the library keeps: `pyrogram/sync.py` bridges a call made
+        # The one loop reference the library keeps: `kirugram/sync.py` bridges a call made
         #  from a thread with no loop of its own onto this one.
         self._loop = asyncio.get_running_loop()
         self._rebuild_loop_bound_state()

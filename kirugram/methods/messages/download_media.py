@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -25,15 +25,15 @@ from datetime import datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, Literal, cast, overload
 
-import pyrogram
-from pyrogram import types, utils
-from pyrogram.file_id import PHOTO_TYPES, FileId, FileType
+import kirugram
+from kirugram import types, utils
+from kirugram.file_id import PHOTO_TYPES, FileId, FileType
 
 if TYPE_CHECKING:
     from collections.abc import Callable
     from io import BytesIO
 
-    from pyrogram._typing import PathType
+    from kirugram._typing import PathType
 
 DEFAULT_DOWNLOAD_DIR = "downloads/"
 
@@ -41,7 +41,7 @@ DEFAULT_DOWNLOAD_DIR = "downloads/"
 class DownloadMedia:
     @overload
     async def download_media(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         message: (
             str
             | types.Message
@@ -69,7 +69,7 @@ class DownloadMedia:
 
     @overload
     async def download_media(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         message: (
             str
             | types.Message
@@ -97,7 +97,7 @@ class DownloadMedia:
 
     @overload
     async def download_media(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         message: (
             str
             | types.Message
@@ -126,7 +126,7 @@ class DownloadMedia:
 
     @overload
     async def download_media(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         message: (
             str
             | types.Message
@@ -154,7 +154,7 @@ class DownloadMedia:
 
     @overload
     async def download_media(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         message: (
             str
             | types.Message
@@ -181,7 +181,7 @@ class DownloadMedia:
     ) -> str | BytesIO | list[str] | list[BytesIO] | None: ...
 
     async def download_media(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         message: (
             str
             | types.Message
@@ -211,7 +211,7 @@ class DownloadMedia:
         .. include:: /_includes/usable-by/users-bots.rst
 
         Parameters:
-            message (``str`` | :obj:`~pyrogram.types.Message` | :obj:`~pyrogram.types.Story` | :obj:`~pyrogram.types.Audio` | :obj:`~pyrogram.types.Document` | :obj:`~pyrogram.types.Photo` | :obj:`~pyrogram.types.Sticker` | :obj:`~pyrogram.types.Animation` | :obj:`~pyrogram.types.Video` | :obj:`~pyrogram.types.Voice` | :obj:`~pyrogram.types.VideoNote` | :obj:`~pyrogram.types.PaidMediaInfo` | :obj:`~pyrogram.types.Thumbnail` | :obj:`~pyrogram.types.StrippedThumbnail` | :obj:`~pyrogram.types.PaidMediaPreview` | :obj:`~pyrogram.types.ChatPhoto`):
+            message (``str`` | :obj:`~kirugram.types.Message` | :obj:`~kirugram.types.Story` | :obj:`~kirugram.types.Audio` | :obj:`~kirugram.types.Document` | :obj:`~kirugram.types.Photo` | :obj:`~kirugram.types.Sticker` | :obj:`~kirugram.types.Animation` | :obj:`~kirugram.types.Video` | :obj:`~kirugram.types.Voice` | :obj:`~kirugram.types.VideoNote` | :obj:`~kirugram.types.PaidMediaInfo` | :obj:`~kirugram.types.Thumbnail` | :obj:`~kirugram.types.StrippedThumbnail` | :obj:`~kirugram.types.PaidMediaPreview` | :obj:`~kirugram.types.ChatPhoto`):
                 Pass a object containing the media, the media itself (message.audio, message.video, ...) or a file id
                 as string.
 
@@ -257,7 +257,7 @@ class DownloadMedia:
             downloaded file is returned. In case ``in_memory=True``, a binary file-like object with its attribute
             ".name" set is returned. If the message contains multiple media (purchased paid media), a list of paths or
             binary file-like objects is returned. In case the download failed or was deliberately stopped with
-            :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             ValueError: if the message doesn't contain any downloadable media

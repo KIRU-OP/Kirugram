@@ -1,28 +1,28 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import re
 
-import pyrogram
-from pyrogram import raw, enums
-from pyrogram import types
+import kirugram
+from kirugram import raw, enums
+from kirugram import types
 from ..object import Object
 
 
@@ -32,7 +32,7 @@ class MessageEntity(Object):
     For example, hashtags, usernames, URLs, etc.
 
     Parameters:
-        type (:obj:`~pyrogram.enums.MessageEntityType`):
+        type (:obj:`~kirugram.enums.MessageEntityType`):
             Type of the entity.
 
         offset (``int``):
@@ -42,20 +42,20 @@ class MessageEntity(Object):
             Length of the entity in UTF-16 code units.
 
         url (``str``, *optional*):
-            For :obj:`~pyrogram.enums.MessageEntityType.TEXT_LINK` only, url that will be opened after user taps on the text.
+            For :obj:`~kirugram.enums.MessageEntityType.TEXT_LINK` only, url that will be opened after user taps on the text.
 
-        user (:obj:`~pyrogram.types.User`, *optional*):
-            For :obj:`~pyrogram.enums.MessageEntityType.TEXT_MENTION` only, the mentioned user.
+        user (:obj:`~kirugram.types.User`, *optional*):
+            For :obj:`~kirugram.enums.MessageEntityType.TEXT_MENTION` only, the mentioned user.
 
         language (``str``, *optional*):
             For "pre" only, the programming language of the entity text.
 
         custom_emoji_id (``str``, *optional*):
-            For :obj:`~pyrogram.enums.MessageEntityType.CUSTOM_EMOJI` only, unique identifier of the custom emoji.
-            Use :meth:`~pyrogram.Client.get_custom_emoji_stickers` to get full information about the sticker.
+            For :obj:`~kirugram.enums.MessageEntityType.CUSTOM_EMOJI` only, unique identifier of the custom emoji.
+            Use :meth:`~kirugram.Client.get_custom_emoji_stickers` to get full information about the sticker.
 
         expandable (``bool``, *optional*):
-            For :obj:`~pyrogram.enums.MessageEntityType.BLOCKQUOTE` only, whether the blockquote is expandable or not.
+            For :obj:`~kirugram.enums.MessageEntityType.BLOCKQUOTE` only, whether the blockquote is expandable or not.
 
         unix_time (``int``, *optional*):
             For "date_time" only, the Unix time associated with the entity.
@@ -67,7 +67,7 @@ class MessageEntity(Object):
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         type: enums.MessageEntityType,
         offset: int,
         length: int,

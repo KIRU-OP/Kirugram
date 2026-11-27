@@ -1,27 +1,27 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import enums, raw, types
+import kirugram
+from kirugram import enums, raw, types
 
 if TYPE_CHECKING:
     from collections.abc import AsyncGenerator
@@ -29,7 +29,7 @@ if TYPE_CHECKING:
 
 class SearchStickers:
     async def search_stickers(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         sticker_type: enums.StickerType,
         emojis: list[str],
         query: str = "",
@@ -42,7 +42,7 @@ class SearchStickers:
         .. include:: /_includes/usable-by/users.rst
 
         Parameters:
-            sticker_type (:obj:`~pyrogram.enums.StickerType`):
+            sticker_type (:obj:`~kirugram.enums.StickerType`):
                 Type of the stickers to return.
 
             emojis (List of ``str``):
@@ -63,7 +63,7 @@ class SearchStickers:
                 By default, no limit is applied and all stickers are returned.
 
         Returns:
-            ``Generator``: A generator yielding :obj:`~pyrogram.types.Sticker` objects.
+            ``Generator``: A generator yielding :obj:`~kirugram.types.Sticker` objects.
         """
         current = 0
         total = abs(limit) or (1 << 31) - 1

@@ -1,31 +1,31 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, types
+import kirugram
+from kirugram import raw, types
 
 from ..object import Object
 
 
 async def _write_caption(
-    client: pyrogram.Client,
+    client: kirugram.Client,
     *,
     caption: types.RichBlockCaption | None,
 ) -> raw.types.PageCaption:
@@ -39,7 +39,7 @@ async def _write_caption(
 
 
 async def _get_input_photo(
-    client: pyrogram.Client,
+    client: kirugram.Client,
     *,
     chat_id: int | str | None,
     input_media: raw.base.InputMedia,
@@ -68,7 +68,7 @@ async def _get_input_photo(
 
 
 async def _get_input_document(
-    client: pyrogram.Client,
+    client: kirugram.Client,
     *,
     chat_id: int | str | None,
     input_media: raw.base.InputMedia,
@@ -101,31 +101,31 @@ class InputRichBlock(Object):
 
     It can be one of:
 
-    - :obj:`~pyrogram.types.InputRichBlockListItem`
-    - :obj:`~pyrogram.types.InputRichBlockParagraph`
-    - :obj:`~pyrogram.types.InputRichBlockSectionHeading`
-    - :obj:`~pyrogram.types.InputRichBlockPreformatted`
-    - :obj:`~pyrogram.types.InputRichBlockFooter`
-    - :obj:`~pyrogram.types.InputRichBlockDivider`
-    - :obj:`~pyrogram.types.InputRichBlockMathematicalExpression`
-    - :obj:`~pyrogram.types.InputRichBlockAnchor`
-    - :obj:`~pyrogram.types.InputRichBlockList`
-    - :obj:`~pyrogram.types.InputRichBlockBlockQuotation`
-    - :obj:`~pyrogram.types.InputRichBlockExpandableBlockQuotation`
-    - :obj:`~pyrogram.types.InputRichBlockPullQuotation`
-    - :obj:`~pyrogram.types.InputRichBlockCollage`
-    - :obj:`~pyrogram.types.InputRichBlockSlideshow`
-    - :obj:`~pyrogram.types.InputRichBlockTable`
-    - :obj:`~pyrogram.types.InputRichBlockDetails`
-    - :obj:`~pyrogram.types.InputRichBlockMap`
-    - :obj:`~pyrogram.types.InputRichBlockButtons`
-    - :obj:`~pyrogram.types.InputRichBlockAnimation`
-    - :obj:`~pyrogram.types.InputRichBlockAudio`
-    - :obj:`~pyrogram.types.InputRichBlockDocument`
-    - :obj:`~pyrogram.types.InputRichBlockPhoto`
-    - :obj:`~pyrogram.types.InputRichBlockVideo`
-    - :obj:`~pyrogram.types.InputRichBlockVoiceNote`
-    - :obj:`~pyrogram.types.InputRichBlockThinking`
+    - :obj:`~kirugram.types.InputRichBlockListItem`
+    - :obj:`~kirugram.types.InputRichBlockParagraph`
+    - :obj:`~kirugram.types.InputRichBlockSectionHeading`
+    - :obj:`~kirugram.types.InputRichBlockPreformatted`
+    - :obj:`~kirugram.types.InputRichBlockFooter`
+    - :obj:`~kirugram.types.InputRichBlockDivider`
+    - :obj:`~kirugram.types.InputRichBlockMathematicalExpression`
+    - :obj:`~kirugram.types.InputRichBlockAnchor`
+    - :obj:`~kirugram.types.InputRichBlockList`
+    - :obj:`~kirugram.types.InputRichBlockBlockQuotation`
+    - :obj:`~kirugram.types.InputRichBlockExpandableBlockQuotation`
+    - :obj:`~kirugram.types.InputRichBlockPullQuotation`
+    - :obj:`~kirugram.types.InputRichBlockCollage`
+    - :obj:`~kirugram.types.InputRichBlockSlideshow`
+    - :obj:`~kirugram.types.InputRichBlockTable`
+    - :obj:`~kirugram.types.InputRichBlockDetails`
+    - :obj:`~kirugram.types.InputRichBlockMap`
+    - :obj:`~kirugram.types.InputRichBlockButtons`
+    - :obj:`~kirugram.types.InputRichBlockAnimation`
+    - :obj:`~kirugram.types.InputRichBlockAudio`
+    - :obj:`~kirugram.types.InputRichBlockDocument`
+    - :obj:`~kirugram.types.InputRichBlockPhoto`
+    - :obj:`~kirugram.types.InputRichBlockVideo`
+    - :obj:`~kirugram.types.InputRichBlockVoiceNote`
+    - :obj:`~kirugram.types.InputRichBlockThinking`
     """
 
     def __init__(self) -> None:
@@ -134,7 +134,7 @@ class InputRichBlock(Object):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -146,7 +146,7 @@ class InputRichBlockListItem(InputRichBlock):
     """An item of a list to be sent.
 
     Parameters:
-        blocks (List of :obj:`~pyrogram.types.InputRichBlock`):
+        blocks (List of :obj:`~kirugram.types.InputRichBlock`):
             The content of the item.
 
         has_checkbox (``bool``, *optional*):
@@ -186,7 +186,7 @@ class InputRichBlockListItem(InputRichBlock):
     async def write(  # ty: ignore[invalid-method-override]
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -222,7 +222,7 @@ class InputRichBlockParagraph(InputRichBlock):
     """A text paragraph, corresponding to the HTML tag ``<p>``.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             Text of the block.
     """
 
@@ -237,7 +237,7 @@ class InputRichBlockParagraph(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -249,7 +249,7 @@ class InputRichBlockSectionHeading(InputRichBlock):
     """A section heading, corresponding to the HTML tags ``<h1>``, ``<h2>``, ``<h3>``, ``<h4>``, ``<h5>``, or ``<h6>``.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             Text of the block.
 
         size (``int``):
@@ -270,7 +270,7 @@ class InputRichBlockSectionHeading(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -302,7 +302,7 @@ class InputRichBlockPreformatted(InputRichBlock):
     """A preformatted text block, corresponding to the nested HTML tags ``<pre>`` and ``<code>``.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             Text of the block.
 
         language (``str``, *optional*):
@@ -322,7 +322,7 @@ class InputRichBlockPreformatted(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -337,7 +337,7 @@ class InputRichBlockFooter(InputRichBlock):
     """A footer, corresponding to the HTML tag ``<footer>``.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             Text of the block.
     """
 
@@ -349,7 +349,7 @@ class InputRichBlockFooter(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -366,7 +366,7 @@ class InputRichBlockDivider(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -390,7 +390,7 @@ class InputRichBlockMathematicalExpression(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -414,7 +414,7 @@ class InputRichBlockAnchor(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -428,7 +428,7 @@ class InputRichBlockList(InputRichBlock):
     The list is sent as ordered when any of its items carries *value* or *type*.
 
     Parameters:
-        items (List of :obj:`~pyrogram.types.InputRichBlockListItem`):
+        items (List of :obj:`~kirugram.types.InputRichBlockListItem`):
             Items of the list.
     """
 
@@ -440,7 +440,7 @@ class InputRichBlockList(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -468,10 +468,10 @@ class InputRichBlockBlockQuotation(InputRichBlock):
     """A block quotation, corresponding to the HTML tag ``<blockquote>``.
 
     Parameters:
-        blocks (List of :obj:`~pyrogram.types.InputRichBlock`):
+        blocks (List of :obj:`~kirugram.types.InputRichBlock`):
             Content of the block.
 
-        credit (:obj:`~pyrogram.types.RichText`, *optional*):
+        credit (:obj:`~kirugram.types.RichText`, *optional*):
             Credit of the block.
     """
 
@@ -488,7 +488,7 @@ class InputRichBlockBlockQuotation(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -513,10 +513,10 @@ class InputRichBlockExpandableBlockQuotation(InputRichBlock):
     """A block quotation, corresponding to the HTML tag ``<blockquote>`` with custom attribute ``"expandable"``.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             Content of the block.
 
-        credit (:obj:`~pyrogram.types.RichText`, *optional*):
+        credit (:obj:`~kirugram.types.RichText`, *optional*):
             Credit of the block.
     """
 
@@ -533,7 +533,7 @@ class InputRichBlockExpandableBlockQuotation(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -549,10 +549,10 @@ class InputRichBlockPullQuotation(InputRichBlock):
     """A quotation with centered text, loosely corresponding to the HTML tag ``<aside>``.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             Text of the block.
 
-        credit (:obj:`~pyrogram.types.RichText`, *optional*):
+        credit (:obj:`~kirugram.types.RichText`, *optional*):
             Credit of the block.
     """
 
@@ -569,7 +569,7 @@ class InputRichBlockPullQuotation(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -584,10 +584,10 @@ class InputRichBlockCollage(InputRichBlock):
     """A collage, corresponding to the custom HTML tag ``<tg-collage>``.
 
     Parameters:
-        blocks (List of :obj:`~pyrogram.types.InputRichBlock`):
+        blocks (List of :obj:`~kirugram.types.InputRichBlock`):
             Elements of the collage.
 
-        caption (:obj:`~pyrogram.types.RichBlockCaption`, *optional*):
+        caption (:obj:`~kirugram.types.RichBlockCaption`, *optional*):
             Caption of the block.
     """
 
@@ -604,7 +604,7 @@ class InputRichBlockCollage(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -629,10 +629,10 @@ class InputRichBlockSlideshow(InputRichBlock):
     """A slideshow, corresponding to the custom HTML tag ``<tg-slideshow>``.
 
     Parameters:
-        blocks (List of :obj:`~pyrogram.types.InputRichBlock`):
+        blocks (List of :obj:`~kirugram.types.InputRichBlock`):
             Elements of the slideshow.
 
-        caption (:obj:`~pyrogram.types.RichBlockCaption`, *optional*):
+        caption (:obj:`~kirugram.types.RichBlockCaption`, *optional*):
             Caption of the block.
     """
 
@@ -649,7 +649,7 @@ class InputRichBlockSlideshow(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -674,7 +674,7 @@ class InputRichBlockTable(InputRichBlock):
     """A table, corresponding to the HTML tag ``<table>``.
 
     Parameters:
-        cells (List of List of :obj:`~pyrogram.types.RichBlockTableCell`):
+        cells (List of List of :obj:`~kirugram.types.RichBlockTableCell`):
             Cells of the table.
 
         is_bordered (``bool``, *optional*):
@@ -686,7 +686,7 @@ class InputRichBlockTable(InputRichBlock):
         is_compact (``bool``, *optional*):
             Pass True if the table is compact.
 
-        caption (:obj:`~pyrogram.types.RichText`, *optional*):
+        caption (:obj:`~kirugram.types.RichText`, *optional*):
             Caption of the table.
     """
 
@@ -709,7 +709,7 @@ class InputRichBlockTable(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -733,10 +733,10 @@ class InputRichBlockDetails(InputRichBlock):
     """An expandable block for details disclosure, corresponding to the HTML tag ``<details>``.
 
     Parameters:
-        summary (:obj:`~pyrogram.types.RichText`):
+        summary (:obj:`~kirugram.types.RichText`):
             Always shown summary of the block.
 
-        blocks (List of :obj:`~pyrogram.types.InputRichBlock`):
+        blocks (List of :obj:`~kirugram.types.InputRichBlock`):
             Content of the block.
 
         is_open (``bool``, *optional*):
@@ -758,7 +758,7 @@ class InputRichBlockDetails(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -787,7 +787,7 @@ class InputRichBlockMap(InputRichBlock):
     The width and height ratio must be at most 20.
 
     Parameters:
-        location (:obj:`~pyrogram.types.Location`):
+        location (:obj:`~kirugram.types.Location`):
             Location of the center of the map.
 
         zoom (``int``, *optional*):
@@ -799,7 +799,7 @@ class InputRichBlockMap(InputRichBlock):
         height (``int``, *optional*):
             Map height, 0-10000.
 
-        caption (:obj:`~pyrogram.types.RichBlockCaption`, *optional*):
+        caption (:obj:`~kirugram.types.RichBlockCaption`, *optional*):
             Caption of the block.
     """
 
@@ -822,7 +822,7 @@ class InputRichBlockMap(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -844,7 +844,7 @@ class InputRichBlockButtons(InputRichBlock):
     """A block containing a list of buttons that are shown in one row, corresponding to the custom HTML tag ``<tg-button-row>``.
 
     Parameters:
-        buttons (List of :obj:`~pyrogram.types.RichMessageButton`):
+        buttons (List of :obj:`~kirugram.types.RichMessageButton`):
             List of 1-8 buttons to send.
 
         align (``str``, *optional*):
@@ -865,7 +865,7 @@ class InputRichBlockButtons(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -882,10 +882,10 @@ class InputRichBlockAnimation(InputRichBlock):
     """A block with an animation, corresponding to the HTML tag ``<video>``.
 
     Parameters:
-        animation (:obj:`~pyrogram.types.InputMediaAnimation`):
+        animation (:obj:`~kirugram.types.InputMediaAnimation`):
             The animation. Caption is ignored.
 
-        caption (:obj:`~pyrogram.types.RichBlockCaption`, *optional*):
+        caption (:obj:`~kirugram.types.RichBlockCaption`, *optional*):
             Caption of the block.
     """
 
@@ -902,7 +902,7 @@ class InputRichBlockAnimation(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -929,10 +929,10 @@ class InputRichBlockAudio(InputRichBlock):
     """A block with a music file, corresponding to the HTML tag ``<audio>``.
 
     Parameters:
-        audio (:obj:`~pyrogram.types.InputMediaAudio`):
+        audio (:obj:`~kirugram.types.InputMediaAudio`):
             The audio. Caption is ignored.
 
-        caption (:obj:`~pyrogram.types.RichBlockCaption`, *optional*):
+        caption (:obj:`~kirugram.types.RichBlockCaption`, *optional*):
             Caption of the block.
     """
 
@@ -949,7 +949,7 @@ class InputRichBlockAudio(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -976,10 +976,10 @@ class InputRichBlockDocument(InputRichBlock):
     """A block with a general file, corresponding to the custom HTML tag ``<tg-document>``.
 
     Parameters:
-        document (:obj:`~pyrogram.types.InputMediaDocument`):
+        document (:obj:`~kirugram.types.InputMediaDocument`):
             The document. Caption is ignored.
 
-        caption (:obj:`~pyrogram.types.RichBlockCaption`, *optional*):
+        caption (:obj:`~kirugram.types.RichBlockCaption`, *optional*):
             Caption of the block.
     """
 
@@ -996,7 +996,7 @@ class InputRichBlockDocument(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -1023,10 +1023,10 @@ class InputRichBlockPhoto(InputRichBlock):
     """A block with a photo, corresponding to the HTML tag ``<img>``.
 
     Parameters:
-        photo (:obj:`~pyrogram.types.InputMediaPhoto`):
+        photo (:obj:`~kirugram.types.InputMediaPhoto`):
             The photo. Caption is ignored.
 
-        caption (:obj:`~pyrogram.types.RichBlockCaption`, *optional*):
+        caption (:obj:`~kirugram.types.RichBlockCaption`, *optional*):
             Caption of the block.
     """
 
@@ -1043,7 +1043,7 @@ class InputRichBlockPhoto(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -1070,10 +1070,10 @@ class InputRichBlockVideo(InputRichBlock):
     """A block with a video, corresponding to the HTML tag ``<video>``.
 
     Parameters:
-        video (:obj:`~pyrogram.types.InputMediaVideo`):
+        video (:obj:`~kirugram.types.InputMediaVideo`):
             The video. Caption is ignored.
 
-        caption (:obj:`~pyrogram.types.RichBlockCaption`, *optional*):
+        caption (:obj:`~kirugram.types.RichBlockCaption`, *optional*):
             Caption of the block.
     """
 
@@ -1090,7 +1090,7 @@ class InputRichBlockVideo(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -1117,10 +1117,10 @@ class InputRichBlockVoiceNote(InputRichBlock):
     """A block with a voice note, corresponding to the HTML tag ``<audio>``.
 
     Parameters:
-        voice_note (:obj:`~pyrogram.types.InputMediaVoiceNote`):
+        voice_note (:obj:`~kirugram.types.InputMediaVoiceNote`):
             The voice note. Caption is ignored.
 
-        caption (:obj:`~pyrogram.types.RichBlockCaption`, *optional*):
+        caption (:obj:`~kirugram.types.RichBlockCaption`, *optional*):
             Caption of the block.
     """
 
@@ -1137,7 +1137,7 @@ class InputRichBlockVoiceNote(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],
@@ -1164,11 +1164,11 @@ class InputRichBlockVoiceNote(InputRichBlock):
 
 class InputRichBlockThinking(InputRichBlock):
     """A block with a "Thinking..." placeholder, corresponding to the custom HTML tag ``<tg-thinking>``.
-    The block may be used only in :meth:`~pyrogram.Client.send_rich_message_draft`, therefore it can't be received in messages.
+    The block may be used only in :meth:`~kirugram.Client.send_rich_message_draft`, therefore it can't be received in messages.
     See https://t.me/addemoji/AIActions for examples of custom emoji, which are recommended for usage in the block.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             Text of the block.
             See https://t.me/addemoji/AIActions for examples of custom emoji, which are recommended for usage in the block.
     """
@@ -1184,7 +1184,7 @@ class InputRichBlockThinking(InputRichBlock):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         photos: list[raw.base.InputPhoto],
         documents: list[raw.base.InputDocument],

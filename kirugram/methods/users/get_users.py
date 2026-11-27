@@ -1,28 +1,28 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import asyncio
 from typing import TYPE_CHECKING, overload
 
-import pyrogram
-from pyrogram import raw, types
+import kirugram
+from kirugram import raw, types
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
@@ -33,16 +33,16 @@ class GetUsers:
     #  The single-user one comes first, resolving it the way the body does.
     @overload
     async def get_users(  # type: ignore[overload-overlap]
-        self: pyrogram.Client, user_ids: int | str
+        self: kirugram.Client, user_ids: int | str
     ) -> types.User | None: ...
 
     @overload
     async def get_users(
-        self: pyrogram.Client, user_ids: Iterable[int | str]
+        self: kirugram.Client, user_ids: Iterable[int | str]
     ) -> list[types.User]: ...
 
     async def get_users(
-        self: pyrogram.Client, user_ids: int | str | Iterable[int | str]
+        self: kirugram.Client, user_ids: int | str | Iterable[int | str]
     ) -> types.User | list[types.User] | None:
         """Get information about a user.
         You can retrieve up to 200 users at once.
@@ -55,7 +55,7 @@ class GetUsers:
                 For a contact that exists in your Telegram address book you can use his phone number (str).
 
         Returns:
-            :obj:`~pyrogram.types.User` | List of :obj:`~pyrogram.types.User` | ``None``: In case *user_ids* was not a
+            :obj:`~kirugram.types.User` | List of :obj:`~kirugram.types.User` | ``None``: In case *user_ids* was not a
             list, a single user is returned, otherwise a list of users is returned. Telegram answers with an empty
             list for an identifier that belongs to no user (a channel, a chat, or a peer this account cannot see),
             in which case None is returned for a single identifier and the missing users are absent from the list.

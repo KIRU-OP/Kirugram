@@ -1,37 +1,37 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import os
 from typing import TYPE_CHECKING, BinaryIO
 
-import pyrogram
-from pyrogram import raw, types, utils
-from pyrogram.file_id import FileType
+import kirugram
+from kirugram import raw, types, utils
+from kirugram.file_id import FileType
 
 if TYPE_CHECKING:
-    from pyrogram._typing import PathType
+    from kirugram._typing import PathType
 
 
 class SetChatPhoto:
     async def set_chat_photo(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         *,
         photo: PathType | BinaryIO | None = None,
@@ -52,12 +52,12 @@ class SetChatPhoto:
                 Unique identifier (int) or username (str) of the target chat.
 
             photo (``str`` | ``os.PathLike`` | ``BinaryIO``, *optional*):
-                New chat photo. You can pass a :obj:`~pyrogram.types.Photo` file_id, a file path to upload a new photo
+                New chat photo. You can pass a :obj:`~kirugram.types.Photo` file_id, a file path to upload a new photo
                 from your local machine or a binary file-like object with its attribute
                 ".name" set for in-memory uploads.
 
             video (``str`` | ``os.PathLike`` | ``BinaryIO``, *optional*):
-                New chat video. You can pass a :obj:`~pyrogram.types.Video` file_id, a file path to upload a new video
+                New chat video. You can pass a :obj:`~kirugram.types.Video` file_id, a file path to upload a new video
                 from your local machine or a binary file-like object with its attribute
                 ".name" set for in-memory uploads.
 
@@ -65,7 +65,7 @@ class SetChatPhoto:
                 The timestamp in seconds of the video frame to use as photo profile preview.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent service message is returned,
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent service message is returned,
             otherwise, in case the server answered with no message, None is returned.
 
         Raises:

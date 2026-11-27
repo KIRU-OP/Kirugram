@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -22,19 +22,19 @@ import os
 from pathlib import Path
 from typing import TYPE_CHECKING, BinaryIO
 
-import pyrogram
-from pyrogram import StopTransmission, raw, types, utils
-from pyrogram.errors import FilePartMissing
+import kirugram
+from kirugram import StopTransmission, raw, types, utils
+from kirugram.errors import FilePartMissing
 
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-    from pyrogram._typing import PathType
+    from kirugram._typing import PathType
 
 
 class EditStoryMedia:
     async def edit_story_media(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         story_id: int,
         media: PathType | BinaryIO | None = None,
@@ -66,7 +66,7 @@ class EditStoryMedia:
                 pass a file path as string to upload a new animation that exists on your local machine, or
                 pass a binary file-like object with its attribute ".name" set for in-memory uploads.
 
-            media_areas (List of :obj:`~pyrogram.types.MediaArea`, *optional*):
+            media_areas (List of :obj:`~kirugram.types.MediaArea`, *optional*):
                 List of media areas to edit in the story.
 
             duration (``int``, *optional*):
@@ -104,8 +104,8 @@ class EditStoryMedia:
                 object or a Client instance in order to edit the message with the updated progress status.
 
         Returns:
-            :obj:`~pyrogram.types.Story` | ``None``: On success, the edited story is returned, otherwise,
-            in case the upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`,
+            :obj:`~kirugram.types.Story` | ``None``: On success, the edited story is returned, otherwise,
+            in case the upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`,
             None is returned.
 
         Raises:

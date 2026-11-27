@@ -1,24 +1,24 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-from pyrogram import enums, raw, types
+from kirugram import enums, raw, types
 
 from ..object import Object
 
@@ -37,7 +37,7 @@ class KeyboardButton(Object):
         icon_custom_emoji_id (``str``, *optional*):
             Identifier of the custom emoji that must be shown on the button.
 
-        style (:obj:`~pyrogram.enums.ButtonStyle`, *optional*):
+        style (:obj:`~kirugram.enums.ButtonStyle`, *optional*):
             Style of the button.
 
         request_contact (``bool``, *optional*):
@@ -48,26 +48,26 @@ class KeyboardButton(Object):
             If True, the user's current location will be sent when the button is pressed.
             Available in private chats only.
 
-        request_poll (:obj:`~pyrogram.types.KeyboardButtonPollType`, *optional*):
+        request_poll (:obj:`~kirugram.types.KeyboardButtonPollType`, *optional*):
             If specified, the user will be asked to create a poll and send it to the bot when the button is pressed.
             Available in private chats only.
 
-        request_users (:obj:`~pyrogram.types.KeyboardButtonRequestUsers`, *optional*):
+        request_users (:obj:`~kirugram.types.KeyboardButtonRequestUsers`, *optional*):
             If specified, pressing the button will open a list of suitable users.
             Identifiers of selected users will be sent to the bot in a `users_shared` service message.
             Available in private chats only.
 
-        request_chat (:obj:`~pyrogram.types.KeyboardButtonRequestChat`, *optional*):
+        request_chat (:obj:`~kirugram.types.KeyboardButtonRequestChat`, *optional*):
             If specified, pressing the button will open a list of suitable chats.
             Tapping on a chat will send its identifier to the bot in a `chat_shared` service message.
             Available in private chats only.
 
-        request_managed_bot (:obj:`~pyrogram.types.KeyboardButtonRequestManagedBot`, *optional*):
+        request_managed_bot (:obj:`~kirugram.types.KeyboardButtonRequestManagedBot`, *optional*):
             If specified, pressing the button will ask the user to create and share a bot that will be managed by the current bot.
             Available for bots that enabled management of other bots in the @BotFather Mini App.
             Available in private chats only.
 
-        web_app (:obj:`~pyrogram.types.WebAppInfo`, *optional*):
+        web_app (:obj:`~kirugram.types.WebAppInfo`, *optional*):
             If specified, the described `Web App <https://core.telegram.org/bots/webapps>`_ will be launched when the
             button is pressed.
             The Web App will be able to send a `web_app_data` service message.

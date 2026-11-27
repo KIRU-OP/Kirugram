@@ -1,26 +1,26 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, types
-from pyrogram.raw.core import TLObject
+import kirugram
+from kirugram import raw, types
+from kirugram.raw.core import TLObject
 
 from ..object import Object
 
@@ -52,7 +52,7 @@ class InputRichMessage(Object):
     Exactly one of the fields *html*, *markdown*, or *blocks* must be used.
 
     Parameters:
-        blocks (List of :obj:`~pyrogram.types.InputRichBlock`, *optional*):
+        blocks (List of :obj:`~kirugram.types.InputRichBlock`, *optional*):
             Content of the rich message to send described as a list of blocks.
 
         html (``str``, *optional*):
@@ -65,7 +65,7 @@ class InputRichMessage(Object):
             See `rich message formatting options <https://core.telegram.org/bots/api#rich-message-formatting-options>`__ for more details.
             Use *media* field to specify the media used in the message.
 
-        media (List of :obj:`~pyrogram.types.InputRichMessageMedia`, *optional*):
+        media (List of :obj:`~kirugram.types.InputRichMessageMedia`, *optional*):
             List of media that are specified in the *markdown* or *html* fields using
             ``tg://photo?id=``, ``tg://video?id=``, ``tg://document?id=``, and ``tg://audio?id=`` links.
 
@@ -98,7 +98,7 @@ class InputRichMessage(Object):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
     ) -> raw.base.InputRichMessage:
         if self.blocks:
@@ -140,7 +140,7 @@ class InputRichMessage(Object):
         self,
         *,
         blocks: list[types.InputRichBlock],
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None,
     ) -> raw.types.InputRichMessage:
         photos: list[raw.base.InputPhoto] = []

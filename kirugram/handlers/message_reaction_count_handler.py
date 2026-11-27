@@ -1,36 +1,36 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from collections.abc import Callable
 from typing import TYPE_CHECKING, Any
 
-from pyrogram import types
+from kirugram import types
 
 from .handler import Handler
 
 if TYPE_CHECKING:
-    import pyrogram
-    from pyrogram.filters import Filter
+    import kirugram
+    from kirugram.filters import Filter
 
 MessageReactionCountCallbackType = Callable[
-    ["pyrogram.Client", types.MessageReactionCountUpdated], Any
+    ["kirugram.Client", types.MessageReactionCountUpdated], Any
 ]
 
 
@@ -38,10 +38,10 @@ class MessageReactionCountHandler(Handler[MessageReactionCountCallbackType]):
     """The MessageReactionCount handler class.
     Used to handle changes in the anonymous reaction of a message.
 
-    It is intended to be used with :meth:`~pyrogram.Client.add_handler`.
+    It is intended to be used with :meth:`~kirugram.Client.add_handler`.
 
     For a nicer way to register this handler, have a look at the
-    :meth:`~pyrogram.Client.on_message_reaction_count` decorator.
+    :meth:`~kirugram.Client.on_message_reaction_count` decorator.
 
     Parameters:
         callback (``Callable``):
@@ -49,14 +49,14 @@ class MessageReactionCountHandler(Handler[MessageReactionCountCallbackType]):
             *(client, reactions)* as positional arguments (look at the section below for a detailed
             description).
 
-        filters (:obj:`~pyrogram.filters.Filter`):
+        filters (:obj:`~kirugram.filters.Filter`):
             Pass one or more filters to allow only a subset of updates to be passed in your callback function.
 
     Other parameters:
-        client (:obj:`~pyrogram.Client`):
+        client (:obj:`~kirugram.Client`):
             The Client itself, useful when you want to call other API methods inside the handler.
 
-        reactions (:obj:`~pyrogram.types.MessageReactionCountUpdated`):
+        reactions (:obj:`~kirugram.types.MessageReactionCountUpdated`):
             The received message reaction count update.
     """
 

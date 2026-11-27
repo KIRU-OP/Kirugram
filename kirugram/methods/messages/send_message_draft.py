@@ -1,30 +1,30 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import enums, raw, types
+import kirugram
+from kirugram import enums, raw, types
 
 
 class SendMessageDraft:
     async def send_message_draft(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         draft_id: int,
         text: str = "",
@@ -39,7 +39,7 @@ class SendMessageDraft:
         .. note::
 
             The streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized,
-            you must call :meth:`~pyrogram.Client.send_message` with the complete message to persist it in the user's chat.
+            you must call :meth:`~kirugram.Client.send_message` with the complete message to persist it in the user's chat.
 
         .. include:: /_includes/usable-by/bots.rst
 
@@ -58,11 +58,11 @@ class SendMessageDraft:
             message_thread_id (``int``, *optional*):
                 Unique identifier for the target message thread.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in message text, which can be specified instead of *parse_mode*.
 
             can_stop (``bool``, *optional*):
@@ -80,7 +80,7 @@ class SendMessageDraft:
             .. code-block:: python
 
 
-                text = "Hello! I'm your Kurigram bot! How can I help you?"
+                text = "Hello! I'm your Kirugram bot! How can I help you?"
                 words = text.split()
                 draft_id = app.rnd_id()
 

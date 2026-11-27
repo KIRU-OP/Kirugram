@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -22,19 +22,19 @@ import os
 from pathlib import Path
 from typing import TYPE_CHECKING, BinaryIO
 
-import pyrogram
-from pyrogram import StopTransmission, enums, raw, types, utils
-from pyrogram.errors import FilePartMissing
+import kirugram
+from kirugram import StopTransmission, enums, raw, types, utils
+from kirugram.errors import FilePartMissing
 
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-    from pyrogram._typing import PathType
+    from kirugram._typing import PathType
 
 
 class SendStory:
     async def send_story(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         media: PathType | BinaryIO,
         caption: str | None = None,
@@ -79,7 +79,7 @@ class SendStory:
                 Must be one of ``6 * 3600``, ``12 * 3600``, ``86400``, or ``2 * 86400`` for Telegram Premium users,
                 and 86400 otherwise.
 
-            media_areas (List of :obj:`~pyrogram.types.MediaArea`, *optional*):
+            media_areas (List of :obj:`~kirugram.types.MediaArea`, *optional*):
                 List of media areas to add to the story.
 
             duration (``int``, *optional*):
@@ -104,20 +104,20 @@ class SendStory:
             file_name (``str``, *optional*):
                 File name of the story sent.
 
-            privacy (:obj:`~pyrogram.enums.StoriesPrivacyRules`, *optional*):
+            privacy (:obj:`~kirugram.enums.StoriesPrivacyRules`, *optional*):
                 Story privacy.
-                Defaults to :obj:`~pyrogram.enums.StoriesPrivacyRules.PUBLIC`
+                Defaults to :obj:`~kirugram.enums.StoriesPrivacyRules.PUBLIC`
 
             allowed_users (List of ``int``, *optional*):
                 List of user_id or chat_id of chat users who are allowed to view stories.
-                Note: chat_id available only with :obj:`~pyrogram.enums.StoriesPrivacyRules.SELECTED_USERS`.
-                Works with :obj:`~pyrogram.enums.StoriesPrivacyRules.CLOSE_FRIENDS`
-                and :obj:`~pyrogram.enums.StoriesPrivacyRules.SELECTED_USERS` only
+                Note: chat_id available only with :obj:`~kirugram.enums.StoriesPrivacyRules.SELECTED_USERS`.
+                Works with :obj:`~kirugram.enums.StoriesPrivacyRules.CLOSE_FRIENDS`
+                and :obj:`~kirugram.enums.StoriesPrivacyRules.SELECTED_USERS` only
 
             disallowed_users (List of ``int``, *optional*):
                 List of user_id whos disallow to view the stories.
-                Note: Works with :obj:`~pyrogram.enums.StoriesPrivacyRules.PUBLIC`
-                and :obj:`~pyrogram.enums.StoriesPrivacyRules.CONTACTS` only
+                Note: Works with :obj:`~kirugram.enums.StoriesPrivacyRules.PUBLIC`
+                and :obj:`~kirugram.enums.StoriesPrivacyRules.CONTACTS` only
 
             pinned (``bool``, *optional*):
                 If True, the story will be pinned.
@@ -125,11 +125,11 @@ class SendStory:
             protect_content (``bool``, *optional*):
                 Protects the contents of the sent story from forwarding and saving.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             progress (``Callable``, *optional*):
@@ -144,8 +144,8 @@ class SendStory:
                 object or a Client instance in order to edit the message with the updated progress status.
 
         Returns:
-            :obj:`~pyrogram.types.Story` | ``None``: On success, the sent story is returned, otherwise,
-            in case the upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`,
+            :obj:`~kirugram.types.Story` | ``None``: On success, the sent story is returned, otherwise,
+            in case the upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`,
             None is returned.
 
         Example:

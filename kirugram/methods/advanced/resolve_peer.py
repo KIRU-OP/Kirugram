@@ -1,35 +1,35 @@
-#  Kurigram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #  Copyright (C) 2024-present KurimuzonAkuma <https://github.com/KurimuzonAkuma>
 #
-#  This file is part of Kurigram.
+#  This file is part of Kirugram.
 #
-#  Kurigram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Kurigram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Kurigram. If not, see <https://www.gnu.org/licenses/>.
+#  along with Kirugram. If not, see <https://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import re
 
-import pyrogram
-from pyrogram import raw, utils, enums
-from pyrogram.errors import PeerIdInvalid
+import kirugram
+from kirugram import raw, utils, enums
+from kirugram.errors import PeerIdInvalid
 
 
 class ResolvePeer:
     async def _resolve_peer_from_message_cache(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         peer_id: int | str,
     ) -> raw.types.InputPeerUserFromMessage | raw.types.InputPeerChannelFromMessage | None:
         for (_, message_id), parsed_message in self.message_cache._cache.items():
@@ -99,13 +99,13 @@ class ResolvePeer:
 
         return None
 
-    async def resolve_peer(self: pyrogram.Client, peer_id: int | str) -> raw.base.InputPeer | None:
+    async def resolve_peer(self: kirugram.Client, peer_id: int | str) -> raw.base.InputPeer | None:
         """Get the InputPeer of a known peer id. Useful whenever an InputPeer type is required.
 
         .. note::
 
             This is a utility method intended to be used **only** when working with raw
-            :obj:`functions <pyrogram.raw.functions>` (i.e: a Telegram API method you wish to use which is not
+            :obj:`functions <kirugram.raw.functions>` (i.e: a Telegram API method you wish to use which is not
             available yet in the Client class as an easy-to-use method).
 
         .. include:: /_includes/usable-by/users-bots.rst
@@ -116,7 +116,7 @@ class ResolvePeer:
                 Can be a direct id (int), a username (str), a link (str) or a phone number (str).
 
         Returns:
-            :obj:`~pyrogram.raw.base.InputPeer` | ``None``: On success, the resolved peer id is returned in
+            :obj:`~kirugram.raw.base.InputPeer` | ``None``: On success, the resolved peer id is returned in
             form of an InputPeer object, otherwise, in case *peer_id* is None, None is returned.
 
         Raises:

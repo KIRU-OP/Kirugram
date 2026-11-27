@@ -1,30 +1,30 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, types, utils
+import kirugram
+from kirugram import raw, types, utils
 
 
 class SendResoldGift:
     async def send_resold_gift(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         gift_link: str,
         new_owner_chat_id: int | str,
         price: types.GiftResalePrice,
@@ -33,7 +33,7 @@ class SendResoldGift:
 
         .. note::
 
-            Gifts already owned by the current user must be transferred using :meth:`~pyrogram.Client.transfer_gift` and can't be passed to this method.
+            Gifts already owned by the current user must be transferred using :meth:`~kirugram.Client.transfer_gift` and can't be passed to this method.
 
         .. include:: /_includes/usable-by/users.rst
 
@@ -46,11 +46,11 @@ class SendResoldGift:
                 For your personal cloud (Saved Messages) you can simply use "me" or "self".
                 For a contact that exists in your Telegram address book you can use his phone number (str).
 
-            price (:obj:`~pyrogram.types.GiftResalePrice`):
+            price (:obj:`~kirugram.types.GiftResalePrice`):
                 The price that the user agreed to pay for the gift.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise,
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise,
             in case the server answered with no message, None is returned.
 
         Example:
@@ -64,7 +64,7 @@ class SendResoldGift:
                 )
 
                 # Buy ton gift
-                from pyrogram import utils
+                from kirugram import utils
 
                 await app.send_resold_gift(
                     gift_link="https://t.me/nft/NekoHelmet-9215",

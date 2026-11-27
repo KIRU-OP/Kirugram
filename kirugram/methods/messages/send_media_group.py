@@ -1,30 +1,30 @@
-#  Kurigram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #  Copyright (C) 2024-present KurimuzonAkuma <https://github.com/KurimuzonAkuma>
 #
-#  This file is part of Kurigram.
+#  This file is part of Kirugram.
 #
-#  Kurigram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Kurigram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Kurigram. If not, see <https://www.gnu.org/licenses/>.
+#  along with Kirugram. If not, see <https://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import logging
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import raw, types, utils
+import kirugram
+from kirugram import raw, types, utils
 
 if TYPE_CHECKING:
     from datetime import datetime, timedelta
@@ -35,7 +35,7 @@ log = logging.getLogger(__name__)
 class SendMediaGroup:
     # TODO: Add progress parameter
     async def send_media_group(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         media: list[
             types.InputMediaPhoto
@@ -65,7 +65,7 @@ class SendMediaGroup:
                 For your personal cloud (Saved Messages) you can simply use "me" or "self".
                 For a contact that exists in your Telegram address book you can use his phone number (str).
 
-            media (List of :obj:`~pyrogram.types.InputMediaPhoto`, :obj:`~pyrogram.types.InputMediaVideo`, :obj:`~pyrogram.types.InputMediaAudio` and :obj:`~pyrogram.types.InputMediaDocument`):
+            media (List of :obj:`~kirugram.types.InputMediaPhoto`, :obj:`~kirugram.types.InputMediaVideo`, :obj:`~kirugram.types.InputMediaAudio` and :obj:`~kirugram.types.InputMediaDocument`):
                 A list describing photos and videos to be sent, must include 2–10 items.
 
             disable_notification (``bool``, *optional*):
@@ -84,7 +84,7 @@ class SendMediaGroup:
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -110,7 +110,7 @@ class SendMediaGroup:
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
         Returns:
-            List of :obj:`~pyrogram.types.Message`: On success, a list of the sent messages is returned.
+            List of :obj:`~kirugram.types.Message`: On success, a list of the sent messages is returned.
 
         Raises:
             FileNotFoundError: In case a local ``os.PathLike`` doesn't point to an existing file.
@@ -118,7 +118,7 @@ class SendMediaGroup:
         Example:
             .. code-block:: python
 
-                from pyrogram.types import InputMediaPhoto, InputMediaVideo
+                from kirugram.types import InputMediaPhoto, InputMediaVideo
 
                 await app.send_media_group(
                     "me",

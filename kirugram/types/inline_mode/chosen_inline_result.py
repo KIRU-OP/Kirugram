@@ -1,27 +1,27 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import raw, types, utils
+import kirugram
+from kirugram import raw, types, utils
 
 from ..object import Object
 from ..update import Update
@@ -42,13 +42,13 @@ class ChosenInlineResult(Object, Update):
         result_id (``str``):
             The unique identifier for the result that was chosen.
 
-        from_user (:obj:`~pyrogram.types.User`):
+        from_user (:obj:`~kirugram.types.User`):
             The user that chose the result.
 
         query (``str``):
             The query that was used to obtain the result.
 
-        location (:obj:`~pyrogram.types.Location`, *optional*):
+        location (:obj:`~kirugram.types.Location`, *optional*):
             Sender location, only for bots that require user location.
 
         inline_message_id (``str``, *optional*):
@@ -58,13 +58,13 @@ class ChosenInlineResult(Object, Update):
 
         matches (List of regex Matches, *optional*):
             A list containing all `Match Objects <https://docs.python.org/3/library/re.html#match-objects>`_ that match
-            the query of this chosen query. Only applicable when using :obj:`filters.regex <pyrogram.filters.regex>`.
+            the query of this chosen query. Only applicable when using :obj:`filters.regex <kirugram.filters.regex>`.
     """
 
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         result_id: str,
         from_user: types.User,
         query: str,

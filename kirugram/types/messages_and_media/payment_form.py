@@ -1,25 +1,25 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import enums, raw, types
+import kirugram
+from kirugram import enums, raw, types
 
 from ..object import Object
 
@@ -31,7 +31,7 @@ class PaymentForm(Object):
         id (``int``):
             Form id.
 
-        type (:obj:`~pyrogram.enums.PaymentFormType`):
+        type (:obj:`~kirugram.enums.PaymentFormType`):
             Type of the payment form.
 
         title (``str``, *optional*):
@@ -40,28 +40,28 @@ class PaymentForm(Object):
         description (``str``, *optional*):
             Form description.
 
-        photo (:obj:`~pyrogram.types.Photo`, *optional*):
+        photo (:obj:`~kirugram.types.Photo`, *optional*):
             Product photo.
 
         seller_bot_user_id (``int``, *optional*):
             User identifier of the seller bot.
 
-        seller_bot (:obj:`~pyrogram.types.User`, *optional*):
+        seller_bot (:obj:`~kirugram.types.User`, *optional*):
             Information about the seller bot.
 
         payment_provider_user_id (``int``, *optional*):
             User identifier of the payment provider bot.
 
-        payment_provider (:obj:`~pyrogram.types.User`, *optional*):
+        payment_provider (:obj:`~kirugram.types.User`, *optional*):
             Information about the payment provider.
 
-        additional_payment_options (List of :obj:`~pyrogram.types.PaymentOption`, *optional*):
+        additional_payment_options (List of :obj:`~kirugram.types.PaymentOption`, *optional*):
             The list of additional payment options.
 
-        saved_credentials (List of :obj:`~pyrogram.types.SavedCredentials`, *optional*):
+        saved_credentials (List of :obj:`~kirugram.types.SavedCredentials`, *optional*):
             The list of saved payment credentials.
 
-        invoice (:obj:`~pyrogram.types.Invoice`, *optional*):
+        invoice (:obj:`~kirugram.types.Invoice`, *optional*):
             Full information about the invoice.
 
         url (``str``, *optional*):
@@ -76,14 +76,14 @@ class PaymentForm(Object):
         native_provider (``str``, *optional*):
             Payment provider name.
 
-        raw (:obj:`~pyrogram.raw.base.payments.PaymentForm`, *optional*):
+        raw (:obj:`~kirugram.raw.base.payments.PaymentForm`, *optional*):
             The raw object, as received from the Telegram API.
     """
 
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         id: int,
         type: enums.PaymentFormType,
         title: str | None = None,

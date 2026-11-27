@@ -1,24 +1,24 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-from pyrogram import enums, raw, types
+from kirugram import enums, raw, types
 
 from ..object import Object
 
@@ -27,73 +27,73 @@ class MessageContent(Object):
     """A message content.
 
     Parameters:
-        type (:obj:`~pyrogram.enums.MessageMediaType`, *optional*):
+        type (:obj:`~kirugram.enums.MessageMediaType`, *optional*):
             The attached media of the message.
             This field will contain the enumeration type of the media.
             You can use ``media = getattr(media, media.type.value)`` to access the media.
 
-        audio (:obj:`~pyrogram.types.Audio`, *optional*):
+        audio (:obj:`~kirugram.types.Audio`, *optional*):
             Message is an audio file, information about the file.
 
-        document (:obj:`~pyrogram.types.Document`, *optional*):
+        document (:obj:`~kirugram.types.Document`, *optional*):
             Message is a general file, information about the file.
 
-        photo (:obj:`~pyrogram.types.Photo`, *optional*):
+        photo (:obj:`~kirugram.types.Photo`, *optional*):
             Message is a photo, information about the photo.
 
-        sticker (:obj:`~pyrogram.types.Sticker`, *optional*):
+        sticker (:obj:`~kirugram.types.Sticker`, *optional*):
             Message is a sticker, information about the sticker.
 
-        animation (:obj:`~pyrogram.types.Animation`, *optional*):
+        animation (:obj:`~kirugram.types.Animation`, *optional*):
             Message is an animation, information about the animation.
 
-        game (:obj:`~pyrogram.types.Game`, *optional*):
+        game (:obj:`~kirugram.types.Game`, *optional*):
             Message is a game, information about the game.
 
-        giveaway (:obj:`~pyrogram.types.Giveaway`, *optional*):
+        giveaway (:obj:`~kirugram.types.Giveaway`, *optional*):
             Message is a giveaway, information about the giveaway.
 
-        giveaway_winners (:obj:`~pyrogram.types.GiveawayWinners`, *optional*):
+        giveaway_winners (:obj:`~kirugram.types.GiveawayWinners`, *optional*):
             A giveaway with public winners was completed.
 
-        invoice (:obj:`~pyrogram.types.Invoice`, *optional*):
+        invoice (:obj:`~kirugram.types.Invoice`, *optional*):
             Message is a invoice, information about the invoice.
             `More about payments » <https://core.telegram.org/bots/api#payments>`_
 
-        story (:obj:`~pyrogram.types.Story`, *optional*):
+        story (:obj:`~kirugram.types.Story`, *optional*):
             Message is a story, information about the story.
 
-        video (:obj:`~pyrogram.types.Video`, *optional*):
+        video (:obj:`~kirugram.types.Video`, *optional*):
             Message is a video, information about the video.
 
-        voice (:obj:`~pyrogram.types.Voice`, *optional*):
+        voice (:obj:`~kirugram.types.Voice`, *optional*):
             Message is a voice message, information about the file.
 
-        video_note (:obj:`~pyrogram.types.VideoNote`, *optional*):
+        video_note (:obj:`~kirugram.types.VideoNote`, *optional*):
             Message is a video note, information about the video message.
 
-        contact (:obj:`~pyrogram.types.Contact`, *optional*):
+        contact (:obj:`~kirugram.types.Contact`, *optional*):
             Message is a shared contact, information about the contact.
 
-        location (:obj:`~pyrogram.types.Location`, *optional*):
+        location (:obj:`~kirugram.types.Location`, *optional*):
             Message is a shared location, information about the location.
 
-        venue (:obj:`~pyrogram.types.Venue`, *optional*):
+        venue (:obj:`~kirugram.types.Venue`, *optional*):
             Message is a venue, information about the venue.
 
-        web_page (:obj:`~pyrogram.types.WebPage`, *optional*):
+        web_page (:obj:`~kirugram.types.WebPage`, *optional*):
             Message was sent with a webpage preview.
 
-        poll (:obj:`~pyrogram.types.Poll`, *optional*):
+        poll (:obj:`~kirugram.types.Poll`, *optional*):
             Message is a native poll, information about the poll.
 
-        dice (:obj:`~pyrogram.types.Dice`, *optional*):
+        dice (:obj:`~kirugram.types.Dice`, *optional*):
             A dice containing a value that is randomly generated by Telegram.
 
-        paid_media (:obj:`~pyrogram.types.PaidMediaInfo`, *optional*):
+        paid_media (:obj:`~kirugram.types.PaidMediaInfo`, *optional*):
             The message is a paid media message.
 
-        checklist (:obj:`~pyrogram.types.Checklist`, *optional*):
+        checklist (:obj:`~kirugram.types.Checklist`, *optional*):
             The message is a checklist message.
     """
 

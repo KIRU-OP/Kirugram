@@ -1,44 +1,44 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, types, enums
+import kirugram
+from kirugram import raw, types, enums
 
 
 class GetPrivacy:
-    async def get_privacy(self: pyrogram.Client, key: enums.PrivacyKey) -> list[types.PrivacyRule]:
+    async def get_privacy(self: kirugram.Client, key: enums.PrivacyKey) -> list[types.PrivacyRule]:
         """Get account privacy rules.
 
         .. include:: /_includes/usable-by/users.rst
 
         Parameters:
-            key (:obj:`~pyrogram.enums.PrivacyKey`):
+            key (:obj:`~kirugram.enums.PrivacyKey`):
                 Privacy key.
 
         Returns:
-            List of :obj:`~pyrogram.types.PrivacyRule`: On success, the list of privacy rules is returned.
+            List of :obj:`~kirugram.types.PrivacyRule`: On success, the list of privacy rules is returned.
 
         Example:
             .. code-block:: python
 
-                from pyrogram import enums
+                from kirugram import enums
 
                 await app.get_privacy(enums.PrivacyKey.PHONE_NUMBER)
         """

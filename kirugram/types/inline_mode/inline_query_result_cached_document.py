@@ -1,25 +1,25 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
+import kirugram
+from kirugram import enums, raw, types, utils
 
 from ...file_id import FileId
 from .inline_query_result import InlineQueryResult
@@ -48,17 +48,17 @@ class InlineQueryResultCachedDocument(InlineQueryResult):
         caption (``str``, *optional*):
             Caption of the photo to be sent, 0-1024 characters.
 
-        parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+        parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
             By default, texts are parsed using both Markdown and HTML styles.
             You can combine both syntaxes together.
 
-        caption_entities (List of :obj:`~pyrogram.types.MessageEntity`):
+        caption_entities (List of :obj:`~kirugram.types.MessageEntity`):
             List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
-        reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
+        reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup`, *optional*):
             An InlineKeyboardMarkup object.
 
-        input_message_content (:obj:`~pyrogram.types.InputMessageContent`):
+        input_message_content (:obj:`~kirugram.types.InputMessageContent`):
             Content of the message to be sent instead of the photo.
     """
 
@@ -85,7 +85,7 @@ class InlineQueryResultCachedDocument(InlineQueryResult):
         self.reply_markup = reply_markup
         self.input_message_content = input_message_content
 
-    async def write(self, client: pyrogram.Client):
+    async def write(self, client: kirugram.Client):
         message, entities = (
             await utils.parse_text_entities(
                 client, self.caption, self.parse_mode, self.caption_entities

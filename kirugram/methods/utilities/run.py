@@ -1,35 +1,35 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-from pyrogram.methods.utilities.idle import idle
-from pyrogram.utils import loops
+from kirugram.methods.utilities.idle import idle
+from kirugram.utils import loops
 
 if TYPE_CHECKING:
-    import pyrogram
+    import kirugram
 
 
 class Run:
     def run(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         *,
         use_qr: bool = False,
         except_ids: list[int] | None = None,
@@ -37,10 +37,10 @@ class Run:
         """Start the client, idle the main script and finally stop the client.
 
         When calling this method without any argument it acts as a convenience method that calls
-        :meth:`~pyrogram.Client.start`, :meth:`~pyrogram.idle` and :meth:`~pyrogram.Client.stop` in sequence.
+        :meth:`~kirugram.Client.start`, :meth:`~kirugram.idle` and :meth:`~kirugram.Client.stop` in sequence.
         It makes running a single client less verbose.
 
-        If you want to run multiple clients at once, see :meth:`pyrogram.compose`.
+        If you want to run multiple clients at once, see :meth:`kirugram.compose`.
 
         Parameters:
             use_qr (``bool``, *optional*):
@@ -58,7 +58,7 @@ class Run:
         Example:
             .. code-block:: python
 
-                from pyrogram import Client
+                from kirugram import Client
 
                 app = Client("my_account")
                 ...  # Set handlers up

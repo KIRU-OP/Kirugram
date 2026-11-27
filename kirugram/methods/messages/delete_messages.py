@@ -1,27 +1,27 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import raw
+import kirugram
+from kirugram import raw
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
@@ -29,7 +29,7 @@ if TYPE_CHECKING:
 
 class DeleteMessages:
     async def delete_messages(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         message_ids: int | Iterable[int],
         revoke: bool = True,
@@ -44,11 +44,11 @@ class DeleteMessages:
             - **For BOTS Only**: A message can only be deleted if it was sent less than 48 hours ago.
             - Service messages about a supergroup, channel, or forum topic creation can't be deleted.
             - A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.
-            - :obj:`~pyrogram.Client` can delete outgoing messages in private chats, groups, and supergroups.
-            - :obj:`~pyrogram.Client` can delete incoming messages in private chats.
-            - :obj:`~pyrogram.Client` granted can_post_messages permissions can delete outgoing messages in channels.
-            - If the :obj:`~pyrogram.Client` is an administrator of a group, it can delete any message there.
-            - If the :obj:`~pyrogram.Client` has can_delete_messages permission in a supergroup or a channel, it can delete any message there.
+            - :obj:`~kirugram.Client` can delete outgoing messages in private chats, groups, and supergroups.
+            - :obj:`~kirugram.Client` can delete incoming messages in private chats.
+            - :obj:`~kirugram.Client` granted can_post_messages permissions can delete outgoing messages in channels.
+            - If the :obj:`~kirugram.Client` is an administrator of a group, it can delete any message there.
+            - If the :obj:`~kirugram.Client` has can_delete_messages permission in a supergroup or a channel, it can delete any message there.
 
         Parameters:
             chat_id (``int`` | ``str``):

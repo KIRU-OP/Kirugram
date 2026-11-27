@@ -1,29 +1,29 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import logging
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import enums, raw, types
-from pyrogram.errors import ChannelPrivate
+import kirugram
+from kirugram import enums, raw, types
+from kirugram.errors import ChannelPrivate
 
 from ... import utils
 from ..object import Object
@@ -46,14 +46,14 @@ class CallbackQuery(Object, Update):
         id (``str``):
             Unique identifier for this query.
 
-        from_user (:obj:`~pyrogram.types.User`):
+        from_user (:obj:`~kirugram.types.User`):
             Sender.
 
         chat_instance (``str``, *optional*):
             Global identifier, uniquely corresponding to the chat to which the message with the callback button was
             sent. Useful for high scores in games.
 
-        message (:obj:`~pyrogram.types.Message`, *optional*):
+        message (:obj:`~kirugram.types.Message`, *optional*):
             Message with the callback button that originated the query. Note that message content and message date will
             not be available if the message is too old.
 
@@ -68,9 +68,9 @@ class CallbackQuery(Object, Update):
 
         matches (List of regex Matches, *optional*):
             A list containing all `Match Objects <https://docs.python.org/3/library/re.html#match-objects>`_ that match
-            the data of this callback query. Only applicable when using :obj:`filters.regex <pyrogram.filters.regex>`.
+            the data of this callback query. Only applicable when using :obj:`filters.regex <kirugram.filters.regex>`.
 
-        chat (:obj:`~pyrogram.types.Chat`, *property*):
+        chat (:obj:`~kirugram.types.Chat`, *property*):
             The chat *message* was sent in. None for a button attached to an inline message, which carries
             *inline_message_id* instead.
     """
@@ -78,7 +78,7 @@ class CallbackQuery(Object, Update):
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         id: str,
         from_user: types.User,
         chat_instance: str | None = None,
@@ -104,7 +104,7 @@ class CallbackQuery(Object, Update):
         return self.message.chat if self.message else None
 
     @staticmethod
-    async def _parse(client: pyrogram.Client, callback_query, users, chats) -> CallbackQuery:
+    async def _parse(client: kirugram.Client, callback_query, users, chats) -> CallbackQuery:
         message = None
         inline_message_id = None
 
@@ -171,7 +171,7 @@ class CallbackQuery(Object, Update):
         url: (str | None) = None,
         cache_time: int = 0,
     ):
-        """Bound method *answer* of :obj:`~pyrogram.types.CallbackQuery`.
+        """Bound method *answer* of :obj:`~kirugram.types.CallbackQuery`.
 
         Use this method as a shortcut for:
 
@@ -225,25 +225,25 @@ class CallbackQuery(Object, Update):
     ) -> types.Message | bool:
         """Edit the text of messages attached to callback queries.
 
-        Bound method *edit_message_text* of :obj:`~pyrogram.types.CallbackQuery`.
+        Bound method *edit_message_text* of :obj:`~kirugram.types.CallbackQuery`.
 
         Parameters:
             text (``str``, *optional*):
                 New text of the message.
                 Required if rich_message isn't specified.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            link_preview_options (:obj:`~pyrogram.types.LinkPreviewOptions`, *optional*):
+            link_preview_options (:obj:`~kirugram.types.LinkPreviewOptions`, *optional*):
                 Options used for link preview generation for the message.
 
-            rich_message (:obj:`~pyrogram.types.InputRichMessage`, *optional*):
+            rich_message (:obj:`~kirugram.types.InputRichMessage`, *optional*):
                 New rich content of the message.
                 Required if text isn't specified.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup`, *optional*):
                 An InlineKeyboardMarkup object.
 
             disable_web_page_preview (``bool``, *optional*):
@@ -252,7 +252,7 @@ class CallbackQuery(Object, Update):
                 Use `link_preview_options` instead.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``bool``: On success, if the edited message was sent by the bot, the edited
+            :obj:`~kirugram.types.Message` | ``bool``: On success, if the edited message was sent by the bot, the edited
             message is returned, otherwise True is returned (message sent via the bot, as inline query result).
 
         Raises:
@@ -292,21 +292,21 @@ class CallbackQuery(Object, Update):
     ) -> types.Message | bool:
         """Edit the caption of media messages attached to callback queries.
 
-        Bound method *edit_message_caption* of :obj:`~pyrogram.types.CallbackQuery`.
+        Bound method *edit_message_caption* of :obj:`~kirugram.types.CallbackQuery`.
 
         Parameters:
             caption (``str``):
                 New caption of the message.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup`, *optional*):
                 An InlineKeyboardMarkup object.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``bool``: On success, if the edited message was sent by the bot, the edited
+            :obj:`~kirugram.types.Message` | ``bool``: On success, if the edited message was sent by the bot, the edited
             message is returned, otherwise True is returned (message sent via the bot, as inline query result).
 
         Raises:
@@ -319,17 +319,17 @@ class CallbackQuery(Object, Update):
     ) -> types.Message | bool:
         """Edit animation, audio, document, photo or video messages attached to callback queries.
 
-        Bound method *edit_message_media* of :obj:`~pyrogram.types.CallbackQuery`.
+        Bound method *edit_message_media* of :obj:`~kirugram.types.CallbackQuery`.
 
         Parameters:
-            media (:obj:`~pyrogram.types.InputMedia`):
+            media (:obj:`~kirugram.types.InputMedia`):
                 One of the InputMedia objects describing an animation, audio, document, photo or video.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup`, *optional*):
                 An InlineKeyboardMarkup object.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``bool``: On success, if the edited message was sent by the bot, the edited
+            :obj:`~kirugram.types.Message` | ``bool``: On success, if the edited message was sent by the bot, the edited
             message is returned, otherwise True is returned (message sent via the bot, as inline query result).
 
         Raises:
@@ -352,14 +352,14 @@ class CallbackQuery(Object, Update):
     ) -> types.Message | bool:
         """Edit only the reply markup of messages attached to callback queries.
 
-        Bound method *edit_message_reply_markup* of :obj:`~pyrogram.types.CallbackQuery`.
+        Bound method *edit_message_reply_markup* of :obj:`~kirugram.types.CallbackQuery`.
 
         Parameters:
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup`, *optional*):
                 An InlineKeyboardMarkup object.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``bool``: On success, if the edited message was sent by the bot, the edited
+            :obj:`~kirugram.types.Message` | ``bool``: On success, if the edited message was sent by the bot, the edited
             message is returned, otherwise True is returned (message sent via the bot, as inline query result).
 
         Raises:

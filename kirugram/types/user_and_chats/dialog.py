@@ -1,25 +1,25 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, types
+import kirugram
+from kirugram import raw, types
 
 from ... import utils
 from ..object import Object
@@ -29,10 +29,10 @@ class Dialog(Object):
     """A user's dialog.
 
     Parameters:
-        chat (:obj:`~pyrogram.types.Chat`):
+        chat (:obj:`~kirugram.types.Chat`):
             Conversation the dialog belongs to.
 
-        top_message (:obj:`~pyrogram.types.Message`):
+        top_message (:obj:`~kirugram.types.Message`):
             The last message sent in the dialog at this time.
 
         last_read_inbox_message_id (``int``):
@@ -65,14 +65,14 @@ class Dialog(Object):
         ttl_period (``int``, *optional*):
             Time-to-live of all messages sent in this dialog (in seconds).
 
-        raw (:obj:`~pyrogram.raw.types.Dialog`, *optional*):
+        raw (:obj:`~kirugram.raw.types.Dialog`, *optional*):
             The raw object, as received from the Telegram API.
     """
 
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         chat: types.Chat,
         top_message: types.Message,
         last_read_inbox_message_id: int,

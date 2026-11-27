@@ -1,26 +1,26 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-from pyrogram import raw, types, utils, enums
+from kirugram import raw, types, utils, enums
 
 from ..object import Object
 
@@ -32,7 +32,7 @@ class SuggestedPostInfo(Object):
     """Contains information about a suggested post.
 
     Parameters:
-        price (:obj:`~pyrogram.types.SuggestedPostPrice`, *optional*):
+        price (:obj:`~kirugram.types.SuggestedPostPrice`, *optional*):
             Proposed price of the post.
             If the field is omitted, then the post is unpaid.
 
@@ -41,7 +41,7 @@ class SuggestedPostInfo(Object):
             If the field is omitted, then the post can be published at any time
             within 30 days at the sole discretion of the user or administrator who approves it.
 
-        state (:obj:`~pyrogram.enums.SuggestedPostState`, *optional*):
+        state (:obj:`~kirugram.enums.SuggestedPostState`, *optional*):
             State of the suggested post.
     """
 

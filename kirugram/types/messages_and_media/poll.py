@@ -1,27 +1,27 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
+import kirugram
+from kirugram import enums, raw, types, utils
 
 from ..object import Object
 from ..update import Update
@@ -37,10 +37,10 @@ class Poll(Object, Update):
         id (``str``):
             Unique poll identifier.
 
-        question (:obj:`~pyrogram.types.FormattedText`, *optional*):
+        question (:obj:`~kirugram.types.FormattedText`, *optional*):
             Poll question, 1-300 characters.
 
-        options (List of :obj:`~pyrogram.types.PollOption`):
+        options (List of :obj:`~kirugram.types.PollOption`):
             List of poll options.
 
         total_voter_count (``int``, *optional*):
@@ -52,7 +52,7 @@ class Poll(Object, Update):
         is_anonymous (``bool``, *optional*):
             True, if the poll is anonymous.
 
-        type (:obj:`~pyrogram.enums.PollType`, *optional*):
+        type (:obj:`~kirugram.enums.PollType`, *optional*):
             Poll type.
 
         allows_multiple_answers (``bool``, *optional*):
@@ -75,11 +75,11 @@ class Poll(Object, Update):
             Array of 0-based identifiers of the correct answer options.
             Available only for polls in quiz mode which are closed or were sent (not forwarded) by the bot or to the private chat with the bot.
 
-        explanation (:obj:`pyrogram.types.FormattedText`, *optional*):
+        explanation (:obj:`kirugram.types.FormattedText`, *optional*):
             Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll,
             0-200 characters.
 
-        explanation_media (:obj:`~pyrogram.types.MessageContent`, *optional*):
+        explanation_media (:obj:`~kirugram.types.MessageContent`, *optional*):
             Media that is shown when the user chooses an incorrect answer or taps on the lamp icon.
             May be None if none or the poll is unanswered yet.
 
@@ -89,22 +89,22 @@ class Poll(Object, Update):
         close_date (:py:obj:`~datetime.datetime`, *optional*):
             Point in time when the poll will be automatically closed.
 
-        description (:obj:`~pyrogram.types.FormattedText`, *optional*):
+        description (:obj:`~kirugram.types.FormattedText`, *optional*):
             Description of the poll.
-            Only for polls inside the :obj:`~pyrogram.types.Message` object.
+            Only for polls inside the :obj:`~kirugram.types.Message` object.
 
-        description_media (:obj:`~pyrogram.types.MessageContent`, *optional*):
+        description_media (:obj:`~kirugram.types.MessageContent`, *optional*):
             Media attached to the poll.
-            Only for polls inside the :obj:`~pyrogram.types.Message` object.
+            Only for polls inside the :obj:`~kirugram.types.Message` object.
 
-        voter (:obj:`~pyrogram.types.User`, *optional*):
+        voter (:obj:`~kirugram.types.User`, *optional*):
             The user that voted in the poll.
     """
 
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         id: str,
         question: types.FormattedText | None = None,
         options: list[types.PollOption],

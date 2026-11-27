@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -23,7 +23,7 @@ from typing import TYPE_CHECKING
 from ..object import Object
 
 if TYPE_CHECKING:
-    from pyrogram import types
+    from kirugram import types
 
 
 class ChatEventAction(Object):
@@ -31,59 +31,59 @@ class ChatEventAction(Object):
 
     It can be one of:
 
-    - :obj:`~pyrogram.types.ChatEventActionMessageEdited`
-    - :obj:`~pyrogram.types.ChatEventActionMessageDeleted`
-    - :obj:`~pyrogram.types.ChatEventActionMessagePinned`
-    - :obj:`~pyrogram.types.ChatEventActionMessageUnpinned`
-    - :obj:`~pyrogram.types.ChatEventActionPollStopped`
-    - :obj:`~pyrogram.types.ChatEventActionMemberJoined`
-    - :obj:`~pyrogram.types.ChatEventActionMemberJoinedByInviteLink`
-    - :obj:`~pyrogram.types.ChatEventActionMemberJoinedByRequest`
-    - :obj:`~pyrogram.types.ChatEventActionMemberInvited`
-    - :obj:`~pyrogram.types.ChatEventActionMemberLeft`
-    - :obj:`~pyrogram.types.ChatEventActionMemberPromoted`
-    - :obj:`~pyrogram.types.ChatEventActionMemberRestricted`
-    - :obj:`~pyrogram.types.ChatEventActionMemberTagChanged`
-    - :obj:`~pyrogram.types.ChatEventActionMemberSubscriptionExtended`
-    - :obj:`~pyrogram.types.ChatEventActionAvailableReactionsChanged`
-    - :obj:`~pyrogram.types.ChatEventActionBackgroundChanged`
-    - :obj:`~pyrogram.types.ChatEventActionDescriptionChanged`
-    - :obj:`~pyrogram.types.ChatEventActionEmojiStatusChanged`
-    - :obj:`~pyrogram.types.ChatEventActionLinkedChatChanged`
-    - :obj:`~pyrogram.types.ChatEventActionLocationChanged`
-    - :obj:`~pyrogram.types.ChatEventActionMessageAutoDeleteTimeChanged`
-    - :obj:`~pyrogram.types.ChatEventActionPermissionsChanged`
-    - :obj:`~pyrogram.types.ChatEventActionPhotoChanged`
-    - :obj:`~pyrogram.types.ChatEventActionSlowModeDelayChanged`
-    - :obj:`~pyrogram.types.ChatEventActionStickerSetChanged`
-    - :obj:`~pyrogram.types.ChatEventActionCustomEmojiStickerSetChanged`
-    - :obj:`~pyrogram.types.ChatEventActionTitleChanged`
-    - :obj:`~pyrogram.types.ChatEventActionUsernameChanged`
-    - :obj:`~pyrogram.types.ChatEventActionActiveUsernamesChanged`
-    - :obj:`~pyrogram.types.ChatEventActionAccentColorChanged`
-    - :obj:`~pyrogram.types.ChatEventActionProfileAccentColorChanged`
-    - :obj:`~pyrogram.types.ChatEventActionHasProtectedContentToggled`
-    - :obj:`~pyrogram.types.ChatEventActionInvitesToggled`
-    - :obj:`~pyrogram.types.ChatEventActionIsAllHistoryAvailableToggled`
-    - :obj:`~pyrogram.types.ChatEventActionHasAggressiveAntiSpamEnabledToggled`
-    - :obj:`~pyrogram.types.ChatEventActionSignMessagesToggled`
-    - :obj:`~pyrogram.types.ChatEventActionShowMessageSenderToggled`
-    - :obj:`~pyrogram.types.ChatEventActionAutomaticTranslationToggled`
-    - :obj:`~pyrogram.types.ChatEventActionInviteLinkEdited`
-    - :obj:`~pyrogram.types.ChatEventActionInviteLinkRevoked`
-    - :obj:`~pyrogram.types.ChatEventActionInviteLinkDeleted`
-    - :obj:`~pyrogram.types.ChatEventActionVideoChatCreated`
-    - :obj:`~pyrogram.types.ChatEventActionVideoChatEnded`
-    - :obj:`~pyrogram.types.ChatEventActionVideoChatMuteNewParticipantsToggled`
-    - :obj:`~pyrogram.types.ChatEventActionVideoChatParticipantIsMutedToggled`
-    - :obj:`~pyrogram.types.ChatEventActionVideoChatParticipantVolumeLevelChanged`
-    - :obj:`~pyrogram.types.ChatEventActionIsForumToggled`
-    - :obj:`~pyrogram.types.ChatEventActionForumTopicCreated`
-    - :obj:`~pyrogram.types.ChatEventActionForumTopicEdited`
-    - :obj:`~pyrogram.types.ChatEventActionForumTopicToggleIsClosed`
-    - :obj:`~pyrogram.types.ChatEventActionForumTopicToggleIsHidden`
-    - :obj:`~pyrogram.types.ChatEventActionForumTopicDeleted`
-    - :obj:`~pyrogram.types.ChatEventActionForumTopicPinned`
+    - :obj:`~kirugram.types.ChatEventActionMessageEdited`
+    - :obj:`~kirugram.types.ChatEventActionMessageDeleted`
+    - :obj:`~kirugram.types.ChatEventActionMessagePinned`
+    - :obj:`~kirugram.types.ChatEventActionMessageUnpinned`
+    - :obj:`~kirugram.types.ChatEventActionPollStopped`
+    - :obj:`~kirugram.types.ChatEventActionMemberJoined`
+    - :obj:`~kirugram.types.ChatEventActionMemberJoinedByInviteLink`
+    - :obj:`~kirugram.types.ChatEventActionMemberJoinedByRequest`
+    - :obj:`~kirugram.types.ChatEventActionMemberInvited`
+    - :obj:`~kirugram.types.ChatEventActionMemberLeft`
+    - :obj:`~kirugram.types.ChatEventActionMemberPromoted`
+    - :obj:`~kirugram.types.ChatEventActionMemberRestricted`
+    - :obj:`~kirugram.types.ChatEventActionMemberTagChanged`
+    - :obj:`~kirugram.types.ChatEventActionMemberSubscriptionExtended`
+    - :obj:`~kirugram.types.ChatEventActionAvailableReactionsChanged`
+    - :obj:`~kirugram.types.ChatEventActionBackgroundChanged`
+    - :obj:`~kirugram.types.ChatEventActionDescriptionChanged`
+    - :obj:`~kirugram.types.ChatEventActionEmojiStatusChanged`
+    - :obj:`~kirugram.types.ChatEventActionLinkedChatChanged`
+    - :obj:`~kirugram.types.ChatEventActionLocationChanged`
+    - :obj:`~kirugram.types.ChatEventActionMessageAutoDeleteTimeChanged`
+    - :obj:`~kirugram.types.ChatEventActionPermissionsChanged`
+    - :obj:`~kirugram.types.ChatEventActionPhotoChanged`
+    - :obj:`~kirugram.types.ChatEventActionSlowModeDelayChanged`
+    - :obj:`~kirugram.types.ChatEventActionStickerSetChanged`
+    - :obj:`~kirugram.types.ChatEventActionCustomEmojiStickerSetChanged`
+    - :obj:`~kirugram.types.ChatEventActionTitleChanged`
+    - :obj:`~kirugram.types.ChatEventActionUsernameChanged`
+    - :obj:`~kirugram.types.ChatEventActionActiveUsernamesChanged`
+    - :obj:`~kirugram.types.ChatEventActionAccentColorChanged`
+    - :obj:`~kirugram.types.ChatEventActionProfileAccentColorChanged`
+    - :obj:`~kirugram.types.ChatEventActionHasProtectedContentToggled`
+    - :obj:`~kirugram.types.ChatEventActionInvitesToggled`
+    - :obj:`~kirugram.types.ChatEventActionIsAllHistoryAvailableToggled`
+    - :obj:`~kirugram.types.ChatEventActionHasAggressiveAntiSpamEnabledToggled`
+    - :obj:`~kirugram.types.ChatEventActionSignMessagesToggled`
+    - :obj:`~kirugram.types.ChatEventActionShowMessageSenderToggled`
+    - :obj:`~kirugram.types.ChatEventActionAutomaticTranslationToggled`
+    - :obj:`~kirugram.types.ChatEventActionInviteLinkEdited`
+    - :obj:`~kirugram.types.ChatEventActionInviteLinkRevoked`
+    - :obj:`~kirugram.types.ChatEventActionInviteLinkDeleted`
+    - :obj:`~kirugram.types.ChatEventActionVideoChatCreated`
+    - :obj:`~kirugram.types.ChatEventActionVideoChatEnded`
+    - :obj:`~kirugram.types.ChatEventActionVideoChatMuteNewParticipantsToggled`
+    - :obj:`~kirugram.types.ChatEventActionVideoChatParticipantIsMutedToggled`
+    - :obj:`~kirugram.types.ChatEventActionVideoChatParticipantVolumeLevelChanged`
+    - :obj:`~kirugram.types.ChatEventActionIsForumToggled`
+    - :obj:`~kirugram.types.ChatEventActionForumTopicCreated`
+    - :obj:`~kirugram.types.ChatEventActionForumTopicEdited`
+    - :obj:`~kirugram.types.ChatEventActionForumTopicToggleIsClosed`
+    - :obj:`~kirugram.types.ChatEventActionForumTopicToggleIsHidden`
+    - :obj:`~kirugram.types.ChatEventActionForumTopicDeleted`
+    - :obj:`~kirugram.types.ChatEventActionForumTopicPinned`
     """
 
 
@@ -91,10 +91,10 @@ class ChatEventActionMessageEdited(ChatEventAction):
     """A message was edited.
 
     Parameters:
-        old_message (:obj:`~pyrogram.types.Message`):
+        old_message (:obj:`~kirugram.types.Message`):
             The original message before the edit.
 
-        new_message (:obj:`~pyrogram.types.Message`):
+        new_message (:obj:`~kirugram.types.Message`):
             The message after it was edited.
     """
 
@@ -109,7 +109,7 @@ class ChatEventActionMessageDeleted(ChatEventAction):
     """A message was deleted.
 
     Parameters:
-        message (:obj:`~pyrogram.types.Message`):
+        message (:obj:`~kirugram.types.Message`):
             Deleted message.
 
         can_report_anti_spam_false_positive (``bool``):
@@ -127,7 +127,7 @@ class ChatEventActionMessagePinned(ChatEventAction):
     """A message was pinned.
 
     Parameters:
-        message (:obj:`~pyrogram.types.Message`):
+        message (:obj:`~kirugram.types.Message`):
             Pinned message.
     """
 
@@ -141,7 +141,7 @@ class ChatEventActionMessageUnpinned(ChatEventAction):
     """A message was unpinned.
 
     Parameters:
-        message (:obj:`~pyrogram.types.Message`):
+        message (:obj:`~kirugram.types.Message`):
             Unpinned message.
     """
 
@@ -155,7 +155,7 @@ class ChatEventActionPollStopped(ChatEventAction):
     """A poll in a message was stopped.
 
     Parameters:
-        message (:obj:`~pyrogram.types.Message`):
+        message (:obj:`~kirugram.types.Message`):
             The message with the poll.
     """
 
@@ -179,7 +179,7 @@ class ChatEventActionMemberJoinedByInviteLink(ChatEventAction):
     """A new member joined the chat via an invite link.
 
     Parameters:
-        invite_link (:obj:`~pyrogram.types.ChatInviteLink`):
+        invite_link (:obj:`~kirugram.types.ChatInviteLink`):
             Invite link used to join the chat.
 
         via_chat_folder_invite_link (``bool``):
@@ -197,10 +197,10 @@ class ChatEventActionMemberJoinedByRequest(ChatEventAction):
     """A new member was accepted to the chat by an administrator.
 
     Parameters:
-        approver_user (:obj:`~pyrogram.types.User`):
+        approver_user (:obj:`~kirugram.types.User`):
             The chat administrator that approved user join request.
 
-        invite_link (:obj:`~pyrogram.types.ChatInviteLink`, *optional*):
+        invite_link (:obj:`~kirugram.types.ChatInviteLink`, *optional*):
             Invite link used to join the chat.
     """
 
@@ -217,7 +217,7 @@ class ChatEventActionMemberInvited(ChatEventAction):
     """A new chat member was invited.
 
     Parameters:
-        member (:obj:`~pyrogram.types.ChatMember`):
+        member (:obj:`~kirugram.types.ChatMember`):
             New member.
     """
 
@@ -241,10 +241,10 @@ class ChatEventActionMemberPromoted(ChatEventAction):
     """A chat member has gained/lost administrator status, or the list of their administrator privileges has changed.
 
     Parameters:
-        old_member (:obj:`~pyrogram.types.ChatMember`):
+        old_member (:obj:`~kirugram.types.ChatMember`):
             Previous status of the chat member.
 
-        new_member (:obj:`~pyrogram.types.ChatMember`):
+        new_member (:obj:`~kirugram.types.ChatMember`):
             New status of the chat member.
     """
 
@@ -259,10 +259,10 @@ class ChatEventActionMemberRestricted(ChatEventAction):
     """A chat member was restricted/unrestricted or banned/unbanned, or the list of their restrictions has changed.
 
     Parameters:
-        old_member (:obj:`~pyrogram.types.ChatMember`):
+        old_member (:obj:`~kirugram.types.ChatMember`):
             Previous status of the chat member.
 
-        new_member (:obj:`~pyrogram.types.ChatMember`):
+        new_member (:obj:`~kirugram.types.ChatMember`):
             New status of the chat member.
     """
 
@@ -277,7 +277,7 @@ class ChatEventActionMemberTagChanged(ChatEventAction):
     """A chat member tag has been changed.
 
     Parameters:
-        user (:obj:`~pyrogram.types.User`):
+        user (:obj:`~kirugram.types.User`):
             Affected chat member.
 
         old_tag (``str``):
@@ -299,10 +299,10 @@ class ChatEventActionMemberSubscriptionExtended(ChatEventAction):
     """A chat member extended their subscription to the chat.
 
     Parameters:
-        old_member (:obj:`~pyrogram.types.ChatMember`):
+        old_member (:obj:`~kirugram.types.ChatMember`):
             Previous status of the chat member.
 
-        new_member (:obj:`~pyrogram.types.ChatMember`):
+        new_member (:obj:`~kirugram.types.ChatMember`):
             New status of the chat member.
     """
 
@@ -317,10 +317,10 @@ class ChatEventActionAvailableReactionsChanged(ChatEventAction):
     """The chat available reactions were changed.
 
     Parameters:
-        old_available_reactions (:obj:`~pyrogram.types.ChatReactions`):
+        old_available_reactions (:obj:`~kirugram.types.ChatReactions`):
             Previous chat available reactions.
 
-        new_available_reactions (:obj:`~pyrogram.types.ChatReactions`):
+        new_available_reactions (:obj:`~kirugram.types.ChatReactions`):
             New chat available reactions.
     """
 
@@ -340,10 +340,10 @@ class ChatEventActionBackgroundChanged(ChatEventAction):
     """The chat background was changed.
 
     Parameters:
-        old_background (:obj:`~pyrogram.types.ChatBackground`, *optional*):
+        old_background (:obj:`~kirugram.types.ChatBackground`, *optional*):
             Previous background.
 
-        new_background (:obj:`~pyrogram.types.ChatBackground`, *optional*):
+        new_background (:obj:`~kirugram.types.ChatBackground`, *optional*):
             New background.
     """
 
@@ -381,10 +381,10 @@ class ChatEventActionEmojiStatusChanged(ChatEventAction):
     """The chat emoji status was changed.
 
     Parameters:
-        old_emoji_status (:obj:`~pyrogram.types.EmojiStatus`, *optional*):
+        old_emoji_status (:obj:`~kirugram.types.EmojiStatus`, *optional*):
             Previous chat description.
 
-        new_emoji_status (:obj:`~pyrogram.types.EmojiStatus`, *optional*):
+        new_emoji_status (:obj:`~kirugram.types.EmojiStatus`, *optional*):
             New chat description.
     """
 
@@ -404,10 +404,10 @@ class ChatEventActionLinkedChatChanged(ChatEventAction):
     """The linked chat of a supergroup was changed.
 
     Parameters:
-        old_linked_chat (:obj:`~pyrogram.types.Chat`, *optional*):
+        old_linked_chat (:obj:`~kirugram.types.Chat`, *optional*):
             Previous supergroup linked chat.
 
-        new_linked_chat (:obj:`~pyrogram.types.Chat`, *optional*):
+        new_linked_chat (:obj:`~kirugram.types.Chat`, *optional*):
             New supergroup linked chat.
     """
 
@@ -427,10 +427,10 @@ class ChatEventActionLocationChanged(ChatEventAction):
     """The supergroup location was changed.
 
     Parameters:
-        old_location (:obj:`~pyrogram.types.Location`, *optional*):
+        old_location (:obj:`~kirugram.types.Location`, *optional*):
             Previous location.
 
-        new_location (:obj:`~pyrogram.types.Location`, *optional*):
+        new_location (:obj:`~kirugram.types.Location`, *optional*):
             New location.
     """
 
@@ -468,10 +468,10 @@ class ChatEventActionPermissionsChanged(ChatEventAction):
     """The chat permissions were changed.
 
     Parameters:
-        old_permissions (:obj:`~pyrogram.types.ChatPermissions`):
+        old_permissions (:obj:`~kirugram.types.ChatPermissions`):
             Previous chat permissions.
 
-        new_permissions (:obj:`~pyrogram.types.ChatPermissions`):
+        new_permissions (:obj:`~kirugram.types.ChatPermissions`):
             New chat permissions.
     """
 
@@ -488,10 +488,10 @@ class ChatEventActionPhotoChanged(ChatEventAction):
     """The chat photo was changed.
 
     Parameters:
-        old_photo (:obj:`~pyrogram.types.ChatPhoto`, *optional*):
+        old_photo (:obj:`~kirugram.types.ChatPhoto`, *optional*):
             Previous chat photo value.
 
-        new_photo (:obj:`~pyrogram.types.ChatPhoto`, *optional*):
+        new_photo (:obj:`~kirugram.types.ChatPhoto`, *optional*):
             New chat photo value.
     """
 
@@ -784,10 +784,10 @@ class ChatEventActionInviteLinkEdited(ChatEventAction):
     """A chat invite link was edited.
 
     Parameters:
-        old_invite_link (:obj:`~pyrogram.types.ChatInviteLink`):
+        old_invite_link (:obj:`~kirugram.types.ChatInviteLink`):
             Previous information about the invite link.
 
-        new_invite_link (:obj:`~pyrogram.types.ChatInviteLink`):
+        new_invite_link (:obj:`~kirugram.types.ChatInviteLink`):
             New information about the invite link.
     """
 
@@ -804,7 +804,7 @@ class ChatEventActionInviteLinkRevoked(ChatEventAction):
     """A chat invite link was revoked.
 
     Parameters:
-        invite_link (:obj:`~pyrogram.types.ChatInviteLink`):
+        invite_link (:obj:`~kirugram.types.ChatInviteLink`):
             The invite link.
     """
 
@@ -818,7 +818,7 @@ class ChatEventActionInviteLinkDeleted(ChatEventAction):
     """A revoked chat invite link was deleted.
 
     Parameters:
-        invite_link (:obj:`~pyrogram.types.ChatInviteLink`):
+        invite_link (:obj:`~kirugram.types.ChatInviteLink`):
             The invite link.
     """
 
@@ -874,7 +874,7 @@ class ChatEventActionVideoChatParticipantIsMutedToggled(ChatEventAction):
     """A video chat participant was muted or unmuted.
 
     Parameters:
-        participant (:obj:`~pyrogram.types.Chat`):
+        participant (:obj:`~kirugram.types.Chat`):
             Identifier of the affected group call participant.
 
         is_muted (``bool``):
@@ -892,7 +892,7 @@ class ChatEventActionVideoChatParticipantVolumeLevelChanged(ChatEventAction):
     """A video chat participant volume level was changed.
 
     Parameters:
-        participant (:obj:`~pyrogram.types.Chat`):
+        participant (:obj:`~kirugram.types.Chat`):
             Identifier of the affected group call participant.
 
         volume_level (``int``):
@@ -924,7 +924,7 @@ class ChatEventActionForumTopicCreated(ChatEventAction):
     """A forum topic was created.
 
     Parameters:
-        topic_info (:obj:`~pyrogram.types.ForumTopic`):
+        topic_info (:obj:`~kirugram.types.ForumTopic`):
             Information about the topic.
     """
 
@@ -938,10 +938,10 @@ class ChatEventActionForumTopicEdited(ChatEventAction):
     """A forum topic was edited.
 
     Parameters:
-        old_topic_info (:obj:`~pyrogram.types.ForumTopic`):
+        old_topic_info (:obj:`~kirugram.types.ForumTopic`):
             Old information about the topic.
 
-        new_topic_info (:obj:`~pyrogram.types.ForumTopic`):
+        new_topic_info (:obj:`~kirugram.types.ForumTopic`):
             New information about the topic.
     """
 
@@ -956,7 +956,7 @@ class ChatEventActionForumTopicToggleIsClosed(ChatEventAction):
     """A forum topic was closed or reopened.
 
     Parameters:
-        topic_info (:obj:`~pyrogram.types.ForumTopic`):
+        topic_info (:obj:`~kirugram.types.ForumTopic`):
             New information about the topic.
     """
 
@@ -970,7 +970,7 @@ class ChatEventActionForumTopicToggleIsHidden(ChatEventAction):
     """The General forum topic was hidden or unhidden.
 
     Parameters:
-        topic_info (:obj:`~pyrogram.types.ForumTopic`):
+        topic_info (:obj:`~kirugram.types.ForumTopic`):
             New information about the topic.
     """
 
@@ -984,7 +984,7 @@ class ChatEventActionForumTopicDeleted(ChatEventAction):
     """A forum topic was deleted.
 
     Parameters:
-        topic_info (:obj:`~pyrogram.types.ForumTopic`):
+        topic_info (:obj:`~kirugram.types.ForumTopic`):
             Information about the topic.
     """
 
@@ -998,10 +998,10 @@ class ChatEventActionForumTopicPinned(ChatEventAction):
     """A pinned forum topic was changed.
 
     Parameters:
-        old_topic_info (:obj:`~pyrogram.types.ForumTopic`, *optional*):
+        old_topic_info (:obj:`~kirugram.types.ForumTopic`, *optional*):
             Information about the old pinned topic.
 
-        new_topic_info (:obj:`~pyrogram.types.ForumTopic`, *optional*):
+        new_topic_info (:obj:`~kirugram.types.ForumTopic`, *optional*):
             New information about the new pinned topic.
     """
 

@@ -1,25 +1,25 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, types
+import kirugram
+from kirugram import raw, types
 
 from ..object import Object
 
@@ -28,7 +28,7 @@ class ChatOwnerLeft(Object):
     """Describes a service message about the chat owner leaving the chat.
 
     Parameters:
-        new_owner (:obj:`~pyrogram.types.User`, *optional*):
+        new_owner (:obj:`~kirugram.types.User`, *optional*):
             The user which will be the new owner of the chat if the previous owner does not return to the chat.
     """
 
@@ -39,7 +39,7 @@ class ChatOwnerLeft(Object):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         action: raw.types.MessageActionNewCreatorPending,
         users: dict[int, types.User],
     ) -> ChatOwnerLeft:

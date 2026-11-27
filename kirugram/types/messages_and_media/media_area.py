@@ -1,26 +1,26 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import enums, raw, types
-from pyrogram.errors import ChannelInvalid, ChannelPrivate
+import kirugram
+from kirugram import enums, raw, types
+from kirugram.errors import ChannelInvalid, ChannelPrivate
 
 from ..object import Object
 
@@ -44,13 +44,13 @@ class MediaArea(Object):
         rotation (``float``):
             Clockwise rotation angle of the rectangle, in degrees (0-360).
 
-        type (:obj:`~pyrogram.enums.MediaAreaType`):
+        type (:obj:`~kirugram.enums.MediaAreaType`):
             The type of the media area.
 
         radius (``float``, *optional*):
             The radius of the rectangle corner rounding, as a percentage of the media width.
 
-        sender_chat (:obj:`~pyrogram.types.Chat`, *optional*):
+        sender_chat (:obj:`~kirugram.types.Chat`, *optional*):
             The channel that posted the message.
             For post type only.
 
@@ -58,16 +58,16 @@ class MediaArea(Object):
             Identifier of the message in channel.
             For post type only.
 
-        message (:obj:`~pyrogram.types.Message`, *optional*):
+        message (:obj:`~kirugram.types.Message`, *optional*):
             Message attached to the story.
             Can be empty if the message was deleted or unavailable (channel is private).
             For post type only.
 
-        location (:obj:`~pyrogram.types.Location`, *optional*):
+        location (:obj:`~kirugram.types.Location`, *optional*):
             Represents a location tag attached to a story.
             For location type only.
 
-        reaction (:obj:`~pyrogram.types.Reaction`, *optional*):
+        reaction (:obj:`~kirugram.types.Reaction`, *optional*):
             The reaction that should be sent when this area is clicked.
             For reaction type only.
 
@@ -95,14 +95,14 @@ class MediaArea(Object):
             The argb color in decimal format.
             For weather type only.
 
-        gift (:obj:`~pyrogram.types.Gift`, *optional*):
+        gift (:obj:`~kirugram.types.Gift`, *optional*):
             Information about this gift.
     """
 
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         x: float,
         y: float,
         width: float,
@@ -149,7 +149,7 @@ class MediaArea(Object):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client, area: raw.base.MediaArea, chats: dict[int, raw.base.Chat]
+        client: kirugram.Client, area: raw.base.MediaArea, chats: dict[int, raw.base.Chat]
     ) -> MediaArea:
         sender_chat = None
         message_id = None
@@ -215,7 +215,7 @@ class MediaArea(Object):
         )
 
     async def write(
-        self, client: pyrogram.Client
+        self, client: kirugram.Client
     ) -> (
         raw.types.InputMediaAreaChannelPost
         | raw.types.MediaAreaGeoPoint

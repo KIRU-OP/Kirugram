@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -23,8 +23,8 @@ from typing import Final
 
 import pytest
 
-import pyrogram
-from pyrogram import raw, types
+import kirugram
+from kirugram import raw, types
 
 
 _EMPTY_CAPTION: Final[raw.types.PageCaption] = raw.types.PageCaption(
@@ -200,7 +200,7 @@ async def test_rich_message_parses_compact_table() -> None:
 
     # Test integration with types.List.__repr__ (PR #401)
     list_repr = repr(rich_msg.blocks)
-    assert "pyrogram.types.List" in list_repr
+    assert "kirugram.types.List" in list_repr
     assert "is_compact=True" in list_repr
 
 
@@ -234,7 +234,7 @@ async def test_message_parses_rich_message_with_compact_table() -> None:
         ),
     )
 
-    cli = pyrogram.Client("test", api_id=1, api_hash="0" * 32, in_memory=True)
+    cli = kirugram.Client("test", api_id=1, api_hash="0" * 32, in_memory=True)
     parsed_msg = await types.Message._parse(cli, raw_msg, users={}, chats={channel_id: raw_chat})
     assert parsed_msg.rich_message is not None
     assert isinstance(parsed_msg.rich_message.blocks[0], types.RichBlockTable)

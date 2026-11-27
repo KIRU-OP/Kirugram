@@ -1,27 +1,27 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import raw, types, utils
+import kirugram
+from kirugram import raw, types, utils
 from ..object import Object
 
 if TYPE_CHECKING:
@@ -44,7 +44,7 @@ class ChatBoost(Object):
         multiplier (``int``):
             If set, this boost counts as multiplier boosts, otherwise it counts as a single boost.
 
-        from_user (:obj:`~pyrogram.types.User`, *optional*):
+        from_user (:obj:`~kirugram.types.User`, *optional*):
             The user that that applied the boost.
 
         is_gift (``bool``, *optional*):
@@ -54,7 +54,7 @@ class ChatBoost(Object):
             Whether this boost was applied because the user was chosen in a giveaway started by the channel/supergroup.
 
         is_unclaimed (``bool``, *optional*):
-            If set, the user hasn't yet invoked :meth:`~pyrogram.Client.apply_gift_code` to claim a subscription gifted directly or in a giveaway by the channel.
+            If set, the user hasn't yet invoked :meth:`~kirugram.Client.apply_gift_code` to claim a subscription gifted directly or in a giveaway by the channel.
 
         giveaway_message_id (``int``, *optional*):
             The message identifier of the giveaway.
@@ -96,7 +96,7 @@ class ChatBoost(Object):
         self.stars = stars
 
     @staticmethod
-    async def _parse(client: pyrogram.Client, boost: raw.types.Boost, users) -> ChatBoost:
+    async def _parse(client: kirugram.Client, boost: raw.types.Boost, users) -> ChatBoost:
         return ChatBoost(
             id=boost.id,
             date=utils.timestamp_to_datetime(boost.date),

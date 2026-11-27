@@ -1,30 +1,30 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, utils
+import kirugram
+from kirugram import raw, utils
 
 
 class RequestCallbackAnswer:
     async def request_callback_answer(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         message_id: int,
         callback_data: str | bytes,
@@ -50,13 +50,13 @@ class RequestCallbackAnswer:
 
             password (``str``, *optional*):
                 When clicking certain buttons (such as BotFather's confirmation button to transfer ownership), if your account has 2FA enabled, you need to provide your account's password.
-                The 2-step verification password for the current user. Only applicable, if the :obj:`~pyrogram.types.InlineKeyboardButton` contains ``callback_data_with_password``.
+                The 2-step verification password for the current user. Only applicable, if the :obj:`~kirugram.types.InlineKeyboardButton` contains ``callback_data_with_password``.
 
             timeout (``int``, *optional*):
                 Timeout in seconds.
 
         Returns:
-            :obj:`~pyrogram.raw.base.messages.BotCallbackAnswer`: The answer containing info
+            :obj:`~kirugram.raw.base.messages.BotCallbackAnswer`: The answer containing info
             useful for clients to display a notification at the top of the chat screen or as an alert.
 
         Raises:

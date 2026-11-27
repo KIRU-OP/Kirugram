@@ -1,34 +1,34 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import logging
 
-import pyrogram
-from pyrogram import enums, raw, utils, types
+import kirugram
+from kirugram import enums, raw, utils, types
 
 log = logging.getLogger(__name__)
 
 
 class SendInvoice:
     async def send_invoice(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         title: str,
         description: str,
@@ -92,13 +92,13 @@ class SendInvoice:
             currency (``str``):
                 Three-letter ISO 4217 currency code, see `more on currencies <https://core.telegram.org/bots/payments#supported-currencies>`_. Pass ``XTR`` for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
 
-            prices (List of :obj:`~pyrogram.types.LabeledPrice`):
+            prices (List of :obj:`~kirugram.types.LabeledPrice`):
                 Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
 
             message_thread_id (``int``, *optional*):
                 If the message is in a thread, ID of the original message.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             provider_token (``str``, *optional*):
@@ -168,7 +168,7 @@ class SendInvoice:
                 Unique identifier of the topic in a channel direct messages chat administered by the current user.
                 For direct chats only.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
             subscription_expiration_date (``int``, *optional*):
@@ -176,18 +176,18 @@ class SendInvoice:
                 Currently the only allowed subscription period is 30*24*60*60 (1 month).
                 For recurring payments only.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
             caption (``str``, *optional*):
                 Document caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             reply_to_message_id (``int``, *optional*):
@@ -196,7 +196,7 @@ class SendInvoice:
                 Use `reply_parameters` instead.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent invoice message is returned,
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent invoice message is returned,
             otherwise, in case the server answered with no message, None is returned.
 
         """

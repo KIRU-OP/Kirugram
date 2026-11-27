@@ -1,27 +1,27 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING, overload
 
-import pyrogram
-from pyrogram import raw, types, utils
+import kirugram
+from kirugram import raw, types, utils
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
@@ -31,7 +31,7 @@ if TYPE_CHECKING:
 class ForwardMessages:
     @overload
     async def forward_messages(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         from_chat_id: int | str,
         message_ids: int,
@@ -50,7 +50,7 @@ class ForwardMessages:
 
     @overload
     async def forward_messages(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         from_chat_id: int | str,
         message_ids: Iterable[int],
@@ -68,7 +68,7 @@ class ForwardMessages:
     ) -> list[types.Message]: ...
 
     async def forward_messages(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         from_chat_id: int | str,
         message_ids: int | Iterable[int],
@@ -135,14 +135,14 @@ class ForwardMessages:
             video_start_timestamp (``int``, *optional*):
                 Video startpoint, in seconds.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | List of :obj:`~pyrogram.types.Message` | ``None``: In case *message_ids*
+            :obj:`~kirugram.types.Message` | List of :obj:`~kirugram.types.Message` | ``None``: In case *message_ids*
             was not a list, a single message is returned, otherwise a list of messages is returned. In case
             *message_ids* was not a list and the answer carried no message, None is returned.
 

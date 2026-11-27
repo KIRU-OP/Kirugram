@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -24,30 +24,30 @@ from uuid import uuid4
 from ..object import Object
 
 if TYPE_CHECKING:
-    import pyrogram
-    from pyrogram import types
+    import kirugram
+    from kirugram import types
 
 
 class InlineQueryResult(Object):
     """One result of an inline query.
 
-    - :obj:`~pyrogram.types.InlineQueryResultCachedAudio`
-    - :obj:`~pyrogram.types.InlineQueryResultCachedDocument`
-    - :obj:`~pyrogram.types.InlineQueryResultCachedAnimation`
-    - :obj:`~pyrogram.types.InlineQueryResultCachedPhoto`
-    - :obj:`~pyrogram.types.InlineQueryResultCachedSticker`
-    - :obj:`~pyrogram.types.InlineQueryResultCachedVideo`
-    - :obj:`~pyrogram.types.InlineQueryResultCachedVoice`
-    - :obj:`~pyrogram.types.InlineQueryResultArticle`
-    - :obj:`~pyrogram.types.InlineQueryResultAudio`
-    - :obj:`~pyrogram.types.InlineQueryResultContact`
-    - :obj:`~pyrogram.types.InlineQueryResultDocument`
-    - :obj:`~pyrogram.types.InlineQueryResultAnimation`
-    - :obj:`~pyrogram.types.InlineQueryResultLocation`
-    - :obj:`~pyrogram.types.InlineQueryResultPhoto`
-    - :obj:`~pyrogram.types.InlineQueryResultVenue`
-    - :obj:`~pyrogram.types.InlineQueryResultVideo`
-    - :obj:`~pyrogram.types.InlineQueryResultVoice`
+    - :obj:`~kirugram.types.InlineQueryResultCachedAudio`
+    - :obj:`~kirugram.types.InlineQueryResultCachedDocument`
+    - :obj:`~kirugram.types.InlineQueryResultCachedAnimation`
+    - :obj:`~kirugram.types.InlineQueryResultCachedPhoto`
+    - :obj:`~kirugram.types.InlineQueryResultCachedSticker`
+    - :obj:`~kirugram.types.InlineQueryResultCachedVideo`
+    - :obj:`~kirugram.types.InlineQueryResultCachedVoice`
+    - :obj:`~kirugram.types.InlineQueryResultArticle`
+    - :obj:`~kirugram.types.InlineQueryResultAudio`
+    - :obj:`~kirugram.types.InlineQueryResultContact`
+    - :obj:`~kirugram.types.InlineQueryResultDocument`
+    - :obj:`~kirugram.types.InlineQueryResultAnimation`
+    - :obj:`~kirugram.types.InlineQueryResultLocation`
+    - :obj:`~kirugram.types.InlineQueryResultPhoto`
+    - :obj:`~kirugram.types.InlineQueryResultVenue`
+    - :obj:`~kirugram.types.InlineQueryResultVideo`
+    - :obj:`~kirugram.types.InlineQueryResultVoice`
     """
 
     def __init__(
@@ -64,5 +64,5 @@ class InlineQueryResult(Object):
         self.input_message_content = input_message_content
         self.reply_markup = reply_markup
 
-    async def write(self, client: pyrogram.Client):
+    async def write(self, client: kirugram.Client):
         pass

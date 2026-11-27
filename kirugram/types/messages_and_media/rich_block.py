@@ -1,27 +1,27 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import Literal
 
-import pyrogram
-from pyrogram import raw, types
+import kirugram
+from kirugram import raw, types
 
 from ..object import Object
 
@@ -75,34 +75,34 @@ class RichBlock(Object):
 
     It can be one of:
 
-    - :obj:`~pyrogram.types.RichBlockCaption`
-    - :obj:`~pyrogram.types.RichBlockTableCell`
-    - :obj:`~pyrogram.types.RichBlockListItem`
-    - :obj:`~pyrogram.types.RichBlockParagraph`
-    - :obj:`~pyrogram.types.RichBlockSectionHeading`
-    - :obj:`~pyrogram.types.RichBlockPreformatted`
-    - :obj:`~pyrogram.types.RichBlockFooter`
-    - :obj:`~pyrogram.types.RichBlockDivider`
-    - :obj:`~pyrogram.types.RichBlockMathematicalExpression`
-    - :obj:`~pyrogram.types.RichBlockAnchor`
-    - :obj:`~pyrogram.types.RichBlockList`
-    - :obj:`~pyrogram.types.RichBlockBlockQuotation`
-    - :obj:`~pyrogram.types.RichBlockExpandableBlockQuotation`
-    - :obj:`~pyrogram.types.RichBlockPullQuotation`
-    - :obj:`~pyrogram.types.RichBlockCollage`
-    - :obj:`~pyrogram.types.RichBlockSlideshow`
-    - :obj:`~pyrogram.types.RichBlockTable`
-    - :obj:`~pyrogram.types.RichBlockDetails`
-    - :obj:`~pyrogram.types.RichBlockMap`
-    - :obj:`~pyrogram.types.RichBlockButtons`
-    - :obj:`~pyrogram.types.RichBlockAnimation`
-    - :obj:`~pyrogram.types.RichBlockAudio`
-    - :obj:`~pyrogram.types.RichBlockDocument`
-    - :obj:`~pyrogram.types.RichBlockPhoto`
-    - :obj:`~pyrogram.types.RichBlockVideo`
-    - :obj:`~pyrogram.types.RichBlockVoiceNote`
-    - :obj:`~pyrogram.types.RichBlockThinking`
-    - :obj:`~pyrogram.types.RichBlockUnsupported`
+    - :obj:`~kirugram.types.RichBlockCaption`
+    - :obj:`~kirugram.types.RichBlockTableCell`
+    - :obj:`~kirugram.types.RichBlockListItem`
+    - :obj:`~kirugram.types.RichBlockParagraph`
+    - :obj:`~kirugram.types.RichBlockSectionHeading`
+    - :obj:`~kirugram.types.RichBlockPreformatted`
+    - :obj:`~kirugram.types.RichBlockFooter`
+    - :obj:`~kirugram.types.RichBlockDivider`
+    - :obj:`~kirugram.types.RichBlockMathematicalExpression`
+    - :obj:`~kirugram.types.RichBlockAnchor`
+    - :obj:`~kirugram.types.RichBlockList`
+    - :obj:`~kirugram.types.RichBlockBlockQuotation`
+    - :obj:`~kirugram.types.RichBlockExpandableBlockQuotation`
+    - :obj:`~kirugram.types.RichBlockPullQuotation`
+    - :obj:`~kirugram.types.RichBlockCollage`
+    - :obj:`~kirugram.types.RichBlockSlideshow`
+    - :obj:`~kirugram.types.RichBlockTable`
+    - :obj:`~kirugram.types.RichBlockDetails`
+    - :obj:`~kirugram.types.RichBlockMap`
+    - :obj:`~kirugram.types.RichBlockButtons`
+    - :obj:`~kirugram.types.RichBlockAnimation`
+    - :obj:`~kirugram.types.RichBlockAudio`
+    - :obj:`~kirugram.types.RichBlockDocument`
+    - :obj:`~kirugram.types.RichBlockPhoto`
+    - :obj:`~kirugram.types.RichBlockVideo`
+    - :obj:`~kirugram.types.RichBlockVoiceNote`
+    - :obj:`~kirugram.types.RichBlockThinking`
+    - :obj:`~kirugram.types.RichBlockUnsupported`
     """
 
     def __init__(self):
@@ -110,7 +110,7 @@ class RichBlock(Object):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         rich_block: raw.base.PageBlock,
         photos: dict[int, raw.base.Photo] | None = None,
         documents: dict[int, raw.base.Document] | None = None,
@@ -400,10 +400,10 @@ class RichBlockCaption(RichBlock):
     """Caption of a rich formatted block.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             Block caption.
 
-        credit (:obj:`~pyrogram.types.RichText`, *optional*):
+        credit (:obj:`~kirugram.types.RichText`, *optional*):
             Block credit which corresponds to the HTML tag <cite>.
     """
 
@@ -425,7 +425,7 @@ class RichBlockCaption(RichBlock):
                 credit=await types.RichText._parse(client, caption.credit),
             )
 
-    async def write(self, client: pyrogram.Client) -> raw.types.PageCaption:
+    async def write(self, client: kirugram.Client) -> raw.types.PageCaption:
         return raw.types.PageCaption(
             text=await types.RichText._write(client, self.text),
             credit=await types.RichText._write(client, self.credit),
@@ -436,7 +436,7 @@ class RichBlockTableCell(RichBlock):
     """Cell in a table.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`, *optional*):
+        text (:obj:`~kirugram.types.RichText`, *optional*):
             Text in the cell.
             If omitted, then the cell is invisible.
 
@@ -499,7 +499,7 @@ class RichBlockTableCell(RichBlock):
             valign=valign,
         )
 
-    async def write(self, client: pyrogram.Client) -> raw.types.PageTableCell:
+    async def write(self, client: kirugram.Client) -> raw.types.PageTableCell:
         text = await types.RichText._write(client, self.text) if self.text is not None else None
 
         return raw.types.PageTableCell(
@@ -521,7 +521,7 @@ class RichBlockListItem(RichBlock):
         label (``str``):
             Label of the item.
 
-        blocks (List of :obj:`pyrogram.types.RichBlock`):
+        blocks (List of :obj:`kirugram.types.RichBlock`):
             The content of the item.
 
         has_checkbox (``bool``, *optional*):
@@ -560,7 +560,7 @@ class RichBlockListItem(RichBlock):
 
     @staticmethod
     async def _parse_list_item(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         list_item: raw.base.PageListItem | raw.base.PageListOrderedItem,
         photos: dict[int, raw.base.Photo] | None = None,
         documents: dict[int, raw.base.Document] | None = None,
@@ -637,7 +637,7 @@ class RichBlockParagraph(RichBlock):
     """A text paragraph, corresponding to the HTML tag ``<p>``.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             Text of the block.
     """
 
@@ -654,7 +654,7 @@ class RichBlockSectionHeading(RichBlock):
     """A section heading, corresponding to the HTML tags ``<h1>``, ``<h2>``, ``<h3>``, ``<h4>``, ``<h5>``, or ``<h6>``.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             Text of the block.
 
         size (``int``):
@@ -677,7 +677,7 @@ class RichBlockPreformatted(RichBlock):
     """A preformatted text block, corresponding to the nested HTML tags ``<pre>`` and ``<code>``.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             Text of the block.
 
         language (``str``, *optional*):
@@ -699,7 +699,7 @@ class RichBlockFooter(RichBlock):
     """A footer, corresponding to the HTML tag ``<footer>``.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             Text of the block.
     """
 
@@ -748,7 +748,7 @@ class RichBlockList(RichBlock):
     """A list of blocks, corresponding to the HTML tag ``<ul>`` or ``<ol>`` with multiple nested tags ``<li>``.
 
     Parameters:
-        items (List of :obj:`pyrogram.types.RichBlockListItem`):
+        items (List of :obj:`kirugram.types.RichBlockListItem`):
             Items of the list.
     """
 
@@ -762,10 +762,10 @@ class RichBlockBlockQuotation(RichBlock):
     """A block quotation, corresponding to the HTML tag ``<blockquote>``.
 
     Parameters:
-        blocks (List of :obj:`pyrogram.types.RichBlock`):
+        blocks (List of :obj:`kirugram.types.RichBlock`):
             Content of the block.
 
-        credit (:obj:`~pyrogram.types.RichText`, *optional*):
+        credit (:obj:`~kirugram.types.RichText`, *optional*):
             Credit of the block.
     """
 
@@ -780,10 +780,10 @@ class RichBlockExpandableBlockQuotation(RichBlock):
     """A block quotation, corresponding to the HTML tag ``<blockquote>`` with custom attribute ``"expandable"``.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             Content of the block.
 
-        credit (:obj:`~pyrogram.types.RichText`, *optional*):
+        credit (:obj:`~kirugram.types.RichText`, *optional*):
             Credit of the block.
     """
 
@@ -798,10 +798,10 @@ class RichBlockPullQuotation(RichBlock):
     """A quotation with centered text, loosely corresponding to the HTML tag ``<aside>``.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             Text of the block.
 
-        credit (:obj:`~pyrogram.types.RichText`, *optional*):
+        credit (:obj:`~kirugram.types.RichText`, *optional*):
             Credit of the block.
     """
 
@@ -816,10 +816,10 @@ class RichBlockCollage(RichBlock):
     """A collage, corresponding to the custom HTML tag ``<tg-collage>``.
 
     Parameters:
-        blocks (List of :obj:`~pyrogram.types.RichBlock`):
+        blocks (List of :obj:`~kirugram.types.RichBlock`):
             Elements of the collage.
 
-        caption (:obj:`~pyrogram.types.RichBlockCaption`, *optional*):
+        caption (:obj:`~kirugram.types.RichBlockCaption`, *optional*):
             Caption of the block.
     """
 
@@ -836,10 +836,10 @@ class RichBlockSlideshow(RichBlock):
     """A slideshow, corresponding to the custom HTML tag ``<tg-slideshow>``.
 
     Parameters:
-        blocks (List of :obj:`~pyrogram.types.RichBlock`):
+        blocks (List of :obj:`~kirugram.types.RichBlock`):
             Elements of the slideshow.
 
-        caption (:obj:`~pyrogram.types.RichBlockCaption`, *optional*):
+        caption (:obj:`~kirugram.types.RichBlockCaption`, *optional*):
             Caption of the block.
     """
 
@@ -856,7 +856,7 @@ class RichBlockTable(RichBlock):
     """A table, corresponding to the HTML tag ``<table>``.
 
     Parameters:
-        cells (List of List of :obj:`~pyrogram.types.RichBlockTableCell`):
+        cells (List of List of :obj:`~kirugram.types.RichBlockTableCell`):
             Cells of the table.
 
         is_bordered (``bool``, *optional*):
@@ -868,7 +868,7 @@ class RichBlockTable(RichBlock):
         is_compact (``bool``, *optional*):
             True, if the table is compact.
 
-        caption (:obj:`~pyrogram.types.RichText`, *optional*):
+        caption (:obj:`~kirugram.types.RichText`, *optional*):
             Caption of the table.
     """
 
@@ -916,10 +916,10 @@ class RichBlockDetails(RichBlock):
     """An expandable block for details disclosure, corresponding to the HTML tag ``<details>``.
 
     Parameters:
-        summary (:obj:`~pyrogram.types.RichText`):
+        summary (:obj:`~kirugram.types.RichText`):
             Always shown summary of the block.
 
-        blocks (List of :obj:`~pyrogram.types.RichBlock`):
+        blocks (List of :obj:`~kirugram.types.RichBlock`):
             Content of the block.
 
         is_open (``bool``, *optional*):
@@ -943,7 +943,7 @@ class RichBlockMap(RichBlock):
     """A block with a map, corresponding to the custom HTML tag ``<tg-map>``.
 
     Parameters:
-        location (:obj:`~pyrogram.types.Location`):
+        location (:obj:`~kirugram.types.Location`):
             Location of the center of the map.
 
         zoom (``int``):
@@ -955,7 +955,7 @@ class RichBlockMap(RichBlock):
         height (``int``):
             Expected height of the map.
 
-        caption (:obj:`~pyrogram.types.RichBlockCaption`, *optional*):
+        caption (:obj:`~kirugram.types.RichBlockCaption`, *optional*):
             Caption of the block.
     """
 
@@ -980,7 +980,7 @@ class RichBlockButtons(RichBlock):
     """A block containing a list of buttons that are shown in one row, corresponding to the custom HTML tag ``<tg-button-row>``.
 
     Parameters:
-        buttons (List of :obj:`~pyrogram.types.RichMessageButton`):
+        buttons (List of :obj:`~kirugram.types.RichMessageButton`):
             The buttons.
 
         align (``str``, *optional*):
@@ -1003,13 +1003,13 @@ class RichBlockAnimation(RichBlock):
     """A block with an animation, corresponding to the HTML tag ``<video>``.
 
     Parameters:
-        animation (:obj:`~pyrogram.types.Animation`):
+        animation (:obj:`~kirugram.types.Animation`):
             The animation.
 
         has_spoiler (``bool``, *optional*):
             True, if the media preview is covered by a spoiler animation.
 
-        caption (:obj:`~pyrogram.types.RichBlockCaption`, *optional*):
+        caption (:obj:`~kirugram.types.RichBlockCaption`, *optional*):
             Caption of the block.
     """
 
@@ -1030,10 +1030,10 @@ class RichBlockAudio(RichBlock):
     """A block with a music file, corresponding to the HTML tag ``<audio>``.
 
     Parameters:
-        audio (:obj:`~pyrogram.types.Audio`):
+        audio (:obj:`~kirugram.types.Audio`):
             The audio.
 
-        caption (:obj:`~pyrogram.types.RichBlockCaption`, *optional*):
+        caption (:obj:`~kirugram.types.RichBlockCaption`, *optional*):
             Caption of the block.
     """
 
@@ -1048,10 +1048,10 @@ class RichBlockDocument(RichBlock):
     """A block with a general file, corresponding to the custom HTML tag ``<tg-document>``.
 
     Parameters:
-        document (:obj:`~pyrogram.types.Document`):
+        document (:obj:`~kirugram.types.Document`):
             The document.
 
-        caption (:obj:`~pyrogram.types.RichBlockCaption`, *optional*):
+        caption (:obj:`~kirugram.types.RichBlockCaption`, *optional*):
             Caption of the block.
     """
 
@@ -1070,13 +1070,13 @@ class RichBlockPhoto(RichBlock):
     """A block with a photo, corresponding to the HTML tag ``<photo>``.
 
     Parameters:
-        photo (:obj:`~pyrogram.types.Photo`):
+        photo (:obj:`~kirugram.types.Photo`):
             The photo.
 
         has_spoiler (``bool``, *optional*):
             True, if the media preview is covered by a spoiler animation.
 
-        caption (:obj:`~pyrogram.types.RichBlockCaption`, *optional*):
+        caption (:obj:`~kirugram.types.RichBlockCaption`, *optional*):
             Caption of the block.
     """
 
@@ -1097,13 +1097,13 @@ class RichBlockVideo(RichBlock):
     """A block with a video, corresponding to the HTML tag ``<video>``.
 
     Parameters:
-        video (:obj:`~pyrogram.types.Video`):
+        video (:obj:`~kirugram.types.Video`):
             The video.
 
         has_spoiler (``bool``, *optional*):
             True, if the media preview is covered by a spoiler animation.
 
-        caption (:obj:`~pyrogram.types.RichBlockCaption`, *optional*):
+        caption (:obj:`~kirugram.types.RichBlockCaption`, *optional*):
             Caption of the block.
     """
 
@@ -1124,10 +1124,10 @@ class RichBlockVoiceNote(RichBlock):
     """A block with a voice note, corresponding to the HTML tag ``<audio>``.
 
     Parameters:
-        voice_note (:obj:`~pyrogram.types.Voice`):
+        voice_note (:obj:`~kirugram.types.Voice`):
             The voice note.
 
-        caption (:obj:`~pyrogram.types.RichBlockCaption`, *optional*):
+        caption (:obj:`~kirugram.types.RichBlockCaption`, *optional*):
             Caption of the block.
     """
 
@@ -1140,11 +1140,11 @@ class RichBlockVoiceNote(RichBlock):
 
 class RichBlockThinking(RichBlock):
     """A block with a "Thinking..." placeholder, corresponding to the custom HTML tag ``<tg-thinking>``.
-    The block may be used only in :meth:`~pyrogram.Client.send_rich_message_draft`, therefore it can't be received in messages.
+    The block may be used only in :meth:`~kirugram.Client.send_rich_message_draft`, therefore it can't be received in messages.
     See https://t.me/addemoji/AIActions for examples of custom emoji, which are recommended for usage in the block.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             Text of the block.
             See https://t.me/addemoji/AIActions for examples of custom emoji, which are recommended for usage in the block.
     """

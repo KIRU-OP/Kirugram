@@ -1,26 +1,26 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
+import kirugram
 
-from pyrogram import raw, types, errors
+from kirugram import raw, types, errors
 from ..object import Object
 
 
@@ -37,7 +37,7 @@ class GiveawayCompleted(Object):
         giveaway_message_id (``int``, *optional*):
             Identifier of the message with the giveaway in the chat.
 
-        giveaway_message (:obj:`~pyrogram.types.Message`, *optional*):
+        giveaway_message (:obj:`~kirugram.types.Message`, *optional*):
             Message with the giveaway that was completed, if it wasn't deleted.
 
         is_star_giveaway (``bool``, *optional*):
@@ -48,7 +48,7 @@ class GiveawayCompleted(Object):
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         winner_count: int,
         unclaimed_prize_count: int | None = None,
         giveaway_message_id: int | None = None,

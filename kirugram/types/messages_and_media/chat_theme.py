@@ -1,25 +1,25 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-from pyrogram import raw, types
-import pyrogram
+from kirugram import raw, types
+import kirugram
 
 from ..object import Object
 
@@ -32,7 +32,7 @@ class ChatTheme(Object):
             Theme name.
             For themes based on an emoji.
 
-        gift (:obj:`~pyrogram.types.Gift`, *optional*):
+        gift (:obj:`~kirugram.types.Gift`, *optional*):
             Gift that was used to change the theme.
             For themes based on an upgraded gifts.
     """
@@ -44,7 +44,7 @@ class ChatTheme(Object):
         self.gift = gift
 
     @staticmethod
-    async def _parse(client: pyrogram.Client, theme: raw.base.ChatTheme) -> ChatTheme:
+    async def _parse(client: kirugram.Client, theme: raw.base.ChatTheme) -> ChatTheme:
         if isinstance(theme, raw.types.ChatTheme):
             return ChatTheme(name=theme.emoticon)
         elif isinstance(theme, raw.types.ChatThemeUniqueGift):

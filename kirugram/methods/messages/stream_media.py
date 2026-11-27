@@ -1,22 +1,22 @@
-#  Kurigram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #  Copyright (C) 2024-present KurimuzonAkuma <https://github.com/KurimuzonAkuma>
 #
-#  This file is part of Kurigram.
+#  This file is part of Kirugram.
 #
-#  Kurigram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Kurigram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Kurigram. If not, see <https://www.gnu.org/licenses/>.
+#  along with Kirugram. If not, see <https://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -24,9 +24,9 @@ import math
 from contextlib import aclosing
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import types
-from pyrogram.file_id import FileId
+import kirugram
+from kirugram import types
+from kirugram.file_id import FileId
 
 if TYPE_CHECKING:
     from collections.abc import AsyncGenerator
@@ -34,7 +34,7 @@ if TYPE_CHECKING:
 
 class StreamMedia:
     async def stream_media(
-        self: pyrogram.Client, message: types.Message | str, limit: int = 0, offset: int = 0
+        self: kirugram.Client, message: types.Message | str, limit: int = 0, offset: int = 0
     ) -> AsyncGenerator[bytes, None]:
         """Stream the media from a message chunk by chunk.
 
@@ -44,7 +44,7 @@ class StreamMedia:
         .. include:: /_includes/usable-by/users-bots.rst
 
         Parameters:
-            message (:obj:`~pyrogram.types.Message` | ``str``):
+            message (:obj:`~kirugram.types.Message` | ``str``):
                 Pass a Message containing the media, the media itself (message.audio, message.video, ...) or a file id
                 as string.
 

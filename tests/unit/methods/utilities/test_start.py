@@ -1,24 +1,24 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 """`start()` records the loop it runs on, and rebuilds what binds to a loop.
 
-`pyrogram/sync.py` needs a loop object to hand a coroutine to from a thread that is
+`kirugram/sync.py` needs a loop object to hand a coroutine to from a thread that is
 running none of its own, and asyncio offers no way to ask another thread which loop it
 drives.
 """
@@ -30,7 +30,7 @@ import typing
 
 import pytest
 
-from pyrogram import Client
+from kirugram import Client
 
 
 def stop_before_the_network() -> typing.NoReturn:
@@ -47,7 +47,7 @@ async def test_starting_a_client_records_the_loop_for_the_sync_bridge(
     with pytest.raises(RuntimeError, match="far enough"):
         await client.start()
 
-    # The record is private and `pyrogram/sync.py` is its only reader.
+    # The record is private and `kirugram/sync.py` is its only reader.
     assert client._loop is asyncio.get_running_loop()
 
 

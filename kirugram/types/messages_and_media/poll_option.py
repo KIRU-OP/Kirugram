@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -25,8 +25,8 @@ from ..object import Object
 if TYPE_CHECKING:
     import datetime
 
-    import pyrogram
-    from pyrogram import types
+    import kirugram
+    from kirugram import types
 
 
 class PollOption(Object):
@@ -36,10 +36,10 @@ class PollOption(Object):
         persistent_id (``str``):
             Unique identifier of the option, persistent on option addition and deletion.
 
-        text (:obj:`~pyrogram.types.FormattedText`, *optional*):
+        text (:obj:`~kirugram.types.FormattedText`, *optional*):
             Option text, 1-100 characters.
 
-        media (:obj:`~pyrogram.types.MessageContent`, *optional*):
+        media (:obj:`~kirugram.types.MessageContent`, *optional*):
             Option media.
             Currently, can be only of the types Animation, Location, Photo, Sticker, Venue, or Video without caption.
 
@@ -50,14 +50,14 @@ class PollOption(Object):
         vote_percentage (``int``, *optional*):
             The percentage of votes for this option, 0-100.
 
-        recent_voters (List of :obj:`~pyrogram.types.Chat`, *optional*):
+        recent_voters (List of :obj:`~kirugram.types.Chat`, *optional*):
             List of recent voters for the option, if the poll is non-anonymous and poll results are available.
 
-        added_by_user (:obj:`~pyrogram.types.User`, *optional*):
+        added_by_user (:obj:`~kirugram.types.User`, *optional*):
             User who added the option.
             Omitted if the option wasn't added by a user after poll creation.
 
-        added_by_chat (:obj:`~pyrogram.types.Chat`, *optional*):
+        added_by_chat (:obj:`~kirugram.types.Chat`, *optional*):
             Chat that added the option.
             Omitted if the option wasn't added by a chat after poll creation.
 
@@ -69,7 +69,7 @@ class PollOption(Object):
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         persistent_id: str,
         text: types.FormattedText | None = None,
         media: types.MessageContent | None = None,

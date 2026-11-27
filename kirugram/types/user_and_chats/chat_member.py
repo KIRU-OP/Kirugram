@@ -1,27 +1,27 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
+import kirugram
+from kirugram import enums, raw, types, utils
 
 from ..object import Object
 
@@ -33,16 +33,16 @@ class ChatMember(Object):
     """Contains information about one member of a chat.
 
     Parameters:
-        status (:obj:`~pyrogram.enums.ChatMemberStatus`):
+        status (:obj:`~kirugram.enums.ChatMemberStatus`):
             The member's status in the chat.
 
         tag (``str``, *optional*):
             Tag of the member.
 
-        user (:obj:`~pyrogram.types.User`, *optional*):
+        user (:obj:`~kirugram.types.User`, *optional*):
             Information about the user.
 
-        chat (:obj:`~pyrogram.types.Chat`, *optional*):
+        chat (:obj:`~kirugram.types.Chat`, *optional*):
             Information about the chat (useful in case of banned channel senders).
 
         joined_date (:py:obj:`~datetime.datetime`, *optional*):
@@ -57,14 +57,14 @@ class ChatMember(Object):
             Restricted and banned only.
             Date when restrictions will be lifted for this user.
 
-        invited_by (:obj:`~pyrogram.types.User`, *optional*):
+        invited_by (:obj:`~kirugram.types.User`, *optional*):
             Administrators and self member only. Information about the user who invited this member.
             In case the user joined by himself this will be the same as "user".
 
-        promoted_by (:obj:`~pyrogram.types.User`, *optional*):
+        promoted_by (:obj:`~kirugram.types.User`, *optional*):
             Administrators only. Information about the user who promoted this member as administrator.
 
-        restricted_by (:obj:`~pyrogram.types.User`, *optional*):
+        restricted_by (:obj:`~kirugram.types.User`, *optional*):
             Restricted and banned only. Information about the user who restricted or banned this member.
 
         is_member (``bool``, *optional*):
@@ -73,10 +73,10 @@ class ChatMember(Object):
         can_be_edited (``bool``, *optional*):
             True, if the you are allowed to edit administrator privileges of the user.
 
-        permissions (:obj:`~pyrogram.types.ChatPermissions`, *optional*):
+        permissions (:obj:`~kirugram.types.ChatPermissions`, *optional*):
             Restricted only. Restricted actions that a non-administrator user is allowed to take.
 
-        privileges (:obj:`~pyrogram.types.ChatAdministratorRights`, *optional*):
+        privileges (:obj:`~kirugram.types.ChatAdministratorRights`, *optional*):
             Administrators only. Privileged actions that an administrator is able to take.
 
         subscription_until_date (:py:obj:`~datetime.datetime`, *optional*):
@@ -86,7 +86,7 @@ class ChatMember(Object):
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         status: enums.ChatMemberStatus,
         tag: str | None = None,
         user: types.User | None = None,
@@ -123,7 +123,7 @@ class ChatMember(Object):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         member: raw.base.ChatParticipant | raw.base.ChannelParticipant,
         users: dict[int, raw.base.User],
         chats: dict[int, raw.base.Chat],

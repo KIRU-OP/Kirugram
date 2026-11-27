@@ -1,25 +1,25 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, types
+import kirugram
+from kirugram import raw, types
 
 from ..object import Object
 
@@ -28,13 +28,13 @@ class MessageReactions(Object):
     """Contains information about a message reactions.
 
     Parameters:
-        reactions (List of :obj:`~pyrogram.types.Reaction`):
+        reactions (List of :obj:`~kirugram.types.Reaction`):
             Reactions list.
 
         are_tags (``bool``, *optional*):
             True, if the reactions are tags and Telegram Premium users can filter messages by them.
 
-        paid_reactors (List of :obj:`~pyrogram.types.PaidReactor`, *optional*):
+        paid_reactors (List of :obj:`~kirugram.types.PaidReactor`, *optional*):
             Information about top users that added the paid reaction.
 
         can_get_added_reactions (``bool``, *optional*):
@@ -46,7 +46,7 @@ class MessageReactions(Object):
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         reactions: list[types.Reaction],
         are_tags: bool | None = None,
         paid_reactors: list[types.PaidReactor] | None = None,
@@ -61,7 +61,7 @@ class MessageReactions(Object):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         message_reactions: raw.base.MessageReactions | None,
         users: dict[int, types.User],
         chats: dict[int, types.Chat],

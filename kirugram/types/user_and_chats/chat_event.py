@@ -1,28 +1,28 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 from datetime import datetime
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
+import kirugram
+from kirugram import enums, raw, types, utils
 
 from ..object import Object
 
@@ -42,174 +42,174 @@ class ChatEvent(Object):
         date (:py:obj:`~datetime.datetime`):
             Date of the event.
 
-        member (:obj:`~pyrogram.types.Chat`):
+        member (:obj:`~kirugram.types.Chat`):
             User or chat who performed the action.
 
-        action (:obj:`~pyrogram.enums.ChatEventActionType`):
+        action (:obj:`~kirugram.enums.ChatEventActionType`):
             Event action.
             This field will contain the enumeration type of the chat event action.
             You can use ``action = getattr(event, event.action.value)`` to access the chat event.
 
-        message_edited (:obj:`~pyrogram.types.ChatEventActionMessageEdited`, *optional*):
+        message_edited (:obj:`~kirugram.types.ChatEventActionMessageEdited`, *optional*):
             A message was edited.
 
-        message_deleted (:obj:`~pyrogram.types.ChatEventActionMessageDeleted`, *optional*):
+        message_deleted (:obj:`~kirugram.types.ChatEventActionMessageDeleted`, *optional*):
             A message was deleted.
 
-        message_pinned (:obj:`~pyrogram.types.ChatEventActionMessagePinned`, *optional*):
+        message_pinned (:obj:`~kirugram.types.ChatEventActionMessagePinned`, *optional*):
             A message was pinned.
 
-        message_unpinned (:obj:`~pyrogram.types.ChatEventActionMessageUnpinned`, *optional*):
+        message_unpinned (:obj:`~kirugram.types.ChatEventActionMessageUnpinned`, *optional*):
             A message was unpinned.
 
-        poll_stopped (:obj:`~pyrogram.types.ChatEventActionPollStopped`, *optional*):
+        poll_stopped (:obj:`~kirugram.types.ChatEventActionPollStopped`, *optional*):
             A poll in a message was stopped.
 
-        member_joined (:obj:`~pyrogram.types.ChatEventActionMemberJoined`, *optional*):
+        member_joined (:obj:`~kirugram.types.ChatEventActionMemberJoined`, *optional*):
             A new member joined the chat.
 
-        member_joined_by_invite_link (:obj:`~pyrogram.types.ChatEventActionMemberJoinedByInviteLink`, *optional*):
+        member_joined_by_invite_link (:obj:`~kirugram.types.ChatEventActionMemberJoinedByInviteLink`, *optional*):
             A new member joined the chat via an invite link.
 
-        member_joined_by_request (:obj:`~pyrogram.types.ChatEventActionMemberJoinedByRequest`, *optional*):
+        member_joined_by_request (:obj:`~kirugram.types.ChatEventActionMemberJoinedByRequest`, *optional*):
             A new member was accepted to the chat by an administrator.
 
-        member_invited (:obj:`~pyrogram.types.ChatEventActionMemberInvited`, *optional*):
+        member_invited (:obj:`~kirugram.types.ChatEventActionMemberInvited`, *optional*):
             A new chat member was invited.
 
-        member_left (:obj:`~pyrogram.types.ChatEventActionMemberLeft`, *optional*):
+        member_left (:obj:`~kirugram.types.ChatEventActionMemberLeft`, *optional*):
             A member left the chat.
 
-        member_promoted (:obj:`~pyrogram.types.ChatEventActionMemberPromoted`, *optional*):
+        member_promoted (:obj:`~kirugram.types.ChatEventActionMemberPromoted`, *optional*):
             A chat member has gained/lost administrator status, or the list of their administrator privileges has changed.
 
-        member_restricted (:obj:`~pyrogram.types.ChatEventActionMemberRestricted`, *optional*):
+        member_restricted (:obj:`~kirugram.types.ChatEventActionMemberRestricted`, *optional*):
             A chat member was restricted/unrestricted or banned/unbanned, or the list of their restrictions has changed.
 
-        member_tag_changed (:obj:`~pyrogram.types.ChatEventActionMemberTagChanged`, *optional*):
+        member_tag_changed (:obj:`~kirugram.types.ChatEventActionMemberTagChanged`, *optional*):
             A chat member tag has been changed.
 
-        member_subscription_extended (:obj:`~pyrogram.types.ChatEventActionMemberSubscriptionExtended`, *optional*):
+        member_subscription_extended (:obj:`~kirugram.types.ChatEventActionMemberSubscriptionExtended`, *optional*):
             A chat member extended their subscription to the chat.
 
-        available_reactions_changed (:obj:`~pyrogram.types.ChatEventActionAvailableReactionsChanged`, *optional*):
+        available_reactions_changed (:obj:`~kirugram.types.ChatEventActionAvailableReactionsChanged`, *optional*):
             The chat available reactions were changed.
 
-        background_changed (:obj:`~pyrogram.types.ChatEventActionBackgroundChanged`, *optional*):
+        background_changed (:obj:`~kirugram.types.ChatEventActionBackgroundChanged`, *optional*):
             The chat background was changed.
 
-        description_changed (:obj:`~pyrogram.types.ChatEventActionDescriptionChanged`, *optional*):
+        description_changed (:obj:`~kirugram.types.ChatEventActionDescriptionChanged`, *optional*):
             The chat description was changed.
 
-        emoji_status_changed (:obj:`~pyrogram.types.ChatEventActionEmojiStatusChanged`, *optional*):
+        emoji_status_changed (:obj:`~kirugram.types.ChatEventActionEmojiStatusChanged`, *optional*):
             The chat emoji status was changed.
 
-        linked_chat_changed (:obj:`~pyrogram.types.ChatEventActionLinkedChatChanged`, *optional*):
+        linked_chat_changed (:obj:`~kirugram.types.ChatEventActionLinkedChatChanged`, *optional*):
             The linked chat of a supergroup was changed.
 
-        location_changed (:obj:`~pyrogram.types.ChatEventActionLocationChanged`, *optional*):
+        location_changed (:obj:`~kirugram.types.ChatEventActionLocationChanged`, *optional*):
             The supergroup location was changed.
 
-        message_auto_delete_time_changed (:obj:`~pyrogram.types.ChatEventActionMessageAutoDeleteTimeChanged`, *optional*):
+        message_auto_delete_time_changed (:obj:`~kirugram.types.ChatEventActionMessageAutoDeleteTimeChanged`, *optional*):
             The message auto-delete timer was changed.
 
-        permissions_changed (:obj:`~pyrogram.types.ChatEventActionPermissionsChanged`, *optional*):
+        permissions_changed (:obj:`~kirugram.types.ChatEventActionPermissionsChanged`, *optional*):
             The chat permissions were changed.
 
-        photo_changed (:obj:`~pyrogram.types.ChatEventActionPhotoChanged`, *optional*):
+        photo_changed (:obj:`~kirugram.types.ChatEventActionPhotoChanged`, *optional*):
             The chat photo was changed.
 
-        slow_mode_delay_changed (:obj:`~pyrogram.types.ChatEventActionSlowModeDelayChanged`, *optional*):
+        slow_mode_delay_changed (:obj:`~kirugram.types.ChatEventActionSlowModeDelayChanged`, *optional*):
             The slow_mode_delay setting of a supergroup was changed.
 
-        sticker_set_changed (:obj:`~pyrogram.types.ChatEventActionStickerSetChanged`, *optional*):
+        sticker_set_changed (:obj:`~kirugram.types.ChatEventActionStickerSetChanged`, *optional*):
             The supergroup sticker set was changed.
 
-        custom_emoji_sticker_set_changed (:obj:`~pyrogram.types.ChatEventActionCustomEmojiStickerSetChanged`, *optional*):
+        custom_emoji_sticker_set_changed (:obj:`~kirugram.types.ChatEventActionCustomEmojiStickerSetChanged`, *optional*):
             The supergroup sticker set with allowed custom emoji was changed.
 
-        title_changed (:obj:`~pyrogram.types.ChatEventActionTitleChanged`, *optional*):
+        title_changed (:obj:`~kirugram.types.ChatEventActionTitleChanged`, *optional*):
             The chat title was changed.
 
-        username_changed (:obj:`~pyrogram.types.ChatEventActionUsernameChanged`, *optional*):
+        username_changed (:obj:`~kirugram.types.ChatEventActionUsernameChanged`, *optional*):
             The chat editable username was changed.
 
-        active_usernames_changed (:obj:`~pyrogram.types.ChatEventActionActiveUsernamesChanged`, *optional*):
+        active_usernames_changed (:obj:`~kirugram.types.ChatEventActionActiveUsernamesChanged`, *optional*):
             The chat active usernames were changed.
 
-        accent_color_changed (:obj:`~pyrogram.types.ChatEventActionAccentColorChanged`, *optional*):
+        accent_color_changed (:obj:`~kirugram.types.ChatEventActionAccentColorChanged`, *optional*):
             The chat accent color or background custom emoji were changed.
 
-        profile_accent_color_changed (:obj:`~pyrogram.types.ChatEventActionProfileAccentColorChanged`, *optional*):
+        profile_accent_color_changed (:obj:`~kirugram.types.ChatEventActionProfileAccentColorChanged`, *optional*):
             The chat's profile accent color or profile background custom emoji were changed.
 
-        has_protected_content_toggled (:obj:`~pyrogram.types.ChatEventActionHasProtectedContentToggled`, *optional*):
+        has_protected_content_toggled (:obj:`~kirugram.types.ChatEventActionHasProtectedContentToggled`, *optional*):
             The has_protected_content setting of a chat was toggled.
 
-        invites_toggled (:obj:`~pyrogram.types.ChatEventActionInvitesToggled`, *optional*):
+        invites_toggled (:obj:`~kirugram.types.ChatEventActionInvitesToggled`, *optional*):
             The can_invite_users permission of a supergroup chat was toggled.
 
-        is_all_history_available_toggled (:obj:`~pyrogram.types.ChatEventActionIsAllHistoryAvailableToggled`, *optional*):
+        is_all_history_available_toggled (:obj:`~kirugram.types.ChatEventActionIsAllHistoryAvailableToggled`, *optional*):
             The is_all_history_available setting of a supergroup was toggled.
 
-        has_aggressive_anti_spam_enabled_toggled (:obj:`~pyrogram.types.ChatEventActionHasAggressiveAntiSpamEnabledToggled`, *optional*):
+        has_aggressive_anti_spam_enabled_toggled (:obj:`~kirugram.types.ChatEventActionHasAggressiveAntiSpamEnabledToggled`, *optional*):
             The has_aggressive_anti_spam_enabled setting of a supergroup was toggled.
 
-        sign_messages_toggled (:obj:`~pyrogram.types.ChatEventActionSignMessagesToggled`, *optional*):
+        sign_messages_toggled (:obj:`~kirugram.types.ChatEventActionSignMessagesToggled`, *optional*):
             The sign_messages setting of a channel was toggled.
 
-        show_message_sender_toggled (:obj:`~pyrogram.types.ChatEventActionShowMessageSenderToggled`, *optional*):
+        show_message_sender_toggled (:obj:`~kirugram.types.ChatEventActionShowMessageSenderToggled`, *optional*):
             The show_message_sender setting of a channel was toggled.
 
-        automatic_translation_toggled (:obj:`~pyrogram.types.ChatEventActionAutomaticTranslationToggled`, *optional*):
+        automatic_translation_toggled (:obj:`~kirugram.types.ChatEventActionAutomaticTranslationToggled`, *optional*):
             The has_automatic_translation setting of a channel was toggled.
 
-        invite_link_edited (:obj:`~pyrogram.types.ChatEventActionInviteLinkEdited`, *optional*):
+        invite_link_edited (:obj:`~kirugram.types.ChatEventActionInviteLinkEdited`, *optional*):
             A chat invite link was edited.
 
-        invite_link_revoked (:obj:`~pyrogram.types.ChatEventActionInviteLinkRevoked`, *optional*):
+        invite_link_revoked (:obj:`~kirugram.types.ChatEventActionInviteLinkRevoked`, *optional*):
             A chat invite link was revoked.
 
-        invite_link_deleted (:obj:`~pyrogram.types.ChatEventActionInviteLinkDeleted`, *optional*):
+        invite_link_deleted (:obj:`~kirugram.types.ChatEventActionInviteLinkDeleted`, *optional*):
             A chat invite link was deleted.
 
-        video_chat_created (:obj:`~pyrogram.types.ChatEventActionVideoChatCreated`, *optional*):
+        video_chat_created (:obj:`~kirugram.types.ChatEventActionVideoChatCreated`, *optional*):
             A video chat was created.
 
-        video_chat_ended (:obj:`~pyrogram.types.ChatEventActionVideoChatEnded`, *optional*):
+        video_chat_ended (:obj:`~kirugram.types.ChatEventActionVideoChatEnded`, *optional*):
             A video chat was ended.
 
-        video_chat_mute_new_participants_toggled (:obj:`~pyrogram.types.ChatEventActionVideoChatMuteNewParticipantsToggled`, *optional*):
+        video_chat_mute_new_participants_toggled (:obj:`~kirugram.types.ChatEventActionVideoChatMuteNewParticipantsToggled`, *optional*):
             The mute_new_participants setting of a video chat was toggled.
 
-        video_chat_participant_is_muted_toggled (:obj:`~pyrogram.types.ChatEventActionVideoChatParticipantIsMutedToggled`, *optional*):
+        video_chat_participant_is_muted_toggled (:obj:`~kirugram.types.ChatEventActionVideoChatParticipantIsMutedToggled`, *optional*):
             A video chat participant was muted or unmuted.
 
-        video_chat_participant_volume_level_changed (:obj:`~pyrogram.types.ChatEventActionVideoChatParticipantVolumeLevelChanged`, *optional*):
+        video_chat_participant_volume_level_changed (:obj:`~kirugram.types.ChatEventActionVideoChatParticipantVolumeLevelChanged`, *optional*):
             A video chat participant volume level was changed.
 
-        is_forum_toggled (:obj:`~pyrogram.types.ChatEventActionIsForumToggled`, *optional*):
+        is_forum_toggled (:obj:`~kirugram.types.ChatEventActionIsForumToggled`, *optional*):
             The is_forum setting of a supergroup was toggled.
 
-        forum_topic_created (:obj:`~pyrogram.types.ChatEventActionForumTopicCreated`, *optional*):
+        forum_topic_created (:obj:`~kirugram.types.ChatEventActionForumTopicCreated`, *optional*):
             A new forum topic was created.
 
-        forum_topic_edited (:obj:`~pyrogram.types.ChatEventActionForumTopicEdited`, *optional*):
+        forum_topic_edited (:obj:`~kirugram.types.ChatEventActionForumTopicEdited`, *optional*):
             A forum topic was edited.
 
-        forum_topic_toggle_is_closed (:obj:`~pyrogram.types.ChatEventActionForumTopicToggleIsClosed`, *optional*):
+        forum_topic_toggle_is_closed (:obj:`~kirugram.types.ChatEventActionForumTopicToggleIsClosed`, *optional*):
             A forum topic was closed or reopened.
 
-        forum_topic_toggle_is_hidden (:obj:`~pyrogram.types.ChatEventActionForumTopicToggleIsHidden`, *optional*):
+        forum_topic_toggle_is_hidden (:obj:`~kirugram.types.ChatEventActionForumTopicToggleIsHidden`, *optional*):
             The General forum topic was hidden or unhidden.
 
-        forum_topic_deleted (:obj:`~pyrogram.types.ChatEventActionForumTopicDeleted`, *optional*):
+        forum_topic_deleted (:obj:`~kirugram.types.ChatEventActionForumTopicDeleted`, *optional*):
             A forum topic was deleted.
 
-        forum_topic_pinned (:obj:`~pyrogram.types.ChatEventActionForumTopicPinned`, *optional*):
+        forum_topic_pinned (:obj:`~kirugram.types.ChatEventActionForumTopicPinned`, *optional*):
             A pinned forum topic was changed.
 
-        raw (:obj:`~pyrogram.raw.base.ChannelAdminLogEvent`, *optional*):
+        raw (:obj:`~kirugram.raw.base.ChannelAdminLogEvent`, *optional*):
             A raw object.
     """
 
@@ -348,7 +348,7 @@ class ChatEvent(Object):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         event: raw.base.ChannelAdminLogEvent,
         users: dict[int, raw.base.User],
         chats: dict[int, raw.base.Chat],

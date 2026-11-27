@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -28,13 +28,13 @@ import os
 from hashlib import md5
 from typing import TYPE_CHECKING, BinaryIO, overload
 
-import pyrogram
-from pyrogram import StopTransmission, raw
+import kirugram
+from kirugram import StopTransmission, raw
 
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-    from pyrogram._typing import PathType
+    from kirugram._typing import PathType
 
 log = logging.getLogger(__name__)
 
@@ -48,7 +48,7 @@ class SaveFile:
     #  wider than `Client`, and an overload the implementation does not accept is an error.
     @overload
     async def save_file(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         path: None,
         file_id: int | None = None,
         file_part: int = 0,
@@ -58,7 +58,7 @@ class SaveFile:
 
     @overload
     async def save_file(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         path: PathType | BinaryIO,
         file_id: int,
         file_part: int = 0,
@@ -68,7 +68,7 @@ class SaveFile:
 
     @overload
     async def save_file(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         path: PathType | BinaryIO,
         file_id: None = None,
         file_part: int = 0,
@@ -77,7 +77,7 @@ class SaveFile:
     ) -> raw.types.InputFile | raw.types.InputFileBig: ...
 
     async def save_file(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         path: PathType | BinaryIO | None,
         file_id: int | None = None,
         file_part: int = 0,
@@ -90,7 +90,7 @@ class SaveFile:
         .. note::
 
             This is a utility method intended to be used **only** when working with raw
-            :obj:`functions <pyrogram.raw.functions>` (i.e: a Telegram API method you wish to use which is not
+            :obj:`functions <kirugram.raw.functions>` (i.e: a Telegram API method you wish to use which is not
             available yet in the Client class as an easy-to-use method).
 
         .. include:: /_includes/usable-by/users-bots.rst

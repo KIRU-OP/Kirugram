@@ -12,9 +12,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 EXCLUDED = {"COPYING", "COPYING.lesser", "NOTICE", "README.md", "pyproject.toml", "uv.lock"}
 PATTERNS = (
-    (re.compile(r"(?<![A-Za-z0-9_./@-])pyrogram(?![A-Za-z0-9_-])"), "kirugram"),
-    (re.compile(r"(?<![A-Za-z0-9_./@-])Pyrogram(?![A-Za-z0-9_-])"), "Kirugram"),
-    (re.compile(r"(?<![A-Za-z0-9_./@-])Kurigram(?![A-Za-z0-9_-])"), "Kirugram"),
+    (re.compile(r"(?<![A-Za-z0-9_./@-])kirugram(?![A-Za-z0-9_-])"), "kirugram"),
+    (re.compile(r"(?<![A-Za-z0-9_./@-])Kirugram(?![A-Za-z0-9_-])"), "Kirugram"),
+    (re.compile(r"(?<![A-Za-z0-9_./@-])Kirugram(?![A-Za-z0-9_-])"), "Kirugram"),
 )
 
 changed = []

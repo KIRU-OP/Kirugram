@@ -1,25 +1,25 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import enums, raw, types
+import kirugram
+from kirugram import enums, raw, types
 
 from ..object import Object
 
@@ -36,7 +36,7 @@ class InlineKeyboardButton(Object):
         icon_custom_emoji_id (``str``, *optional*):
             Identifier of the custom emoji that must be shown on the button.
 
-        style (:obj:`~pyrogram.enums.ButtonStyle`, *optional*):
+        style (:obj:`~kirugram.enums.ButtonStyle`, *optional*):
             Style of the button.
 
         url (``str``, *optional*):
@@ -48,13 +48,13 @@ class InlineKeyboardButton(Object):
         requires_password (``bool``, *optional*):
             A button that asks for the 2-step verification password of the current user and then sends a callback query to a bot Data to be sent to the bot via a callback query.
 
-        web_app (:obj:`~pyrogram.types.WebAppInfo`, *optional*):
+        web_app (:obj:`~kirugram.types.WebAppInfo`, *optional*):
             Description of the `Web App <https://core.telegram.org/bots/webapps>`_ that will be launched when the user
             presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the
-            method :meth:`~pyrogram.Client.answer_web_app_query`. Available only in private chats between a user and the
+            method :meth:`~kirugram.Client.answer_web_app_query`. Available only in private chats between a user and the
             bot.
 
-        login_url (:obj:`~pyrogram.types.LoginUrl`, *optional*):
+        login_url (:obj:`~kirugram.types.LoginUrl`, *optional*):
              An HTTP URL used to automatically authorize the user. Can be used as a replacement for
              the `Telegram Login Widget <https://core.telegram.org/widgets/login>`_.
 
@@ -75,27 +75,27 @@ class InlineKeyboardButton(Object):
             quick way for the user to open your bot in inline mode in the same chat – good for selecting something
             from multiple options.
 
-        switch_inline_query_chosen_chat (:obj:`~pyrogram.types.SwitchInlineQueryChosenChat`, *optional*):
+        switch_inline_query_chosen_chat (:obj:`~kirugram.types.SwitchInlineQueryChosenChat`, *optional*):
             If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert
             the bot's username and the specified inline query in the input field.
             Not supported for messages sent in channel direct messages chats and on behalf of a business account.
 
-        copy_text (:obj:`~pyrogram.types.CopyTextButton` | ``str``, *optional*):
+        copy_text (:obj:`~kirugram.types.CopyTextButton` | ``str``, *optional*):
             A button that copies specified text to clipboard.
             Limited to 256 characters.
 
-        callback_game (:obj:`~pyrogram.types.CallbackGame`, *optional*):
+        callback_game (:obj:`~kirugram.types.CallbackGame`, *optional*):
             Description of the game that will be launched when the user presses the button.
             **NOTE**: This type of button **must** always be the first button in the first row.
 
         pay (``bool``, *optional*):
             Pass True, to send a Pay button.
             Substrings `⭐` and `XTR` in the buttons's text will be replaced with a Telegram Star icon.
-            Available in :meth:`~pyrogram.Client.send_invoice`.
+            Available in :meth:`~kirugram.Client.send_invoice`.
 
             **NOTE**: This type of button **must** always be the first button in the first row and can only be used in invoice messages.
 
-        disabled (:obj:`~pyrogram.types.DisabledButton`, *optional*):
+        disabled (:obj:`~kirugram.types.DisabledButton`, *optional*):
             If set, then the button is disabled and does nothing.
     """
 
@@ -266,7 +266,7 @@ class InlineKeyboardButton(Object):
                 icon_custom_emoji_id=icon_custom_emoji_id,
             )
 
-    async def write(self, client: pyrogram.Client) -> raw.types.KeyboardInlineButton:
+    async def write(self, client: kirugram.Client) -> raw.types.KeyboardInlineButton:
         if self.style is enums.ButtonStyle.LINK:
             # `keyboardButtonStyle` carries no `link` flag, so the style would go out empty.
             #  `compiler/api/source/main_api.tl:2188`

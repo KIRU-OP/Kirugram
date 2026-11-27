@@ -1,27 +1,27 @@
-#  Kurigram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #  Copyright (C) 2024-present KurimuzonAkuma <https://github.com/KurimuzonAkuma>
 #
-#  This file is part of Kurigram.
+#  This file is part of Kirugram.
 #
-#  Kurigram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Kurigram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Kurigram. If not, see <https://www.gnu.org/licenses/>.
+#  along with Kirugram. If not, see <https://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, types, utils
+import kirugram
+from kirugram import raw, types, utils
 
 from ..object import Object
 from ..update import Update
@@ -30,17 +30,17 @@ from ..update import Update
 class WidgetQuery(Object, Update):
     """This object represents an incoming query from a widget in a message sent by the bot or via the bot.
 
-    Use :meth:`~pyrogram.Client.answer_widget_query` to answer the query.
+    Use :meth:`~kirugram.Client.answer_widget_query` to answer the query.
     Each user can send at most 5 queries per 5 seconds to the bot from all its widgets.
 
     Parameters:
         id (``str``):
             Unique identifier for this query.
 
-        from_user (:obj:`~pyrogram.types.User`):
+        from_user (:obj:`~kirugram.types.User`):
             Sender.
 
-        chat (:obj:`~pyrogram.types.Chat`, *optional*):
+        chat (:obj:`~kirugram.types.Chat`, *optional*):
             Chat with the message containing the widget.
             Omitted if the widget is in an inline message.
 
@@ -59,7 +59,7 @@ class WidgetQuery(Object, Update):
             Can be either ``sender`` for a private chat with the inline query sender, ``private``, ``group``,
             ``supergroup``, or ``channel``.
 
-        type (:obj:`~pyrogram.types.WidgetQueryType`):
+        type (:obj:`~kirugram.types.WidgetQueryType`):
             Type of the query.
 
         data (``str`` | ``bytes``):
@@ -73,7 +73,7 @@ class WidgetQuery(Object, Update):
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         id: str,
         from_user: types.User,
         chat: types.Chat | None = None,
@@ -100,7 +100,7 @@ class WidgetQuery(Object, Update):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         query: raw.types.UpdateBotWidgetQuery | raw.types.UpdateInlineBotWidgetQuery,
         users: dict[int, raw.base.User],
         chats: dict[int, raw.base.Chat],
@@ -148,17 +148,17 @@ class WidgetQuery(Object, Update):
 class SharedWidgetQuery(Object, Update):
     """This object represents an incoming query from a forwarded message with a shared widget created by the bot.
 
-    Use :meth:`~pyrogram.Client.answer_widget_query` to answer the query.
+    Use :meth:`~kirugram.Client.answer_widget_query` to answer the query.
     Each user can send at most 5 queries per 5 seconds to the bot from all its widgets.
 
     Parameters:
         id (``str``):
             Unique identifier for this query.
 
-        from_user (:obj:`~pyrogram.types.User`):
+        from_user (:obj:`~kirugram.types.User`):
             Sender.
 
-        type (:obj:`~pyrogram.types.WidgetQueryType`):
+        type (:obj:`~kirugram.types.WidgetQueryType`):
             Type of the query.
 
         data (``str`` | ``bytes``):
@@ -171,7 +171,7 @@ class SharedWidgetQuery(Object, Update):
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         id: str,
         from_user: types.User,
         type: types.WidgetQueryType,
@@ -188,7 +188,7 @@ class SharedWidgetQuery(Object, Update):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         query: raw.types.UpdateBotWidgetCopyQuery,
         users: dict[int, raw.base.User],
         chats: dict[int, raw.base.Chat],

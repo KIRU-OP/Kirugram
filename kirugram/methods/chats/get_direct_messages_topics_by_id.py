@@ -1,28 +1,28 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import logging
 from typing import TYPE_CHECKING, overload
 
-import pyrogram
-from pyrogram import raw, types
+import kirugram
+from kirugram import raw, types
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
@@ -33,16 +33,16 @@ log = logging.getLogger(__name__)
 class GetDirectMessagesTopicsByID:
     @overload
     async def get_direct_messages_topics_by_id(
-        self: pyrogram.Client, chat_id: int | str, topic_ids: int
+        self: kirugram.Client, chat_id: int | str, topic_ids: int
     ) -> types.DirectMessagesTopic | None: ...
 
     @overload
     async def get_direct_messages_topics_by_id(
-        self: pyrogram.Client, chat_id: int | str, topic_ids: Iterable[int]
+        self: kirugram.Client, chat_id: int | str, topic_ids: Iterable[int]
     ) -> list[types.DirectMessagesTopic]: ...
 
     async def get_direct_messages_topics_by_id(
-        self: pyrogram.Client, chat_id: int | str, topic_ids: int | Iterable[int]
+        self: kirugram.Client, chat_id: int | str, topic_ids: int | Iterable[int]
     ) -> types.DirectMessagesTopic | list[types.DirectMessagesTopic] | None:
         """Get one or more direct message topic from a chat by using topic identifiers.
 
@@ -57,7 +57,7 @@ class GetDirectMessagesTopicsByID:
                 topic themselves.
 
         Returns:
-            :obj:`~pyrogram.types.DirectMessagesTopic` | List of :obj:`~pyrogram.types.DirectMessagesTopic` | ``None``:
+            :obj:`~kirugram.types.DirectMessagesTopic` | List of :obj:`~kirugram.types.DirectMessagesTopic` | ``None``:
             In case *topic_ids* was not a list, a single topic is returned, otherwise a list of topics is returned. In
             case *topic_ids* was not a list and the chat has no topic with that identifier, None is returned.
 

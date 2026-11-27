@@ -1,28 +1,28 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import logging
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
+import kirugram
+from kirugram import enums, raw, types, utils
 
 if TYPE_CHECKING:
     from datetime import datetime, timedelta
@@ -32,7 +32,7 @@ log = logging.getLogger(__name__)
 
 class SendPoll:
     async def send_poll(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         question: str | types.FormattedText,
         options: list[str | types.InputPollOption],
@@ -86,17 +86,17 @@ class SendPoll:
                 For your personal cloud (Saved Messages) you can simply use "me" or "self".
                 For a contact that exists in your Telegram address book you can use his phone number (str).
 
-            question (``str`` | :obj:`~pyrogram.types.FormattedText`):
+            question (``str`` | :obj:`~kirugram.types.FormattedText`):
                 Poll question, 1-255 characters (up to 300 characters for bots).
                 Only custom emoji entities are allowed to be added and only by Premium users.
 
-            options (List of :obj:`~pyrogram.types.InputPollOption`):
+            options (List of :obj:`~kirugram.types.InputPollOption`):
                 List of 1-12 answer options.
 
-            description (``str`` | :obj:`~pyrogram.types.FormattedText`, *optional*):
+            description (``str`` | :obj:`~kirugram.types.FormattedText`, *optional*):
                 Description of the poll to be sent, 0-1024 characters after entities parsing.
 
-            description_media (:obj:`~pyrogram.types.InputPollMedia`, *optional*):
+            description_media (:obj:`~kirugram.types.InputPollMedia`, *optional*):
                 Media attached to the poll.
 
             message_thread_id (``int``, *optional*):
@@ -110,9 +110,9 @@ class SendPoll:
                 True, if the poll needs to be anonymous.
                 Defaults to True.
 
-            type (:obj`~pyrogram.enums.PollType`, *optional*):
-                Poll type, :obj:`~pyrogram.enums.PollType.QUIZ` or :obj:`~pyrogram.enums.PollType.REGULAR`.
-                Defaults to :obj:`~pyrogram.enums.PollType.REGULAR`.
+            type (:obj`~kirugram.enums.PollType`, *optional*):
+                Poll type, :obj:`~kirugram.enums.PollType.QUIZ` or :obj:`~kirugram.enums.PollType.REGULAR`.
+                Defaults to :obj:`~kirugram.enums.PollType.REGULAR`.
 
             allows_multiple_answers (``bool``, *optional*):
                 Pass True, if the poll allows multiple answers.
@@ -143,10 +143,10 @@ class SendPoll:
             correct_option_ids (List of ``int``, *optional*):
                 List of monotonically increasing 0-based identifiers of the correct answer options, required for polls in quiz mode.
 
-            explanation (``str`` | :obj:`~pyrogram.types.FormattedText`, *optional*):
+            explanation (``str`` | :obj:`~kirugram.types.FormattedText`, *optional*):
                 Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters with at most 2 line feeds after entities parsing.
 
-            explanation_media (:obj:`~pyrogram.types.InputPollMedia`, *optional*):
+            explanation_media (:obj:`~kirugram.types.InputPollMedia`, *optional*):
                 Media attached to the explanation.
 
             open_period (``int``, *optional*):
@@ -181,7 +181,7 @@ class SendPoll:
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -194,12 +194,12 @@ class SendPoll:
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent poll message is returned,
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent poll message is returned,
             otherwise, in case the server answered with no message, None is returned.
 
         Example:

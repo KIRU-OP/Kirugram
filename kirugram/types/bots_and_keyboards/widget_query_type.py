@@ -1,29 +1,29 @@
-#  Kurigram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #  Copyright (C) 2024-present KurimuzonAkuma <https://github.com/KurimuzonAkuma>
 #
-#  This file is part of Kurigram.
+#  This file is part of Kirugram.
 #
-#  Kurigram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Kurigram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Kurigram. If not, see <https://www.gnu.org/licenses/>.
+#  along with Kirugram. If not, see <https://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from base64 import b64encode
 
-import pyrogram
-from pyrogram import raw, types
+import kirugram
+from kirugram import raw, types
 
 from ..object import Object
 
@@ -33,9 +33,9 @@ class WidgetQueryType(Object):
 
     It can be one of:
 
-    - :obj:`~pyrogram.types.WidgetQueryTypeData`
-    - :obj:`~pyrogram.types.WidgetQueryTypeSignData`
-    - :obj:`~pyrogram.types.WidgetQueryTypeSentTransaction`
+    - :obj:`~kirugram.types.WidgetQueryTypeData`
+    - :obj:`~kirugram.types.WidgetQueryTypeSignData`
+    - :obj:`~kirugram.types.WidgetQueryTypeSentTransaction`
     """
 
     def __init__(self) -> None:
@@ -43,7 +43,7 @@ class WidgetQueryType(Object):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         query_type: raw.base.WidgetQueryType,
         wallet_card: raw.base.wallet.Card | None,
         users: dict[int, raw.base.User],
@@ -70,7 +70,7 @@ class WidgetQueryTypeData(WidgetQueryType):
     """The query contains data for the bot.
 
     Parameters:
-        wallet_card (:obj:`~pyrogram.types.TonWalletCard`, *optional*):
+        wallet_card (:obj:`~kirugram.types.TonWalletCard`, *optional*):
             TON wallet card of the user who sent the query, if it was sent to the bot along with the query.
     """
 
@@ -86,7 +86,7 @@ class WidgetQueryTypeSignData(WidgetQueryType):
     The data is signed for the domain ``bot<bot_id>``, where ``<bot_id>`` is the identifier of the bot.
 
     Parameters:
-        wallet (:obj:`~pyrogram.types.WidgetQueryWallet`):
+        wallet (:obj:`~kirugram.types.WidgetQueryWallet`):
             The wallet that signed the data.
 
         sign_data (``str``):
@@ -104,7 +104,7 @@ class WidgetQueryTypeSentTransaction(WidgetQueryType):
     """The query notifies the bot about a transaction sent from a TON wallet of the user who sent the query.
 
     Parameters:
-        wallet (:obj:`~pyrogram.types.WidgetQueryWallet`):
+        wallet (:obj:`~kirugram.types.WidgetQueryWallet`):
             The wallet from which the transaction was sent.
 
         msg_hash (``str``):

@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 """Every `Message.reply_*` and `Message.answer_*` shortcut accepts what its target accepts.
 
@@ -35,7 +35,7 @@ from typing import TYPE_CHECKING, Final
 
 import pytest
 
-from pyrogram import Client, types
+from kirugram import Client, types
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
@@ -50,7 +50,7 @@ class Shortcut:
     target_name: str
 
 
-_TARGET: Final[re.Pattern[str]] = re.compile(r"Shortcut for method :obj:`~pyrogram\.Client\.(\w+)`")
+_TARGET: Final[re.Pattern[str]] = re.compile(r"Shortcut for method :obj:`~kirugram\.Client\.(\w+)`")
 
 # The shortcut's own docstring lists what it fills from `self`, one bullet per attribute.
 _FILLED_FROM_SELF: Final[re.Pattern[str]] = re.compile(r"^\* (\w+)$", re.MULTILINE)

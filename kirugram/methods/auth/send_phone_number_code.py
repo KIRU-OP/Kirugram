@@ -1,36 +1,36 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import logging
 import re
 
-import pyrogram
-from pyrogram import enums, raw, types
-from pyrogram.errors import NetworkMigrate, PhoneMigrate
+import kirugram
+from kirugram import enums, raw, types
+from kirugram.errors import NetworkMigrate, PhoneMigrate
 
 log = logging.getLogger(__name__)
 
 
 class SendPhoneNumberCode:
     async def send_phone_number_code(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         phone_number: str,
         settings: types.PhoneNumberAuthenticationSettings | None = None,
         type: enums.PhoneNumberCodeType = enums.PhoneNumberCodeType.AUTHENTICATION,
@@ -53,10 +53,10 @@ class SendPhoneNumberCode:
             phone_number (``str``):
                 Phone number in international format (includes the country prefix).
 
-            settings (:obj:`~pyrogram.types.PhoneNumberAuthenticationSettings`, *optional*):
+            settings (:obj:`~kirugram.types.PhoneNumberAuthenticationSettings`, *optional*):
                 Settings for the authentication of the user's phone number.
 
-            type (:obj:`~pyrogram.enums.PhoneNumberCodeType`, *optional*):
+            type (:obj:`~kirugram.enums.PhoneNumberCodeType`, *optional*):
                 Type of the request for which the code is sent.
                 Defaults to authentication.
 
@@ -108,7 +108,7 @@ class SendPhoneNumberCode:
                 Use `settings` instead.
 
         Returns:
-            :obj:`~pyrogram.types.SentCode`: On success, returns information about the sent code.
+            :obj:`~kirugram.types.SentCode`: On success, returns information about the sent code.
 
         Raises:
             BadRequest: In case the phone number is invalid.

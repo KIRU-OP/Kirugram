@@ -1,27 +1,27 @@
-#  Kurigram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #  Copyright (C) 2024-present KurimuzonAkuma <https://github.com/KurimuzonAkuma>
 #
-#  This file is part of Kurigram.
+#  This file is part of Kirugram.
 #
-#  Kurigram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Kurigram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Kurigram. If not, see <https://www.gnu.org/licenses/>.
+#  along with Kirugram. If not, see <https://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
+import kirugram
+from kirugram import enums, raw, types, utils
 
 from ..object import Object
 
@@ -30,10 +30,10 @@ class ExternalReplyInfo(Object):
     """This object contains information about a message that is being replied to, which may come from another chat or forum topic.
 
     Parameters:
-        origin (:obj:`~pyrogram.types.MessageOrigin`, *optional*):
+        origin (:obj:`~kirugram.types.MessageOrigin`, *optional*):
             Origin of the message replied to by the given message.
 
-        chat (:obj:`~pyrogram.types.Chat`, *optional*):
+        chat (:obj:`~kirugram.types.Chat`, *optional*):
             Chat the original message belongs to.
             Available only if the chat is a supergroup or a channel.
 
@@ -41,86 +41,86 @@ class ExternalReplyInfo(Object):
             Unique message identifier inside the original chat.
             Available only if the original chat is a supergroup or a channel.
 
-        link_preview_options (:obj:`~pyrogram.types.LinkPreviewOptions`, *optional*):
+        link_preview_options (:obj:`~kirugram.types.LinkPreviewOptions`, *optional*):
             Options used for link preview generation for the original message, if it is a text message.
 
-        media (:obj:`~pyrogram.enums.MessageMediaType`, *optional*):
+        media (:obj:`~kirugram.enums.MessageMediaType`, *optional*):
             The message is a media message.
             This field will contain the enumeration type of the media message.
             You can use ``media = getattr(message, message.media.value)`` to access the media message.
 
-        animation (:obj:`~pyrogram.types.Animation`, *optional*):
+        animation (:obj:`~kirugram.types.Animation`, *optional*):
             Message is an animation, information about the animation.
 
-        audio (:obj:`~pyrogram.types.Audio`, *optional*):
+        audio (:obj:`~kirugram.types.Audio`, *optional*):
             Message is an audio file, information about the file.
 
-        document (:obj:`~pyrogram.types.Document`, *optional*):
+        document (:obj:`~kirugram.types.Document`, *optional*):
             Message is a general file, information about the file.
 
-        paid_media (:obj:`~pyrogram.types.PaidMediaInfo`, *optional*):
+        paid_media (:obj:`~kirugram.types.PaidMediaInfo`, *optional*):
             Message contains paid media; information about the paid media.
 
-        photo (:obj:`~pyrogram.types.Photo`, *optional*):
+        photo (:obj:`~kirugram.types.Photo`, *optional*):
             Message is a photo, information about the photo.
 
-        sticker (:obj:`~pyrogram.types.Sticker`, *optional*):
+        sticker (:obj:`~kirugram.types.Sticker`, *optional*):
             Message is a sticker, information about the sticker.
 
-        story (:obj:`~pyrogram.types.Story`, *optional*):
+        story (:obj:`~kirugram.types.Story`, *optional*):
             Message is a forwarded story.
 
-        video (:obj:`~pyrogram.types.Video`, *optional*):
+        video (:obj:`~kirugram.types.Video`, *optional*):
             Message is a video, information about the video.
 
-        video_note (:obj:`~pyrogram.types.VideoNote`, *optional*):
+        video_note (:obj:`~kirugram.types.VideoNote`, *optional*):
             Message is a video note, information about the video message.
 
-        voice (:obj:`~pyrogram.types.Voice`, *optional*):
+        voice (:obj:`~kirugram.types.Voice`, *optional*):
             Message is a voice message, information about the file.
 
-        widget (:obj:`~pyrogram.types.Widget`, *optional*):
+        widget (:obj:`~kirugram.types.Widget`, *optional*):
             Message is an HTML widget, information about the widget.
 
         has_media_spoiler (``bool``, *optional*):
             True, if the message media is covered by a spoiler animation.
 
-        checklist (:obj:`~pyrogram.types.Checklist`, *optional*):
+        checklist (:obj:`~kirugram.types.Checklist`, *optional*):
             Message is a checklist.
 
-        contact (:obj:`~pyrogram.types.Contact`, *optional*):
+        contact (:obj:`~kirugram.types.Contact`, *optional*):
             Message is a shared contact, information about the contact.
 
-        dice (:obj:`~pyrogram.types.Dice`, *optional*):
+        dice (:obj:`~kirugram.types.Dice`, *optional*):
             A dice containing a value that is randomly generated by Telegram.
 
-        game (:obj:`~pyrogram.types.Game`, *optional*):
+        game (:obj:`~kirugram.types.Game`, *optional*):
             Message is a game, information about the game.
 
-        giveaway (:obj:`~pyrogram.types.Giveaway`, *optional*):
+        giveaway (:obj:`~kirugram.types.Giveaway`, *optional*):
             Message is a scheduled giveaway, information about the giveaway.
 
-        giveaway_winners (:obj:`~pyrogram.types.GiveawayWinners`, *optional*):
+        giveaway_winners (:obj:`~kirugram.types.GiveawayWinners`, *optional*):
             A giveaway with public winners was completed
 
-        invoice (:obj:`~pyrogram.types.Invoice`, *optional*):
+        invoice (:obj:`~kirugram.types.Invoice`, *optional*):
             Message is a invoice, information about the invoice.
             `More about payments » <https://core.telegram.org/bots/api#payments>`_
 
-        location (:obj:`~pyrogram.types.Location`, *optional*):
+        location (:obj:`~kirugram.types.Location`, *optional*):
             Message is a shared location, information about the location.
 
-        poll (:obj:`~pyrogram.types.Poll`, *optional*):
+        poll (:obj:`~kirugram.types.Poll`, *optional*):
             Message is a native poll, information about the poll.
 
-        venue (:obj:`~pyrogram.types.Venue`, *optional*):
+        venue (:obj:`~kirugram.types.Venue`, *optional*):
             Message is a venue, information about the venue.
     """
 
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         origin: types.MessageOrigin | None = None,
         chat: types.Chat | None = None,
         message_id: int,

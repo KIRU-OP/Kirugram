@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -24,9 +24,9 @@ import logging
 import threading
 from typing import Any
 
-import pyrogram
-from pyrogram import raw, utils
-from pyrogram.handlers import (
+import kirugram
+from kirugram import raw, utils
+from kirugram.handlers import (
     BusinessConnectionHandler,
     BusinessMessageHandler,
     CallbackQueryHandler,
@@ -57,7 +57,7 @@ from pyrogram.handlers import (
     UserStatusHandler,
     WidgetQueryHandler,
 )
-from pyrogram.raw.types import (
+from kirugram.raw.types import (
     UpdateBotBusinessConnect,
     UpdateBotCallbackQuery,
     UpdateBotChatBoost,
@@ -146,7 +146,7 @@ class Dispatcher:
     GUEST_MESSAGE_UPDATES = (UpdateBotGuestChatQuery,)
     USER_TYPING_UPDATES = (UpdateUserTyping, UpdateChatUserTyping, UpdateChannelUserTyping)
 
-    def __init__(self, client: pyrogram.Client):
+    def __init__(self, client: kirugram.Client):
         self.client = client
 
         self.handler_worker_tasks: list[asyncio.Task[None]] = []
@@ -168,7 +168,7 @@ class Dispatcher:
 
         async def message_parser(update, users, chats):
             return (
-                await pyrogram.types.Message._parse(
+                await kirugram.types.Message._parse(
                     self.client,
                     update.message,
                     users,
@@ -196,58 +196,58 @@ class Dispatcher:
 
         async def callback_query_parser(update, users, chats):
             return (
-                await pyrogram.types.CallbackQuery._parse(self.client, update, users, chats),
+                await kirugram.types.CallbackQuery._parse(self.client, update, users, chats),
                 CallbackQueryHandler,
             )
 
         async def user_status_parser(update, users, chats):
-            return (pyrogram.types.User._parse_user_status(self.client, update), UserStatusHandler)
+            return (kirugram.types.User._parse_user_status(self.client, update), UserStatusHandler)
 
         async def inline_query_parser(update, users, chats):
             return (
-                await pyrogram.types.InlineQuery._parse(self.client, update, users),
+                await kirugram.types.InlineQuery._parse(self.client, update, users),
                 InlineQueryHandler,
             )
 
         async def widget_query_parser(update, users, chats):
             return (
-                await pyrogram.types.WidgetQuery._parse(self.client, update, users, chats),
+                await kirugram.types.WidgetQuery._parse(self.client, update, users, chats),
                 WidgetQueryHandler,
             )
 
         async def shared_widget_query_parser(update, users, chats):
             return (
-                await pyrogram.types.SharedWidgetQuery._parse(self.client, update, users, chats),
+                await kirugram.types.SharedWidgetQuery._parse(self.client, update, users, chats),
                 SharedWidgetQueryHandler,
             )
 
         async def poll_parser(update, users, chats):
             return (
-                await pyrogram.types.Poll._parse_update(self.client, update, users, chats),
+                await kirugram.types.Poll._parse_update(self.client, update, users, chats),
                 PollHandler,
             )
 
         async def chosen_inline_result_parser(update, users, chats):
             return (
-                await pyrogram.types.ChosenInlineResult._parse(self.client, update, users),
+                await kirugram.types.ChosenInlineResult._parse(self.client, update, users),
                 ChosenInlineResultHandler,
             )
 
         async def chat_member_updated_parser(update, users, chats):
             return (
-                await pyrogram.types.ChatMemberUpdated._parse(self.client, update, users, chats),
+                await kirugram.types.ChatMemberUpdated._parse(self.client, update, users, chats),
                 ChatMemberUpdatedHandler,
             )
 
         async def chat_join_request_parser(update, users, chats):
             return (
-                await pyrogram.types.ChatJoinRequest._parse(self.client, update, users, chats),
+                await kirugram.types.ChatJoinRequest._parse(self.client, update, users, chats),
                 ChatJoinRequestHandler,
             )
 
         async def story_parser(update, users, chats):
             return (
-                await pyrogram.types.Story._parse(
+                await kirugram.types.Story._parse(
                     self.client, update.story, update.peer, users, chats
                 ),
                 StoryHandler,
@@ -255,19 +255,19 @@ class Dispatcher:
 
         async def pre_checkout_query_parser(update, users, chats):
             return (
-                await pyrogram.types.PreCheckoutQuery._parse(self.client, update, users),
+                await kirugram.types.PreCheckoutQuery._parse(self.client, update, users),
                 PreCheckoutQueryHandler,
             )
 
         async def shipping_query_parser(update, users, chats):
             return (
-                await pyrogram.types.ShippingQuery._parse(self.client, update, users),
+                await kirugram.types.ShippingQuery._parse(self.client, update, users),
                 ShippingQueryHandler,
             )
 
         async def message_reaction_parser(update, users, chats):
             return (
-                await pyrogram.types.MessageReactionUpdated._parse(
+                await kirugram.types.MessageReactionUpdated._parse(
                     self.client, update, users, chats
                 ),
                 MessageReactionHandler,
@@ -275,7 +275,7 @@ class Dispatcher:
 
         async def message_reaction_count_parser(update, users, chats):
             return (
-                await pyrogram.types.MessageReactionCountUpdated._parse(
+                await kirugram.types.MessageReactionCountUpdated._parse(
                     self.client, update, users, chats
                 ),
                 MessageReactionCountHandler,
@@ -283,19 +283,19 @@ class Dispatcher:
 
         async def chat_boost_parser(update, users, chats):
             return (
-                await pyrogram.types.ChatBoostUpdated._parse(self.client, update, users, chats),
+                await kirugram.types.ChatBoostUpdated._parse(self.client, update, users, chats),
                 ChatBoostHandler,
             )
 
         async def purchased_paid_media_parser(update, users, chats):
             return (
-                await pyrogram.types.PurchasedPaidMedia._parse(self.client, update, users),
+                await kirugram.types.PurchasedPaidMedia._parse(self.client, update, users),
                 PurchasedPaidMediaHandler,
             )
 
         async def business_connection_parser(update, users, chats):
             return (
-                await pyrogram.types.BusinessConnection._parse(self.client, update, users),
+                await kirugram.types.BusinessConnection._parse(self.client, update, users),
                 BusinessConnectionHandler,
             )
 
@@ -322,7 +322,7 @@ class Dispatcher:
 
         async def managed_bot_parser(update, users, chats):
             return (
-                await pyrogram.types.ManagedBotUpdated._parse(self.client, update, users),
+                await kirugram.types.ManagedBotUpdated._parse(self.client, update, users),
                 ManagedBotUpdatedHandler,
             )
 
@@ -330,7 +330,7 @@ class Dispatcher:
             # Guest messages are parsed the same way as new messages, but the handler is different
             # Pre-parse referenced messages so they get cached before the main message
             for ref in update.reference_messages or []:
-                await pyrogram.types.Message._parse(self.client, ref, users, chats)
+                await kirugram.types.Message._parse(self.client, ref, users, chats)
 
             parsed, _ = await message_parser(update, users, chats)
 
@@ -345,7 +345,7 @@ class Dispatcher:
         ):
             if isinstance(update.action, raw.types.SendMessageStopDraftAction):
                 return (
-                    await pyrogram.types.MessageGenerationStopped._parse(
+                    await kirugram.types.MessageGenerationStopped._parse(
                         self.client, update, users, chats
                     ),
                     StoppedMessageGenerationHandler,
@@ -528,9 +528,9 @@ class Dispatcher:
                                     self.client,
                                     *args,
                                 )
-                        except pyrogram.StopPropagation:
+                        except kirugram.StopPropagation:
                             raise
-                        except pyrogram.ContinuePropagation:
+                        except kirugram.ContinuePropagation:
                             continue
                         except Exception as exc:
                             await self.handle_update_handler_exception(
@@ -542,7 +542,7 @@ class Dispatcher:
                             )
 
                         break
-            except pyrogram.StopPropagation:
+            except kirugram.StopPropagation:
                 pass
             except Exception as e:
                 log.exception(e)
@@ -551,9 +551,9 @@ class Dispatcher:
         self,
         exc: Exception,
         update_handler: Handler[Any],
-        update: pyrogram.raw.base.Update,
-        users: dict[int, pyrogram.raw.base.User],
-        chats: dict[int, pyrogram.raw.base.Chat],
+        update: kirugram.raw.base.Update,
+        users: dict[int, kirugram.raw.base.User],
+        chats: dict[int, kirugram.raw.base.Chat],
     ) -> None:
         handled = False
         try:
@@ -581,10 +581,10 @@ class Dispatcher:
                                 users,
                                 chats,
                             )
-                    except pyrogram.StopPropagation:
+                    except kirugram.StopPropagation:
                         handled = True
                         raise
-                    except pyrogram.ContinuePropagation:
+                    except kirugram.ContinuePropagation:
                         handled = True
                         continue
                     except Exception:
@@ -593,7 +593,7 @@ class Dispatcher:
                         handled = True
 
                     break
-        except pyrogram.StopPropagation:
+        except kirugram.StopPropagation:
             pass
         finally:
             if not handled:

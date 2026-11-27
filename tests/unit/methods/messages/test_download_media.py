@@ -7,15 +7,15 @@ from typing import TYPE_CHECKING, cast
 
 import pytest
 
-import pyrogram
-from pyrogram import types
-from pyrogram.file_id import FileType
-from pyrogram.methods.messages.download_media import DownloadMedia
+import kirugram
+from kirugram import types
+from kirugram.file_id import FileType
+from kirugram.methods.messages.download_media import DownloadMedia
 
 if TYPE_CHECKING:
     from pathlib import Path
 
-download_media_module = importlib.import_module("pyrogram.methods.messages.download_media")
+download_media_module = importlib.import_module("kirugram.methods.messages.download_media")
 
 
 class FakeClient(DownloadMedia):
@@ -60,7 +60,7 @@ async def test_download_media_sanitizes_telegram_file_name(
     client = FakeClient(tmp_path)
     media = types.Document(file_id="id", file_unique_id="unique", file_name=media_file_name)
 
-    await cast("pyrogram.Client", client).download_media(media)
+    await cast("kirugram.Client", client).download_media(media)
     packet = client.captured_packet()
 
     assert packet[1] == tmp_path / "downloads"
@@ -79,7 +79,7 @@ async def test_download_media_replaces_dot_path_name(
     client = FakeClient(tmp_path)
     media = types.Document(file_id="id", file_unique_id="unique", file_name="..")
 
-    await cast("pyrogram.Client", client).download_media(media)
+    await cast("kirugram.Client", client).download_media(media)
     packet = client.captured_packet()
 
     assert packet[1] == tmp_path / "downloads"
@@ -105,7 +105,7 @@ async def test_download_media_names_media_without_file_name_mime_type_or_size(
         duration=1,
     )
 
-    await cast("pyrogram.Client", client).download_media(media)
+    await cast("kirugram.Client", client).download_media(media)
     packet = client.captured_packet()
 
     assert str(packet[2]).startswith("animation_")

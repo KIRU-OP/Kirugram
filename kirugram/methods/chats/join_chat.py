@@ -1,29 +1,29 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import errors, raw, types
+import kirugram
+from kirugram import errors, raw, types
 
 
 class JoinChat:
-    async def join_chat(self: pyrogram.Client, chat_id: int | str) -> types.ChatJoinResult:
+    async def join_chat(self: kirugram.Client, chat_id: int | str) -> types.ChatJoinResult:
         """Adds the current user as a new member to a chat. Private and secret chats can't be joined using this method.
 
         .. include:: /_includes/usable-by/users.rst
@@ -34,7 +34,7 @@ class JoinChat:
                 channel/supergroup (in the format @username) or a chat id of a linked chat (channel or supergroup).
 
         Returns:
-            :obj:`~pyrogram.types.ChatJoinResult`: On success, a chat join result object is returned.
+            :obj:`~kirugram.types.ChatJoinResult`: On success, a chat join result object is returned.
 
         Example:
             .. code-block:: python
@@ -43,10 +43,10 @@ class JoinChat:
                 await app.join_chat("https://t.me/+AbCdEf0123456789")
 
                 # Join chat via username
-                await app.join_chat("pyrogram")
+                await app.join_chat("kirugram")
 
                 # Join a linked chat
-                await app.join_chat((await app.get_chat("pyrogram")).linked_chat.id)
+                await app.join_chat((await app.get_chat("kirugram")).linked_chat.id)
         """
         match = self.INVITE_LINK_RE.match(str(chat_id))
 

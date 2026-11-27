@@ -1,25 +1,25 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, types
+import kirugram
+from kirugram import raw, types
 
 from ...file_id import FileId
 from .inline_query_result import InlineQueryResult
@@ -39,10 +39,10 @@ class InlineQueryResultCachedSticker(InlineQueryResult):
             Unique identifier for this result, 1-64 bytes.
             Defaults to a randomly generated UUID4.
 
-        reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
+        reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup`, *optional*):
             An InlineKeyboardMarkup object.
 
-        input_message_content (:obj:`~pyrogram.types.InputMessageContent`):
+        input_message_content (:obj:`~kirugram.types.InputMessageContent`):
             Content of the message to be sent instead of the photo.
     """
 
@@ -59,7 +59,7 @@ class InlineQueryResultCachedSticker(InlineQueryResult):
         self.reply_markup = reply_markup
         self.input_message_content = input_message_content
 
-    async def write(self, client: pyrogram.Client):
+    async def write(self, client: kirugram.Client):
         file_id = FileId.decode(self.sticker_file_id)
 
         return raw.types.InputBotInlineResultDocument(

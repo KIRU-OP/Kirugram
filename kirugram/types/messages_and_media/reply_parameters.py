@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -23,7 +23,7 @@ from typing import TYPE_CHECKING
 from ..object import Object
 
 if TYPE_CHECKING:
-    from pyrogram import enums, types
+    from kirugram import enums, types
 
 
 class ReplyParameters(Object):
@@ -55,15 +55,15 @@ class ReplyParameters(Object):
             The quote must be an exact substring of the message to be replied to, including bold, italic, underline, strikethrough, spoiler, and custom_emoji entities.
             The message will fail to send if the quote isn't found in the original message.
 
-        quote_parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+        quote_parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
             By default, texts are parsed using both Markdown and HTML styles.
             You can combine both syntaxes together.
 
-        quote_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+        quote_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
             List of special entities that appear in message text, which can be specified instead of *quote_parse_mode*.
 
-        quote_rich_texts (List of :obj:`~pyrogram.types.RichText`, *optional*):
-            List of quoted parts of the :obj:`~pyrogram.types.RichMessage` to be replied to.
+        quote_rich_texts (List of :obj:`~kirugram.types.RichText`, *optional*):
+            List of quoted parts of the :obj:`~kirugram.types.RichMessage` to be replied to.
             Include one element for each quoted text, in the order in which the texts appear in the message.
             A paragraph, heading, preformatted block, footer, or mathematical expression each has its own text.
             A block quotation or pull quotation has separate text and credit, and a details block has a summary.

@@ -1,28 +1,28 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import logging
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
+import kirugram
+from kirugram import enums, raw, types, utils
 
 if TYPE_CHECKING:
     from datetime import datetime, timedelta
@@ -32,7 +32,7 @@ log = logging.getLogger(__name__)
 
 class EditMessageText:
     async def edit_message_text(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         message_id: int,
         text: str | None = None,
@@ -63,14 +63,14 @@ class EditMessageText:
                 New text of the message.
                 Required if rich_message isn't specified.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in message text, which can be specified instead of *parse_mode*.
 
-            link_preview_options (:obj:`~pyrogram.types.LinkPreviewOptions`, *optional*):
+            link_preview_options (:obj:`~kirugram.types.LinkPreviewOptions`, *optional*):
                 Options used for link preview generation for the message.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -80,11 +80,11 @@ class EditMessageText:
             business_connection_id (``str``, *optional*):
                 Unique identifier of the business connection on behalf of which the message will be sent.
 
-            rich_message (:obj:`~pyrogram.types.InputRichMessage`, *optional*):
+            rich_message (:obj:`~kirugram.types.InputRichMessage`, *optional*):
                 New rich content of the message.
                 Required if text isn't specified.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup`, *optional*):
                 An InlineKeyboardMarkup object.
 
             show_caption_above_media (``bool``, *optional*):
@@ -98,7 +98,7 @@ class EditMessageText:
                 Use `link_preview_options` instead.
 
         Returns:
-            :obj:`~pyrogram.types.Message`: On success, the edited message is returned.
+            :obj:`~kirugram.types.Message`: On success, the edited message is returned.
 
         Example:
             .. code-block:: python
@@ -107,7 +107,7 @@ class EditMessageText:
                 await app.edit_message_text(chat_id, message_id, "new text")
 
                 # Take the same text message, remove the web page preview only
-                from pyrogram import types
+                from kirugram import types
 
                 await app.edit_message_text(
                     chat_id, message_id, message.text,

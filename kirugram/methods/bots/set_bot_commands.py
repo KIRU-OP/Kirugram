@@ -1,31 +1,31 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw
-from pyrogram import types
+import kirugram
+from kirugram import raw
+from kirugram import types
 
 
 class SetBotCommands:
     async def set_bot_commands(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         commands: list[types.BotCommand],
         scope: types.BotCommandScope | None = None,
         language_code: str = "",
@@ -37,13 +37,13 @@ class SetBotCommands:
         .. include:: /_includes/usable-by/bots.rst
 
         Parameters:
-            commands (List of :obj:`~pyrogram.types.BotCommand`):
+            commands (List of :obj:`~kirugram.types.BotCommand`):
                 A list of bot commands.
                 At most 100 commands can be specified.
 
-            scope (:obj:`~pyrogram.types.BotCommandScope`, *optional*):
+            scope (:obj:`~kirugram.types.BotCommandScope`, *optional*):
                 An object describing the scope of users for which the commands are relevant.
-                Defaults to :obj:`~pyrogram.types.BotCommandScopeDefault`.
+                Defaults to :obj:`~kirugram.types.BotCommandScopeDefault`.
 
             language_code (``str``, *optional*):
                 A two-letter ISO 639-1 language code.
@@ -56,7 +56,7 @@ class SetBotCommands:
         Example:
             .. code-block:: python
 
-                from pyrogram.types import BotCommand
+                from kirugram.types import BotCommand
 
                 # Set new commands
                 await app.set_bot_commands([

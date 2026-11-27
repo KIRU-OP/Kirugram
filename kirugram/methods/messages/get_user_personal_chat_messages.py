@@ -1,28 +1,28 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import logging
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import raw, types, utils
+import kirugram
+from kirugram import raw, types, utils
 
 if TYPE_CHECKING:
     from collections.abc import AsyncGenerator
@@ -32,7 +32,7 @@ log = logging.getLogger(__name__)
 
 class GetUserPersonalChatMessages:
     async def get_user_personal_chat_messages(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         user_id: int | str,
         limit: int = 0,
         min_id: int = 0,
@@ -63,7 +63,7 @@ class GetUserPersonalChatMessages:
                 with IDs less than or equal to max_id (inclusive).
 
         Returns:
-            ``Generator``: A generator yielding :obj:`~pyrogram.types.Message` objects.
+            ``Generator``: A generator yielding :obj:`~kirugram.types.Message` objects.
         """
         current = 0
         total = limit or (1 << 31) - 1

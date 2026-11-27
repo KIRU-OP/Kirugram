@@ -1,44 +1,44 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import Literal, overload
 
-import pyrogram
-from pyrogram import enums, raw, types
+import kirugram
+from kirugram import enums, raw, types
 
 from ..object import Object
 
 
 class RichMessageButton(Object):
-    """This object represents a button in a :obj:`~pyrogram.types.RichMessage`.
+    """This object represents a button in a :obj:`~kirugram.types.RichMessage`.
 
     Exactly one of the fields other than *text* and *style* must be used to specify the type of the button.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             Text of the button.
-            May contain only plain text, :obj:`~pyrogram.types.RichTextCustomEmoji` and :obj:`~pyrogram.types.RichTextDateTime` entities.
+            May contain only plain text, :obj:`~kirugram.types.RichTextCustomEmoji` and :obj:`~kirugram.types.RichTextDateTime` entities.
 
-        style (:obj:`~pyrogram.enums.ButtonStyle`, *optional*):
+        style (:obj:`~kirugram.enums.ButtonStyle`, *optional*):
             Style of the button.
-            Must be one of :obj:`~pyrogram.enums.ButtonStyle.DANGER`, :obj:`~pyrogram.enums.ButtonStyle.SUCCESS`, :obj:`~pyrogram.enums.ButtonStyle.PRIMARY`, or :obj:`~pyrogram.enums.ButtonStyle.LINK` (the button is shown as a regular link without borders).
+            Must be one of :obj:`~kirugram.enums.ButtonStyle.DANGER`, :obj:`~kirugram.enums.ButtonStyle.SUCCESS`, :obj:`~kirugram.enums.ButtonStyle.PRIMARY`, or :obj:`~kirugram.enums.ButtonStyle.LINK` (the button is shown as a regular link without borders).
             Apps may use theme-specific colors for the button background and text based on the style.
             The style “link” is allowed only for callback buttons.
 
@@ -49,13 +49,13 @@ class RichMessageButton(Object):
         callback_data (``str`` | ``bytes``, *optional*):
             Data to be sent in a callback query to the bot when button is pressed, 1-64 bytes.
 
-        web_app (:obj:`~pyrogram.types.WebAppInfo`, *optional*):
+        web_app (:obj:`~kirugram.types.WebAppInfo`, *optional*):
             Description of the `Web App <https://core.telegram.org/bots/webapps>`_ that will be launched when the user
             presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the
-            method :meth:`~pyrogram.Client.answer_web_app_query`. Available only in private chats between a user and the
+            method :meth:`~kirugram.Client.answer_web_app_query`. Available only in private chats between a user and the
             bot.
 
-        login_url (:obj:`~pyrogram.types.LoginUrl`, *optional*):
+        login_url (:obj:`~kirugram.types.LoginUrl`, *optional*):
             An HTTP URL used to automatically authorize the user. Can be used as a replacement for
             the `Telegram Login Widget <https://core.telegram.org/widgets/login>`_.
 
@@ -69,15 +69,15 @@ class RichMessageButton(Object):
             May be empty, in which case only the bot's username will be inserted.
             Not supported in channels and for messages sent in channel direct messages chats and on behalf of a business account.
 
-        switch_inline_query_chosen_chat (:obj:`~pyrogram.types.SwitchInlineQueryChosenChat`, *optional*):
+        switch_inline_query_chosen_chat (:obj:`~kirugram.types.SwitchInlineQueryChosenChat`, *optional*):
             If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field.
             Not supported for messages sent in channel direct messages chats and on behalf of a business account.
 
-        copy_text (:obj:`~pyrogram.types.CopyTextButton` | ``str``, *optional*):
+        copy_text (:obj:`~kirugram.types.CopyTextButton` | ``str``, *optional*):
             A button that copies specified text to clipboard.
             Limited to 256 characters.
 
-        disabled (:obj:`~pyrogram.types.DisabledButton`, *optional*):
+        disabled (:obj:`~kirugram.types.DisabledButton`, *optional*):
             If set, then the button is disabled and does nothing.
     """
 
@@ -115,7 +115,7 @@ class RichMessageButton(Object):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client, button: raw.types.TextButton | raw.types.PageButton
+        client: kirugram.Client, button: raw.types.TextButton | raw.types.PageButton
     ) -> RichMessageButton:
         button_text = await types.RichText._parse(client, button.text)
         button_type = button.type
@@ -211,20 +211,20 @@ class RichMessageButton(Object):
     @overload
     async def write(
         self,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         is_block: Literal[False] = False,
     ) -> raw.types.TextButton: ...
 
     @overload
     async def write(
         self,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         is_block: Literal[True],
     ) -> raw.types.PageButton: ...
 
     async def write(
         self,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         is_block: bool = False,
     ) -> raw.types.TextButton | raw.types.PageButton:
         style = (

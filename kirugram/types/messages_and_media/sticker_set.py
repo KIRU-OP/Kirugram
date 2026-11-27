@@ -1,25 +1,25 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import enums, raw, types
+import kirugram
+from kirugram import enums, raw, types
 
 from ..object import Object
 
@@ -38,13 +38,13 @@ class StickerSet(Object):
             Unique identifier for this file, which is supposed to be the same over time and for different accounts.
             Can't be used to download or reuse the file.
 
-        sticker_type (:obj:`~pyrogram.enums.StickerType`):
+        sticker_type (:obj:`~kirugram.enums.StickerType`):
             Type of stickers in the set.
 
-        stickers (List of :obj:`~pyrogram.types.Sticker`, *optional*):
+        stickers (List of :obj:`~kirugram.types.Sticker`, *optional*):
             List of all set stickers.
 
-        thumbs (List of :obj:`~pyrogram.types.Thumbnail`, *optional*):
+        thumbs (List of :obj:`~kirugram.types.Thumbnail`, *optional*):
             Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format.
 
         is_owned (``bool``, *optional*):
@@ -65,7 +65,7 @@ class StickerSet(Object):
         needs_repainting (``bool``, *optional*):
             True, if the sticker set needs to be repainted.
 
-        raw (:obj:`~pyrogram.raw.base.StickerSet`, *optional*):
+        raw (:obj:`~kirugram.raw.base.StickerSet`, *optional*):
             The raw object.
     """
 
@@ -108,7 +108,7 @@ class StickerSet(Object):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         sticker_set: raw.types.messages.StickerSet | raw.types.StickerSet,
     ) -> StickerSet:
         if isinstance(sticker_set, raw.types.StickerSet):
@@ -119,7 +119,7 @@ class StickerSet(Object):
 
     @staticmethod
     async def _parse_messages_set(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         sticker_set: raw.types.messages.StickerSet,
     ) -> StickerSet:
         _set: raw.types.StickerSet = sticker_set.set
@@ -171,7 +171,7 @@ class StickerSet(Object):
 
     @staticmethod
     async def _parse_set(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         sticker_set: raw.types.StickerSet,
     ) -> StickerSet:
         sticker_type = enums.StickerType.REGULAR

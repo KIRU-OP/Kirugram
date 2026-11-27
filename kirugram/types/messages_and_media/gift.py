@@ -1,27 +1,27 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
+import kirugram
+from kirugram import enums, raw, types, utils
 
 from ..object import Object
 
@@ -36,10 +36,10 @@ class Gift(Object):
         id (``int``):
             Unique identifier of the gift.
 
-        type (:obj:`~pyrogram.enums.GiftType`):
+        type (:obj:`~kirugram.enums.GiftType`):
             Type of the gift.
 
-        origin (:obj:`~pyrogram.enums.UpgradedGiftOrigin`, *optional*):
+        origin (:obj:`~kirugram.enums.UpgradedGiftOrigin`, *optional*):
             Origin of the gift.
 
         received_gift_id (``str``, *optional*):
@@ -48,13 +48,13 @@ class Gift(Object):
         regular_gift_id (``int``, *optional*):
             Unique identifier of the regular gift from which the gift was upgraded.
 
-        publisher_chat (:obj:`~pyrogram.types.Chat`, *optional*):
+        publisher_chat (:obj:`~kirugram.types.Chat`, *optional*):
             Information about the chat that published the gift.
 
-        sticker (:obj:`~pyrogram.types.Sticker`, *optional*):
+        sticker (:obj:`~kirugram.types.Sticker`, *optional*):
             The sticker that represents the gift.
 
-        text (:obj:`~pyrogram.types.FormattedText`, *optional*):
+        text (:obj:`~kirugram.types.FormattedText`, *optional*):
             Message added to the gift.
 
         date (:py:obj:`~datetime.datetime`, *optional*):
@@ -74,16 +74,16 @@ class Gift(Object):
         craft_date (:py:obj:`~datetime.datetime`, *optional*):
             Date when the gift can be used to craft another gift can be in the past.
 
-        sender (:obj:`~pyrogram.types.Chat`, *optional*):
+        sender (:obj:`~kirugram.types.Chat`, *optional*):
             User or a chat that sent the gift.
 
-        receiver (:obj:`~pyrogram.types.Chat`, *optional*):
+        receiver (:obj:`~kirugram.types.Chat`, *optional*):
             User or a chat that received the gift.
 
-        host (:obj:`~pyrogram.types.Chat`, *optional*):
+        host (:obj:`~kirugram.types.Chat`, *optional*):
             User or the chat to which the upgraded gift was assigned from blockchain.
 
-        owner (:obj:`~pyrogram.types.Chat`, *optional*):
+        owner (:obj:`~kirugram.types.Chat`, *optional*):
             User or the chat that owns the gift.
 
         owner_address (``str``, *optional*):
@@ -101,16 +101,16 @@ class Gift(Object):
         name (``str``, *optional*):
             Unique name of the upgraded gift.
 
-        model (:obj:`~pyrogram.types.GiftAttribute`, *optional*):
+        model (:obj:`~kirugram.types.GiftAttribute`, *optional*):
             Model of the upgraded gift.
 
-        symbol (:obj:`~pyrogram.types.GiftAttribute`, *optional*):
+        symbol (:obj:`~kirugram.types.GiftAttribute`, *optional*):
             Symbol of the upgraded gift.
 
-        backdrop (:obj:`~pyrogram.types.GiftAttribute`, *optional*):
+        backdrop (:obj:`~kirugram.types.GiftAttribute`, *optional*):
             Backdrop of the upgraded gift.
 
-        original_details (:obj:`~pyrogram.types.UpgradedGiftOriginalDetails`, *optional*):
+        original_details (:obj:`~kirugram.types.UpgradedGiftOriginalDetails`, *optional*):
             Information about the originally sent gift.
 
         total_upgraded_count (``int``, *optional*):
@@ -156,18 +156,18 @@ class Gift(Object):
             Number of Telegram Stars that were paid by the sender for the ability to upgrade the gift.
 
         prepaid_upgrade_hash (``str``, *optional*):
-            If non-empty, then the user can pay for an upgrade of the gift using :meth:`~pyrogram.Client.buy_gift_upgrade`.
+            If non-empty, then the user can pay for an upgrade of the gift using :meth:`~kirugram.Client.buy_gift_upgrade`.
 
-        auction_info (:obj:`~pyrogram.types.GiftAuction`, *optional*):
+        auction_info (:obj:`~kirugram.types.GiftAuction`, *optional*):
             Information about the auction on which the gift can be purchased.
 
-        resale_parameters (:obj:`~pyrogram.types.GiftResaleParameters`, *optional*):
+        resale_parameters (:obj:`~kirugram.types.GiftResaleParameters`, *optional*):
             Resale parameters of the gift.
 
-        user_limits (:obj:`~pyrogram.types.GiftPurchaseLimit`, *optional*):
+        user_limits (:obj:`~kirugram.types.GiftPurchaseLimit`, *optional*):
             Number of times the gift can be purchased by the current user.
 
-        overall_limits (:obj:`~pyrogram.types.GiftPurchaseLimit`, *optional*):
+        overall_limits (:obj:`~kirugram.types.GiftPurchaseLimit`, *optional*):
             Number of times the gift can be purchased all users.
 
         value_currency (``str``, *optional*):
@@ -260,7 +260,7 @@ class Gift(Object):
             True, if the upgraded gift can be transferred to another owner.
 
         can_send_purchase_offer (``bool``, *optional*):
-            True, if an offer to purchase the gift can be sent using :meth:`~pyrogram.Client.send_gift_purchase_offer`.
+            True, if an offer to purchase the gift can be sent using :meth:`~kirugram.Client.send_gift_purchase_offer`.
 
         was_converted (``bool``, *optional*):
             True, if the gift was converted to Telegram Stars.
@@ -272,7 +272,7 @@ class Gift(Object):
         was_refunded (``bool``, *optional*):
             True, if the gift was refunded and isn't available anymore.
 
-        raw (:obj:`~pyrogram.raw.base.StarGift` | :obj:`~pyrogram.raw.base.SavedStarGift`):
+        raw (:obj:`~kirugram.raw.base.StarGift` | :obj:`~kirugram.raw.base.SavedStarGift`):
             The raw object as received from the server.
 
         link (``str``, *property*):
@@ -287,7 +287,7 @@ class Gift(Object):
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         id: int,
         type: enums.GiftType,
         origin: enums.UpgradedGiftOrigin | None = None,
@@ -452,7 +452,7 @@ class Gift(Object):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         gift: (
             raw.base.StarGift
             | raw.base.SavedStarGift
@@ -479,7 +479,7 @@ class Gift(Object):
 
     @staticmethod
     async def _parse_regular(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         star_gift: raw.types.StarGift,
         receiver: raw.base.User | raw.base.Chat | None = None,
         users: dict[int, raw.base.User] | None = None,
@@ -535,7 +535,7 @@ class Gift(Object):
 
     @staticmethod
     async def _parse_upgraded(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         star_gift: raw.types.StarGiftUnique,
         receiver: raw.base.User | raw.base.Chat | None = None,
         users: dict[int, raw.base.User] | None = None,
@@ -857,7 +857,7 @@ class Gift(Object):
         return self.received_gift_id
 
     async def show(self) -> bool:
-        """Bound method *show* of :obj:`~pyrogram.types.Gift`.
+        """Bound method *show* of :obj:`~kirugram.types.Gift`.
 
         Use as a shortcut for:
 
@@ -878,7 +878,7 @@ class Gift(Object):
         return await self._client.show_gift(owned_gift_id=self.owned_gift_id)
 
     async def hide(self) -> bool:
-        """Bound method *hide* of :obj:`~pyrogram.types.Gift`.
+        """Bound method *hide* of :obj:`~kirugram.types.Gift`.
 
         Use as a shortcut for:
 
@@ -899,7 +899,7 @@ class Gift(Object):
         return await self._client.hide_gift(owned_gift_id=self.owned_gift_id)
 
     async def convert(self) -> bool:
-        """Bound method *convert* of :obj:`~pyrogram.types.Gift`.
+        """Bound method *convert* of :obj:`~kirugram.types.Gift`.
 
         .. note::
 
@@ -926,7 +926,7 @@ class Gift(Object):
     async def upgrade(
         self, keep_original_details: (bool | None) = None, star_count: (int | None) = None
     ) -> types.Message | None:
-        """Bound method *upgrade* of :obj:`~pyrogram.types.Gift`.
+        """Bound method *upgrade* of :obj:`~kirugram.types.Gift`.
 
         .. note::
 
@@ -946,7 +946,7 @@ class Gift(Object):
                 await gift.upgrade()
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
         """
         return await self._client.upgrade_gift(
@@ -956,7 +956,7 @@ class Gift(Object):
         )
 
     async def transfer(self, to_chat_id: int | str) -> types.Message | None:
-        """Bound method *transfer* of :obj:`~pyrogram.types.Gift`.
+        """Bound method *transfer* of :obj:`~kirugram.types.Gift`.
 
         .. note::
 
@@ -977,7 +977,7 @@ class Gift(Object):
                 await gift.transfer(to_chat_id=123)
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
         """
         if not self.type == enums.GiftType.UPGRADED:
@@ -988,7 +988,7 @@ class Gift(Object):
         )
 
     async def wear(self) -> bool:
-        """Bound method *wear* of :obj:`~pyrogram.types.Gift`.
+        """Bound method *wear* of :obj:`~kirugram.types.Gift`.
 
         .. note::
 
@@ -1015,7 +1015,7 @@ class Gift(Object):
         new_owner_chat_id: (int | str | None) = None,
         price: (types.GiftResalePrice | None) = None,
     ) -> types.Message | None:
-        """Bound method *buy* of :obj:`~pyrogram.types.Gift`.
+        """Bound method *buy* of :obj:`~kirugram.types.Gift`.
 
         .. note::
 
@@ -1033,7 +1033,7 @@ class Gift(Object):
                 await gift.buy()
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
         """
         if new_owner_chat_id is None:
@@ -1060,7 +1060,7 @@ class Gift(Object):
         is_private: bool | None = None,
         pay_for_upgrade: bool | None = None,
     ) -> types.Message | None:
-        """Bound method *send* of :obj:`~pyrogram.types.Gift`.
+        """Bound method *send* of :obj:`~kirugram.types.Gift`.
 
         .. note::
 
@@ -1082,7 +1082,7 @@ class Gift(Object):
                 await gift.send("me")
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
         """
         return await self._client.send_gift(
@@ -1096,7 +1096,7 @@ class Gift(Object):
         )
 
     async def get_auction_state(self) -> types.GiftAuctionState:
-        """Bound method *get_auction_state* of :obj:`~pyrogram.types.Gift`.
+        """Bound method *get_auction_state* of :obj:`~kirugram.types.Gift`.
 
         .. note::
 
@@ -1111,7 +1111,7 @@ class Gift(Object):
             )
 
         Returns:
-            :obj:`~pyrogram.types.GiftAuctionState`: The auction state of the gift.
+            :obj:`~kirugram.types.GiftAuctionState`: The auction state of the gift.
         """
 
         return await self._client.get_gift_auction_state(auction_id=self.id)
@@ -1122,13 +1122,13 @@ class Gift(Object):
         duration: int,
         paid_message_star_count: int | None = None,
     ) -> types.Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_gift_purchase_offer` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_gift_purchase_offer` will automatically fill method attributes:
 
         * owner_id
         * gift_id
 
         Parameters:
-            price (:obj:`~pyrogram.types.GiftResalePrice`):
+            price (:obj:`~kirugram.types.GiftResalePrice`):
                 The price that the user agreed to pay for the gift.
 
             duration (``int``):
@@ -1140,7 +1140,7 @@ class Gift(Object):
                 Pass User.paid_message_star_count for users and None otherwise.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
         """
         if not self.can_send_purchase_offer:

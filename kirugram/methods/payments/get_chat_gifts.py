@@ -1,27 +1,27 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import raw, types, utils
+import kirugram
+from kirugram import raw, types, utils
 
 if TYPE_CHECKING:
     from collections.abc import AsyncGenerator
@@ -29,7 +29,7 @@ if TYPE_CHECKING:
 
 class GetChatGifts:
     async def get_chat_gifts(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         collection_id: int | None = None,
         exclude_unsaved: bool | None = None,
@@ -76,7 +76,7 @@ class GetChatGifts:
                 Pass True to exclude upgraded gifts.
 
             exclude_without_colors (``bool``, *optional*):
-                Pass True to exclude gifts that can't be used in :meth:`~pyrogram.Client.set_upgraded_gift_colors`.
+                Pass True to exclude gifts that can't be used in :meth:`~kirugram.Client.set_upgraded_gift_colors`.
 
             exclude_hosted (``bool``, *optional*):
                 Pass True to exclude gifts that are just hosted and are not owned by the owner.
@@ -91,7 +91,7 @@ class GetChatGifts:
                 The maximum number of gifts to be returned.
 
         Returns:
-            ``Generator``: A generator yielding :obj:`~pyrogram.types.Gift` objects.
+            ``Generator``: A generator yielding :obj:`~kirugram.types.Gift` objects.
 
         Example:
             .. code-block:: python

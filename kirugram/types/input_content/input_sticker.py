@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -24,16 +24,16 @@ import re
 from pathlib import Path
 from typing import TYPE_CHECKING, BinaryIO
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
-from pyrogram.file_id import FileType
+import kirugram
+from kirugram import enums, raw, types, utils
+from kirugram.file_id import FileType
 
 from ..object import Object
 
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-    from pyrogram._typing import PathType
+    from kirugram._typing import PathType
 
 
 class InputSticker(Object):
@@ -46,13 +46,13 @@ class InputSticker(Object):
             pass a file path as string to upload a new file that exists on your local machine or
             pass a binary file-like object with its attribute “.name” set for in-memory uploads.
 
-        format (:obj:`~pyrogram.enums.StickerFormat`):
+        format (:obj:`~kirugram.enums.StickerFormat`):
             Format of the added sticker.
 
         emoji_list (List of ``str``):
             List of 1-20 emoji associated with the sticker.
 
-        mask_position (:obj:`~pyrogram.types.MaskPosition`, *optional*):
+        mask_position (:obj:`~kirugram.types.MaskPosition`, *optional*):
             Position where the mask should be placed on faces.
             For mask stickers only.
 
@@ -84,7 +84,7 @@ class InputSticker(Object):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
         progress: Callable | None = None,
         progress_args: tuple = (),

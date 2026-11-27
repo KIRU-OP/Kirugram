@@ -1,25 +1,25 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, types
+import kirugram
+from kirugram import raw, types
 
 from ..object import Object
 from .input_rich_block import _get_input_document, _get_input_photo
@@ -34,7 +34,7 @@ class InputRichMessageMedia(Object):
             ``tg://document?id=``, or ``tg://audio?id=`` link.
             1-64 characters, only A-Z, a-z, 0-9, _ and - are allowed.
 
-        media (:obj:`~pyrogram.types.InputMediaAnimation` | :obj:`~pyrogram.types.InputMediaAudio` | :obj:`~pyrogram.types.InputMediaDocument` | :obj:`~pyrogram.types.InputMediaPhoto` | :obj:`~pyrogram.types.InputMediaVideo` | :obj:`~pyrogram.types.InputMediaVoiceNote`):
+        media (:obj:`~kirugram.types.InputMediaAnimation` | :obj:`~kirugram.types.InputMediaAudio` | :obj:`~kirugram.types.InputMediaDocument` | :obj:`~kirugram.types.InputMediaPhoto` | :obj:`~kirugram.types.InputMediaVideo` | :obj:`~kirugram.types.InputMediaVoiceNote`):
             The media to be sent.
             Everything except the media itself and its properties is ignored.
     """
@@ -57,7 +57,7 @@ class InputRichMessageMedia(Object):
     async def write(
         self,
         *,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_id: int | str | None = None,
     ) -> raw.base.InputRichFile:
         input_media = await self.media.write(

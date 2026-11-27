@@ -1,29 +1,29 @@
-#  Kurigram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #  Copyright (C) 2024-present KurimuzonAkuma <https://github.com/KurimuzonAkuma>
 #
-#  This file is part of Kurigram.
+#  This file is part of Kirugram.
 #
-#  Kurigram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Kurigram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Kurigram. If not, see <https://www.gnu.org/licenses/>.
+#  along with Kirugram. If not, see <https://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import raw, types, utils
+import kirugram
+from kirugram import raw, types, utils
 
 from ..object import Object
 
@@ -37,44 +37,44 @@ class RichText(Object):
     It can be one of:
 
     - ``str``
-    - List of :obj:`~pyrogram.types.RichText`
-    - :obj:`~pyrogram.types.RichTextBold`
-    - :obj:`~pyrogram.types.RichTextItalic`
-    - :obj:`~pyrogram.types.RichTextUnderline`
-    - :obj:`~pyrogram.types.RichTextStrikethrough`
-    - :obj:`~pyrogram.types.RichTextSpoiler`
-    - :obj:`~pyrogram.types.RichTextDateTime`
-    - :obj:`~pyrogram.types.RichTextTextMention`
-    - :obj:`~pyrogram.types.RichTextSubscript`
-    - :obj:`~pyrogram.types.RichTextSuperscript`
-    - :obj:`~pyrogram.types.RichTextMarked`
-    - :obj:`~pyrogram.types.RichTextCode`
-    - :obj:`~pyrogram.types.RichTextCustomEmoji`
-    - :obj:`~pyrogram.types.RichTextMathematicalExpression`
-    - :obj:`~pyrogram.types.RichTextUrl`
-    - :obj:`~pyrogram.types.RichTextEmailAddress`
-    - :obj:`~pyrogram.types.RichTextPhoneNumber`
-    - :obj:`~pyrogram.types.RichTextBankCardNumber`
-    - :obj:`~pyrogram.types.RichTextMention`
-    - :obj:`~pyrogram.types.RichTextHashtag`
-    - :obj:`~pyrogram.types.RichTextCashtag`
-    - :obj:`~pyrogram.types.RichTextTonAddress`
-    - :obj:`~pyrogram.types.RichTextBotCommand`
-    - :obj:`~pyrogram.types.RichTextButton`
-    - :obj:`~pyrogram.types.RichTextAnchor`
-    - :obj:`~pyrogram.types.RichTextAnchorLink`
-    - :obj:`~pyrogram.types.RichTextReference`
-    - :obj:`~pyrogram.types.RichTextReferenceLink`
+    - List of :obj:`~kirugram.types.RichText`
+    - :obj:`~kirugram.types.RichTextBold`
+    - :obj:`~kirugram.types.RichTextItalic`
+    - :obj:`~kirugram.types.RichTextUnderline`
+    - :obj:`~kirugram.types.RichTextStrikethrough`
+    - :obj:`~kirugram.types.RichTextSpoiler`
+    - :obj:`~kirugram.types.RichTextDateTime`
+    - :obj:`~kirugram.types.RichTextTextMention`
+    - :obj:`~kirugram.types.RichTextSubscript`
+    - :obj:`~kirugram.types.RichTextSuperscript`
+    - :obj:`~kirugram.types.RichTextMarked`
+    - :obj:`~kirugram.types.RichTextCode`
+    - :obj:`~kirugram.types.RichTextCustomEmoji`
+    - :obj:`~kirugram.types.RichTextMathematicalExpression`
+    - :obj:`~kirugram.types.RichTextUrl`
+    - :obj:`~kirugram.types.RichTextEmailAddress`
+    - :obj:`~kirugram.types.RichTextPhoneNumber`
+    - :obj:`~kirugram.types.RichTextBankCardNumber`
+    - :obj:`~kirugram.types.RichTextMention`
+    - :obj:`~kirugram.types.RichTextHashtag`
+    - :obj:`~kirugram.types.RichTextCashtag`
+    - :obj:`~kirugram.types.RichTextTonAddress`
+    - :obj:`~kirugram.types.RichTextBotCommand`
+    - :obj:`~kirugram.types.RichTextButton`
+    - :obj:`~kirugram.types.RichTextAnchor`
+    - :obj:`~kirugram.types.RichTextAnchorLink`
+    - :obj:`~kirugram.types.RichTextReference`
+    - :obj:`~kirugram.types.RichTextReferenceLink`
     """
 
     def __init__(self):
         super().__init__()
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         raise NotImplementedError
 
     @staticmethod
-    async def _write(client: pyrogram.Client, text: types.RichText | None) -> raw.base.RichText:
+    async def _write(client: kirugram.Client, text: types.RichText | None) -> raw.base.RichText:
         if text is None:
             return raw.types.TextEmpty()
 
@@ -90,7 +90,7 @@ class RichText(Object):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         rich_text: raw.base.RichText,
         users: dict[int, raw.base.User] | None = None,
         chats: dict[int, raw.base.Chat] | None = None,
@@ -301,7 +301,7 @@ class RichTextBold(RichText):
     """A bold text.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
     """
 
@@ -313,7 +313,7 @@ class RichTextBold(RichText):
 
         self.text = text
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextBold(text=await RichText._write(client, self.text))
 
 
@@ -321,7 +321,7 @@ class RichTextItalic(RichText):
     """A italicized text.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
     """
 
@@ -333,7 +333,7 @@ class RichTextItalic(RichText):
 
         self.text = text
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextItalic(text=await RichText._write(client, self.text))
 
 
@@ -341,7 +341,7 @@ class RichTextUnderline(RichText):
     """A underlined text.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
     """
 
@@ -353,7 +353,7 @@ class RichTextUnderline(RichText):
 
         self.text = text
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextUnderline(text=await RichText._write(client, self.text))
 
 
@@ -361,7 +361,7 @@ class RichTextStrikethrough(RichText):
     """A strikethrough text.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
     """
 
@@ -373,7 +373,7 @@ class RichTextStrikethrough(RichText):
 
         self.text = text
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextStrike(text=await RichText._write(client, self.text))
 
 
@@ -381,7 +381,7 @@ class RichTextSpoiler(RichText):
     """A text covered by a spoiler.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
     """
 
@@ -393,7 +393,7 @@ class RichTextSpoiler(RichText):
 
         self.text = text
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextSpoiler(text=await RichText._write(client, self.text))
 
 
@@ -401,7 +401,7 @@ class RichTextDateTime(RichText):
     """Formatted date and time.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
 
         date (:py:obj:`datetime.datetime` | :py:obj:`datetime.timedelta`):
@@ -425,7 +425,7 @@ class RichTextDateTime(RichText):
         self.date = date
         self.date_time_format = date_time_format
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         relative: bool | None = None
         short_time: bool | None = None
         long_time: bool | None = None
@@ -466,10 +466,10 @@ class RichTextTextMention(RichText):
     """A mention of a Telegram user by their identifier.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
 
-        user (:obj:`~pyrogram.types.User`):
+        user (:obj:`~kirugram.types.User`):
             The mentioned user.
     """
 
@@ -483,7 +483,7 @@ class RichTextTextMention(RichText):
         self.text = text
         self.user = user
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextMentionName(
             text=await RichText._write(client, self.text),
             user_id=self.user.id,
@@ -494,7 +494,7 @@ class RichTextSubscript(RichText):
     """A subscript text.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
     """
 
@@ -506,7 +506,7 @@ class RichTextSubscript(RichText):
 
         self.text = text
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextSubscript(text=await RichText._write(client, self.text))
 
 
@@ -514,7 +514,7 @@ class RichTextSuperscript(RichText):
     """A superscript text.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
     """
 
@@ -526,7 +526,7 @@ class RichTextSuperscript(RichText):
 
         self.text = text
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextSuperscript(text=await RichText._write(client, self.text))
 
 
@@ -534,7 +534,7 @@ class RichTextMarked(RichText):
     """A marked text.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
     """
 
@@ -546,7 +546,7 @@ class RichTextMarked(RichText):
 
         self.text = text
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextMarked(text=await RichText._write(client, self.text))
 
 
@@ -554,7 +554,7 @@ class RichTextCode(RichText):
     """A monowidth text.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
     """
 
@@ -566,7 +566,7 @@ class RichTextCode(RichText):
 
         self.text = text
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextFixed(text=await RichText._write(client, self.text))
 
 
@@ -576,7 +576,7 @@ class RichTextCustomEmoji(RichText):
     Parameters:
         custom_emoji_id (``str``):
             Unique identifier of the custom emoji.
-            Use :meth:`pyrogram.Client.get_custom_emoji_stickers` to get full information about the sticker.
+            Use :meth:`kirugram.Client.get_custom_emoji_stickers` to get full information about the sticker.
 
         alternative_text (``str``):
             Alternative emoji for the custom emoji.
@@ -588,7 +588,7 @@ class RichTextCustomEmoji(RichText):
         self.custom_emoji_id = custom_emoji_id
         self.alternative_text = alternative_text
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextCustomEmoji(
             document_id=int(self.custom_emoji_id),
             alt=self.alternative_text,
@@ -611,7 +611,7 @@ class RichTextMathematicalExpression(RichText):
 
         self.expression = expression
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextMath(source=self.expression)
 
 
@@ -619,7 +619,7 @@ class RichTextUrl(RichText):
     """A text with a link.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
 
         url (``str``):
@@ -632,7 +632,7 @@ class RichTextUrl(RichText):
         self.text = text
         self.url = url
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         # `webpage_id` is unknown at send time: the server resolves the preview itself.
         return raw.types.TextUrl(
             text=await RichText._write(client, self.text),
@@ -645,7 +645,7 @@ class RichTextEmailAddress(RichText):
     """A text with an email address.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
 
         email_address (``str``):
@@ -658,7 +658,7 @@ class RichTextEmailAddress(RichText):
         self.text = text
         self.email_address = email_address
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextEmail(
             text=await RichText._write(client, self.text),
             email=self.email_address,
@@ -669,7 +669,7 @@ class RichTextPhoneNumber(RichText):
     """A text with a phone number.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
 
         phone_number (``str``):
@@ -682,7 +682,7 @@ class RichTextPhoneNumber(RichText):
         self.text = text
         self.phone_number = phone_number
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextPhone(
             text=await RichText._write(client, self.text),
             phone=self.phone_number,
@@ -693,7 +693,7 @@ class RichTextBankCardNumber(RichText):
     """A text with a bank card number.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
 
         bank_card_number (``str``):
@@ -706,7 +706,7 @@ class RichTextBankCardNumber(RichText):
         self.text = text
         self.bank_card_number = bank_card_number
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextBankCard(text=await RichText._write(client, self.text))
 
 
@@ -714,7 +714,7 @@ class RichTextMention(RichText):
     """A mention by a username.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
 
         username (``str``):
@@ -727,7 +727,7 @@ class RichTextMention(RichText):
         self.text = text
         self.username = username
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextMention(text=await RichText._write(client, self.text))
 
 
@@ -735,7 +735,7 @@ class RichTextHashtag(RichText):
     """A hashtag.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
 
         hashtag (``str``):
@@ -748,7 +748,7 @@ class RichTextHashtag(RichText):
         self.text = text
         self.hashtag = hashtag
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextHashtag(text=await RichText._write(client, self.text))
 
 
@@ -756,7 +756,7 @@ class RichTextCashtag(RichText):
     """A cashtag.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
 
         cashtag (``str``):
@@ -769,7 +769,7 @@ class RichTextCashtag(RichText):
         self.text = text
         self.cashtag = cashtag
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextCashtag(text=await RichText._write(client, self.text))
 
 
@@ -777,7 +777,7 @@ class RichTextTonAddress(RichText):
     """An address in the TON blockchain.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
 
         address (``str``):
@@ -790,7 +790,7 @@ class RichTextTonAddress(RichText):
         self.text = text
         self.address = address
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextTonAddress(text=await RichText._write(client, self.text))
 
 
@@ -798,7 +798,7 @@ class RichTextBotCommand(RichText):
     """A bot command.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
 
         bot_command (``str``):
@@ -811,7 +811,7 @@ class RichTextBotCommand(RichText):
         self.text = text
         self.bot_command = bot_command
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextBotCommand(text=await RichText._write(client, self.text))
 
 
@@ -819,7 +819,7 @@ class RichTextButton(RichText):
     """A button.
 
     Parameters:
-        button (:obj:`~pyrogram.types.RichMessageButton`):
+        button (:obj:`~kirugram.types.RichMessageButton`):
             The button.
     """
 
@@ -828,7 +828,7 @@ class RichTextButton(RichText):
 
         self.button = button
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return await self.button.write(client)
 
 
@@ -836,7 +836,7 @@ class RichTextAnchor(RichText):
     """An anchor.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
 
         name (``str``):
@@ -849,7 +849,7 @@ class RichTextAnchor(RichText):
         self.text = text
         self.name = name
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextAnchor(
             text=await RichText._write(client, self.text),
             name=self.name,
@@ -860,7 +860,7 @@ class RichTextAnchorLink(RichText):
     """A link to an anchor.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
 
         anchor_name (``str``):
@@ -874,7 +874,7 @@ class RichTextAnchorLink(RichText):
         self.text = text
         self.anchor_name = anchor_name
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         # An in-page link is a `textUrl` whose URL is the anchor name prefixed with `#`.
         return raw.types.TextUrl(
             text=await RichText._write(client, self.text),
@@ -887,7 +887,7 @@ class RichTextReference(RichText):
     """A reference.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
 
         name (``str``):
@@ -900,7 +900,7 @@ class RichTextReference(RichText):
         self.text = text
         self.name = name
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         return raw.types.TextAnchor(
             text=await RichText._write(client, self.text),
             name=self.name,
@@ -911,7 +911,7 @@ class RichTextReferenceLink(RichText):
     """A link to a reference.
 
     Parameters:
-        text (:obj:`~pyrogram.types.RichText`):
+        text (:obj:`~kirugram.types.RichText`):
             The text.
 
         reference_name (``str``):
@@ -924,7 +924,7 @@ class RichTextReferenceLink(RichText):
         self.text = text
         self.reference_name = reference_name
 
-    async def write(self, client: pyrogram.Client) -> raw.base.RichText:
+    async def write(self, client: kirugram.Client) -> raw.base.RichText:
         # A reference link uses the same `textUrl` encoding as `RichTextAnchorLink`.
         return raw.types.TextUrl(
             text=await RichText._write(client, self.text),

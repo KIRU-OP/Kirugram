@@ -1,28 +1,28 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from datetime import datetime
 
-import pyrogram
-from pyrogram import raw, types, utils
-from pyrogram.file_id import FileId, FileType, FileUniqueId, FileUniqueType, ThumbnailSource
+import kirugram
+from kirugram import raw, types, utils
+from kirugram.file_id import FileId, FileType, FileUniqueId, FileUniqueType, ThumbnailSource
 
 from ..object import Object
 
@@ -34,7 +34,7 @@ class AnimatedChatPhoto(Object):
         length (``int``):
             Animation width and height.
 
-        animation (:obj:`~pyrogram.types.Animation`):
+        animation (:obj:`~kirugram.types.Animation`):
             Animation.
 
         main_frame_timestamp (``float``, *optional*):
@@ -44,7 +44,7 @@ class AnimatedChatPhoto(Object):
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         length: int,
         animation: types.Animation,
         main_frame_timestamp: float | None = None,

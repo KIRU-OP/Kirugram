@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -24,17 +24,17 @@ import os
 import re
 from pathlib import Path
 
-import pyrogram
-from pyrogram import raw, types, utils
-from pyrogram.errors import MediaEmpty, RPCError
-from pyrogram.file_id import FileType
+import kirugram
+from kirugram import raw, types, utils
+from kirugram.errors import MediaEmpty, RPCError
+from kirugram.file_id import FileType
 
 
 class EditInlineMedia:
     MAX_RETRIES = 3
 
     async def edit_inline_media(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         inline_message_id: str,
         media: types.InputMedia,
         reply_markup: types.InlineKeyboardMarkup | None = None,
@@ -51,10 +51,10 @@ class EditInlineMedia:
                 Required if *chat_id* and *message_id* are not specified.
                 Identifier of the inline message.
 
-            media (:obj:`~pyrogram.types.InputMedia`):
+            media (:obj:`~kirugram.types.InputMedia`):
                 One of the InputMedia objects describing an animation, audio, document, photo or video.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup`, *optional*):
                 An InlineKeyboardMarkup object.
 
         Returns:
@@ -66,7 +66,7 @@ class EditInlineMedia:
         Example:
             .. code-block:: python
 
-                from pyrogram.types import InputMediaPhoto, InputMediaVideo, InputMediaAudio
+                from kirugram.types import InputMediaPhoto, InputMediaVideo, InputMediaAudio
 
                 # Bots only
 

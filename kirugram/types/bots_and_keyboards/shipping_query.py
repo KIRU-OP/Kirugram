@@ -1,25 +1,25 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, types
+import kirugram
+from kirugram import raw, types
 
 from ..object import Object
 from ..update import Update
@@ -32,20 +32,20 @@ class ShippingQuery(Object, Update):
         id (``str``):
             Unique query identifier.
 
-        from_user (:obj:`~pyrogram.types.User`):
+        from_user (:obj:`~kirugram.types.User`):
             User who sent the query.
 
         invoice_payload (``str``):
             Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
 
-        shipping_address (:obj:`~pyrogram.types.ShippingAddress`):
+        shipping_address (:obj:`~kirugram.types.ShippingAddress`):
             User specified shipping address. Only available to the bot that received the payment.
     """
 
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         id: str,
         from_user: types.User,
         invoice_payload: str,
@@ -60,7 +60,7 @@ class ShippingQuery(Object, Update):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client, shipping_query: raw.types.UpdateBotShippingQuery, users: dict
+        client: kirugram.Client, shipping_query: raw.types.UpdateBotShippingQuery, users: dict
     ) -> ShippingQuery:
         # Try to decode shipping query payload into string. If that fails, fallback to bytes instead of decoding by
         # ignoring/replacing errors, this way, button clicks will still work.
@@ -83,7 +83,7 @@ class ShippingQuery(Object, Update):
         shipping_options: list[types.ShippingOption] | None = None,
         error_message: str | None = None,
     ) -> bool:
-        """Bound method *answer* of :obj:`~pyrogram.types.ShippingQuery`.
+        """Bound method *answer* of :obj:`~kirugram.types.ShippingQuery`.
 
         Use this method as a shortcut for:
 
@@ -103,7 +103,7 @@ class ShippingQuery(Object, Update):
             ok (``bool``):
                 Pass True if delivery to the specified address is possible and False if there are any problems (for example, if delivery to the specified address is not possible).
 
-            shipping_options (List of :obj:`~pyrogram.types.ShippingOption`, *optional*):
+            shipping_options (List of :obj:`~kirugram.types.ShippingOption`, *optional*):
                 Required if ok is True. A JSON-serialized array of available shipping options.
 
             error_message (``str``, *optional*):

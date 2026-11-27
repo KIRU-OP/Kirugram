@@ -1,22 +1,22 @@
-#  Kurigram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #  Copyright (C) 2024-present KurimuzonAkuma <https://github.com/KurimuzonAkuma>
 #
-#  This file is part of Kurigram.
+#  This file is part of Kirugram.
 #
-#  Kurigram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Kurigram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Kurigram. If not, see <https://www.gnu.org/licenses/>.
+#  along with Kirugram. If not, see <https://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -26,9 +26,9 @@ from functools import partial
 from itertools import groupby
 from typing import TYPE_CHECKING, BinaryIO, Literal, SupportsIndex, overload
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
-from pyrogram.errors import (
+import kirugram
+from kirugram import enums, raw, types, utils
+from kirugram.errors import (
     ChannelForumMissing,
     ChannelInvalid,
     ChannelPrivate,
@@ -36,7 +36,7 @@ from pyrogram.errors import (
     MessageIdsEmpty,
     PeerIdInvalid,
 )
-from pyrogram.parser import Parser
+from kirugram.parser import Parser
 
 from ..object import Object
 from ..update import Update
@@ -47,8 +47,8 @@ if TYPE_CHECKING:
     from io import BytesIO
     from re import Match
 
-    from pyrogram._typing import PathType
-    from pyrogram.types.messages_and_media.forum_topic_created import ForumTopicCreated
+    from kirugram._typing import PathType
+    from kirugram.types.messages_and_media.forum_topic_created import ForumTopicCreated
 
 log = logging.getLogger(__name__)
 
@@ -115,10 +115,10 @@ class Message(Object, Update):
             In specific instances (e.g., a message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately.
             In such cases, this message will be unusable until it is actually sent.
 
-        from_user (:obj:`~pyrogram.types.User`, *optional*):
+        from_user (:obj:`~kirugram.types.User`, *optional*):
             Sender, empty for messages sent to channels.
 
-        sender_chat (:obj:`~pyrogram.types.Chat`, *optional*):
+        sender_chat (:obj:`~kirugram.types.Chat`, *optional*):
             Sender of the message, sent on behalf of a chat.
             The channel itself for channel messages.
             The supergroup itself for messages from anonymous group administrators.
@@ -127,14 +127,14 @@ class Message(Object, Update):
         sender_boost_count (``int``, *optional*):
             If the sender of the message boosted the chat, the number of boosts added by the user.
 
-        sender_business_bot (:obj:`~pyrogram.types.User`, *optional*):
+        sender_business_bot (:obj:`~kirugram.types.User`, *optional*):
             The bot that actually sent the message on behalf of the business account. Available only for outgoing messages sent on behalf of the connected business account.
 
         sender_tag (``str``, *optional*):
             Tag or custom title of the sender of the message.
             For supergroups only.
 
-        receiver_user (:obj:`~pyrogram.types.User`, *optional*):
+        receiver_user (:obj:`~kirugram.types.User`, *optional*):
             For ephemeral messages, the user who received the message.
 
         ephemeral_message_id (``int``, *optional*):
@@ -146,10 +146,10 @@ class Message(Object, Update):
 
         guest_query_id (``str``, *optional*):
             The unique identifier for the guest query.
-            Use this identifier with the method :meth:`~pyrogram.Client.answer_guest_query` to send a response message.
+            Use this identifier with the method :meth:`~kirugram.Client.answer_guest_query` to send a response message.
             If non-empty, the message belongs to the chat where the guest bot was summoned, which may not coincide with other existing bot chats sharing the same identifier.
 
-        chat (:obj:`~pyrogram.types.Chat`, *optional*):
+        chat (:obj:`~kirugram.types.Chat`, *optional*):
             Conversation the message belongs to.
 
         topic_message (``bool``, *optional*):
@@ -161,12 +161,12 @@ class Message(Object, Update):
         from_offline (``bool``, *optional*):
             True, if the message was sent by an implicit action, for example, as an away or a greeting business message, or as a scheduled message.
 
-        topic (:obj:`~pyrogram.types.ForumTopic` | :obj:`~pyrogram.types.DirectMessagesTopic`, *optional*):
+        topic (:obj:`~kirugram.types.ForumTopic` | :obj:`~kirugram.types.DirectMessagesTopic`, *optional*):
             Topic the message belongs to.
-            A :obj:`~pyrogram.types.ForumTopic` in a forum, a :obj:`~pyrogram.types.DirectMessagesTopic` in a channel
+            A :obj:`~kirugram.types.ForumTopic` in a forum, a :obj:`~kirugram.types.DirectMessagesTopic` in a channel
             direct messages chat.
 
-        forward_origin (:obj:`~pyrogram.types.MessageOrigin`, *optional*):
+        forward_origin (:obj:`~kirugram.types.MessageOrigin`, *optional*):
             Information about the original message for forwarded messages.
 
         message_thread_id (``int``, *optional*):
@@ -181,7 +181,7 @@ class Message(Object, Update):
             Unique identifier of the message effect.
             For private chats only.
 
-        rich_message (:obj:`~pyrogram.types.Message`, *optional*):
+        rich_message (:obj:`~kirugram.types.Message`, *optional*):
             Message is a rich formatted message.
 
         reply_to_message_id (``int``, *optional*):
@@ -199,11 +199,11 @@ class Message(Object, Update):
         reply_to_poll_option_id (``str``, *optional*):
             Persistent identifier of the specific poll option that is being replied to.
 
-        reply_to_message (:obj:`~pyrogram.types.Message`, *optional*):
+        reply_to_message (:obj:`~kirugram.types.Message`, *optional*):
             For replies, the original message. Note that the Message object in this field will not contain
             further reply_to_message fields even if it itself is a reply.
 
-        reply_to_story (:obj:`~pyrogram.types.Story`, *optional*):
+        reply_to_story (:obj:`~kirugram.types.Story`, *optional*):
             For replies, the original story.
 
         reply_to_checklist_task_id (``int``, *optional*):
@@ -216,20 +216,20 @@ class Message(Object, Update):
             The message is empty.
             A message can be empty in case it was deleted or you tried to retrieve a message that doesn't exist yet.
 
-        service (:obj:`~pyrogram.enums.MessageServiceType`, *optional*):
+        service (:obj:`~kirugram.enums.MessageServiceType`, *optional*):
             The message is a service message.
             This field will contain the enumeration type of the service message.
             You can use ``service = getattr(message, message.service.value)`` to access the service message.
 
-        media (:obj:`~pyrogram.enums.MessageMediaType`, *optional*):
+        media (:obj:`~kirugram.enums.MessageMediaType`, *optional*):
             The message is a media message.
             This field will contain the enumeration type of the media message.
             You can use ``media = getattr(message, message.media.value)`` to access the media message.
 
-        paid_media (:obj:`~pyrogram.types.PaidMediaInfo`, *optional*):
+        paid_media (:obj:`~kirugram.types.PaidMediaInfo`, *optional*):
             The message is a paid media message.
 
-        checklist (:obj:`~pyrogram.types.Checklist`, *optional*):
+        checklist (:obj:`~kirugram.types.Checklist`, *optional*):
             The message is a checklist message.
 
         show_caption_above_media (``bool``, *optional*):
@@ -265,58 +265,58 @@ class Message(Object, Update):
             *text.html* to get the marked up message text. In case there is no entity, the fields
             will contain the same text as *text*.
 
-        entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+        entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
             For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text.
 
-        caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+        caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
             For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear
             in the caption.
 
-        audio (:obj:`~pyrogram.types.Audio`, *optional*):
+        audio (:obj:`~kirugram.types.Audio`, *optional*):
             Message is an audio file, information about the file.
 
-        document (:obj:`~pyrogram.types.Document`, *optional*):
+        document (:obj:`~kirugram.types.Document`, *optional*):
             Message is a general file, information about the file.
 
-        photo (:obj:`~pyrogram.types.Photo`, *optional*):
+        photo (:obj:`~kirugram.types.Photo`, *optional*):
             Message is a photo, information about the photo.
 
-        live_photo (:obj:`~pyrogram.types.LivePhoto`, *optional*):
+        live_photo (:obj:`~kirugram.types.LivePhoto`, *optional*):
             Message is a live photo, information about the live photo.
             For backward compatibility, when this field is set, the photo field will also be set.
 
-        sticker (:obj:`~pyrogram.types.Sticker`, *optional*):
+        sticker (:obj:`~kirugram.types.Sticker`, *optional*):
             Message is a sticker, information about the sticker.
 
-        animation (:obj:`~pyrogram.types.Animation`, *optional*):
+        animation (:obj:`~kirugram.types.Animation`, *optional*):
             Message is an animation, information about the animation.
 
-        game (:obj:`~pyrogram.types.Game`, *optional*):
+        game (:obj:`~kirugram.types.Game`, *optional*):
             Message is a game, information about the game.
 
-        giveaway (:obj:`~pyrogram.types.Giveaway`, *optional*):
+        giveaway (:obj:`~kirugram.types.Giveaway`, *optional*):
             Message is a giveaway, information about the giveaway.
 
-        invoice (:obj:`~pyrogram.types.Invoice`, *optional*):
+        invoice (:obj:`~kirugram.types.Invoice`, *optional*):
             Message is a invoice, information about the invoice.
             `More about payments » <https://core.telegram.org/bots/api#payments>`_
 
-        story (:obj:`~pyrogram.types.Story`, *optional*):
+        story (:obj:`~kirugram.types.Story`, *optional*):
             Message is a story, information about the story.
 
-        video (:obj:`~pyrogram.types.Video`, *optional*):
+        video (:obj:`~kirugram.types.Video`, *optional*):
             Message is a video, information about the video.
 
         video_processing_pending (``bool``, *optional*):
             True, if the video is still processing.
 
-        voice (:obj:`~pyrogram.types.Voice`, *optional*):
+        voice (:obj:`~kirugram.types.Voice`, *optional*):
             Message is a voice message, information about the file.
 
-        video_note (:obj:`~pyrogram.types.VideoNote`, *optional*):
+        video_note (:obj:`~kirugram.types.VideoNote`, *optional*):
             Message is a video note, information about the video message.
 
-        widget (:obj:`~pyrogram.types.Widget`, *optional*):
+        widget (:obj:`~kirugram.types.Widget`, *optional*):
             Message is an HTML widget, information about the widget.
 
         caption (``str``, *optional*):
@@ -325,47 +325,47 @@ class Message(Object, Update):
             *caption.html* to get the marked up caption text. In case there is no caption entity, the fields
             will contain the same text as *caption*.
 
-        contact (:obj:`~pyrogram.types.Contact`, *optional*):
+        contact (:obj:`~kirugram.types.Contact`, *optional*):
             Message is a shared contact, information about the contact.
 
-        location (:obj:`~pyrogram.types.Location`, *optional*):
+        location (:obj:`~kirugram.types.Location`, *optional*):
             Message is a shared location, information about the location.
 
-        venue (:obj:`~pyrogram.types.Venue`, *optional*):
+        venue (:obj:`~kirugram.types.Venue`, *optional*):
             Message is a venue, information about the venue.
 
-        web_page (:obj:`~pyrogram.types.WebPage`, *optional*):
+        web_page (:obj:`~kirugram.types.WebPage`, *optional*):
             Message was sent with a webpage preview.
 
-        link_preview_options (:obj:`~pyrogram.types.LinkPreviewOptions`, *optional*):
+        link_preview_options (:obj:`~kirugram.types.LinkPreviewOptions`, *optional*):
             Options used for link preview generation for the message.
 
-        poll (:obj:`~pyrogram.types.Poll`, *optional*):
+        poll (:obj:`~kirugram.types.Poll`, *optional*):
             Message is a native poll, information about the poll.
 
-        dice (:obj:`~pyrogram.types.Dice`, *optional*):
+        dice (:obj:`~kirugram.types.Dice`, *optional*):
             A dice containing a value that is randomly generated by Telegram.
 
-        new_chat_members (List of :obj:`~pyrogram.types.User`, *optional*):
+        new_chat_members (List of :obj:`~kirugram.types.User`, *optional*):
             New members that were added to the group or supergroup and information about them
             (the bot itself may be one of these members).
 
-        left_chat_member (:obj:`~pyrogram.types.User`, *optional*):
+        left_chat_member (:obj:`~kirugram.types.User`, *optional*):
             A member was removed from the group, information about them (this member may be the bot itself).
 
-        chat_owner_left (:obj:`~pyrogram.types.ChatOwnerLeft`, *optional*):
+        chat_owner_left (:obj:`~kirugram.types.ChatOwnerLeft`, *optional*):
             Service message: chat owner has left.
 
-        chat_owner_changed (:obj:`~pyrogram.types.ChatOwnerChanged`, *optional*):
+        chat_owner_changed (:obj:`~kirugram.types.ChatOwnerChanged`, *optional*):
             Service message: chat owner has changed.
 
-        chat_join_type (:obj:`~pyrogram.enums.ChatJoinType`, *optional*):
+        chat_join_type (:obj:`~kirugram.enums.ChatJoinType`, *optional*):
             This field will contain the enumeration type of how the user had joined the chat.
 
         new_chat_title (``str``, *optional*):
             A chat title was changed to this value.
 
-        new_chat_photo (:obj:`~pyrogram.types.Photo`, *optional*):
+        new_chat_photo (:obj:`~kirugram.types.Photo`, *optional*):
             A chat photo was change to this value.
 
         delete_chat_photo (``bool``, *optional*):
@@ -398,12 +398,12 @@ class Message(Object, Update):
             in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float
             type are safe for storing this identifier.
 
-        pinned_message (:obj:`~pyrogram.types.Message`, *optional*):
+        pinned_message (:obj:`~kirugram.types.Message`, *optional*):
             Specified message was pinned.
             Note that the Message object in this field will not contain further reply_to_message fields even if it
             is itself a reply.
 
-        game_high_score (:obj:`~pyrogram.types.GameHighScore`, *optional*):
+        game_high_score (:obj:`~kirugram.types.GameHighScore`, *optional*):
             The game score for a user.
             The reply_to_message field will contain the game Message.
 
@@ -413,7 +413,7 @@ class Message(Object, Update):
         forwards (``int``, *optional*):
             Channel post forwards.
 
-        via_bot (:obj:`~pyrogram.types.User`):
+        via_bot (:obj:`~kirugram.types.User`):
             The information of the bot that generated the message from an inline query of a user.
 
         outgoing (``bool``, *optional*):
@@ -422,109 +422,109 @@ class Message(Object, Update):
             Messages sent from yourself to other chats are outgoing (*outgoing* is True).
             An exception is made for your own personal chat; messages sent there will be incoming.
 
-        external_reply (:obj:`~pyrogram.types.ExternalReplyInfo`, *optional*):
+        external_reply (:obj:`~kirugram.types.ExternalReplyInfo`, *optional*):
             Information about the message that is being replied to, which may come from another chat or forum topic.
 
-        quote (:obj:`~pyrogram.types.TextQuote`, *optional*):
+        quote (:obj:`~kirugram.types.TextQuote`, *optional*):
             Chosen quote from the replied message.
 
         matches (List of regex Matches, *optional*):
             A list containing all `Match Objects <https://docs.python.org/3/library/re.html#match-objects>`_ that match
-            the text of this message. Only applicable when using :obj:`filters.regex <pyrogram.filters.regex>`.
+            the text of this message. Only applicable when using :obj:`filters.regex <kirugram.filters.regex>`.
 
         command (List of ``str``, *optional*):
             A list containing the command and its arguments, if any.
             E.g.: "/start 1 2 3" would produce ["start", "1", "2", "3"].
-            Only applicable when using :obj:`~pyrogram.filters.command`.
+            Only applicable when using :obj:`~kirugram.filters.command`.
 
-        forum_topic_created (:obj:`~pyrogram.types.ForumTopicCreated`, *optional*):
+        forum_topic_created (:obj:`~kirugram.types.ForumTopicCreated`, *optional*):
             Service message: forum topic created
 
-        forum_topic_closed (:obj:`~pyrogram.types.ForumTopicClosed`, *optional*):
+        forum_topic_closed (:obj:`~kirugram.types.ForumTopicClosed`, *optional*):
             Service message: forum topic closed
 
-        forum_topic_reopened (:obj:`~pyrogram.types.ForumTopicReopened`, *optional*):
+        forum_topic_reopened (:obj:`~kirugram.types.ForumTopicReopened`, *optional*):
             Service message: forum topic reopened
 
-        forum_topic_edited (:obj:`~pyrogram.types.ForumTopicEdited`, *optional*):
+        forum_topic_edited (:obj:`~kirugram.types.ForumTopicEdited`, *optional*):
             Service message: forum topic edited
 
-        general_forum_topic_hidden (:obj:`~pyrogram.types.GeneralForumTopicHidden`, *optional*):
+        general_forum_topic_hidden (:obj:`~kirugram.types.GeneralForumTopicHidden`, *optional*):
             Service message: general forum topic hidden
 
-        general_forum_topic_unhidden (:obj:`~pyrogram.types.GeneralForumTopicUnhidden`, *optional*):
+        general_forum_topic_unhidden (:obj:`~kirugram.types.GeneralForumTopicUnhidden`, *optional*):
             Service message: general forum topic unhidden
 
-        video_chat_scheduled (:obj:`~pyrogram.types.VideoChatScheduled`, *optional*):
+        video_chat_scheduled (:obj:`~kirugram.types.VideoChatScheduled`, *optional*):
             Service message: voice chat scheduled.
 
-        history_cleared (:obj:`~pyrogram.types.HistoryCleared`, *optional*):
+        history_cleared (:obj:`~kirugram.types.HistoryCleared`, *optional*):
             Service message: history cleared
 
-        video_chat_started (:obj:`~pyrogram.types.VideoChatStarted`, *optional*):
+        video_chat_started (:obj:`~kirugram.types.VideoChatStarted`, *optional*):
             Service message: the voice chat started.
 
-        video_chat_ended (:obj:`~pyrogram.types.VideoChatEnded`, *optional*):
+        video_chat_ended (:obj:`~kirugram.types.VideoChatEnded`, *optional*):
             Service message: the voice chat has ended.
 
-        video_chat_members_invited (:obj:`~pyrogram.types.VideoChatMembersInvited`, *optional*):
+        video_chat_members_invited (:obj:`~kirugram.types.VideoChatMembersInvited`, *optional*):
             Service message: new members were invited to the voice chat.
 
-        phone_call_started (:obj:`~pyrogram.types.PhoneCallStarted`, *optional*):
+        phone_call_started (:obj:`~kirugram.types.PhoneCallStarted`, *optional*):
             Service message: phone call started.
 
-        phone_call_ended (:obj:`~pyrogram.types.PhoneCallEnded`, *optional*):
+        phone_call_ended (:obj:`~kirugram.types.PhoneCallEnded`, *optional*):
             Service message: phone call ended.
 
-        web_app_data (:obj:`~pyrogram.types.WebAppData`, *optional*):
+        web_app_data (:obj:`~kirugram.types.WebAppData`, *optional*):
             Service message: web app data sent to the bot.
 
-        paid_messages_refunded (:obj:`~pyrogram.types.PaidMessagesRefunded`, *optional*):
+        paid_messages_refunded (:obj:`~kirugram.types.PaidMessagesRefunded`, *optional*):
             Service message: paid messages refunded.
 
-        paid_messages_price_changed (:obj:`~pyrogram.types.PaidMessagesPriceChanged`, *optional*):
+        paid_messages_price_changed (:obj:`~kirugram.types.PaidMessagesPriceChanged`, *optional*):
             Service message: paid messages price.
 
-        direct_message_price_changed (:obj:`~pyrogram.types.DirectMessagePriceChanged`, *optional*):
+        direct_message_price_changed (:obj:`~kirugram.types.DirectMessagePriceChanged`, *optional*):
             Service message: direct messages price.
 
-        checklist_tasks_done (:obj:`~pyrogram.types.ChecklistTasksDone`, *optional*):
+        checklist_tasks_done (:obj:`~kirugram.types.ChecklistTasksDone`, *optional*):
             Service message: checklist tasks done.
 
-        checklist_tasks_added (:obj:`~pyrogram.types.ChecklistTasksAdded`, *optional*):
+        checklist_tasks_added (:obj:`~kirugram.types.ChecklistTasksAdded`, *optional*):
             Service message: checklist tasks added.
 
-        community_chat_added (:obj:`~pyrogram.types.CommunityChatAdded`, *optional*):
-            Service message: chat added to a :obj:`~pyrogram.types.Community`.
+        community_chat_added (:obj:`~kirugram.types.CommunityChatAdded`, *optional*):
+            Service message: chat added to a :obj:`~kirugram.types.Community`.
 
-        community_chat_removed (:obj:`~pyrogram.types.CommunityChatRemoved`, *optional*):
-            Service message: chat removed from a :obj:`~pyrogram.types.Community`.
+        community_chat_removed (:obj:`~kirugram.types.CommunityChatRemoved`, *optional*):
+            Service message: chat removed from a :obj:`~kirugram.types.Community`.
 
-        community_chat_joined (:obj:`~pyrogram.types.CommunityChatJoined`, *optional*):
-            Service message: chat was joined by a user from a :obj:`~pyrogram.types.Community`.
+        community_chat_joined (:obj:`~kirugram.types.CommunityChatJoined`, *optional*):
+            Service message: chat was joined by a user from a :obj:`~kirugram.types.Community`.
 
-        ton_wallet_transfer (:obj:`~pyrogram.types.TonWalletTransfer`, *optional*):
+        ton_wallet_transfer (:obj:`~kirugram.types.TonWalletTransfer`, *optional*):
             Service message: a transfer with a TON wallet.
 
-        ton_connect_request (:obj:`~pyrogram.types.TonConnectRequest`, *optional*):
+        ton_connect_request (:obj:`~kirugram.types.TonConnectRequest`, *optional*):
             Service message: a request from a dApp was received through TON Connect.
 
-        paid_messages_waived (:obj:`~pyrogram.types.PaidMessagesWaived`, *optional*):
+        paid_messages_waived (:obj:`~kirugram.types.PaidMessagesWaived`, *optional*):
             Service message: the sender of the message used a link of the other user, which allows sending messages to the user without paying Telegram Stars.
 
-        premium_gift_code (:obj:`~pyrogram.types.PremiumGiftCode`, *optional*):
+        premium_gift_code (:obj:`~kirugram.types.PremiumGiftCode`, *optional*):
             Service message: premium gift code information.
 
-        gifted_premium (:obj:`~pyrogram.types.GiftedPremium`, *optional*):
+        gifted_premium (:obj:`~kirugram.types.GiftedPremium`, *optional*):
             Service message: gifted premium information.
 
-        gifted_stars (:obj:`~pyrogram.types.GiftedStars`, *optional*):
+        gifted_stars (:obj:`~kirugram.types.GiftedStars`, *optional*):
             Service message: gifted stars information.
 
-        gifted_grams (:obj:`~pyrogram.types.GiftedGrams`, *optional*):
+        gifted_grams (:obj:`~kirugram.types.GiftedGrams`, *optional*):
             Service message: gifted TON Grams information.
 
-        gift (:obj:`~pyrogram.types.Gift`, *optional*):
+        gift (:obj:`~kirugram.types.Gift`, *optional*):
             Service message: star gift information.
 
         is_prepaid_upgrade (``bool``, *optional*):
@@ -533,61 +533,61 @@ class Message(Object, Update):
         is_from_auction (``bool``, *optional*):
             True, if the message is a notification about a gift won on an auction.
 
-        suggest_profile_photo (:obj:`~pyrogram.types.Photo`, *optional*):
+        suggest_profile_photo (:obj:`~kirugram.types.Photo`, *optional*):
             Service message: suggested profile photo.
 
-        suggest_birthday (:obj:`~pyrogram.types.Birthday`, *optional*):
+        suggest_birthday (:obj:`~kirugram.types.Birthday`, *optional*):
             Service message: suggested birthday.
 
-        users_shared (:obj:`~pyrogram.types.UsersShared`, *optional*):
+        users_shared (:obj:`~kirugram.types.UsersShared`, *optional*):
             Service message: users shared information.
 
-        chat_shared (:obj:`~pyrogram.types.ChatShared`, *optional*):
+        chat_shared (:obj:`~kirugram.types.ChatShared`, *optional*):
             Service message: chat shared information.
 
-        successful_payment (:obj:`~pyrogram.types.SuccessfulPayment`, *optional*):
+        successful_payment (:obj:`~kirugram.types.SuccessfulPayment`, *optional*):
             Service message: successful payment.
 
-        refunded_payment (:obj:`~pyrogram.types.RefundedPayment`, *optional*):
+        refunded_payment (:obj:`~kirugram.types.RefundedPayment`, *optional*):
             Service message: refunded payment.
 
-        suggested_post_approval_failed (:obj:`~pyrogram.types.SuggestedPostApprovalFailed`, *optional*):
+        suggested_post_approval_failed (:obj:`~kirugram.types.SuggestedPostApprovalFailed`, *optional*):
             Service message: suggested post approval failed.
 
-        suggested_post_approved (:obj:`~pyrogram.types.SuggestedPostApproved`, *optional*):
+        suggested_post_approved (:obj:`~kirugram.types.SuggestedPostApproved`, *optional*):
             Service message: suggested post approved.
 
-        suggested_post_declined (:obj:`~pyrogram.types.SuggestedPostDeclined`, *optional*):
+        suggested_post_declined (:obj:`~kirugram.types.SuggestedPostDeclined`, *optional*):
             Service message: suggested post declined.
 
-        suggested_post_paid (:obj:`~pyrogram.types.SuggestedPostPaid`, *optional*):
+        suggested_post_paid (:obj:`~kirugram.types.SuggestedPostPaid`, *optional*):
             Service message: suggested post paid.
 
-        suggested_post_refunded (:obj:`~pyrogram.types.SuggestedPostRefunded`, *optional*):
+        suggested_post_refunded (:obj:`~kirugram.types.SuggestedPostRefunded`, *optional*):
             Service message: suggested post refunded.
 
         giveaway_created (``bool``, *optional*):
             Service message: giveaway launched.
 
-        giveaway_winners (:obj:`~pyrogram.types.GiveawayWinners`, *optional*):
+        giveaway_winners (:obj:`~kirugram.types.GiveawayWinners`, *optional*):
             A giveaway with public winners was completed.
 
-        giveaway_completed (:obj:`~pyrogram.types.GiveawayCompleted`, *optional*):
+        giveaway_completed (:obj:`~kirugram.types.GiveawayCompleted`, *optional*):
             Service message: a giveaway without public winners was completed.
 
-        managed_bot_created (:obj:`~pyrogram.types.ManagedBotCreated`, *optional*):
+        managed_bot_created (:obj:`~kirugram.types.ManagedBotCreated`, *optional*):
             Service message: user created a bot that will be managed by the current bot.
 
-        poll_option_added (:obj:`~pyrogram.types.PollOptionAdded`, *optional*):
+        poll_option_added (:obj:`~kirugram.types.PollOptionAdded`, *optional*):
             Service message: answer option was added to a poll.
 
-        poll_option_deleted (:obj:`~pyrogram.types.PollOptionDeleted`, *optional*):
+        poll_option_deleted (:obj:`~kirugram.types.PollOptionDeleted`, *optional*):
             Service message: answer option was deleted from a poll.
 
-        chat_set_theme (:obj:`~pyrogram.types.ChatTheme`, *optional*):
+        chat_set_theme (:obj:`~kirugram.types.ChatTheme`, *optional*):
             Service message: The chat theme was changed.
 
-        chat_set_background (:obj:`~pyrogram.types.ChatBackground`, *optional*):
+        chat_set_background (:obj:`~kirugram.types.ChatBackground`, *optional*):
             Service message: The chat background was changed.
 
         set_message_auto_delete_time (``int``, *optional*):
@@ -597,34 +597,34 @@ class Message(Object, Update):
             Service message: The chat was boosted by the sender of the message.
             Number of times the chat was boosted.
 
-        write_access_allowed (:obj:`~pyrogram.types.WriteAccessAllowed`, *optional*):
+        write_access_allowed (:obj:`~kirugram.types.WriteAccessAllowed`, *optional*):
             Service message: the user allowed the bot to write messages after adding it to the attachment or side menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method `requestWriteAccess <https://core.telegram.org/bots/webapps#initializing-mini-apps>`__
 
         connected_website (``str``, *optional*):
             The domain name of the website on which the user has logged in. `More about Telegram Login <https://core.telegram.org/widgets/login>`__
 
-        contact_registered (:obj:`~pyrogram.types.ContactRegistered`, *optional*):
+        contact_registered (:obj:`~kirugram.types.ContactRegistered`, *optional*):
             Service message: Contact registered in Telegram.
 
-        proximity_alert_triggered (:obj:`~pyrogram.types.ProximityAlertTriggered`, *optional*):
+        proximity_alert_triggered (:obj:`~kirugram.types.ProximityAlertTriggered`, *optional*):
             Service message: A user in the chat came within proximity alert range.
 
-        giveaway_prize_stars (:obj:`~pyrogram.types.GiveawayPrizeStars`, *optional*):
+        giveaway_prize_stars (:obj:`~kirugram.types.GiveawayPrizeStars`, *optional*):
             Service message: Stars were received by the current user from a giveaway.
 
-        screenshot_taken (:obj:`~pyrogram.types.ScreenshotTaken`, *optional*):
+        screenshot_taken (:obj:`~kirugram.types.ScreenshotTaken`, *optional*):
             Service message: screenshot of a message in the chat has been taken.
 
-        upgraded_gift_purchase_offer (:obj:`~pyrogram.types.UpgradedGiftPurchaseOffer`, *optional*):
+        upgraded_gift_purchase_offer (:obj:`~kirugram.types.UpgradedGiftPurchaseOffer`, *optional*):
             Service message: An offer to purchase an upgraded gift was sent or received.
 
-        upgraded_gift_purchase_offer_rejected (:obj:`~pyrogram.types.UpgradedGiftPurchaseOfferRejected`, *optional*):
+        upgraded_gift_purchase_offer_rejected (:obj:`~kirugram.types.UpgradedGiftPurchaseOfferRejected`, *optional*):
             Service message: An offer to purchase a gift was rejected or expired.
 
-        chat_has_protected_content_toggled (:obj:`~pyrogram.types.ChatHasProtectedContentToggled`, *optional*):
+        chat_has_protected_content_toggled (:obj:`~kirugram.types.ChatHasProtectedContentToggled`, *optional*):
             Service message: An ``has_protected_content`` setting was changed or request to change it was rejected in a chat.
 
-        chat_has_protected_content_disable_requested (:obj:`~pyrogram.types.ChatHasProtectedContentDisableRequested`, *optional*):
+        chat_has_protected_content_disable_requested (:obj:`~kirugram.types.ChatHasProtectedContentDisableRequested`, *optional*):
             Service message: An process requested to disable ``has_protected_content`` in a chat.
 
         business_connection_id (``str``, *optional*):
@@ -632,11 +632,11 @@ class Message(Object, Update):
             If non-empty, the message belongs to a chat of the corresponding business account that is independent from any potential bot chat which might share the same identifier.
             This update may at times be triggered by unavailable changes to message fields that are either unavailable or not actively used by the current bot.
 
-        reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+        reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
             Additional interface options. An object for an inline keyboard, custom reply keyboard,
             instructions to remove reply keyboard or to force a reply from the user.
 
-        reactions (:obj:`~pyrogram.types.MessageReactions`):
+        reactions (:obj:`~kirugram.types.MessageReactions`):
             Reactions of this message.
 
         send_paid_messages_stars (``int``, *optional*):
@@ -655,13 +655,13 @@ class Message(Object, Update):
         pinned (``bool``, *optional*):
             True, if the message is pinned.
 
-        restriction_reason (List of :obj:`~pyrogram.types.RestrictionReason`, *optional*):
+        restriction_reason (List of :obj:`~kirugram.types.RestrictionReason`, *optional*):
             Contains a list of human-readable description of the reason why access to this message must be restricted.
 
-        fact_check (:obj:`~pyrogram.types.FactCheck`, *optional*):
+        fact_check (:obj:`~kirugram.types.FactCheck`, *optional*):
             Information about fact-check added to the message.
 
-        suggested_post_info (:obj:`~pyrogram.types.SuggestedPostInfo`, *optional*):
+        suggested_post_info (:obj:`~kirugram.types.SuggestedPostInfo`, *optional*):
             Information about the suggested post.
 
         channel_post (``bool``, *optional*):
@@ -674,13 +674,13 @@ class Message(Object, Update):
             IETF language tag of the message language on which it can be summarized.
             None if summary isn't available for the message.
 
-        guest_bot_caller_user (:obj:`~pyrogram.types.User`, *optional*):
+        guest_bot_caller_user (:obj:`~kirugram.types.User`, *optional*):
             For a message sent by a guest bot, this is the user whose original message triggered the bot's response.
 
-        guest_bot_caller_chat (:obj:`~pyrogram.types.Chat`, *optional*):
+        guest_bot_caller_chat (:obj:`~kirugram.types.Chat`, *optional*):
             For a message sent by a guest bot, this is the chat whose original message triggered the bot's response.
 
-        raw (:obj:`~pyrogram.raw.types.Message`, *optional*):
+        raw (:obj:`~kirugram.raw.types.Message`, *optional*):
             The raw message object, as received from the Telegram API.
 
         link (``str``, *property*):
@@ -696,7 +696,7 @@ class Message(Object, Update):
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         id: int,
         from_user: types.User | None = None,
         sender_chat: types.Chat | None = None,
@@ -1059,7 +1059,7 @@ class Message(Object, Update):
 
     @staticmethod
     async def _parse_service(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         message: raw.types.MessageService,
         users: dict[int, raw.base.User],
         chats: dict[int, raw.base.Chat],
@@ -1623,7 +1623,7 @@ class Message(Object, Update):
 
     @staticmethod
     async def _parse_message(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         message: raw.types.Message,
         users: dict[int, raw.base.User],
         chats: dict[int, raw.base.Chat],
@@ -2068,7 +2068,7 @@ class Message(Object, Update):
 
     @staticmethod
     async def _parse_ephemeral_message(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         message: raw.types.EphemeralMessage,
         users: dict[int, raw.base.User],
         chats: dict[int, raw.base.Chat],
@@ -2401,7 +2401,7 @@ class Message(Object, Update):
 
     @staticmethod
     async def __parse_reply(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         parsed_message: Message,
         message: raw.base.Message,
         users: dict[int, raw.base.User],
@@ -2481,7 +2481,7 @@ class Message(Object, Update):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         message: raw.base.Message | raw.base.EphemeralMessage,
         users: dict[int, raw.base.User],
         chats: dict[int, raw.base.Chat],
@@ -2653,7 +2653,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_animation` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_animation` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -2676,11 +2676,11 @@ class Message(Object, Update):
                 By default, the server will save into your own collection any new animation you send.
                 Pass True to automatically unsave the sent animation. Defaults to False.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             has_spoiler (``bool``, *optional*):
@@ -2735,10 +2735,10 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -2765,8 +2765,8 @@ class Message(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -2845,7 +2845,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_animation` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_animation` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -2867,11 +2867,11 @@ class Message(Object, Update):
                 By default, the server will save into your own collection any new animation you send.
                 Pass True to automatically unsave the sent animation. Defaults to False.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             has_spoiler (``bool``, *optional*):
@@ -2907,7 +2907,7 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -2929,10 +2929,10 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -2959,8 +2959,8 @@ class Message(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -3030,7 +3030,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_audio` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_audio` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -3049,11 +3049,11 @@ class Message(Object, Update):
             caption (``str``, *optional*):
                 Audio caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             duration (``int``, *optional*):
@@ -3102,10 +3102,10 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -3132,8 +3132,8 @@ class Message(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -3206,7 +3206,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_audio` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_audio` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -3224,11 +3224,11 @@ class Message(Object, Update):
             caption (``str``, *optional*):
                 Audio caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             duration (``int``, *optional*):
@@ -3258,7 +3258,7 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -3280,10 +3280,10 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -3310,8 +3310,8 @@ class Message(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -3370,7 +3370,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_contact` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_contact` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -3416,15 +3416,15 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
 
         Raises:
@@ -3482,7 +3482,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_contact` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_contact` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -3511,7 +3511,7 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -3530,15 +3530,15 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
 
         Raises:
@@ -3596,7 +3596,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_document` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_document` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -3621,11 +3621,11 @@ class Message(Object, Update):
             caption (``str``, *optional*):
                 Document caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             file_name (``str``, *optional*):
@@ -3664,10 +3664,10 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -3694,8 +3694,8 @@ class Message(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -3764,7 +3764,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_document` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_document` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -3788,11 +3788,11 @@ class Message(Object, Update):
             caption (``str``, *optional*):
                 Document caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             file_name (``str``, *optional*):
@@ -3812,7 +3812,7 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -3834,10 +3834,10 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -3864,8 +3864,8 @@ class Message(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -3916,7 +3916,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_game` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_game` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -3948,12 +3948,12 @@ class Message(Object, Update):
                 The relevant Stars will be withdrawn from the bot's balance.
                 For bots only.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup`, *optional*):
                 An object for an inline keyboard. If empty, one ‘Play game_title’ button will be shown automatically.
                 If not empty, the first button must launch the game.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
 
         Raises:
@@ -3987,7 +3987,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_game` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_game` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -4009,7 +4009,7 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             protect_content (``bool``, *optional*):
@@ -4021,12 +4021,12 @@ class Message(Object, Update):
                 The relevant Stars will be withdrawn from the bot's balance.
                 For bots only.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup`, *optional*):
                 An object for an inline keyboard. If empty, one ‘Play game_title’ button will be shown automatically.
                 If not empty, the first button must launch the game.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
 
         Raises:
@@ -4084,7 +4084,7 @@ class Message(Object, Update):
         parse_mode: enums.ParseMode | None = None,
         caption_entities: list[types.MessageEntity] | None = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_invoice` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_invoice` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -4104,7 +4104,7 @@ class Message(Object, Update):
             currency (``str``):
                 Three-letter ISO 4217 currency code, see `more on currencies <https://core.telegram.org/bots/payments#supported-currencies>`_. Pass ``XTR`` for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
 
-            prices (List of :obj:`~pyrogram.types.LabeledPrice`):
+            prices (List of :obj:`~kirugram.types.LabeledPrice`):
                 Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
 
             provider_token (``str``, *optional*):
@@ -4170,7 +4170,7 @@ class Message(Object, Update):
                 Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
                 The relevant Stars will be withdrawn from the bot's balance.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
             subscription_expiration_date (``int``, *optional*):
@@ -4178,22 +4178,22 @@ class Message(Object, Update):
                 Currently the only allowed subscription period is 30*24*60*60 (1 month).
                 For recurring payments only.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
             caption (``str``, *optional*):
                 Document caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent invoice message is returned, otherwise, in
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent invoice message is returned, otherwise, in
             case the server answered with no message, None is returned.
         """
         return await self._client.send_invoice(
@@ -4275,7 +4275,7 @@ class Message(Object, Update):
         parse_mode: enums.ParseMode | None = None,
         caption_entities: list[types.MessageEntity] | None = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_invoice` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_invoice` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -4294,10 +4294,10 @@ class Message(Object, Update):
             currency (``str``):
                 Three-letter ISO 4217 currency code, see `more on currencies <https://core.telegram.org/bots/payments#supported-currencies>`_. Pass ``XTR`` for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
 
-            prices (List of :obj:`~pyrogram.types.LabeledPrice`):
+            prices (List of :obj:`~kirugram.types.LabeledPrice`):
                 Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             provider_token (``str``, *optional*):
@@ -4363,7 +4363,7 @@ class Message(Object, Update):
                 Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
                 The relevant Stars will be withdrawn from the bot's balance.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
             subscription_expiration_date (``int``, *optional*):
@@ -4371,22 +4371,22 @@ class Message(Object, Update):
                 Currently the only allowed subscription period is 30*24*60*60 (1 month).
                 For recurring payments only.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
             caption (``str``, *optional*):
                 Document caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent invoice message is returned, otherwise, in
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent invoice message is returned, otherwise, in
             case the server answered with no message, None is returned.
         """
         return await self._client.send_invoice(
@@ -4450,7 +4450,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_location` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_location` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -4506,15 +4506,15 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
 
         Raises:
@@ -4576,7 +4576,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_location` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_location` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -4615,7 +4615,7 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -4634,15 +4634,15 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
 
         Raises:
@@ -4686,7 +4686,7 @@ class Message(Object, Update):
         allow_paid_broadcast: bool | None = None,
         paid_message_star_count: int | None = None,
     ) -> list[types.Message]:
-        """Shortcut for method :obj:`~pyrogram.Client.send_media_group` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_media_group` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -4696,8 +4696,8 @@ class Message(Object, Update):
 
         Parameters:
             media (``list``):
-                A list containing either :obj:`~pyrogram.types.InputMediaPhoto` or
-                :obj:`~pyrogram.types.InputMediaVideo` objects
+                A list containing either :obj:`~kirugram.types.InputMediaPhoto` or
+                :obj:`~kirugram.types.InputMediaVideo` objects
                 describing photos and videos to be sent, must include 2–10 items.
 
             disable_notification (``bool``, *optional*):
@@ -4728,7 +4728,7 @@ class Message(Object, Update):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
         Returns:
-            List of :obj:`~pyrogram.types.Message`: On success, a list of the sent messages is returned.
+            List of :obj:`~kirugram.types.Message`: On success, a list of the sent messages is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -4761,7 +4761,7 @@ class Message(Object, Update):
         allow_paid_broadcast: bool | None = None,
         paid_message_star_count: int | None = None,
     ) -> list[types.Message]:
-        """Shortcut for method :obj:`~pyrogram.Client.send_media_group` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_media_group` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -4770,8 +4770,8 @@ class Message(Object, Update):
 
         Parameters:
             media (``list``):
-                A list containing either :obj:`~pyrogram.types.InputMediaPhoto` or
-                :obj:`~pyrogram.types.InputMediaVideo` objects
+                A list containing either :obj:`~kirugram.types.InputMediaPhoto` or
+                :obj:`~kirugram.types.InputMediaVideo` objects
                 describing photos and videos to be sent, must include 2–10 items.
 
             disable_notification (``bool``, *optional*):
@@ -4782,7 +4782,7 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -4805,7 +4805,7 @@ class Message(Object, Update):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
         Returns:
-            List of :obj:`~pyrogram.types.Message`: On success, a list of the sent messages is returned.
+            List of :obj:`~kirugram.types.Message`: On success, a list of the sent messages is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -4848,7 +4848,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_message` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_message` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -4861,14 +4861,14 @@ class Message(Object, Update):
             text (``str``):
                 Text of the message to be sent.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in message text, which can be specified instead of *parse_mode*.
 
-            link_preview_options (:obj:`~pyrogram.types.LinkPreviewOptions`, *optional*):
+            link_preview_options (:obj:`~kirugram.types.LinkPreviewOptions`, *optional*):
                 Options used for link preview generation for the message.
 
             disable_notification (``bool``, *optional*):
@@ -4898,15 +4898,15 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
 
         Raises:
@@ -4968,7 +4968,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_message` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_message` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -4980,14 +4980,14 @@ class Message(Object, Update):
             text (``str``):
                 Text of the message to be sent.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in message text, which can be specified instead of *parse_mode*.
 
-            link_preview_options (:obj:`~pyrogram.types.LinkPreviewOptions`, *optional*):
+            link_preview_options (:obj:`~kirugram.types.LinkPreviewOptions`, *optional*):
                 Options used for link preview generation for the message.
 
             disable_notification (``bool``, *optional*):
@@ -4998,7 +4998,7 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -5020,15 +5020,15 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
 
         Raises:
@@ -5088,7 +5088,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_photo` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_photo` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -5107,11 +5107,11 @@ class Message(Object, Update):
             caption (``str``, *optional*):
                 Photo caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             has_spoiler (``bool``, *optional*):
@@ -5156,10 +5156,10 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -5186,8 +5186,8 @@ class Message(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -5258,7 +5258,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_photo` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_photo` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -5276,11 +5276,11 @@ class Message(Object, Update):
             caption (``str``, *optional*):
                 Photo caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             has_spoiler (``bool``, *optional*):
@@ -5302,7 +5302,7 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -5328,10 +5328,10 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -5358,8 +5358,8 @@ class Message(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -5425,7 +5425,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_live_photo` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_live_photo` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -5454,11 +5454,11 @@ class Message(Object, Update):
             caption (``str``, *optional*):
                 Video caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             has_spoiler (``bool``, *optional*):
@@ -5500,10 +5500,10 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -5530,8 +5530,8 @@ class Message(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -5604,7 +5604,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_live_photo` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_live_photo` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -5632,11 +5632,11 @@ class Message(Object, Update):
             caption (``str``, *optional*):
                 Video caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             has_spoiler (``bool``, *optional*):
@@ -5659,7 +5659,7 @@ class Message(Object, Update):
             show_caption_above_media (``bool``, *optional*):
                 Pass True, if the caption must be shown above the message media.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -5681,10 +5681,10 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -5711,8 +5711,8 @@ class Message(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -5786,7 +5786,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_poll` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_poll` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -5799,26 +5799,26 @@ class Message(Object, Update):
                 await message.reply_poll("This is a poll", ["A", "B", "C"])
 
         Parameters:
-            question (``str`` | :obj:`~pyrogram.types.FormattedText`):
+            question (``str`` | :obj:`~kirugram.types.FormattedText`):
                 Poll question, 1-255 characters (up to 300 characters for bots).
                 Only custom emoji entities are allowed to be added and only by Premium users.
 
-            options (List of :obj:`~pyrogram.types.InputPollOption`):
+            options (List of :obj:`~kirugram.types.InputPollOption`):
                 List of 1-12 answer options, each 1-100 characters.
 
-            description (``str`` | :obj:`~pyrogram.types.FormattedText`, *optional*):
+            description (``str`` | :obj:`~kirugram.types.FormattedText`, *optional*):
                 Description of the poll to be sent, 0-1024 characters after entities parsing.
 
-            description_media (:obj:`~pyrogram.types.InputPollMedia`, *optional*):
+            description_media (:obj:`~kirugram.types.InputPollMedia`, *optional*):
                 Media attached to the poll.
 
             is_anonymous (``bool``, *optional*):
                 True, if the poll needs to be anonymous.
                 Defaults to True.
 
-            type (:obj`~pyrogram.enums.PollType`, *optional*):
-                Poll type, :obj:`~pyrogram.enums.PollType.QUIZ` or :obj:`~pyrogram.enums.PollType.REGULAR`.
-                Defaults to :obj:`~pyrogram.enums.PollType.REGULAR`.
+            type (:obj`~kirugram.enums.PollType`, *optional*):
+                Poll type, :obj:`~kirugram.enums.PollType.QUIZ` or :obj:`~kirugram.enums.PollType.REGULAR`.
+                Defaults to :obj:`~kirugram.enums.PollType.REGULAR`.
 
             allows_multiple_answers (``bool``, *optional*):
                 Pass True, if the poll allows multiple answers.
@@ -5849,10 +5849,10 @@ class Message(Object, Update):
             correct_option_ids (List of ``int``, *optional*):
                 List of monotonically increasing 0-based identifiers of the correct answer options, required for polls in quiz mode.
 
-            explanation (``str`` | :obj:`~pyrogram.types.FormattedText`, *optional*):
+            explanation (``str`` | :obj:`~kirugram.types.FormattedText`, *optional*):
                 Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters with at most 2 line feeds after entities parsing.
 
-            explanation_media (:obj:`~pyrogram.types.InputPollMedia`, *optional*):
+            explanation_media (:obj:`~kirugram.types.InputPollMedia`, *optional*):
                 Media attached to the explanation.
 
             open_period (``int``, *optional*):
@@ -5897,12 +5897,12 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent poll message is returned, otherwise, in case
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent poll message is returned, otherwise, in case
             the server answered with no message, None is returned.
 
         Raises:
@@ -5979,7 +5979,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_poll` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_poll` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -5991,26 +5991,26 @@ class Message(Object, Update):
                 await message.answer_poll("This is a poll", ["A", "B", "C"])
 
         Parameters:
-            question (``str`` | :obj:`~pyrogram.types.FormattedText`):
+            question (``str`` | :obj:`~kirugram.types.FormattedText`):
                 Poll question, 1-255 characters (up to 300 characters for bots).
                 Only custom emoji entities are allowed to be added and only by Premium users.
 
-            options (List of :obj:`~pyrogram.types.InputPollOption`):
+            options (List of :obj:`~kirugram.types.InputPollOption`):
                 List of 1-12 answer options, each 1-100 characters.
 
-            description (``str`` | :obj:`~pyrogram.types.FormattedText`, *optional*):
+            description (``str`` | :obj:`~kirugram.types.FormattedText`, *optional*):
                 Description of the poll to be sent, 0-1024 characters after entities parsing.
 
-            description_media (:obj:`~pyrogram.types.InputPollMedia`, *optional*):
+            description_media (:obj:`~kirugram.types.InputPollMedia`, *optional*):
                 Media attached to the poll.
 
             is_anonymous (``bool``, *optional*):
                 True, if the poll needs to be anonymous.
                 Defaults to True.
 
-            type (:obj`~pyrogram.enums.PollType`, *optional*):
-                Poll type, :obj:`~pyrogram.enums.PollType.QUIZ` or :obj:`~pyrogram.enums.PollType.REGULAR`.
-                Defaults to :obj:`~pyrogram.enums.PollType.REGULAR`.
+            type (:obj`~kirugram.enums.PollType`, *optional*):
+                Poll type, :obj:`~kirugram.enums.PollType.QUIZ` or :obj:`~kirugram.enums.PollType.REGULAR`.
+                Defaults to :obj:`~kirugram.enums.PollType.REGULAR`.
 
             allows_multiple_answers (``bool``, *optional*):
                 Pass True, if the poll allows multiple answers.
@@ -6041,10 +6041,10 @@ class Message(Object, Update):
             correct_option_ids (List of ``int``, *optional*):
                 List of monotonically increasing 0-based identifiers of the correct answer options, required for polls in quiz mode.
 
-            explanation (``str`` | :obj:`~pyrogram.types.FormattedText`, *optional*):
+            explanation (``str`` | :obj:`~kirugram.types.FormattedText`, *optional*):
                 Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters with at most 2 line feeds after entities parsing.
 
-            explanation_media (:obj:`~pyrogram.types.InputPollMedia`, *optional*):
+            explanation_media (:obj:`~kirugram.types.InputPollMedia`, *optional*):
                 Media attached to the explanation.
 
             open_period (``int``, *optional*):
@@ -6079,7 +6079,7 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -6092,12 +6092,12 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent poll message is returned, otherwise, in case
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent poll message is returned, otherwise, in case
             the server answered with no message, None is returned.
 
         Raises:
@@ -6155,7 +6155,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_dice` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_dice` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -6179,7 +6179,7 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -6198,12 +6198,12 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent dice message is returned, otherwise, in case
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent dice message is returned, otherwise, in case
             the server answered with no message, None is returned.
         """
         return await self._client.send_dice(
@@ -6242,7 +6242,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_dice` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_dice` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -6265,10 +6265,10 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -6287,12 +6287,12 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent dice message is returned, otherwise, in case
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent dice message is returned, otherwise, in case
             the server answered with no message, None is returned.
         """
         return await self._client.send_dice(
@@ -6337,7 +6337,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_sticker` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_sticker` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -6359,11 +6359,11 @@ class Message(Object, Update):
             caption (``str``, *optional*):
                 Sticker caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             disable_notification (``bool``, *optional*):
@@ -6393,10 +6393,10 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -6423,8 +6423,8 @@ class Message(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -6489,7 +6489,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_sticker` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_sticker` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -6510,11 +6510,11 @@ class Message(Object, Update):
             caption (``str``, *optional*):
                 Sticker caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             disable_notification (``bool``, *optional*):
@@ -6525,7 +6525,7 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -6547,10 +6547,10 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -6577,8 +6577,8 @@ class Message(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -6635,7 +6635,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_venue` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_venue` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -6688,15 +6688,15 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
 
         Raises:
@@ -6758,7 +6758,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_venue` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_venue` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -6794,7 +6794,7 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -6813,15 +6813,15 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
 
         Raises:
@@ -6891,7 +6891,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_video` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_video` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -6910,11 +6910,11 @@ class Message(Object, Update):
             caption (``str``, *optional*):
                 Video caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             has_spoiler (``bool``, *optional*):
@@ -6995,10 +6995,10 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -7025,8 +7025,8 @@ class Message(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -7115,7 +7115,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_video` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_video` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -7133,11 +7133,11 @@ class Message(Object, Update):
             caption (``str``, *optional*):
                 Video caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             has_spoiler (``bool``, *optional*):
@@ -7195,7 +7195,7 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -7221,10 +7221,10 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -7251,8 +7251,8 @@ class Message(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -7323,7 +7323,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_video_note` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_video_note` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -7382,10 +7382,10 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -7412,8 +7412,8 @@ class Message(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -7478,7 +7478,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_video_note` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_video_note` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -7513,7 +7513,7 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -7539,10 +7539,10 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -7569,8 +7569,8 @@ class Message(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -7631,7 +7631,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_voice` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_voice` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -7650,11 +7650,11 @@ class Message(Object, Update):
             caption (``str``, *optional*):
                 Voice message caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             duration (``int``, *optional*):
@@ -7695,10 +7695,10 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -7725,8 +7725,8 @@ class Message(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -7795,7 +7795,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_voice` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_voice` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -7813,11 +7813,11 @@ class Message(Object, Update):
             caption (``str``, *optional*):
                 Voice message caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             duration (``int``, *optional*):
@@ -7835,7 +7835,7 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -7861,10 +7861,10 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
@@ -7891,8 +7891,8 @@ class Message(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
-            upload is deliberately stopped with :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            upload is deliberately stopped with :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -7942,7 +7942,7 @@ class Message(Object, Update):
         protect_content: bool | None = None,
         show_caption_above_media: bool | None = None,
     ) -> list[types.Message]:
-        """Shortcut for method :obj:`~pyrogram.Client.send_paid_media` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_paid_media` will automatically fill method attributes:
 
         * chat_id
         * direct_messages_topic_id
@@ -7953,7 +7953,7 @@ class Message(Object, Update):
             stars_amount (``int``):
                 The number of Telegram Stars that must be paid to buy access to the media.
 
-            media (List of :obj:`~pyrogram.types.InputMediaPhoto`, :obj:`~pyrogram.types.InputMediaVideo`):
+            media (List of :obj:`~kirugram.types.InputMediaPhoto`, :obj:`~kirugram.types.InputMediaVideo`):
                 A list describing photos and videos to be sent, must include 1–10 items.
 
             caption (``str``, *optional*):
@@ -7962,18 +7962,18 @@ class Message(Object, Update):
             payload (``str``, *optional*):
                 Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             disable_notification (``bool``, *optional*):
                 Sends the message silently.
                 Users will receive a notification with no sound.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -7987,7 +7987,7 @@ class Message(Object, Update):
                 Pass True, if the caption must be shown above the message media.
 
         Returns:
-            List of :obj:`~pyrogram.types.Message`: On success, a list of messages is returned.
+            List of :obj:`~kirugram.types.Message`: On success, a list of messages is returned.
         """
         return await self._client.send_paid_media(
             chat_id=self.chat.id,
@@ -8022,7 +8022,7 @@ class Message(Object, Update):
         protect_content: bool | None = None,
         show_caption_above_media: bool | None = None,
     ) -> list[types.Message]:
-        """Shortcut for method :obj:`~pyrogram.Client.send_paid_media` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_paid_media` will automatically fill method attributes:
 
         * chat_id
         * direct_messages_topic_id
@@ -8033,7 +8033,7 @@ class Message(Object, Update):
             stars_amount (``int``):
                 The number of Telegram Stars that must be paid to buy access to the media.
 
-            media (List of :obj:`~pyrogram.types.InputMediaPhoto`, :obj:`~pyrogram.types.InputMediaVideo`):
+            media (List of :obj:`~kirugram.types.InputMediaPhoto`, :obj:`~kirugram.types.InputMediaVideo`):
                 A list describing photos and videos to be sent, must include 1–10 items.
 
             caption (``str``, *optional*):
@@ -8042,21 +8042,21 @@ class Message(Object, Update):
             payload (``str``, *optional*):
                 Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             disable_notification (``bool``, *optional*):
                 Sends the message silently.
                 Users will receive a notification with no sound.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -8070,7 +8070,7 @@ class Message(Object, Update):
                 Pass True, if the caption must be shown above the message media.
 
         Returns:
-            List of :obj:`~pyrogram.types.Message`: On success, a list of messages is returned.
+            List of :obj:`~kirugram.types.Message`: On success, a list of messages is returned.
         """
         return await self._client.send_paid_media(
             chat_id=self.chat.id,
@@ -8113,7 +8113,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_cached_media` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_cached_media` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -8129,11 +8129,11 @@ class Message(Object, Update):
             caption (``bool``, *optional*):
                 Media caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             disable_notification (``bool``, *optional*):
@@ -8166,15 +8166,15 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent media message is returned, otherwise, in
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent media message is returned, otherwise, in
             case the server answered with no message, None is returned.
 
         Raises:
@@ -8226,7 +8226,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_cached_media` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_cached_media` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -8241,18 +8241,18 @@ class Message(Object, Update):
             caption (``bool``, *optional*):
                 Media caption, 0-1024 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             disable_notification (``bool``, *optional*):
                 Sends the message silently.
                 Users will receive a notification with no sound.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -8281,15 +8281,15 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent media message is returned, otherwise, in
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent media message is returned, otherwise, in
             case the server answered with no message, None is returned.
 
         Raises:
@@ -8318,13 +8318,13 @@ class Message(Object, Update):
         )
 
     async def get_media_group(self) -> list[types.Message]:
-        """Shortcut for method :obj:`~pyrogram.Client.get_media_group` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.get_media_group` will automatically fill method attributes:
 
         * chat_id
         * message_id
 
         Returns:
-            List of :obj:`~pyrogram.types.Message`: On success, a list of messages of the media group is returned.
+            List of :obj:`~kirugram.types.Message`: On success, a list of messages of the media group is returned.
 
         Raises:
             ValueError: In case the passed message id doesn't belong to a media group.
@@ -8332,13 +8332,13 @@ class Message(Object, Update):
         return await self._client.get_media_group(chat_id=self.chat.id, message_id=self.id)
 
     async def reply_chat_action(self, action: enums.ChatAction) -> bool:
-        """Shortcut for method :obj:`~pyrogram.Client.send_chat_action` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_chat_action` will automatically fill method attributes:
 
         * chat_id
         * business_connection_id
 
         Parameters:
-            action (:obj:`~pyrogram.enums.ChatAction`):
+            action (:obj:`~kirugram.enums.ChatAction`):
                 Type of action to broadcast.
 
         Returns:
@@ -8360,7 +8360,7 @@ class Message(Object, Update):
         paid_message_star_count: int | None = None,
         schedule_date: datetime | timedelta | None = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_inline_bot_result` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_inline_bot_result` will automatically fill method attributes:
 
         * chat_id
         * direct_messages_topic_id
@@ -8386,7 +8386,7 @@ class Message(Object, Update):
                 A :py:obj:`~datetime.timedelta` is counted from now.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
 
         Raises:
@@ -8413,7 +8413,7 @@ class Message(Object, Update):
         paid_message_star_count: int | None = None,
         schedule_date: datetime | timedelta | None = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_inline_bot_result` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_inline_bot_result` will automatically fill method attributes:
 
         * chat_id
         * direct_messages_topic_id
@@ -8430,7 +8430,7 @@ class Message(Object, Update):
                 Sends the message silently.
                 Users will receive a notification with no sound.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             paid_message_star_count (``int``, *optional*):
@@ -8441,7 +8441,7 @@ class Message(Object, Update):
                 A :py:obj:`~datetime.timedelta` is counted from now.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
 
         Raises:
@@ -8476,7 +8476,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_checklist` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_checklist` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -8492,7 +8492,7 @@ class Message(Object, Update):
                 ])
 
         Parameters:
-            checklist (:obj:`~pyrogram.types.InputChecklist`):
+            checklist (:obj:`~kirugram.types.InputChecklist`):
                 Checklist to send.
 
             disable_notification (``bool``, *optional*):
@@ -8516,12 +8516,12 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
 
         Raises:
@@ -8560,7 +8560,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_checklist` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_checklist` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -8575,7 +8575,7 @@ class Message(Object, Update):
                 ])
 
         Parameters:
-            checklist (:obj:`~pyrogram.types.InputChecklist`):
+            checklist (:obj:`~kirugram.types.InputChecklist`):
                 Checklist to send.
 
             disable_notification (``bool``, *optional*):
@@ -8589,7 +8589,7 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -8602,12 +8602,12 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
 
         Raises:
@@ -8644,7 +8644,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_rich_message` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_rich_message` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -8654,7 +8654,7 @@ class Message(Object, Update):
         * ephemeral_message_parameters
 
         Parameters:
-            rich_message (:obj:`~pyrogram.types.InputChecklist`):
+            rich_message (:obj:`~kirugram.types.InputChecklist`):
                 The message to be sent.
 
             disable_notification (``bool``, *optional*):
@@ -8674,15 +8674,15 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent text message is returned, otherwise, in case
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent text message is returned, otherwise, in case
             the server answered with no message, None is returned.
 
         Raises:
@@ -8730,7 +8730,7 @@ class Message(Object, Update):
             | None
         ) = None,
     ) -> Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.send_rich_message` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_rich_message` will automatically fill method attributes:
 
         * chat_id
         * message_thread_id
@@ -8739,7 +8739,7 @@ class Message(Object, Update):
         * ephemeral_message_parameters
 
         Parameters:
-            rich_message (:obj:`~pyrogram.types.InputChecklist`):
+            rich_message (:obj:`~kirugram.types.InputChecklist`):
                 The message to be sent.
 
             disable_notification (``bool``, *optional*):
@@ -8759,18 +8759,18 @@ class Message(Object, Update):
                 Unique identifier of the message effect.
                 For private chats only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
-            suggested_post_parameters (:obj:`~pyrogram.types.SuggestedPostParameters`, *optional*):
+            suggested_post_parameters (:obj:`~kirugram.types.SuggestedPostParameters`, *optional*):
                 Information about the suggested post.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent text message is returned, otherwise, in case
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent text message is returned, otherwise, in case
             the server answered with no message, None is returned.
 
         Raises:
@@ -8805,7 +8805,7 @@ class Message(Object, Update):
         reply_markup: types.InlineKeyboardMarkup | None = None,
         rich_message: types.InputRichMessage | None = None,
     ) -> Message:
-        """Shortcut for method :obj:`~pyrogram.Client.edit_message_text` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.edit_message_text` will automatically fill method attributes:
 
         * chat_id
         * message_id
@@ -8821,25 +8821,25 @@ class Message(Object, Update):
                 New text of the message.
                 Required if ``rich_message`` isn't specified.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in message text, which can be specified instead of *parse_mode*.
 
-            link_preview_options (:obj:`~pyrogram.types.LinkPreviewOptions`, *optional*):
+            link_preview_options (:obj:`~kirugram.types.LinkPreviewOptions`, *optional*):
                 Options used for link preview generation for the message.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup`, *optional*):
                 An InlineKeyboardMarkup object.
 
-            rich_message (:obj:`~pyrogram.types.InputRichMessage`, *optional*):
+            rich_message (:obj:`~kirugram.types.InputRichMessage`, *optional*):
                 New rich content of the message.
                 Required if ``text`` isn't specified.
 
         Returns:
-            On success, the edited :obj:`~pyrogram.types.Message` is returned.
+            On success, the edited :obj:`~kirugram.types.Message` is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -8866,7 +8866,7 @@ class Message(Object, Update):
         reply_markup: types.InlineKeyboardMarkup | None = None,
         show_caption_above_media: bool | None = None,
     ) -> Message:
-        """Shortcut for method :obj:`~pyrogram.Client.edit_message_caption` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.edit_message_caption` will automatically fill method attributes:
 
         * chat_id
         * message_id
@@ -8876,22 +8876,22 @@ class Message(Object, Update):
             caption (``str``):
                 New caption of the message.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
 
             show_caption_above_media (``bool``, *optional*):
                 Pass True, if the caption must be shown above the message media.
                 Supported only for animation, photo and video messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup`, *optional*):
                 An InlineKeyboardMarkup object.
 
         Returns:
-            On success, the edited :obj:`~pyrogram.types.Message` is returned.
+            On success, the edited :obj:`~kirugram.types.Message` is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -8910,7 +8910,7 @@ class Message(Object, Update):
     async def edit_media(
         self, media: types.InputMedia, reply_markup: types.InlineKeyboardMarkup | None = None
     ) -> Message:
-        """Shortcut for method :obj:`~pyrogram.Client.edit_message_media` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.edit_message_media` will automatically fill method attributes:
 
         * chat_id
         * message_id
@@ -8922,14 +8922,14 @@ class Message(Object, Update):
                 await message.edit_media(media)
 
         Parameters:
-            media (:obj:`~pyrogram.types.InputMedia`):
+            media (:obj:`~kirugram.types.InputMedia`):
                 One of the InputMedia objects describing an animation, audio, document, photo or video.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup`, *optional*):
                 An InlineKeyboardMarkup object.
 
         Returns:
-            On success, the edited :obj:`~pyrogram.types.Message` is returned.
+            On success, the edited :obj:`~kirugram.types.Message` is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -8947,21 +8947,21 @@ class Message(Object, Update):
         checklist: types.InputChecklist,
         reply_markup: types.InlineKeyboardMarkup | None = None,
     ) -> Message:
-        """Shortcut for method :obj:`~pyrogram.Client.edit_message_checklist` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.edit_message_checklist` will automatically fill method attributes:
 
         * chat_id
         * message_id
         * business_connection_id
 
         Parameters:
-            checklist (:obj:`~pyrogram.types.InputChecklist`):
+            checklist (:obj:`~kirugram.types.InputChecklist`):
                 New checklist.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup`, *optional*):
                 An InlineKeyboardMarkup object.
 
         Returns:
-            On success, the edited :obj:`~pyrogram.types.Message` is returned.
+            On success, the edited :obj:`~kirugram.types.Message` is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -8977,18 +8977,18 @@ class Message(Object, Update):
     async def edit_reply_markup(
         self, reply_markup: types.InlineKeyboardMarkup | None = None
     ) -> Message:
-        """Shortcut for method :obj:`~pyrogram.Client.edit_message_reply_markup` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.edit_message_reply_markup` will automatically fill method attributes:
 
         * chat_id
         * message_id
 
         Parameters:
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup`, *optional*):
                 An InlineKeyboardMarkup object.
 
         Returns:
             On success, if edited message is sent by the bot, the edited
-            :obj:`~pyrogram.types.Message` is returned, otherwise True is returned.
+            :obj:`~kirugram.types.Message` is returned, otherwise True is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -9035,7 +9035,7 @@ class Message(Object, Update):
                 Can't be enabled in channels and Saved Messages.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the edited message is returned,
+            :obj:`~kirugram.types.Message` | ``None``: On success, the edited message is returned,
             otherwise, in case the server answered with no message, None is returned.
         """
         r = await self._client.invoke(
@@ -9059,7 +9059,7 @@ class Message(Object, Update):
         """Use this method to stop updating a live location message before live_period expires.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the edited message is returned,
+            :obj:`~kirugram.types.Message` | ``None``: On success, the edited message is returned,
             otherwise, in case the server answered with no message, None is returned.
         """
         r = await self._client.invoke(
@@ -9087,7 +9087,7 @@ class Message(Object, Update):
         video_start_timestamp: int | None = None,
         paid_message_star_count: int | None = None,
     ) -> types.Message | list[types.Message] | None:
-        """Shortcut for method :obj:`~pyrogram.Client.forward_messages` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.forward_messages` will automatically fill method attributes:
 
         * from_chat_id
         * message_id
@@ -9132,7 +9132,7 @@ class Message(Object, Update):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | List of :obj:`~pyrogram.types.Message` | ``None``: On success, the
+            :obj:`~kirugram.types.Message` | List of :obj:`~kirugram.types.Message` | ``None``: On success, the
             forwarded messages are returned, otherwise, in case the server answered with no message, None is returned.
 
         Raises:
@@ -9190,7 +9190,7 @@ class Message(Object, Update):
         quote_text: str | None = None,
         quote_entities: list[types.MessageEntity] | None = None,
     ) -> types.Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.copy_message` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.copy_message` will automatically fill method attributes:
 
         * from_chat_id
         * message_id
@@ -9206,11 +9206,11 @@ class Message(Object, Update):
                 If not specified, the original caption is kept.
                 Pass "" (empty string) to remove the caption.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the new caption, which can be specified instead of *parse_mode*.
 
             disable_notification (``bool``, *optional*):
@@ -9221,7 +9221,7 @@ class Message(Object, Update):
                 Unique identifier for the target message thread (topic) of the forum.
                 For supergroups only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -9249,7 +9249,7 @@ class Message(Object, Update):
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
                 If not specified, the original reply markup is kept.
@@ -9270,13 +9270,13 @@ class Message(Object, Update):
                 This parameter is deprecated and should not be used.
                 Use `reply_parameters` instead.
 
-            quote_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            quote_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the quote, which can be specified instead of *parse_mode*.
                 This parameter is deprecated and should not be used.
                 Use `reply_parameters` instead.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the copied message is returned, otherwise, in case
+            :obj:`~kirugram.types.Message` | ``None``: On success, the copied message is returned, otherwise, in case
             no message was sent, None is returned.
 
         Raises:
@@ -9465,7 +9465,7 @@ class Message(Object, Update):
         allow_paid_broadcast: bool | None = None,
         paid_message_star_count: int | None = None,
     ) -> list[types.Message]:
-        """Shortcut for method :obj:`~pyrogram.Client.copy_media_group` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.copy_media_group` will automatically fill method attributes:
 
         * from_chat_id
         * message_id
@@ -9497,7 +9497,7 @@ class Message(Object, Update):
                 Unique identifier for the target message thread (topic) of the forum.
                 For supergroups only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -9517,7 +9517,7 @@ class Message(Object, Update):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
         Returns:
-            List of :obj:`~pyrogram.types.Message`: On success, a list of copied messages is returned.
+            List of :obj:`~kirugram.types.Message`: On success, a list of copied messages is returned.
         """
         return await self._client.copy_media_group(
             chat_id=chat_id,
@@ -9535,7 +9535,7 @@ class Message(Object, Update):
         )
 
     async def delete(self, revoke: bool = True) -> bool:
-        """Shortcut for method :obj:`~pyrogram.Client.delete_messages` and :obj:`~pyrogram.Client.delete_ephemeral_message` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.delete_messages` and :obj:`~kirugram.Client.delete_ephemeral_message` will automatically fill method attributes:
 
         * chat_id
         * message_ids
@@ -9576,7 +9576,7 @@ class Message(Object, Update):
         timeout: int = 10,
         password: str | None = None,
     ) -> str | types.Chat | raw.base.messages.BotCallbackAnswer | None:
-        """Bound method *click* of :obj:`~pyrogram.types.Message`.
+        """Bound method *click* of :obj:`~kirugram.types.Message`.
 
         Use as a shortcut for clicking a button attached to the message instead of:
 
@@ -9628,16 +9628,16 @@ class Message(Object, Update):
 
             password (``str``, *optional*):
                 When clicking certain buttons (such as BotFather's confirmation button to transfer ownership), if your account has 2FA enabled, you need to provide your account's password.
-                The 2-step verification password for the current user. Only applicable, if the :obj:`~pyrogram.types.InlineKeyboardButton` contains ``requires_password``.
+                The 2-step verification password for the current user. Only applicable, if the :obj:`~kirugram.types.InlineKeyboardButton` contains ``requires_password``.
 
         Returns:
-            -   The result of :meth:`~pyrogram.Client.request_callback_answer` in case of inline callback button clicks.
-            -   ``None`` in case of normal button clicks: the label is sent with :meth:`~pyrogram.types.Message.reply` or
-                :meth:`~pyrogram.types.Message.answer`, whose result is not passed on.
+            -   The result of :meth:`~kirugram.Client.request_callback_answer` in case of inline callback button clicks.
+            -   ``None`` in case of normal button clicks: the label is sent with :meth:`~kirugram.types.Message.reply` or
+                :meth:`~kirugram.types.Message.answer`, whose result is not passed on.
             -   A string in case the inline button is a URL, a *switch_inline_query*,
                 *switch_inline_query_current_chat* or a *copy_text* button.
             -   A string URL with the user details, in case of a WebApp button.
-            -   A :obj:`~pyrogram.types.Chat` object in case of a ``KeyboardButtonUserProfile`` button.
+            -   A :obj:`~kirugram.types.Chat` object in case of a ``KeyboardButtonUserProfile`` button.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -9732,7 +9732,7 @@ class Message(Object, Update):
     async def react(
         self, emoji: int | str | list[int | str] | None = None, big: bool = False
     ) -> bool:
-        """Shortcut for method :obj:`~pyrogram.Client.send_reaction` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.send_reaction` will automatically fill method attributes:
 
         * chat_id
         * message_id
@@ -9771,13 +9771,13 @@ class Message(Object, Update):
     async def retract_vote(
         self,
     ) -> types.Poll:
-        """Shortcut for method :obj:`~pyrogram.Client.retract_vote` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.retract_vote` will automatically fill method attributes:
 
         * chat_id
         * message_id
 
         Returns:
-            :obj:`~pyrogram.types.Poll`: On success, the poll with the retracted vote is returned.
+            :obj:`~kirugram.types.Poll`: On success, the poll with the retracted vote is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -9844,7 +9844,7 @@ class Message(Object, Update):
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> str | BytesIO | list[str] | list[BytesIO] | None:
-        """Shortcut for method :obj:`~pyrogram.Client.download_media` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.download_media` will automatically fill method attributes:
 
         * message
 
@@ -9891,7 +9891,7 @@ class Message(Object, Update):
             downloaded file is returned. In case ``in_memory=True``, a binary file-like object with its attribute
             ".name" set is returned. If the message contains multiple media (purchased paid media), a list of paths or
             binary file-like objects is returned. In case the download failed or was deliberately stopped with
-            :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            :meth:`~kirugram.Client.stop_transmission`, None is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -9907,7 +9907,7 @@ class Message(Object, Update):
         )
 
     async def vote(self, option: int | list[int]) -> types.Poll:
-        """Shortcut for method :obj:`~pyrogram.Client.vote_poll` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.vote_poll` will automatically fill method attributes:
 
         * chat_id
         * message_id
@@ -9917,7 +9917,7 @@ class Message(Object, Update):
                 Index or list of indexes (for multiple answers) of the poll option(s) you want to vote for (0 to 11).
 
         Returns:
-            :obj:`~pyrogram.types.Poll`: On success, the poll with the chosen option is returned.
+            :obj:`~kirugram.types.Poll`: On success, the poll with the chosen option is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -9930,7 +9930,7 @@ class Message(Object, Update):
     async def pin(
         self, disable_notification: bool = False, both_sides: bool = False
     ) -> types.Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.pin_chat_message` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.pin_chat_message` will automatically fill method attributes:
 
         * chat_id
         * message_id
@@ -9946,7 +9946,7 @@ class Message(Object, Update):
                 Applicable to private chats only. Defaults to False.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the service message is returned, otherwise, in case
+            :obj:`~kirugram.types.Message` | ``None``: On success, the service message is returned, otherwise, in case
             the server answered with no message, None is returned.
 
         Raises:
@@ -9961,7 +9961,7 @@ class Message(Object, Update):
         )
 
     async def unpin(self) -> bool:
-        """Shortcut for method :obj:`~pyrogram.Client.unpin_chat_message` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.unpin_chat_message` will automatically fill method attributes:
 
         * chat_id
         * message_id
@@ -9980,7 +9980,7 @@ class Message(Object, Update):
         )
 
     async def read(self) -> bool:
-        """Shortcut for method :obj:`~pyrogram.Client.read_chat_history` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.read_chat_history` will automatically fill method attributes:
 
         * chat_id
         * max_id
@@ -9994,7 +9994,7 @@ class Message(Object, Update):
         return await self._client.read_chat_history(chat_id=self.chat.id, max_id=self.id)
 
     async def view(self) -> bool:
-        """Shortcut for method :obj:`~pyrogram.Client.view_messages` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.view_messages` will automatically fill method attributes:
 
         * chat_id
         * message_id
@@ -10008,7 +10008,7 @@ class Message(Object, Update):
         return await self._client.view_messages(chat_id=self.chat.id, message_id=self.id)
 
     async def pay(self) -> types.PaymentResult:
-        """Bound method *pay* of :obj:`~pyrogram.types.Message`.
+        """Bound method *pay* of :obj:`~kirugram.types.Message`.
 
         Use as a shortcut for:
 
@@ -10032,7 +10032,7 @@ class Message(Object, Update):
                 await message.pay()
 
         Returns:
-            :obj:`~pyrogram.types.PaymentResult`: On success, the payment result is returned.
+            :obj:`~kirugram.types.PaymentResult`: On success, the payment result is returned.
         """
         invoice = types.InputInvoiceMessage(chat_id=self.chat.id, message_id=self.id)
 
@@ -10041,29 +10041,29 @@ class Message(Object, Update):
         return await self._client.send_payment_form(payment_form_id=form.id, input_invoice=invoice)
 
     async def accept_gift_purchase_offer(self) -> types.Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.process_gift_purchase_offer` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.process_gift_purchase_offer` will automatically fill method attributes:
 
         * message_id
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
         """
         return await self._client.process_gift_purchase_offer(message_id=self.id, accept=True)
 
     async def reject_gift_purchase_offer(self) -> types.Message | None:
-        """Shortcut for method :obj:`~pyrogram.Client.process_gift_purchase_offer` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.process_gift_purchase_offer` will automatically fill method attributes:
 
         * message_id
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
         """
         return await self._client.process_gift_purchase_offer(message_id=self.id, accept=False)
 
     async def summarize(self, translate_to_language_code: str | None = None) -> types.FormattedText:
-        """Shortcut for method :obj:`~pyrogram.Client.summarize_message` will automatically fill method attributes:
+        """Shortcut for method :obj:`~kirugram.Client.summarize_message` will automatically fill method attributes:
 
         * chat_id
         * message_id
@@ -10079,7 +10079,7 @@ class Message(Object, Update):
                 Defaults to the client's language code.
 
         Returns:
-            :obj:`~pyrogram.types.FormattedText`: On success, information about the summarized text is returned.
+            :obj:`~kirugram.types.FormattedText`: On success, information about the summarized text is returned.
 
         Raises:
             ValueError: In case of this message can't be summarized.

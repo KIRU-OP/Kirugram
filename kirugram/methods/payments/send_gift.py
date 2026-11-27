@@ -1,30 +1,30 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
+import kirugram
+from kirugram import enums, raw, types, utils
 
 
 class SendGift:
     async def send_gift(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         gift_id: int,
         text: str | None = None,
@@ -45,16 +45,16 @@ class SendGift:
 
             gift_id (``int``):
                 Unique identifier of star gift.
-                To get all available star gifts use :meth:`~pyrogram.Client.get_available_gifts`.
+                To get all available star gifts use :meth:`~kirugram.Client.get_available_gifts`.
 
             text (``str``, *optional*):
                 Text that will be shown along with the gift, 0-128 characters.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in message text, which can be specified instead of *parse_mode*.
 
             is_private (``bool``, *optional*):
@@ -64,7 +64,7 @@ class SendGift:
                 Pass True to additionally pay for the gift upgrade and allow the receiver to upgrade it for free.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise,
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise,
             in case the server answered with no message, None is returned.
 
         Example:

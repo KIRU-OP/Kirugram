@@ -1,30 +1,30 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, types, utils
+import kirugram
+from kirugram import raw, types, utils
 
 
 class SendGiftPurchaseOffer:
     async def send_gift_purchase_offer(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         owner_id: int | str,
         gift_name: str,
         price: types.GiftResalePrice,
@@ -43,7 +43,7 @@ class SendGiftPurchaseOffer:
             gift_name (``str``):
                 Name or link of the upgraded gift.
 
-            price (:obj:`~pyrogram.types.GiftResalePrice`):
+            price (:obj:`~kirugram.types.GiftResalePrice`):
                 The price that the user agreed to pay for the gift.
 
             duration (``int``):
@@ -55,7 +55,7 @@ class SendGiftPurchaseOffer:
                 Pass User.paid_message_star_count for users and None otherwise.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent message is returned, otherwise, in case the
             server answered with no message, None is returned.
         """
         match = self.UPGRADED_GIFT_RE.match(gift_name)

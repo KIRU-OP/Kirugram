@@ -1,29 +1,29 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
-from pyrogram.errors import StickersetInvalid
-from pyrogram.file_id import FileId, FileType, FileUniqueId, FileUniqueType
+import kirugram
+from kirugram import enums, raw, types, utils
+from kirugram.errors import StickersetInvalid
+from kirugram.file_id import FileId, FileType, FileUniqueId, FileUniqueType
 
 from ..object import Object
 
@@ -42,7 +42,7 @@ class Sticker(Object):
             Unique identifier for this file, which is supposed to be the same over time and for different accounts.
             Can't be used to download or reuse the file.
 
-        type (:obj:`~pyrogram.enums.StickerType`):
+        type (:obj:`~kirugram.enums.StickerType`):
             Type of the sticker.
 
         width (``int``):
@@ -75,10 +75,10 @@ class Sticker(Object):
         set_name (``str``, *optional*):
             Name of the sticker set to which the sticker belongs.
 
-        premium_animation (:obj:`~pyrogram.types.Animation`, *optional*):
+        premium_animation (:obj:`~kirugram.types.Animation`, *optional*):
             For premium regular stickers, premium animation for the sticker.
 
-        mask_position (:obj:`~pyrogram.types.MaskPosition`, *optional*):
+        mask_position (:obj:`~kirugram.types.MaskPosition`, *optional*):
             For mask stickers, the position where the mask should be placed.
 
         custom_emoji_id (``str``, *optional*):
@@ -89,10 +89,10 @@ class Sticker(Object):
             the color of the Telegram Premium badge in emoji status,
             white color on chat photos, or another appropriate color in other places.
 
-        thumbs (List of :obj:`~pyrogram.types.Thumbnail`, *optional*):
+        thumbs (List of :obj:`~kirugram.types.Thumbnail`, *optional*):
             Sticker thumbnails in the .webp or .jpg format.
 
-        raw (:obj:`~pyrogram.raw.types.Document`, *optional*):
+        raw (:obj:`~kirugram.raw.types.Document`, *optional*):
             The raw sticker.
     """
 
@@ -142,7 +142,7 @@ class Sticker(Object):
         self.raw = raw
 
     @staticmethod
-    async def _get_sticker_set_name(client: pyrogram.Client, input_sticker_set_id: tuple[int, int]):
+    async def _get_sticker_set_name(client: kirugram.Client, input_sticker_set_id: tuple[int, int]):
         try:
             set_id = input_sticker_set_id[0]
             set_access_hash = input_sticker_set_id[1]
@@ -171,7 +171,7 @@ class Sticker(Object):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         sticker: raw.types.Document,
         document_attributes: dict[type[raw.base.DocumentAttribute], raw.base.DocumentAttribute],
     ) -> Sticker:

@@ -1,30 +1,30 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import enums, raw, types
+import kirugram
+from kirugram import enums, raw, types
 
 
 class EditStoryPrivacy:
     async def edit_story_privacy(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         story_id: int,
         privacy: enums.StoriesPrivacyRules = enums.StoriesPrivacyRules.PUBLIC,
@@ -44,22 +44,22 @@ class EditStoryPrivacy:
             story_id (``int``):
                 Story identifier in the chat specified in chat_id.
 
-            privacy (:obj:`~pyrogram.enums.StoriesPrivacyRules`, *optional*):
-                Story privacy. Defaults to :obj:`~pyrogram.enums.StoriesPrivacyRules.PUBLIC`.
+            privacy (:obj:`~kirugram.enums.StoriesPrivacyRules`, *optional*):
+                Story privacy. Defaults to :obj:`~kirugram.enums.StoriesPrivacyRules.PUBLIC`.
 
             allowed_users (List of ``int`` | ``str``, *optional*):
                 List of user_id or chat_id of chat users who are allowed to view stories.
-                Note: chat_id available only with :obj:`~pyrogram.enums.StoriesPrivacyRules.SELECTED_USERS`.
-                Works with :obj:`~pyrogram.enums.StoriesPrivacyRules.CLOSE_FRIENDS`
-                and :obj:`~pyrogram.enums.StoriesPrivacyRules.SELECTED_USERS` only
+                Note: chat_id available only with :obj:`~kirugram.enums.StoriesPrivacyRules.SELECTED_USERS`.
+                Works with :obj:`~kirugram.enums.StoriesPrivacyRules.CLOSE_FRIENDS`
+                and :obj:`~kirugram.enums.StoriesPrivacyRules.SELECTED_USERS` only
 
             disallowed_users (List of ``int`` | ``str``, *optional*):
                 List of user_id whos disallow to view the stories.
-                Note: Works with :obj:`~pyrogram.enums.StoriesPrivacyRules.PUBLIC`
-                and :obj:`~pyrogram.enums.StoriesPrivacyRules.CONTACTS` only
+                Note: Works with :obj:`~kirugram.enums.StoriesPrivacyRules.PUBLIC`
+                and :obj:`~kirugram.enums.StoriesPrivacyRules.CONTACTS` only
 
         Returns:
-            :obj:`~pyrogram.types.Story`: On success, the edited story is returned.
+            :obj:`~kirugram.types.Story`: On success, the edited story is returned.
 
         Example:
             .. code-block:: python

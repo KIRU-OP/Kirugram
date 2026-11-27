@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 """Every Sphinx cross-reference in a docstring points at something that exists.
 
@@ -56,7 +56,7 @@ _DOCUMENTED_NODES: Final[tuple[type, ...]] = (
 )
 
 # A label is free text as often as it is a name, and prose is a suffix of nothing: a label
-#  reading "send a message" over `pyrogram.Client.send_message` is correct Sphinx.
+#  reading "send a message" over `kirugram.Client.send_message` is correct Sphinx.
 _LABEL_THAT_IS_A_PATH: Final[Pattern[str]] = re.compile(r"^[\w.]+(?:\(\))?$")
 
 
@@ -159,22 +159,22 @@ def test_the_sweep_reads_the_docstrings_it_claims_to() -> None:
     targets: set[str] = {one.target for one in references}
 
     assert len(targets) > 500
-    assert "pyrogram.types.Message" in targets
+    assert "kirugram.types.Message" in targets
     assert any(one.path.name == "get_chat_history.py" for one in references)
 
 
 def test_a_target_that_does_not_exist_does_not_resolve() -> None:
-    assert resolves("pyrogram.types.Message")
-    assert resolves("pyrogram.Client.forward_messages")
+    assert resolves("kirugram.types.Message")
+    assert resolves("kirugram.Client.forward_messages")
     assert resolves("datetime.datetime")
 
-    assert not resolves("pyrogram.types.Message.no_such_method")
-    assert not resolves("pyrogram.types.NoSuchType")
+    assert not resolves("kirugram.types.Message.no_such_method")
+    assert not resolves("kirugram.types.NoSuchType")
     assert not resolves("Message.reply")
 
 
 def test_every_label_that_looks_like_a_path_names_the_target_it_points_at() -> None:
-    """`:obj:`Filters.regex <pyrogram.filters.regex>`` prints a name the link does not lead to.
+    """`:obj:`Filters.regex <kirugram.filters.regex>`` prints a name the link does not lead to.
 
     Sphinx prints the label and links the target without comparing them, so a label left
     behind by a rename reads as a working reference to a name that moved.
@@ -194,26 +194,26 @@ def test_every_label_that_looks_like_a_path_names_the_target_it_points_at() -> N
 
 
 def test_a_label_is_checked_only_when_it_is_written_as_a_path() -> None:
-    assert label_agrees_with_target("filters.regex", target="pyrogram.filters.regex")
-    assert label_agrees_with_target("create()", target="pyrogram.filters.create")
-    assert label_agrees_with_target("pyrogram.filters.regex", target="pyrogram.filters.regex")
+    assert label_agrees_with_target("filters.regex", target="kirugram.filters.regex")
+    assert label_agrees_with_target("create()", target="kirugram.filters.create")
+    assert label_agrees_with_target("kirugram.filters.regex", target="kirugram.filters.regex")
 
-    assert not label_agrees_with_target("Filters.regex", target="pyrogram.filters.regex")
-    assert not label_agrees_with_target("types.Folder", target="pyrogram.types.Chat")
-    assert not label_agrees_with_target("regex.filters", target="pyrogram.filters.regex")
+    assert not label_agrees_with_target("Filters.regex", target="kirugram.filters.regex")
+    assert not label_agrees_with_target("types.Folder", target="kirugram.types.Chat")
+    assert not label_agrees_with_target("regex.filters", target="kirugram.filters.regex")
 
     # Prose is exempt, whatever it says.
-    assert label_agrees_with_target("send a message", target="pyrogram.Client.send_message")
-    assert label_agrees_with_target("the chat itself", target="pyrogram.types.Chat")
+    assert label_agrees_with_target("send a message", target="kirugram.Client.send_message")
+    assert label_agrees_with_target("the chat itself", target="kirugram.types.Chat")
 
 
 def test_a_reference_carries_the_label_it_was_written_with() -> None:
     """The rule above passes over everything if the label stops being read."""
-    assert list(references_in(":obj:`~pyrogram.types.Message`")) == [
-        (None, "pyrogram.types.Message")
+    assert list(references_in(":obj:`~kirugram.types.Message`")) == [
+        (None, "kirugram.types.Message")
     ]
-    assert list(references_in(":meth:`filters.create() <pyrogram.filters.create>`")) == [
-        ("filters.create()", "pyrogram.filters.create")
+    assert list(references_in(":meth:`filters.create() <kirugram.filters.create>`")) == [
+        ("filters.create()", "kirugram.filters.create")
     ]
 
     labelled = [one for one in hand_written_references() if one.label is not None]

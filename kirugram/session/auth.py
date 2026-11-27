@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -26,14 +26,14 @@ from io import BytesIO
 from os import urandom
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import raw, utils
-from pyrogram.crypto import aes, prime, rsa
-from pyrogram.errors import SecurityCheckMismatch
-from pyrogram.raw.core import Int, Long, TLObject
+import kirugram
+from kirugram import raw, utils
+from kirugram.crypto import aes, prime, rsa
+from kirugram.errors import SecurityCheckMismatch
+from kirugram.raw.core import Int, Long, TLObject
 
 if TYPE_CHECKING:
-    from pyrogram.connection import Connection
+    from kirugram.connection import Connection
 
 log = logging.getLogger(__name__)
 
@@ -42,7 +42,7 @@ class Auth:
     MAX_RETRIES = 5
 
     def __init__(
-        self, client: pyrogram.Client, dc_id: int, server_address: str, port: int, test_mode: bool
+        self, client: kirugram.Client, dc_id: int, server_address: str, port: int, test_mode: bool
     ):
         self.client = client
         self.dc_id = dc_id

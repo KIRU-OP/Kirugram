@@ -1,26 +1,26 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-from pyrogram import raw, types, utils
+from kirugram import raw, types, utils
 
 from ..object import Object
 
@@ -33,8 +33,8 @@ class AuctionState(Object):
 
     It can be one of:
 
-    - :obj:`~pyrogram.types.AuctionStateActive`
-    - :obj:`~pyrogram.types.AuctionStateFinished`
+    - :obj:`~kirugram.types.AuctionStateActive`
+    - :obj:`~kirugram.types.AuctionStateFinished`
     """
 
     def __init__(self):
@@ -54,13 +54,13 @@ class AuctionStateActive(AuctionState):
         min_bid (``int``):
             The minimum possible bid in the auction in Telegram Stars.
 
-        bid_levels (List of :obj:`~pyrogram.types.AuctionBid`):
+        bid_levels (List of :obj:`~kirugram.types.AuctionBid`):
             A sparse list of bids that were made in the auction.
 
         top_bidder_user_ids (List of ``int``):
             User identifiers of at most 3 users with the biggest bids.
 
-        rounds (List of :obj:`~pyrogram.types.AuctionRound`):
+        rounds (List of :obj:`~kirugram.types.AuctionRound`):
             Rounds of the auction in which their duration or extension rules are changed.
 
         current_round_end_date (:py:obj:`~datetime.datetime`):

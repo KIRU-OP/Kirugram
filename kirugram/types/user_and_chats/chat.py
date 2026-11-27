@@ -1,28 +1,28 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import logging
 from typing import TYPE_CHECKING, BinaryIO
 
-import pyrogram
-from pyrogram import enums, raw, types, utils
+import kirugram
+from kirugram import enums, raw, types, utils
 
 from ..object import Object
 
@@ -30,7 +30,7 @@ if TYPE_CHECKING:
     from collections.abc import AsyncGenerator
     from datetime import datetime, timedelta
 
-    from pyrogram._typing import PathType
+    from kirugram._typing import PathType
 
 log = logging.getLogger(__name__)
 
@@ -42,7 +42,7 @@ class Chat(Object):
         id (``int``, *optional*):
             Unique identifier for this chat.
 
-        type (:obj:`~pyrogram.enums.ChatType`, *optional*):
+        type (:obj:`~kirugram.enums.ChatType`, *optional*):
             Type of chat.
 
         is_forum (``bool``, *optional*):
@@ -100,11 +100,11 @@ class Chat(Object):
         is_paid_reactions_available (``bool``, *optional*):
             True, if paid reactions enabled in this chat.
 
-        verification_status (:obj:`~pyrogram.types.VerificationStatus`, *optional*):
+        verification_status (:obj:`~kirugram.types.VerificationStatus`, *optional*):
             Contains information about verification status of a chat.
 
         can_send_gift (``bool``, *optional*):
-            True, if the user can send a gift to the supergroup or channel using :meth:`~pyrogram.Client.send_gift` or :meth:`~pyrogram.Client.transfer_gift`.
+            True, if the user can send a gift to the supergroup or channel using :meth:`~kirugram.Client.send_gift` or :meth:`~kirugram.Client.transfer_gift`.
 
         title (``str``, *optional*):
             Title, for supergroups, channels and basic group chats.
@@ -112,7 +112,7 @@ class Chat(Object):
         username (``str``, *optional*):
             Username, for private chats, bots, supergroups and channels if available.
 
-        usernames (List of :obj:`~pyrogram.types.Username`, *optional*):
+        usernames (List of :obj:`~kirugram.types.Username`, *optional*):
             The list of chat's collectible (and basic) usernames if available.
 
         first_name (``str``, *optional*):
@@ -121,33 +121,33 @@ class Chat(Object):
         last_name (``str``, *optional*):
             Last name of the other party in a private chat, for private chats.
 
-        personal_photo (:obj:`~pyrogram.types.ChatPhoto`, *optional*):
+        personal_photo (:obj:`~kirugram.types.ChatPhoto`, *optional*):
             Chat profile photo set by the current user for the contact.
             This photo isn't returned in the list of chat photos.
             Suitable for downloads only.
 
-        photo (:obj:`~pyrogram.types.ChatPhoto`, *optional*):
+        photo (:obj:`~kirugram.types.ChatPhoto`, *optional*):
             Chat photo.
             Suitable for downloads only.
 
-        public_photo (:obj:`~pyrogram.types.ChatPhoto`, *optional*):
+        public_photo (:obj:`~kirugram.types.ChatPhoto`, *optional*):
             Chat profile photo visible if the main photo is hidden by privacy settings.
             This photo isn't returned in the list of chat photos.
             Suitable for downloads only.
 
-        stories (List of :obj:`~pyrogram.types.Story`, *optional*):
+        stories (List of :obj:`~kirugram.types.Story`, *optional*):
             The list of chat's stories if available.
 
-        chat_background (:obj:`~pyrogram.types.ChatBackground`, *optional*):
+        chat_background (:obj:`~kirugram.types.ChatBackground`, *optional*):
             Chat wallpaper.
 
         bio (``str``, *optional*):
             Bio of the other party in a private chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         description (``str``, *optional*):
             Description, for groups, supergroups and channel chats.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         show_message_sender_name (``bool``, *optional*):
             True, if the chat has a username.
@@ -155,7 +155,7 @@ class Chat(Object):
         sign_messages (``bool``, *optional*):
             True, if messages sent to the channel contains name of the sender. This field is only applicable to channels.
 
-        emoji_status (:obj:`~pyrogram.types.EmojiStatus`, *optional*):
+        emoji_status (:obj:`~kirugram.types.EmojiStatus`, *optional*):
             Emoji status.
 
         dc_id (``int``, *optional*):
@@ -194,74 +194,74 @@ class Chat(Object):
 
         invite_link (``str``, *optional*):
             Chat invite link, for groups, supergroups and channels.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
-        pinned_message (:obj:`~pyrogram.types.Message`, *optional*):
+        pinned_message (:obj:`~kirugram.types.Message`, *optional*):
             Pinned message, for groups, supergroups channels and own chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         sticker_set_name (``str``, *optional*):
             For supergroups, name of group sticker set.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         custom_emoji_sticker_set_name (``str``, *optional*):
             For supergroups, the name of the group's custom emoji sticker set. Custom emoji from this set can be used by all users and bots in the group.
 
         can_set_sticker_set (``bool``, *optional*):
             True, if the group sticker set can be changed by you.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         can_send_paid_media (``bool``, *optional*):
             True, if paid media messages can be sent or forwarded to the channel chat. The field is available only for channel chats.
 
-        members (List of :obj:`~pyrogram.types.User`, *optional*):
+        members (List of :obj:`~kirugram.types.User`, *optional*):
             A few of the participants that are in the group.
 
         members_count (``int``, *optional*):
             Chat members count, for groups, supergroups and channels only.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
-        restrictions (List of :obj:`~pyrogram.types.Restriction`, *optional*):
+        restrictions (List of :obj:`~kirugram.types.Restriction`, *optional*):
             The list of reasons why this chat might be unavailable to some users.
             This field is available only in case *is_restricted* is True.
 
-        permissions (:obj:`~pyrogram.types.ChatPermissions` *optional*):
+        permissions (:obj:`~kirugram.types.ChatPermissions` *optional*):
             Default chat member permissions, for groups and supergroups.
 
-        personal_channel (:obj:`~pyrogram.types.Chat`, *optional*):
+        personal_channel (:obj:`~kirugram.types.Chat`, *optional*):
             The personal channel linked to this chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
-        personal_channel_message (:obj:`~pyrogram.types.Message`, *optional*):
+        personal_channel_message (:obj:`~kirugram.types.Message`, *optional*):
             The last message in the personal channel of this chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         linked_chat_id (``int``, *optional*):
             Chat identifier of a discussion group for the channel,
             or a channel, for which the supergroup is the designated discussion group.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         direct_messages_chat_id (``int``, *optional*):
             Chat identifier of a direct messages group for the channel,
             or a channel, for which the supergroup is the designated direct messages group.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
-        parent_chat (:obj:`~pyrogram.types.Chat`, *optional*):
+        parent_chat (:obj:`~kirugram.types.Chat`, *optional*):
             Information about the corresponding channel chat.
             For direct messages chats only.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
-        linked_chat (:obj:`~pyrogram.types.Chat`, *optional*):
+        linked_chat (:obj:`~kirugram.types.Chat`, *optional*):
             The linked discussion group (in case of channels) or the linked channel (in case of supergroups).
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
-        send_as_chat (:obj:`~pyrogram.types.Chat`, *optional*):
+        send_as_chat (:obj:`~kirugram.types.Chat`, *optional*):
             The default "send_as" chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
-        available_reactions (:obj:`~pyrogram.types.ChatReactions`, *optional*):
+        available_reactions (:obj:`~kirugram.types.ChatReactions`, *optional*):
             Available reactions in the chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         level (``int``, *optional*):
             Channel boosts level.
@@ -278,22 +278,22 @@ class Chat(Object):
         profile_background_custom_emoji_id (``str``, *optional*):
             Custom emoji identifier of the emoji chosen by the chat for its profile background.
 
-        business_away_message (:obj:`~pyrogram.types.BusinessMessage`, *optional*):
+        business_away_message (:obj:`~kirugram.types.BusinessMessage`, *optional*):
             For private chats with business accounts, the away message of the business.
 
-        business_greeting_message (:obj:`~pyrogram.types.BusinessMessage`, *optional*):
+        business_greeting_message (:obj:`~kirugram.types.BusinessMessage`, *optional*):
             For private chats with business accounts, the greeting message of the business.
 
-        business_work_hours (:obj:`~pyrogram.types.BusinessWorkingHours`, *optional*):
+        business_work_hours (:obj:`~kirugram.types.BusinessWorkingHours`, *optional*):
             For private chats with business accounts, the working hours of the business.
 
-        business_location (:obj:`~pyrogram.types.Location`, *optional*):
+        business_location (:obj:`~kirugram.types.Location`, *optional*):
             For private chats with business accounts, the location of the business.
 
-        business_intro (:obj:`~pyrogram.types.BusinessIntro`, *optional*):
+        business_intro (:obj:`~kirugram.types.BusinessIntro`, *optional*):
             For private chats with business accounts, the intro of the business.
 
-        birthday (:obj:`~pyrogram.types.Birthday`, *optional*):
+        birthday (:obj:`~kirugram.types.Birthday`, *optional*):
             Information about user birthday.
 
         message_auto_delete_time (``int``, *optional*):
@@ -326,245 +326,245 @@ class Chat(Object):
         gift_count (``int``, *optional*):
             Number of saved to profile gifts for channels without `can_post_messages` administrator right, otherwise, the total number of received gifts.
 
-        bot_verification (:obj:`~pyrogram.types.BotVerification`, *optional*):
+        bot_verification (:obj:`~kirugram.types.BotVerification`, *optional*):
             Information about bot verification.
 
-        main_profile_tab (:obj:`~pyrogram.enums.ProfileTab`, *optional*):
+        main_profile_tab (:obj:`~kirugram.enums.ProfileTab`, *optional*):
             The main tab chosen by the administrators of the channel.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
-        first_profile_audio (:obj:`~pyrogram.types.Audio`, *optional*):
+        first_profile_audio (:obj:`~kirugram.types.Audio`, *optional*):
             The first audio file added to the user's profile.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
-        ton_wallet_card (:obj:`~pyrogram.types.TonWalletCard`, *optional*):
+        ton_wallet_card (:obj:`~kirugram.types.TonWalletCard`, *optional*):
             For private chats, the TON wallet card of the user, which is shown on their profile page.
 
-        share_theme (:obj:`~pyrogram.types.ChatShareTheme`, *optional*):
+        share_theme (:obj:`~kirugram.types.ChatShareTheme`, *optional*):
             For private chats, supergroups and channels, the theme of the screen for sharing a link to the user or the chat.
             Omitted if the default theme is used.
 
-        rating (:obj:`~pyrogram.types.UserRating`, *optional*):
+        rating (:obj:`~kirugram.types.UserRating`, *optional*):
             Description of the current rating of the user.
 
-        pending_rating (:obj:`~pyrogram.types.UserRating`, *optional*):
+        pending_rating (:obj:`~kirugram.types.UserRating`, *optional*):
             Description of the rating of the user after the next change.
 
         pending_rating_date (:py:obj:`~datetime.datetime`, *optional*):
             Date when rating of the user will change to pending_rating.
 
-        settings (:obj:`~pyrogram.types.ChatSettings`, *optional*):
+        settings (:obj:`~kirugram.types.ChatSettings`, *optional*):
             Chat settings.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         admins_count (``int``, *optional*):
             Number of admins in channel.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         kicked_count (``int``, *optional*):
             Number of kicked from the channel.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         banned_count (``int``, *optional*):
             Number of banned from the channel.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         available_min_id (``int``, *optional*):
             Identifier of a maximum unavailable message due to hidden history.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         boosts_applied (``int``, *optional*):
             The number of boosts the current user has applied to the current supergroup.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
-        channel_admin_rights (:obj:`~pyrogram.types.ChatAdministratorRights`, *optional*):
+        channel_admin_rights (:obj:`~kirugram.types.ChatAdministratorRights`, *optional*):
             A suggested set of administrator rights for the bot, to be shown when adding the bot as admin to a channel.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
-        chat_admin_rights (:obj:`~pyrogram.types.ChatAdministratorRights`, *optional*):
+        chat_admin_rights (:obj:`~kirugram.types.ChatAdministratorRights`, *optional*):
             A suggested set of administrator rights for the bot, to be shown when adding the bot as admin to a group.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         bot_can_manage_emoji_status (``bool``, *optional*):
             True, if the bot can change your emoji status.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         can_delete_channel (``bool``, *optional*):
             True, if the current user can delete this channel.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         can_pin_message (``bool``, *optional*):
             True, if the current user can pin messages in this chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         can_schedule_messages (``bool``, *optional*):
             True, if the current user can schedule messages in this chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         can_set_location (``bool``, *optional*):
             True, if the current user can set location in this chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         can_set_username (``bool``, *optional*):
             True, if the current user can set username in this chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         can_view_participants (``bool``, *optional*):
             True, if the current user can view participants in this chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         can_view_revenue (``bool``, *optional*):
             True, if the current user can view revenue in this chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         can_view_stars_revenue (``bool``, *optional*):
             True, if the current user can view stars revenue in this chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         can_view_stats (``bool``, *optional*):
             True, if the current user can view stats in this chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         can_send_voice_messages (``bool``, *optional*):
             True, if the current user can send voice messages in this chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         can_manage_bots (``bool``, *optional*):
             True, if other bots can be created to be controlled by the bot.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         common_chats (``int``, *optional*):
             Number of common chats with this user.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         is_ads_enabled (``bool``, *optional*):
             True, if ads were re-enabled for the current account (only accessible to the currently logged-in user).
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         is_blocked (``bool``, *optional*):
             True, if you have blocked this user.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         is_blocked_my_stories_from (``bool``, *optional*):
             True, if we've blocked this user, preventing them from seeing our stories.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         is_contact_require_premium (``bool``, *optional*):
             True, if we cannot write to this user:
             subscribe to Telegram Premium to get permission to write to this user.
             To set this flag for ourselves invoke account.setGlobalPrivacySettings,
             setting the settings.new_noncontact_peers_require_premium flag.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         is_phone_calls_available (``bool``, *optional*):
             True, if this user can make VoIP calls.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         is_phone_calls_private (``bool``, *optional*):
             True, if this user's privacy settings allow you to call them.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         is_pinned_stories_available (``bool``, *optional*):
             True, if this user has some pinned stories.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         is_read_dates_available (``bool``, *optional*):
             True, if we cannot fetch the exact read date of messages we send to this user.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         is_translations_disabled (``bool``, *optional*):
             True, if the real-time chat translation popup should be hidden.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         is_video_calls_available (``bool``, *optional*):
             True, if this user can receive video calls.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         is_wallpaper_overridden (``bool``, *optional*):
             True, if this user has a custom wallpaper.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         migrated_from_chat_id (``int``, *optional*):
             The unique chat identifier from which this group was migrated.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         migrated_from_max_message_id (``int``, *optional*):
             The message identifier in the original chat at which this group was migrated.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         online_count (``int``, *optional*):
             Number of online members in the chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         private_forward_name (``str``, *optional*):
             Anonymized text to be shown instead of the user's name on forwarded messages.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         read_inbox_max_id (``int``, *optional*):
             Position up to which all incoming messages are read.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         read_outbox_max_id (``int``, *optional*):
             Position up to which all outgoing messages are read.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         is_ads_restricted (``bool``, *optional*):
             True, if ads on this channel were restricted.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         stats_dc_id (``int``, *optional*):
             The DC ID where the stats are stored.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
-        theme (:obj:`~pyrogram.types.ChatTheme`, *optional*):
+        theme (:obj:`~kirugram.types.ChatTheme`, *optional*):
             Theme set for the chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         unread_count (``int``, *optional*):
             Number of unread messages in the chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         view_forum_as_messages (``bool``, *optional*):
             Users may also choose to display messages from all topics of a forum as if they were sent to a normal group,
             using a "View as messages" setting in the local client.
             This setting only affects the current account, and is synced to other logged in sessions using the channels.toggleViewForumAsMessages method.
             Invoking this method will update the value of this flag.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         paid_message_star_count (``int``, *optional*):
             Number of Telegram Stars that must be paid by non-administrator users of the supergroup chat for each sent message.
 
         is_paid_messages_available (``bool``, *optional*):
             True, if paid messages are available in this chat.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         display_gifts_button (``bool``, *optional*):
             True, if the gift button should be shown in the message input field for both participants in all chats.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         uses_unofficial_app (``bool``, *optional*):
             True, if the user uses an unofficial application that poses a security risk.
 
-        accepted_gift_types (:obj:`~pyrogram.types.AcceptedGiftTypes`, *optional*):
+        accepted_gift_types (:obj:`~kirugram.types.AcceptedGiftTypes`, *optional*):
             Information about gifts that can be received by the user.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
-        note (:obj:`~pyrogram.types.FormattedText`, *optional*):
+        note (:obj:`~kirugram.types.FormattedText`, *optional*):
             Note added to the user's contact.
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
-        guard_bot (:obj:`~pyrogram.types.User`, *optional*):
+        guard_bot (:obj:`~kirugram.types.User`, *optional*):
             The bot that processes join request queries in the chat.
             The field is only available to chat administrators
-            Returned only in :meth:`~pyrogram.Client.get_chat`.
+            Returned only in :meth:`~kirugram.Client.get_chat`.
 
         community_id (``int``, *optional*):
             The identifier of the community to which the chat belongs.
 
-        community (:obj:`~pyrogram.types.Community`, *optional*):
-            The :obj:`~pyrogram.types.Community` to which the chat belongs.
+        community (:obj:`~kirugram.types.Community`, *optional*):
+            The :obj:`~kirugram.types.Community` to which the chat belongs.
 
-        raw (:obj:`~pyrogram.raw.types.UserFull` | :obj:`~pyrogram.raw.types.ChatFull` | :obj:`~pyrogram.raw.types.ChannelFull`, *optional*):
+        raw (:obj:`~kirugram.raw.types.UserFull` | :obj:`~kirugram.raw.types.ChatFull` | :obj:`~kirugram.raw.types.ChannelFull`, *optional*):
             The raw chat or user object, as received from the Telegram API.
 
         full_name (``str``, *optional*, *property*):
@@ -575,7 +575,7 @@ class Chat(Object):
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         id: int | None = None,
         type: enums.ChatType | None = None,
         is_forum: bool | None = None,
@@ -1144,7 +1144,7 @@ class Chat(Object):
 
     @staticmethod
     async def _parse_full_user(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         user: raw.types.UserFull,
         users: dict[int, raw.base.User],
         chats: dict[int, raw.base.Chat],
@@ -1284,7 +1284,7 @@ class Chat(Object):
 
     @staticmethod
     async def _parse_full_chat(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat: raw.types.ChatFull,
         users: dict[int, raw.base.User],
         chats: dict[int, raw.base.Chat],
@@ -1329,7 +1329,7 @@ class Chat(Object):
 
     @staticmethod
     async def _parse_full_channel(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         channel: raw.types.ChannelFull,
         users: dict[int, raw.base.User],
         chats: dict[int, raw.base.Chat],
@@ -1468,7 +1468,7 @@ class Chat(Object):
 
     @staticmethod
     async def _parse_full(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         chat_full: raw.types.UserFull | raw.types.ChatFull | raw.types.ChannelFull,
     ) -> Chat | None:
         users = {u.id: u for u in chat_full.users}
@@ -1529,7 +1529,7 @@ class Chat(Object):
         return " ".join(filter(None, [self.first_name, self.last_name])) or self.title or None
 
     async def archive(self) -> bool:
-        """Bound method *archive* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *archive* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -1551,7 +1551,7 @@ class Chat(Object):
         return await self._client.archive_chats(self.id)
 
     async def unarchive(self) -> bool:
-        """Bound method *unarchive* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *unarchive* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -1573,7 +1573,7 @@ class Chat(Object):
         return await self._client.unarchive_chats(self.id)
 
     async def set_title(self, title: str) -> types.Message | None:
-        """Bound method *set_title* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *set_title* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -1594,7 +1594,7 @@ class Chat(Object):
                 New chat title, 1-255 characters.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent service message is returned, otherwise, in
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent service message is returned, otherwise, in
             case the server answered with no message, None is returned.
 
         Raises:
@@ -1604,7 +1604,7 @@ class Chat(Object):
         return await self._client.set_chat_title(chat_id=self.id, title=title)
 
     async def set_description(self, description: str) -> bool:
-        """Bound method *set_description* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *set_description* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -1640,7 +1640,7 @@ class Chat(Object):
         video: PathType | BinaryIO | None = None,
         video_start_ts: float | None = None,
     ) -> types.Message | None:
-        """Bound method *set_photo* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *set_photo* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -1669,12 +1669,12 @@ class Chat(Object):
 
         Parameters:
             photo (``str`` | ``os.PathLike`` | ``BinaryIO``, *optional*):
-                New chat photo. You can pass a :obj:`~pyrogram.types.Photo` file_id, a file path to upload a new photo
+                New chat photo. You can pass a :obj:`~kirugram.types.Photo` file_id, a file path to upload a new photo
                 from your local machine or a binary file-like object with its attribute
                 ".name" set for in-memory uploads.
 
             video (``str`` | ``os.PathLike`` | ``BinaryIO``, *optional*):
-                New chat video. You can pass a :obj:`~pyrogram.types.Video` file_id, a file path to upload a new video
+                New chat video. You can pass a :obj:`~kirugram.types.Video` file_id, a file path to upload a new video
                 from your local machine or a binary file-like object with its attribute
                 ".name" set for in-memory uploads.
 
@@ -1682,7 +1682,7 @@ class Chat(Object):
                 The timestamp in seconds of the video frame to use as photo profile preview.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the sent service message is returned, otherwise, in
+            :obj:`~kirugram.types.Message` | ``None``: On success, the sent service message is returned, otherwise, in
             case the server answered with no message, None is returned.
 
         Raises:
@@ -1694,7 +1694,7 @@ class Chat(Object):
         )
 
     async def set_ttl(self, ttl_seconds: int) -> types.Message | None:
-        """Bound method *set_ttl* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *set_ttl* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -1711,7 +1711,7 @@ class Chat(Object):
                 await chat.set_ttl(86400)
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the generated service message is returned, otherwise,
+            :obj:`~kirugram.types.Message` | ``None``: On success, the generated service message is returned, otherwise,
             in case the server answered with no message, None is returned.
         """
         return await self._client.set_chat_ttl(chat_id=self.id, ttl_seconds=ttl_seconds)
@@ -1722,7 +1722,7 @@ class Chat(Object):
         until_date: datetime | timedelta | None = None,
         revoke_messages: bool | None = None,
     ) -> types.Message | bool:
-        """Bound method *ban_member* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *ban_member* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -1753,7 +1753,7 @@ class Chat(Object):
                 Pass True to delete all messages in the chat for the user who is being removed.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``bool``: On success, a service message will be returned (when applicable), otherwise, in
+            :obj:`~kirugram.types.Message` | ``bool``: On success, a service message will be returned (when applicable), otherwise, in
             case a message object couldn't be returned, True is returned.
 
         Raises:
@@ -1767,7 +1767,7 @@ class Chat(Object):
         )
 
     async def unban_member(self, user_id: int | str) -> bool:
-        """Bound method *unban_member* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *unban_member* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -1805,7 +1805,7 @@ class Chat(Object):
         permissions: types.ChatPermissions,
         until_date: datetime | timedelta | None = None,
     ) -> types.Chat:
-        """Bound method *unban_member* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *unban_member* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -1827,7 +1827,7 @@ class Chat(Object):
                 Unique identifier (int) or username (str) of the target user.
                 For a contact that exists in your Telegram address book you can use his phone number (str).
 
-            permissions (:obj:`~pyrogram.types.ChatPermissions`):
+            permissions (:obj:`~kirugram.types.ChatPermissions`):
                 New user permissions.
 
             until_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -1837,7 +1837,7 @@ class Chat(Object):
                 A :py:obj:`~datetime.timedelta` is counted from now.
 
         Returns:
-            :obj:`~pyrogram.types.Chat`: On success, a chat object is returned.
+            :obj:`~kirugram.types.Chat`: On success, a chat object is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -1854,7 +1854,7 @@ class Chat(Object):
     async def promote_member(
         self, user_id: int | str, privileges: types.ChatAdministratorRights | None = None
     ) -> bool:
-        """Bound method *promote_member* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *promote_member* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -1876,7 +1876,7 @@ class Chat(Object):
                 Unique identifier (int) or username (str) of the target user.
                 For a contact that exists in your Telegram address book you can use his phone number (str).
 
-            privileges (:obj:`~pyrogram.types.ChatAdministratorRights`, *optional*):
+            privileges (:obj:`~kirugram.types.ChatAdministratorRights`, *optional*):
                 New user privileges.
 
         Returns:
@@ -1890,7 +1890,7 @@ class Chat(Object):
         )
 
     async def join(self) -> types.ChatJoinResult:
-        """Bound method *join* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *join* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -1908,7 +1908,7 @@ class Chat(Object):
             This only works for public groups, channels that have set a username or linked chats.
 
         Returns:
-            :obj:`~pyrogram.types.ChatJoinResult`: On success, the outcome of the join is returned.
+            :obj:`~kirugram.types.ChatJoinResult`: On success, the outcome of the join is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.
@@ -1916,7 +1916,7 @@ class Chat(Object):
         return await self._client.join_chat(self.username or self.id)
 
     async def leave(self):
-        """Bound method *leave* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *leave* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -1935,7 +1935,7 @@ class Chat(Object):
         return await self._client.leave_chat(self.id)
 
     async def export_invite_link(self) -> str:
-        """Bound method *export_invite_link* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *export_invite_link* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -1960,7 +1960,7 @@ class Chat(Object):
         self,
         user_id: int | str,
     ) -> types.ChatMember:
-        """Bound method *get_member* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *get_member* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -1977,7 +1977,7 @@ class Chat(Object):
                 await chat.get_member(user_id)
 
         Returns:
-            :obj:`~pyrogram.types.ChatMember`: On success, a chat member is returned.
+            :obj:`~kirugram.types.ChatMember`: On success, a chat member is returned.
         """
         return await self._client.get_chat_member(self.id, user_id=user_id)
 
@@ -1987,7 +1987,7 @@ class Chat(Object):
         limit: int = 0,
         filter: enums.ChatMembersFilter = enums.ChatMembersFilter.SEARCH,
     ) -> AsyncGenerator[types.ChatMember, None]:
-        """Bound method *get_members* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *get_members* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -2006,26 +2006,26 @@ class Chat(Object):
             query (``str``, *optional*):
                 Query string to filter members based on their display names and usernames.
                 Only applicable to supergroups and channels. Defaults to "" (empty string).
-                A query string is applicable only for :obj:`~pyrogram.enums.ChatMembersFilter.SEARCH`,
-                :obj:`~pyrogram.enums.ChatMembersFilter.BANNED` and :obj:`~pyrogram.enums.ChatMembersFilter.RESTRICTED`
+                A query string is applicable only for :obj:`~kirugram.enums.ChatMembersFilter.SEARCH`,
+                :obj:`~kirugram.enums.ChatMembersFilter.BANNED` and :obj:`~kirugram.enums.ChatMembersFilter.RESTRICTED`
                 filters only.
 
             limit (``int``, *optional*):
                 Limits the number of members to be retrieved.
 
-            filter (:obj:`~pyrogram.enums.ChatMembersFilter`, *optional*):
+            filter (:obj:`~kirugram.enums.ChatMembersFilter`, *optional*):
                 Filter used to select the kind of members you want to retrieve. Only applicable for supergroups
                 and channels.
 
         Returns:
-            ``Generator``: On success, a generator yielding :obj:`~pyrogram.types.ChatMember` objects is returned.
+            ``Generator``: On success, a generator yielding :obj:`~kirugram.types.ChatMember` objects is returned.
         """
         return self._client.get_chat_members(self.id, query=query, limit=limit, filter=filter)
 
     async def add_members(
         self, user_ids: int | str | list[int | str], forward_limit: int = 100
     ) -> list[types.FailedToAddMember]:
-        """Bound method *add_members* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *add_members* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -2039,7 +2039,7 @@ class Chat(Object):
                 await chat.add_members(user_id)
 
         Returns:
-            List of :obj:`~pyrogram.types.FailedToAddMember`: On success, an empty list is returned, otherwise a list of :obj:`~pyrogram.types.FailedToAddMember` is returned.
+            List of :obj:`~kirugram.types.FailedToAddMember`: On success, an empty list is returned, otherwise a list of :obj:`~kirugram.types.FailedToAddMember` is returned.
         """
         return await self._client.add_chat_members(
             self.id, user_ids=user_ids, forward_limit=forward_limit
@@ -2048,7 +2048,7 @@ class Chat(Object):
     async def mark_unread(
         self,
     ) -> bool:
-        """Bound method *mark_unread* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *mark_unread* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -2067,7 +2067,7 @@ class Chat(Object):
         return await self._client.mark_chat_unread(self.id)
 
     async def set_protected_content(self, enabled: bool) -> types.Message | bool:
-        """Bound method *set_protected_content* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *set_protected_content* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -2085,13 +2085,13 @@ class Chat(Object):
                 await chat.set_protected_content(enabled)
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``bool``: On success, a service message will be returned (when applicable),
+            :obj:`~kirugram.types.Message` | ``bool``: On success, a service message will be returned (when applicable),
             otherwise, in case a message object couldn't be returned, True is returned.
         """
         return await self._client.set_chat_protected_content(self.id, enabled=enabled)
 
     async def unpin_all_messages(self) -> bool:
-        """Bound method *unpin_all_messages* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *unpin_all_messages* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -2110,7 +2110,7 @@ class Chat(Object):
         return await self._client.unpin_all_chat_messages(self.id)
 
     async def mute(self, mute_until: datetime | timedelta | None = None) -> bool:
-        """Bound method *mute* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *mute* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 
@@ -2136,7 +2136,7 @@ class Chat(Object):
         )
 
     async def unmute(self) -> bool:
-        """Bound method *unmute* of :obj:`~pyrogram.types.Chat`.
+        """Bound method *unmute* of :obj:`~kirugram.types.Chat`.
 
         Use as a shortcut for:
 

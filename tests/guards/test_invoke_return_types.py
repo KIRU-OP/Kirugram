@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 """`invoke()` gives back the type of the query it was handed, wrapped or not.
 
@@ -28,7 +28,7 @@ Only a type checker can see any of that, so a suite full of green tests says not
 The first test below asks `ty` what it reveals and asserts the answers; the second reads the
 generated tree and asserts the declared subscripts the first one relies on, the TL core
 returns among them, which the compiler maps to real Python types (`bool`, `list[int]`,
-`raw.core.FutureSalts`) because they have no module under `pyrogram.raw.base`.
+`raw.core.FutureSalts`) because they have no module under `kirugram.raw.base`.
 
 The case the first test drives is written to a temporary file rather than kept in the tree
 because `reveal_type` is an undefined name: in the tree it would fail `ruff`'s `F821` and add
@@ -52,7 +52,7 @@ from tests.guards.name_resolution import REPOSITORY_ROOT
 #  and `make test-ceil` install the `test` group alone, so the guard skips there.
 _TYPE_CHECKER: Final[Path] = Path(sys.executable).with_name("ty")
 
-_GENERATED_FUNCTIONS: Final[Path] = REPOSITORY_ROOT / "pyrogram" / "raw" / "functions"
+_GENERATED_FUNCTIONS: Final[Path] = REPOSITORY_ROOT / "kirugram" / "raw" / "functions"
 
 # `<path>:<line>:<col>: info[revealed-type] Revealed type: `<type>``, one per line, which is what
 #  `--output-format concise` buys over the default multi-line rendering.
@@ -80,11 +80,11 @@ _CALLS: Final[tuple[str, ...]] = (
 
 _CASE_HEADER: Final[str] = """from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw
+import kirugram
+from kirugram import raw
 
 
-async def case(app: pyrogram.Client) -> None:
+async def case(app: kirugram.Client) -> None:
 """
 
 # A function's return type is written as a string, since `raw` is `TYPE_CHECKING`-only in the

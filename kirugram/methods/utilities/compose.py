@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -24,18 +24,18 @@ from typing import TYPE_CHECKING
 from .idle import idle
 
 if TYPE_CHECKING:
-    import pyrogram
+    import kirugram
 
 
-async def compose(clients: list[pyrogram.Client], sequential: bool = False):
+async def compose(clients: list[kirugram.Client], sequential: bool = False):
     """Run multiple clients at once.
 
-    This method can be used to run multiple clients at once and can be found directly in the ``pyrogram`` package.
+    This method can be used to run multiple clients at once and can be found directly in the ``kirugram`` package.
 
-    If you want to run a single client, you can use Client's bound method :meth:`~pyrogram.Client.run`.
+    If you want to run a single client, you can use Client's bound method :meth:`~kirugram.Client.run`.
 
     Parameters:
-        clients (List of :obj:`~pyrogram.Client`):
+        clients (List of :obj:`~kirugram.Client`):
             A list of client objects to run.
 
         sequential (``bool``, *optional*):
@@ -46,7 +46,7 @@ async def compose(clients: list[pyrogram.Client], sequential: bool = False):
         .. code-block:: python
 
             import asyncio
-            from pyrogram import Client, compose
+            from kirugram import Client, compose
 
 
             async def main():

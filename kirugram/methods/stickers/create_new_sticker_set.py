@@ -1,31 +1,31 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 
-import pyrogram
-from pyrogram import raw, types, enums
+import kirugram
+from kirugram import raw, types, enums
 
 
 class CreateNewStickerSet:
     async def create_new_sticker_set(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         user_id: int | str,
         name: str,
         title: str,
@@ -49,11 +49,11 @@ class CreateNewStickerSet:
             title (``str``):
                 Sticker set title, 1-64 characters.
 
-            stickers (List of :obj:`~pyrogram.types.InputSticker`):
+            stickers (List of :obj:`~kirugram.types.InputSticker`):
                 List of stickers to be added to the set, must be up to 200 stickers.
 
-            sticker_type (:obj:`~pyrogram.enums.StickerType`, *optional*):
-                Type of stickers in the set, pass :obj:`~pyrogram.enums.StickerType.REGULAR`, :obj:`~pyrogram.enums.StickerType.MASK`, or :obj:`~pyrogram.enums.StickerType.CUSTOM_EMOJI`.
+            sticker_type (:obj:`~kirugram.enums.StickerType`, *optional*):
+                Type of stickers in the set, pass :obj:`~kirugram.enums.StickerType.REGULAR`, :obj:`~kirugram.enums.StickerType.MASK`, or :obj:`~kirugram.enums.StickerType.CUSTOM_EMOJI`.
                 By default, a regular sticker set is created.
 
             needs_repainting (``bool``, *optional*):
@@ -62,12 +62,12 @@ class CreateNewStickerSet:
                 For custom emoji sticker sets only.
 
         Returns:
-            :obj:`~pyrogram.types.StickerSet`: A created sticker set is returned.
+            :obj:`~kirugram.types.StickerSet`: A created sticker set is returned.
 
         Example:
             .. code-block:: python
 
-                from pyrogram import enums
+                from kirugram import enums
 
                 await app.create_new_sticker_set(
                     "me",

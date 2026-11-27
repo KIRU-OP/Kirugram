@@ -1,30 +1,30 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import enums, raw
+import kirugram
+from kirugram import enums, raw
 
 
 class SetMainProfileTab:
     async def set_main_profile_tab(
-        self: pyrogram.Client, chat_id: int | str, main_profile_tab: enums.ProfileTab
+        self: kirugram.Client, chat_id: int | str, main_profile_tab: enums.ProfileTab
     ) -> bool:
         """Changes the main profile tab of the user or channel.
 
@@ -35,7 +35,7 @@ class SetMainProfileTab:
                 Unique identifier (int) or username (str) of the target chat.
                 For your personal cloud (Saved Messages) you can simply use "me" or "self".
 
-            main_profile_tab (:obj:`~pyrogram.enums.ProfileTab`):
+            main_profile_tab (:obj:`~kirugram.enums.ProfileTab`):
                 The new value of the main profile tab.
 
         Returns:

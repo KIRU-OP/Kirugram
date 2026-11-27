@@ -1,22 +1,22 @@
-#  Kurigram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #  Copyright (C) 2024-present KurimuzonAkuma <https://github.com/KurimuzonAkuma>
 #
-#  This file is part of Kurigram.
+#  This file is part of Kirugram.
 #
-#  Kurigram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Kurigram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Kurigram. If not, see <https://www.gnu.org/licenses/>.
+#  along with Kirugram. If not, see <https://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -41,11 +41,11 @@ from mimetypes import MimeTypes
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
-import pyrogram
-from pyrogram import __license__, __version__, enums, raw, utils
-from pyrogram.connection.proxy import ProxyDict, normalize_proxy
-from pyrogram.crypto import aes
-from pyrogram.errors import (
+import kirugram
+from kirugram import __license__, __version__, enums, raw, utils
+from kirugram.connection.proxy import ProxyDict, normalize_proxy
+from kirugram.crypto import aes
+from kirugram.errors import (
     AuthBytesInvalid,
     AuthTokenExpired,
     BadRequest,
@@ -57,13 +57,13 @@ from pyrogram.errors import (
     Unauthorized,
     VolumeLocNotFound,
 )
-from pyrogram.handlers.handler import Handler
-from pyrogram.methods import Methods
-from pyrogram.qrlogin import QRLogin
-from pyrogram.session import Auth, Session
-from pyrogram.storage import SQLiteStorage, Storage, UpdateState
-from pyrogram.types import LinkPreviewOptions, TermsOfService, User
-from pyrogram.utils import ainput
+from kirugram.handlers.handler import Handler
+from kirugram.methods import Methods
+from kirugram.qrlogin import QRLogin
+from kirugram.session import Auth, Session
+from kirugram.storage import SQLiteStorage, Storage, UpdateState
+from kirugram.types import LinkPreviewOptions, TermsOfService, User
+from kirugram.utils import ainput
 
 from .connection import Connection
 from .connection.transport import TCP, TCPAbridged
@@ -75,8 +75,8 @@ from .session.internals import MsgId
 if TYPE_CHECKING:
     from collections.abc import AsyncGenerator, Callable, Sequence
 
-    from pyrogram._typing import PathType
-    from pyrogram.connection import Proxy
+    from kirugram._typing import PathType
+    from kirugram.connection import Proxy
 
 log = logging.getLogger(__name__)
 
@@ -94,7 +94,7 @@ def _plugin_handlers(target: Any) -> Sequence[tuple[Handler, int]] | None:
 
 
 class Client(Methods):
-    """Kurigram Client, the main means for interacting with Telegram.
+    """Kirugram Client, the main means for interacting with Telegram.
 
     Parameters:
         name (``str``):
@@ -110,7 +110,7 @@ class Client(Methods):
 
         app_version (``str``, *optional*):
             Application version.
-            Defaults to "Kurigram x.y.z".
+            Defaults to "Kirugram x.y.z".
 
         device_model (``str``, *optional*):
             Device model.
@@ -139,9 +139,9 @@ class Client(Methods):
             after which the server address will be updated (works both ways).
             Defaults to False (IPv4).
 
-        proxy (``str`` | ``dict`` | :obj:`~pyrogram.connection.Proxy`, *optional*):
+        proxy (``str`` | ``dict`` | :obj:`~kirugram.connection.Proxy`, *optional*):
             The Proxy settings as a url, a dict, or one of the
-            :obj:`~pyrogram.connection.Proxy` dataclasses.
+            :obj:`~kirugram.connection.Proxy` dataclasses.
             E.g.: *dict(scheme="socks5", hostname="11.22.33.44", port=1234, username="user", password="pass")*
             or *"http://11.22.33.44:1234"* or *"socks5://user:pass@11.22.33.44:1234"* or *"tg://socks?server=11.22.33.44&port=1234"*.
             The *username* and *password* can be omitted if the proxy doesn't require authorization.
@@ -172,7 +172,7 @@ class Client(Methods):
         in_memory (``bool``, *optional*):
             Pass True to start an in-memory session that will be discarded as soon as the client stops.
             In order to reconnect again using an in-memory session without having to login again, you can use
-            :meth:`~pyrogram.Client.export_session_string` before stopping the client to get a session string you can
+            :meth:`~kirugram.Client.export_session_string` before stopping the client to get a session string you can
             pass to the ``session_string`` parameter.
             Defaults to False.
 
@@ -194,13 +194,13 @@ class Client(Methods):
 
         workdir (``str`` | ``os.PathLike``, *optional*):
             Define a custom working directory.
-            The working directory is the location in the filesystem where Kurigram will store the session files.
+            The working directory is the location in the filesystem where Kirugram will store the session files.
             Defaults to the parent directory of the main script.
 
         plugins (``dict``, *optional*):
             Smart Plugins settings as dict, e.g.: *dict(root="plugins")*.
 
-        parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+        parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
             Set the global parse mode of the client. By default, texts are parsed using both Markdown and HTML styles.
             You can combine both syntaxes together.
 
@@ -262,15 +262,15 @@ class Client(Methods):
             Set the maximum size of the sticker set name cache.
             Defaults to 250.
 
-        storage_engine (:obj:`~pyrogram.storage.Storage`, *optional*):
+        storage_engine (:obj:`~kirugram.storage.Storage`, *optional*):
             Pass an instance of your own implementation of session storage engine.
             Useful when you want to store your session in databases like Mongo, Redis, etc.
 
-        client_platform (:obj:`~pyrogram.enums.ClientPlatform`, *optional*):
+        client_platform (:obj:`~kirugram.enums.ClientPlatform`, *optional*):
             The platform where this client is running.
             Defaults to 'other'
 
-        link_preview_options (:obj:`~pyrogram.types.LinkPreviewOptions`, *optional*):
+        link_preview_options (:obj:`~kirugram.types.LinkPreviewOptions`, *optional*):
             Global link preview options for the client.
 
         fetch_replies (``bool``, *optional*):
@@ -289,13 +289,13 @@ class Client(Methods):
             Pass True to automatically fetch names of sticker sets.
             Defaults to True.
 
-        init_connection_params (``dict`` | :obj:`~pyrogram.raw.base.JSONValue`, *optional*):
+        init_connection_params (``dict`` | :obj:`~kirugram.raw.base.JSONValue`, *optional*):
             Additional initConnection parameters.
             For now, only the tz_offset field is supported, for specifying timezone offset in seconds.
             A dict is converted on connect; an already built JSONValue is sent as it is.
     """
 
-    APP_VERSION = f"Kurigram {__version__}"
+    APP_VERSION = f"Kirugram {__version__}"
     DEVICE_MODEL = f"{platform.python_implementation()} {platform.python_version()}"
     SYSTEM_VERSION = f"{platform.system()} {platform.release()}"
 
@@ -484,7 +484,7 @@ class Client(Methods):
         self.updates_watchdog_event = asyncio.Event()
         self.last_update_time = datetime.now()
 
-        # `start()` records the loop it is running on, and `pyrogram/sync.py` is the one
+        # `start()` records the loop it is running on, and `kirugram/sync.py` is the one
         #  reader: a call arriving from a thread with no loop of its own reaches this one
         #  through `run_coroutine_threadsafe`, which takes the loop as an argument.
         self._loop: asyncio.AbstractEventLoop | None = None
@@ -497,8 +497,8 @@ class Client(Methods):
 
     def __exit__(self, *args):
         try:
-            # `Client.stop` is only a plain coroutine function here when `pyrogram.sync`
-            #  hasn't patched it into a blocking sync wrapper (see pyrogram/sync.py);
+            # `Client.stop` is only a plain coroutine function here when `kirugram.sync`
+            #  hasn't patched it into a blocking sync wrapper (see kirugram/sync.py);
             #  `ty` can't see that runtime substitution.
             self.stop()  # ty: ignore[unused-awaitable]
         except ConnectionError:
@@ -553,9 +553,9 @@ class Client(Methods):
         if self.bot_token:
             return await self.sign_in_bot(self.bot_token)
 
-        print(f"Welcome to Kurigram (version {__version__})")
+        print(f"Welcome to Kirugram (version {__version__})")
         print(
-            f"Kurigram is free software and comes with ABSOLUTELY NO WARRANTY. Licensed\n"
+            f"Kirugram is free software and comes with ABSOLUTELY NO WARRANTY. Licensed\n"
             f"under the terms of the {__license__}.\n"
         )
 
@@ -632,7 +632,7 @@ class Client(Methods):
                             # TODO: raw.functions.auth.CheckPaidAuth
                             raise Unauthorized(
                                 f"You need to pay {email_sent_code.sent_code.amount}{email_sent_code.sent_code.currency} or purchase premium to continue authorization "
-                                "process, which is currently not supported by Kurigram."
+                                "process, which is currently not supported by Kirugram."
                             )
                 except BadRequest as e:
                     print(e.MESSAGE)
@@ -727,7 +727,7 @@ class Client(Methods):
 
     async def authorize_qr(self, except_ids: list[int] | None = None) -> User:
         # `qrcode` is an optional extra, so importing it at module level would break
-        #  `import pyrogram` for everyone who did not install it.
+        #  `import kirugram` for everyone who did not install it.
         try:
             from qrcode import QRCode  # noqa: PLC0415 # ty: ignore[unresolved-import]
         except ImportError as er:
@@ -744,8 +744,8 @@ class Client(Methods):
             try:
                 print(
                     "\x1b[2J\n"
-                    f"Welcome to Kurigram (version {__version__})\n"
-                    "Kurigram is free software and comes with ABSOLUTELY NO WARRANTY. Licensed\n"
+                    f"Welcome to Kirugram (version {__version__})\n"
+                    "Kirugram is free software and comes with ABSOLUTELY NO WARRANTY. Licensed\n"
                     f"under the terms of the {__license__}.\n"
                     "Scan the QR code below to login\n"
                     "Settings -> Privacy and Security -> Active Sessions -> Scan QR Code.",
@@ -817,14 +817,14 @@ class Client(Methods):
         global value by default.
 
         Parameters:
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
         Example:
             .. code-block:: python
 
-                from pyrogram import enums
+                from kirugram import enums
 
                 # Default combined mode: Markdown + HTML
                 await app.send_message("me", "1. **markdown** and <i>html</i>")
@@ -1319,7 +1319,7 @@ class Client(Methods):
                 file.close()
                 os.remove(temp_file_path)
 
-            if isinstance(e, pyrogram.StopTransmission):
+            if isinstance(e, kirugram.StopTransmission):
                 return None
 
             raise e

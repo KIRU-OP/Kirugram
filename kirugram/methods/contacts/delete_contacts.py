@@ -1,40 +1,40 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import overload
 
-import pyrogram
-from pyrogram import raw, types
+import kirugram
+from kirugram import raw, types
 
 
 class DeleteContacts:
     @overload
-    async def delete_contacts(self: pyrogram.Client, user_ids: int | str) -> types.User | None: ...
+    async def delete_contacts(self: kirugram.Client, user_ids: int | str) -> types.User | None: ...
 
     @overload
     async def delete_contacts(
-        self: pyrogram.Client, user_ids: list[int | str]
+        self: kirugram.Client, user_ids: list[int | str]
     ) -> list[types.User] | None: ...
 
     async def delete_contacts(
-        self: pyrogram.Client, user_ids: int | str | list[int | str]
+        self: kirugram.Client, user_ids: int | str | list[int | str]
     ) -> types.User | list[types.User] | None:
         """Delete contacts from your Telegram address book.
 
@@ -45,7 +45,7 @@ class DeleteContacts:
                 A single user id/username or a list of user identifiers (id or username).
 
         Returns:
-            :obj:`~pyrogram.types.User` | List of :obj:`~pyrogram.types.User` | ``None``: In case *user_ids* was an
+            :obj:`~kirugram.types.User` | List of :obj:`~kirugram.types.User` | ``None``: In case *user_ids* was an
             integer or a string, a single User object is returned. In case *user_ids* was a list, a list of User objects
             is returned. In case nothing changed after calling the method (for example, when deleting a non-existent
             contact), None is returned.

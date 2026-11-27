@@ -1,38 +1,38 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import logging
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import raw
+import kirugram
+from kirugram import raw
 
 if TYPE_CHECKING:
-    from pyrogram.raw.core import ReturnType, TLObject
+    from kirugram.raw.core import ReturnType, TLObject
 
 log = logging.getLogger(__name__)
 
 
 class Invoke:
     async def invoke(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         query: TLObject[ReturnType],
         retries: int | None = None,
         timeout: float | None = None,
@@ -44,13 +44,13 @@ class Invoke:
         """Invoke raw Telegram functions.
 
         This method makes it possible to manually call every single Telegram API method in a low-level manner.
-        Available functions are listed in the :obj:`functions <pyrogram.raw.functions>` package and may accept compound
-        data types from :obj:`types <pyrogram.raw.types>` as well as bare types such as ``int``, ``str``, etc...
+        Available functions are listed in the :obj:`functions <kirugram.raw.functions>` package and may accept compound
+        data types from :obj:`types <kirugram.raw.types>` as well as bare types such as ``int``, ``str``, etc...
 
         .. note::
 
             This is a utility method intended to be used **only** when working with raw
-            :obj:`functions <pyrogram.raw.functions>` (i.e: a Telegram API method you wish to use which is not
+            :obj:`functions <kirugram.raw.functions>` (i.e: a Telegram API method you wish to use which is not
             available yet in the Client class as an easy-to-use method).
 
         .. include:: /_includes/usable-by/users-bots.rst

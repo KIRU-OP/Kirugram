@@ -1,29 +1,29 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-import pyrogram
-from pyrogram import raw, enums
-from pyrogram import types
-from pyrogram import utils
+import kirugram
+from kirugram import raw, enums
+from kirugram import types
+from kirugram import utils
 
 if TYPE_CHECKING:
     from collections.abc import AsyncGenerator
@@ -31,7 +31,7 @@ if TYPE_CHECKING:
 
 class SearchGlobal:
     async def search_global(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         query: str = "",
         filter: enums.MessagesFilter = enums.MessagesFilter.EMPTY,
         channels_only: bool | None = None,
@@ -41,7 +41,7 @@ class SearchGlobal:
     ) -> AsyncGenerator[types.Message, None]:
         """Search messages globally from all of your chats.
 
-        If you want to get the messages count only, see :meth:`~pyrogram.Client.search_global_count`.
+        If you want to get the messages count only, see :meth:`~kirugram.Client.search_global_count`.
 
         .. note::
 
@@ -55,7 +55,7 @@ class SearchGlobal:
                 Text query string.
                 Use "@" to search for mentions.
 
-            filter (:obj:`~pyrogram.enums.MessagesFilter`, *optional*):
+            filter (:obj:`~kirugram.enums.MessagesFilter`, *optional*):
                 Pass a filter in order to search for specific kind of messages only.
                 Defaults to any message (no filter).
 
@@ -73,15 +73,15 @@ class SearchGlobal:
                 Pass True to search only in users.
 
         Returns:
-            ``Generator``: A generator yielding :obj:`~pyrogram.types.Message` objects.
+            ``Generator``: A generator yielding :obj:`~kirugram.types.Message` objects.
 
         Example:
             .. code-block:: python
 
-                from pyrogram import enums
+                from kirugram import enums
 
-                # Search for "pyrogram". Get the first 50 results
-                async for message in app.search_global("pyrogram", limit=50):
+                # Search for "kirugram". Get the first 50 results
+                async for message in app.search_global("kirugram", limit=50):
                     print(message.text)
 
                 # Search for recent photos from Global. Get the first 20 results

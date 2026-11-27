@@ -1,34 +1,34 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 import logging
 
-import pyrogram
-from pyrogram import raw, types, utils
+import kirugram
+from kirugram import raw, types, utils
 
 log = logging.getLogger(__name__)
 
 
 class SignUp:
     async def sign_up(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         phone_number: str,
         phone_code_hash: str,
         first_name: str,
@@ -43,7 +43,7 @@ class SignUp:
                 Phone number in international format (includes the country prefix).
 
             phone_code_hash (``str``):
-                Code identifier taken from the result of :meth:`~pyrogram.Client.send_phone_number_code`.
+                Code identifier taken from the result of :meth:`~kirugram.Client.send_phone_number_code`.
 
             first_name (``str``):
                 New user first name.
@@ -52,7 +52,7 @@ class SignUp:
                 New user last name. Defaults to "" (empty string, no last name).
 
         Returns:
-            :obj:`~pyrogram.types.User`: On success, the new registered user is returned.
+            :obj:`~kirugram.types.User`: On success, the new registered user is returned.
 
         Raises:
             BadRequest: In case the arguments are invalid.

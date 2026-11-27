@@ -1,25 +1,25 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, types
+import kirugram
+from kirugram import raw, types
 
 from ..object import Object
 
@@ -77,19 +77,19 @@ class WebPage(Object):
         description (``str``, *optional*):
             Description of this webpage.
 
-        audio (:obj:`~pyrogram.types.Audio`, *optional*):
+        audio (:obj:`~kirugram.types.Audio`, *optional*):
             Webpage preview is an audio file, information about the file.
 
-        document (:obj:`~pyrogram.types.Document`, *optional*):
+        document (:obj:`~kirugram.types.Document`, *optional*):
             Webpage preview is a general file, information about the file.
 
-        photo (:obj:`~pyrogram.types.Photo`, *optional*):
+        photo (:obj:`~kirugram.types.Photo`, *optional*):
             Webpage preview is a photo, information about the photo.
 
-        animation (:obj:`~pyrogram.types.Animation`, *optional*):
+        animation (:obj:`~kirugram.types.Animation`, *optional*):
             Webpage preview is an animation, information about the animation.
 
-        video (:obj:`~pyrogram.types.Video`, *optional*):
+        video (:obj:`~kirugram.types.Video`, *optional*):
             Webpage preview is a video, information about the video.
 
         embed_url (``str``, *optional*):
@@ -125,14 +125,14 @@ class WebPage(Object):
         author (``str``, *optional*):
             Author of the webpage, eg the Twitter user for a tweet, or the author in an article.
 
-        raw (:obj:`~pyrogram.raw.types.MessageMediaWebPage`):
+        raw (:obj:`~kirugram.raw.types.MessageMediaWebPage`):
             The raw version of this object.
     """
 
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         id: str,
         url: str,
         display_url: str | None = None,

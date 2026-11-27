@@ -1,20 +1,20 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -24,15 +24,15 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from datetime import datetime, timedelta
 
-    import pyrogram
-    from pyrogram import enums, types
+    import kirugram
+    from kirugram import enums, types
 
 log = logging.getLogger(__name__)
 
 
 class CopyMessage:
     async def copy_message(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
         from_chat_id: int | str,
         message_id: int,
@@ -67,7 +67,7 @@ class CopyMessage:
     ) -> types.Message | None:
         """Copy messages of any kind.
 
-        The method is analogous to the method :meth:`~pyrogram.Client.forward_messages`, but the copied message doesn't have a
+        The method is analogous to the method :meth:`~kirugram.Client.forward_messages`, but the copied message doesn't have a
         link to the original message.
 
         .. include:: /_includes/usable-by/users-bots.rst
@@ -91,11 +91,11 @@ class CopyMessage:
                 If not specified, the original caption is kept.
                 Pass "" (empty string) to remove the caption.
 
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+            parse_mode (:obj:`~kirugram.enums.ParseMode`, *optional*):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
-            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            caption_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the new caption, which can be specified instead of *parse_mode*.
 
             disable_notification (``bool``, *optional*):
@@ -106,7 +106,7 @@ class CopyMessage:
                 Unique identifier for the target message thread (topic) of the forum.
                 For supergroups only.
 
-            reply_parameters (:obj:`~pyrogram.types.ReplyParameters`, *optional*):
+            reply_parameters (:obj:`~kirugram.types.ReplyParameters`, *optional*):
                 Describes reply parameters for the message that is being sent.
 
             schedule_date (:py:obj:`~datetime.datetime` | :py:obj:`~datetime.timedelta`, *optional*):
@@ -134,7 +134,7 @@ class CopyMessage:
             paid_message_star_count (``int``, *optional*):
                 The number of Telegram Stars the user agreed to pay to send the messages.
 
-            reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
+            reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardMarkup` | :obj:`~kirugram.types.ReplyKeyboardRemove` | :obj:`~kirugram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
                 If not specified, the original reply markup is kept.
@@ -155,13 +155,13 @@ class CopyMessage:
                 This parameter is deprecated and should not be used.
                 Use `reply_parameters` instead.
 
-            quote_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+            quote_entities (List of :obj:`~kirugram.types.MessageEntity`, *optional*):
                 List of special entities that appear in the quote, which can be specified instead of *parse_mode*.
                 This parameter is deprecated and should not be used.
                 Use `reply_parameters` instead.
 
         Returns:
-            :obj:`~pyrogram.types.Message` | ``None``: On success, the copied message is returned,
+            :obj:`~kirugram.types.Message` | ``None``: On success, the copied message is returned,
             otherwise, in case no message was sent, None is returned.
 
         Example:

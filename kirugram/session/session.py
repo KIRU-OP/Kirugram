@@ -1,22 +1,22 @@
-#  Kurigram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #  Copyright (C) 2024-present KurimuzonAkuma <https://github.com/KurimuzonAkuma>
 #
-#  This file is part of Kurigram.
+#  This file is part of Kirugram.
 #
-#  Kurigram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Kurigram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Kurigram. If not, see <https://www.gnu.org/licenses/>.
+#  along with Kirugram. If not, see <https://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -29,11 +29,11 @@ from hashlib import sha1
 from io import BytesIO
 from typing import TYPE_CHECKING, Any
 
-import pyrogram
-from pyrogram import raw, utils
-from pyrogram.connection.proxy import client_proxy_address
-from pyrogram.crypto import mtproto
-from pyrogram.errors import (
+import kirugram
+from kirugram import raw, utils
+from kirugram.connection.proxy import client_proxy_address
+from kirugram.crypto import mtproto
+from kirugram.errors import (
     AuthKeyDuplicated,
     BadMsgNotification,
     FloodPremiumWait,
@@ -44,15 +44,15 @@ from pyrogram.errors import (
     ServiceUnavailable,
     Unauthorized,
 )
-from pyrogram.raw.all import layer
-from pyrogram.raw.core import FutureSalt, FutureSalts, Int, MsgContainer, TLObject
+from kirugram.raw.all import layer
+from kirugram.raw.core import FutureSalt, FutureSalts, Int, MsgContainer, TLObject
 
 from .internals import MsgFactory
 
 if TYPE_CHECKING:
     from collections.abc import Coroutine
 
-    from pyrogram.connection import Connection
+    from kirugram.connection import Connection
 
 log = logging.getLogger(__name__)
 
@@ -115,7 +115,7 @@ class Session:
 
     def __init__(
         self,
-        client: pyrogram.Client,
+        client: kirugram.Client,
         dc_id: int,
         server_address: str,
         port: int,
@@ -278,7 +278,7 @@ class Session:
 
             self.ping_task = asyncio.create_task(self.ping_worker())
 
-            log.info("Session initialized: Kurigram v%s (Layer %s)", pyrogram.__version__, layer)
+            log.info("Session initialized: Kirugram v%s (Layer %s)", kirugram.__version__, layer)
             log.info("Device: %s - %s", self.client.device_model, self.client.app_version)
             log.info("System: %s (%s)", self.client.system_version, self.client.lang_code)
         except (AuthKeyDuplicated, Unauthorized) as e:
@@ -766,7 +766,7 @@ class Session:
             except (OSError, InternalServerError, ServiceUnavailable) as e:
                 # `TCP.send` raises a bare `TimeoutError`, an `OSError` whose `str()` is
                 #  empty, so without the `repr` fallback the line would end at "due to: ".
-                #  `pyrogram/connection/transport/tcp/tcp.py:505`.
+                #  `kirugram/connection/transport/tcp/tcp.py:505`.
                 log.warning(
                     '[%s] Retrying "%s" (attempt %s) due to: %s',
                     self.client.name,

@@ -1,30 +1,30 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw
+import kirugram
+from kirugram import raw
 
 
 class UnpinAllForumTopicMessages:
     async def unpin_all_forum_topic_messages(
-        self: pyrogram.Client, chat_id: int | str, message_thread_id: int
+        self: kirugram.Client, chat_id: int | str, message_thread_id: int
     ) -> bool:
         """Use this method to clear the list of pinned messages in a forum topic in a forum supergroup chat or a private chat with a user.
         In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the `can_pin_messages` administrator right in the supergroup.
@@ -58,7 +58,7 @@ class UnpinAllForumTopicMessages:
 
 class UnpinAllGeneralForumTopicMessages:
     async def unpin_all_general_forum_topic_messages(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         chat_id: int | str,
     ) -> bool:
         """Use this method to clear the list of pinned messages in a General forum topic.

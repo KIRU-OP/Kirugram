@@ -1,25 +1,25 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, types
+import kirugram
+from kirugram import raw, types
 from ..object import Object
 
 
@@ -45,7 +45,7 @@ class Invoice(Object):
         start_parameter (``str``, *optional*):
             Unique bot deep-linking parameter that can be used to generate this invoice.
 
-        prices (List of :obj:`~pyrogram.types.LabeledPrice`, *optional*):
+        prices (List of :obj:`~kirugram.types.LabeledPrice`, *optional*):
             Price breakdown, a list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.).
 
         is_name_requested (``bool``, *optional*):
@@ -85,14 +85,14 @@ class Invoice(Object):
         terms_url (``str``, *optional*):
             Terms of service URL.
 
-        raw (:obj:`~pyrogram.raw.types.MessageMediaInvoice` | :obj:`~pyrogram.raw.types.Invoice`, *optional*):
+        raw (:obj:`~kirugram.raw.types.MessageMediaInvoice` | :obj:`~kirugram.raw.types.Invoice`, *optional*):
             The raw object, as received from the Telegram API.
     """
 
     def __init__(
         self,
         *,
-        client: pyrogram.Client | None = None,
+        client: kirugram.Client | None = None,
         currency: str,
         is_test: bool,
         title: str | None = None,

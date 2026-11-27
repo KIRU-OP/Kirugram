@@ -1,37 +1,37 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, enums
+import kirugram
+from kirugram import raw, enums
 
 
 class GetWebAppUrl:
     async def get_web_app_url(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         bot_user_id: int | str,
         url: str | None = None,
         platform: enums.ClientPlatform | None = None,
     ) -> str:
         """Returns an HTTPS URL of a Web App to open from the side menu,
-        a :obj:`~pyrogram.types.KeyboardButton` button with web app type,
-        or an :obj:`~pyrogram.types.InlineKeyboardButton` button with web app type.
+        a :obj:`~kirugram.types.KeyboardButton` button with web app type,
+        or an :obj:`~kirugram.types.InlineKeyboardButton` button with web app type.
 
         .. include:: /_includes/usable-by/users.rst
 
@@ -40,11 +40,11 @@ class GetWebAppUrl:
                 Unique identifier (int) or username (str) of the target bot.
 
             url (``str``, *optional*):
-                The URL from :obj:`~pyrogram.types.KeyboardButton` button with web app type,
-                or an :obj:`~pyrogram.types.InlineKeyboardButton` button with web app type,
+                The URL from :obj:`~kirugram.types.KeyboardButton` button with web app type,
+                or an :obj:`~kirugram.types.InlineKeyboardButton` button with web app type,
                 or an None when the bot is opened from the side menu.
 
-            platform (:obj:`~pyrogram.enums.ClientPlatform`, *optional*):
+            platform (:obj:`~kirugram.enums.ClientPlatform`, *optional*):
                 The platform on which the link will be opened.
 
         Returns:

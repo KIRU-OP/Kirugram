@@ -1,34 +1,34 @@
-#  Kurigram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #  Copyright (C) 2024-present KurimuzonAkuma <https://github.com/KurimuzonAkuma>
 #
-#  This file is part of Kurigram.
+#  This file is part of Kirugram.
 #
-#  Kurigram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Kurigram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Kurigram. If not, see <https://www.gnu.org/licenses/>.
+#  along with Kirugram. If not, see <https://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
 from typing import TYPE_CHECKING
 
-from pyrogram import types
+from kirugram import types
 
 from ..object import Object
 
 if TYPE_CHECKING:
-    import pyrogram
-    from pyrogram import raw
+    import kirugram
+    from kirugram import raw
 
 
 class TonNft(Object):
@@ -50,10 +50,10 @@ class TonNft(Object):
         description (``str``, *optional*):
             Description of the NFT.
 
-        attributes (List of :obj:`~pyrogram.types.TonNftAttribute`, *optional*):
+        attributes (List of :obj:`~kirugram.types.TonNftAttribute`, *optional*):
             Attributes of the NFT.
 
-        gift (:obj:`~pyrogram.types.Gift`, *optional*):
+        gift (:obj:`~kirugram.types.Gift`, *optional*):
             The unique gift corresponding to the NFT.
     """
 
@@ -80,7 +80,7 @@ class TonNft(Object):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client,
+        client: kirugram.Client,
         nft: raw.types.wallet.NftItem,
         users: dict[int, raw.base.User],
         chats: dict[int, raw.base.Chat],

@@ -1,25 +1,25 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, types
+import kirugram
+from kirugram import raw, types
 
 from .inline_query_result import InlineQueryResult
 
@@ -58,10 +58,10 @@ class InlineQueryResultLocation(InlineQueryResult):
             For live locations, a maximum distance for proximity alerts about approaching another chat member,
             in meters. Must be between 1 and 100000 if specified.
 
-        reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
+        reply_markup (:obj:`~kirugram.types.InlineKeyboardMarkup`, *optional*):
             Inline keyboard attached to the message.
 
-        input_message_content (:obj:`~pyrogram.types.InputMessageContent`):
+        input_message_content (:obj:`~kirugram.types.InputMessageContent`):
             Content of the message to be sent instead of the file.
 
         thumb_url (``str``, *optional*):
@@ -103,7 +103,7 @@ class InlineQueryResultLocation(InlineQueryResult):
         self.thumb_width = thumb_width
         self.thumb_height = thumb_height
 
-    async def write(self, client: pyrogram.Client):
+    async def write(self, client: kirugram.Client):
         return raw.types.InputBotInlineResult(
             id=self.id,
             type=self.type,

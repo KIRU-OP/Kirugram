@@ -1,30 +1,30 @@
-#  Pyrogram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Pyrogram.
+#  This file is part of Kirugram.
 #
-#  Pyrogram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Pyrogram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+#  along with Kirugram.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
-import pyrogram
-from pyrogram import raw, utils
+import kirugram
+from kirugram import raw, utils
 
 
 class SetPinnedGifts:
     async def set_pinned_gifts(
-        self: pyrogram.Client,
+        self: kirugram.Client,
         owner_id: int | str,
         owned_gift_ids: list[str],
     ) -> bool:
@@ -55,7 +55,7 @@ class SetPinnedGifts:
                 await app.set_pinned_gifts(owner_id="me", received_gift_ids=["123", "456"])
 
                 # Set pinned gifts in channel
-                await app.set_pinned_gifts(owner_id="pyrogram", received_gift_ids=["-1001292933413_123", "-1001292933413_456"])
+                await app.set_pinned_gifts(owner_id="kirugram", received_gift_ids=["-1001292933413_123", "-1001292933413_456"])
         """
         r = await self.invoke(
             raw.functions.payments.ToggleStarGiftsPinnedToTop(

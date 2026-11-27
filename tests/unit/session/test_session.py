@@ -1,22 +1,22 @@
-#  Kurigram - Telegram MTProto API Client Library for Python
+#  Kirugram - Telegram MTProto API Client Library for Python
 #
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #  Copyright (C) 2024-present KurimuzonAkuma <https://github.com/KurimuzonAkuma>
 #
-#  This file is part of Kurigram.
+#  This file is part of Kirugram.
 #
-#  Kurigram is free software: you can redistribute it and/or modify
+#  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  Kurigram is distributed in the hope that it will be useful,
+#  Kirugram is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #  GNU Lesser General Public License for more details.
 #
 #  You should have received a copy of the GNU Lesser General Public License
-#  along with Kurigram. If not, see <https://www.gnu.org/licenses/>.
+#  along with Kirugram. If not, see <https://www.gnu.org/licenses/>.
 
 from __future__ import annotations as _annotations
 
@@ -29,12 +29,12 @@ from typing import TYPE_CHECKING, Final
 
 import pytest
 
-import pyrogram
-from pyrogram import raw
-from pyrogram.errors import BadMsgNotification
-from pyrogram.crypto import aes, mtproto
-from pyrogram.raw.core import FutureSalt, FutureSalts, Long, Message, MsgContainer, TLObject
-from pyrogram.session.session import Result, Session, SessionState
+import kirugram
+from kirugram import raw
+from kirugram.errors import BadMsgNotification
+from kirugram.crypto import aes, mtproto
+from kirugram.raw.core import FutureSalt, FutureSalts, Long, Message, MsgContainer, TLObject
+from kirugram.session.session import Result, Session, SessionState
 
 if TYPE_CHECKING:
     from concurrent.futures import Executor
@@ -135,7 +135,7 @@ def _bad_msg_notification(*, error_code: int) -> raw.types.BadMsgNotification:
 
 
 def _session() -> Session:
-    client = pyrogram.Client("test", api_id=1, api_hash="0" * 32, in_memory=True)
+    client = kirugram.Client("test", api_id=1, api_hash="0" * 32, in_memory=True)
 
     return Session(client, _DC_ID, "127.0.0.1", _PORT, _AUTH_KEY, test_mode=True)
 
@@ -151,7 +151,7 @@ def _started_session() -> Session:
 
 
 def _pack_as_server(message: Message, *, session_id: bytes, auth_key: bytes) -> bytes:
-    """`pyrogram.crypto.mtproto.pack`, in the direction the server writes.
+    """`kirugram.crypto.mtproto.pack`, in the direction the server writes.
 
     The outer salt is the sender's own and `unpack` skips it, so it is left at zero.
     """

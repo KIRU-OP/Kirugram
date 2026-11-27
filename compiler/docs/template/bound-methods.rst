@@ -1,13 +1,13 @@
 Bound Methods
 =============
 
-Some Kurigram types define what are called bound methods. Bound methods are functions attached to a type which are
+Some Kirugram types define what are called bound methods. Bound methods are functions attached to a type which are
 accessed via an instance of that type. They make it even easier to call specific methods by automatically inferring
 some of the required arguments.
 
 .. code-block:: python
 
-    from pyrogram import Client
+    from kirugram import Client
 
     app = Client("my_account")
 
@@ -21,7 +21,7 @@ some of the required arguments.
 
 -----
 
-.. currentmodule:: pyrogram.types
+.. currentmodule:: kirugram.types
 
 Message
 -------
