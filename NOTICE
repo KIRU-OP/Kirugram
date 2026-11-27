@@ -41,3 +41,5 @@ contributions owned by KIRU-OP that are expressly marked as covered by that
 license. It does not apply to inherited Kurigram/Pyrogram code or other
 third-party material. See KIRUGRAM-COMMUNITY-LICENSE.md. The original
 LGPL-3.0-or-later terms and notices remain in force for inherited code.
+
+A separate custom license draft, KIRUGRAM-LESSER-COMMUNITY-LICENSE.md, is also provided for original KIRU-OP-owned contributions expressly marked as covered by it. It does not replace or modify the LGPL terms applicable to inherited code.
