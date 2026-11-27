@@ -72,11 +72,9 @@ The rebrand does not claim original authorship of Pyrogram or Kurigram, nor does
 
 Kirugram requires **Python 3.10 or newer**.
 
-### Install from the Python package index
+### PyPI package
 
-```bash
-python -m pip install kirugram
-```
+The Kirugram PyPI release has not yet been published. Until an official release is announced, install the current source directly from this repository:
 
 ### Install the latest source from GitHub
 
