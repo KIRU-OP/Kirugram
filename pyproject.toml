@@ -5,12 +5,12 @@ requires = ["hatchling>=1.26.3"]
 build-backend = "hatchling.build"
 
 [project]
-name = "Kurigram"
+name = "Kirugram"
 dynamic = ["version"]
 description = "Elegant, modern and asynchronous Telegram MTProto API framework in Python for users and bots"
 readme = "README.md"
 requires-python = ">=3.10"
-authors = [{ name = "Dan", email = "dan@pyrogram.org" }]
+authors = [{ name = "Dan", email = "dan@kirugram.org" }]
 maintainers = [
     { name = "KurimuzonAkuma" },
     { name = "Danipulok", email = "danipulok@gmail.com" },
@@ -64,10 +64,10 @@ keywords = [
 ]
 
 [project.urls]
-Homepage = "https://kurigram.icu"
-Documentation = "https://docs.kurigram.icu"
-Source = "https://github.com/kurigram-org/kurigram"
-Issues = "https://github.com/kurigram-org/kurigram/issues"
+Homepage = "https://github.com/KIRU-OP/Kirugram"
+Documentation = "https://github.com/KIRU-OP/Kirugram#readme"
+Source = "https://github.com/KIRU-OP/Kirugram"
+Issues = "https://github.com/KIRU-OP/Kirugram/issues"
 Community = "https://t.me/kurigram_chat"
 
 [project.optional-dependencies]
@@ -146,13 +146,13 @@ markers = [
 #  are dropped here too, in the glob form `coverage` matches files with. `[tool.ty.src].exclude`
 #  below carries the reasoning for the list and for the split, and both blocks defer to it.
 [tool.coverage.run]
-source = ["pyrogram"]
+source = ["kirugram"]
 omit = [
-    "pyrogram/raw/base/*",
-    "pyrogram/raw/functions/*",
-    "pyrogram/raw/types/*",
-    "pyrogram/raw/all.py",
-    "pyrogram/errors/exceptions/*",
+    "kirugram/raw/base/*",
+    "kirugram/raw/functions/*",
+    "kirugram/raw/types/*",
+    "kirugram/raw/all.py",
+    "kirugram/errors/exceptions/*",
 ]
 
 [tool.coverage.report]
@@ -161,7 +161,7 @@ omit = [
 #  waits for a number somebody has looked at and chosen.
 
 [tool.hatch.version]
-path = "pyrogram/__init__.py"
+path = "kirugram/__init__.py"
 
 [tool.hatch.build.hooks.custom]
 
@@ -177,7 +177,7 @@ allow-direct-references = true
 #  https://github.com/pypa/hatch/blob/558061c5ecbe7e9b10d81965d4cdc8df05832228/backend/src/hatchling/builders/sdist.py#L330
 [tool.hatch.build.targets.sdist]
 include = [
-    "/pyrogram",
+    "/kirugram",
     # The generated modules are git-ignored and therefore absent from the archive; a build
     #  from the archive writes them, and it needs the sources and templates to do it.
     "/compiler",
@@ -188,7 +188,7 @@ include = [
 
 [tool.hatch.build.targets.wheel]
 ignore-vcs = true
-packages = ["pyrogram"]
+packages = ["kirugram"]
 
 [tool.ruff]
 # 100 is where the hand-written tree already sits: p95 is 87 columns and the tail runs to
@@ -201,11 +201,11 @@ line-length = 100
 #  same as a fresh one. `TOML` cannot share a list, so this repeats `[tool.ty.src].exclude`
 #  below, which carries the reasoning for the split.
 extend-exclude = [
-    "pyrogram/raw/base",
-    "pyrogram/raw/functions",
-    "pyrogram/raw/types",
-    "pyrogram/raw/all.py",
-    "pyrogram/errors/exceptions",
+    "kirugram/raw/base",
+    "kirugram/raw/functions",
+    "kirugram/raw/types",
+    "kirugram/raw/all.py",
+    "kirugram/errors/exceptions",
 ]
 
 [tool.ruff.format]
@@ -250,16 +250,16 @@ select = [
 ]
 
 [tool.ty.src]
-# `pyrogram/raw/{base,functions,types,all.py}` and `pyrogram/errors/exceptions` are
-#  written by `make api`; `pyrogram/raw/core` is hand-written and stays in scope. A CLI
+# `kirugram/raw/{base,functions,types,all.py}` and `kirugram/errors/exceptions` are
+#  written by `make api`; `kirugram/raw/core` is hand-written and stays in scope. A CLI
 #  `--exclude` changes tree traversal and gives a different diagnostic count, so the
 #  exclude has to live here to be reproducible.
 exclude = [
-    "pyrogram/raw/base",
-    "pyrogram/raw/functions",
-    "pyrogram/raw/types",
-    "pyrogram/raw/all.py",
-    "pyrogram/errors/exceptions",
+    "kirugram/raw/base",
+    "kirugram/raw/functions",
+    "kirugram/raw/types",
+    "kirugram/raw/all.py",
+    "kirugram/errors/exceptions",
 ]
 
 [tool.ty.rules]

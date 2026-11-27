@@ -50,7 +50,7 @@ clean-build:
 	@printf "$(YELLOW)Cleaned build directory$(RESET)\n"
 
 clean-api:
-	$(RM) pyrogram/errors/exceptions pyrogram/raw/all.py pyrogram/raw/base pyrogram/raw/functions pyrogram/raw/types
+	$(RM) kirugram/errors/exceptions kirugram/raw/all.py kirugram/raw/base kirugram/raw/functions kirugram/raw/types
 	@printf "$(YELLOW)Cleaned api directory$(RESET)\n"
 
 clean-docs:
@@ -95,7 +95,7 @@ format:
 	$(UV) run ruff format
 
 # The rule set and the excludes live in `pyproject.toml`, same as `lint`. Unlike `lint`,
-#  this needs `pyrogram.raw.*` to resolve, so `make api` has to have been run first.
+#  this needs `kirugram.raw.*` to resolve, so `make api` has to have been run first.
 typecheck:
 	$(UV) run ty check
 
