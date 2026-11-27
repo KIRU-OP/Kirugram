@@ -1,7 +1,7 @@
 #  Kirugram - Telegram MTProto API Client Library for Python
 #  Copyright (C) 2017-present Dan <https://github.com/delivrance>
 #
-#  This file is part of Kirugram, a rebrand of Kirugram.
+#  This file is part of Kirugram, a rebrand of Kurigram.
 #
 #  Kirugram is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Lesser General Public License as published
