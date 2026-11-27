@@ -227,6 +227,7 @@ For original Kirugram contributions that are specifically identified as covered 
 Review the applicable terms before using or redistributing any part of the project:
 
 - [Kirugram Community License 1.0](KIRUGRAM-COMMUNITY-LICENSE.md) — only for original contributions expressly marked as covered by it
+- [Kirugram Lesser Community License 1.0](KIRUGRAM-LESSER-COMMUNITY-LICENSE.md) — a custom linking-permission license draft, only for original contributions expressly marked as covered by it
 - [GNU GPL v3 text](COPYING)
 - [GNU LGPL v3 text](COPYING.lesser)
 - [Copyright and attribution notices](NOTICE)
