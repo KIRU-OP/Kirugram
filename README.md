@@ -220,15 +220,18 @@ Kirugram is maintained as a community rebrand under the KIRU-OP repository. It i
 
 ## License and attribution
 
-Kirugram is distributed under the **GNU Lesser General Public License v3.0 or later (LGPL-3.0-or-later)**.
+Kirugram contains code inherited from Kurigram and the Pyrogram project lineage. That inherited code remains under the **GNU Lesser General Public License v3.0 or later (LGPL-3.0-or-later)**. Its original copyright notices and license terms are preserved.
 
-Original copyright holders retain their respective rights. Existing copyright headers, notices and license files are preserved. The repository includes the applicable license texts and attribution in:
+For original Kirugram contributions that are specifically identified as covered by it, the project also provides the **Kirugram Community License 1.0**, a custom project license written for KIRU-OP-owned contributions. It permits use, modification, and redistribution subject to its attribution and notice conditions. It does not relicense inherited or third-party code, and it is not an OSI-approved or SPDX-standard license.
 
-- [COPYING](COPYING)
-- [COPYING.lesser](COPYING.lesser)
-- [NOTICE](NOTICE)
+Review the applicable terms before using or redistributing any part of the project:
 
-When using, modifying or redistributing this project, review these files and comply with the license terms.
+- [Kirugram Community License 1.0](KIRUGRAM-COMMUNITY-LICENSE.md) — only for original contributions expressly marked as covered by it
+- [GNU GPL v3 text](COPYING)
+- [GNU LGPL v3 text](COPYING.lesser)
+- [Copyright and attribution notices](NOTICE)
+
+Do not assume that the custom license applies to every file. Follow the license identified by each file and preserve all existing third-party notices.
 
 ---
 
