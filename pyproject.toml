@@ -10,7 +10,7 @@ dynamic = ["version"]
 description = "Elegant, modern and asynchronous Telegram MTProto API framework in Python for users and bots"
 readme = "README.md"
 requires-python = ">=3.10"
-authors = [{ name = "Dan", email = "dan@kirugram.org" }]
+authors = [{ name = "Dan", email = "dan@pyrogram.org" }]
 maintainers = [
     { name = "KurimuzonAkuma" },
     { name = "Danipulok", email = "danipulok@gmail.com" },
