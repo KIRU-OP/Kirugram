@@ -34,7 +34,7 @@
 Kirugram is a community-maintained rebrand of Kurigram, itself derived from Pyrogram. It preserves upstream functionality while adopting the `kirugram` Python import namespace. Original authorship and license notices remain in place.
 
 ```python
-from kirugram import Client\nfrom kirugram import filters
+from kirugram import Client, filters
 
 app = Client("my_account")
 
