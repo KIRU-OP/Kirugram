@@ -155,7 +155,7 @@ def test_markdown_unparse_blockquote():
 
 > kirugram!"""
 
-    text = """Hello\nfrom\n\npyrogram!"""
+    text = """Hello\nfrom\n\nkirugram!"""
 
     entities = kirugram.types.List(
         [
