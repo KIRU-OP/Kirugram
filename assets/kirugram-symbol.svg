@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Kirugram symbol</title>
+  <desc id="desc">A stylized letter K combined with a Telegram-inspired paper plane and orbital swoosh.</desc>
+  <defs>
+    <linearGradient id="violet" x1="36" y1="28" x2="220" y2="226" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A78BFA"/>
+      <stop offset="1" stop-color="#6D28D9"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="145" y1="60" x2="224" y2="171" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#60A5FA"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="240" height="240" rx="62" fill="#0B1020"/>
+  <circle cx="128" cy="128" r="91" fill="none" stroke="url(#violet)" stroke-width="7" opacity=".9"/>
+  <path d="M78 65v126M78 128l76-63M78 128l76 63" fill="none" stroke="#F8FAFC" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M133 91 205 58c7-3 13 3 10 10l-35 112c-2 7-11 8-15 2l-24-35-27-20c-6-4-5-13 2-16l17-8Z" fill="url(#blue)" stroke="#BFDBFE" stroke-width="3" stroke-linejoin="round"/>
+  <path d="m116 111 99-47-74 83 0 0" fill="none" stroke="#EFF6FF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M145 147 132 183c-2 6 5 10 10 6l25-21" fill="url(#violet)"/>
+  <path d="M42 202c25 20 59 29 92 23" fill="none" stroke="url(#violet)" stroke-width="6" stroke-linecap="round"/>
+</svg>
