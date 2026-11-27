@@ -15,10 +15,10 @@
     <br />
     <br />
     <img
-        src="https://img.shields.io/github/actions/workflow/status/KIRU-OP/Kirugram/python.yml?branch=dev&logo=github&label=CI"
+        src="https://img.shields.io/github/actions/workflow/status/KIRU-OP/Kirugram/python.yml?branch=main&logo=github&label=CI"
         alt="CI Tests"
     />
-    <a href="https://github.com/KIRU-OP/Kirugram/blob/dev/COPYING">
+    <a href="https://github.com/KIRU-OP/Kirugram/blob/main/COPYING">
         <img
             src="https://img.shields.io/github/license/KIRU-OP/Kirugram.svg?color=%23fd5216"
             alt="License"
@@ -76,7 +76,7 @@ pip install kirugram
 Dev version
 
 ``` bash
-pip install https://github.com/KIRU-OP/Kirugram/archive/refs/heads/rebrand/kirugram.zip --force-reinstall
+pip install https://github.com/KIRU-OP/Kirugram/archive/refs/heads/main.zip --force-reinstall
 ```
 
 Optional dependencies
