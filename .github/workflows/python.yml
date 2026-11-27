@@ -86,7 +86,7 @@ jobs:
         run: |
           make sync
 
-      # Unlike `ruff`, `ty` resolves `pyrogram.raw.*`, so it needs the generated tree.
+      # Unlike `ruff`, `ty` resolves `kirugram.raw.*`, so it needs the generated tree.
       - name: Generate API
         run: |
           make api

@@ -39,20 +39,20 @@ from typing import TYPE_CHECKING, Final, Protocol
 
 import pytest
 
-import pyrogram.client
-from pyrogram import Client, StopTransmission, filters, raw
-from pyrogram.client import _plugin_handlers
-from pyrogram.connection.proxy import HTTPProxy, SOCKS5Proxy
-from pyrogram.file_id import FileId, FileType
-from pyrogram.handlers import MessageHandler
+import kirugram.client
+from kirugram import Client, StopTransmission, filters, raw
+from kirugram.client import _plugin_handlers
+from kirugram.connection.proxy import HTTPProxy, SOCKS5Proxy
+from kirugram.file_id import FileId, FileType
+from kirugram.handlers import MessageHandler
 
 if TYPE_CHECKING:
     from concurrent.futures import Executor
 
-    from pyrogram.connection.proxy import Proxy, ProxyDict
+    from kirugram.connection.proxy import Proxy, ProxyDict
 
 _PLUGIN_SOURCE: Final[str] = """
-from pyrogram import Client
+from kirugram import Client
 
 
 class AnyAttribute:
@@ -72,7 +72,7 @@ async def greet(client, message):
 
 
 _KEYWORD_PLUGIN_SOURCE: Final[str] = """
-from pyrogram import Client, filters
+from kirugram import Client, filters
 
 
 @Client.on_message(filters=filters.text, group=1)
@@ -172,7 +172,7 @@ def test_load_plugins_reports_the_pair_it_refuses(
 ) -> None:
     client = _plugin_client(write_plugin("refused_plugins", source=_REFUSED_PLUGIN_SOURCE))
 
-    with caplog.at_level(logging.WARNING, logger="pyrogram.client"):
+    with caplog.at_level(logging.WARNING, logger="kirugram.client"):
         client.load_plugins()
 
     assert client.dispatcher.groups == {}
@@ -404,7 +404,7 @@ class FullDisk:
 async def test_a_failed_write_releases_the_download_slot_at_once(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    monkeypatch.setattr(pyrogram.client, "BytesIO", FullDisk)
+    monkeypatch.setattr(kirugram.client, "BytesIO", FullDisk)
     downloader = Downloader(b"x" * _PAYLOAD_SIZE)
     packet = (_document_file_id(), "", "file", True, _PAYLOAD_SIZE, None, ())
 
