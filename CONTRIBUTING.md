@@ -1,223 +1,210 @@
 # Contributing to Kirugram
 
-Thanks for taking the time to contribute! This document covers how to set up a development
-environment, the expected workflow, and what we look for in a pull request.
+Thank you for considering a contribution to Kirugram. Whether you are fixing a defect, improving documentation, adding tests, or suggesting an enhancement, your work is welcome.
 
-## Getting started
+This guide explains how this repository is developed and how to prepare a change for review. Please read it before opening a pull request.
 
-Kirugram requires Python `>=3.10` and [`uv`](https://docs.astral.sh/uv/getting-started/installation/).
+## 1. Project and contribution basics
 
-Nothing else has to be set up. Every `make` recipe below runs through `uv run`, which creates
-`.venv` from `uv.lock` and brings it up to date whenever the lock file moves, so there is no
-environment step to forget. To install without running anything:
+Kirugram is maintained in the `KIRU-OP/Kirugram` repository. It continues the technical lineage of Kurigram and Pyrogram while maintaining its own project identity and the `kirugram` Python namespace.
+
+Contributions must respect the existing project history, retained copyright notices, and LGPL-3.0-or-later licensing. Do not remove or rewrite upstream attribution or license headers as part of an unrelated change.
+
+Before starting substantial work:
+
+1. Search the issue tracker and open pull requests for related discussions.
+2. For a significant feature or behavior change, open an issue first so the approach can be discussed.
+3. Keep each pull request focused on one understandable change.
+
+## 2. Development environment
+
+Kirugram supports Python 3.10 and newer. The repository uses [uv](https://docs.astral.sh/uv/) to manage its development environment and dependencies.
+
+Install uv using its official installation guide, clone the repository, and enter the project directory:
+
+```bash
+git clone https://github.com/KIRU-OP/Kirugram.git
+cd Kirugram
+```
+
+Synchronize the environment:
 
 ```bash
 make sync
 ```
 
-Development tools live in the `dev` dependency group and are installed by default; the
-documentation build has its own `docs` group, which the docs recipes select on their own. Neither
-is an extra, so `pip install kurigram[dev]` is not a thing. After changing a dependency in
-`pyproject.toml`, run `uv lock` and commit `uv.lock` with the change.
+The Makefile runs project commands through uv. The first run creates the local `.venv` and installs the versions recorded in `uv.lock`.
 
-`make docs` builds the documentation once; `make docs-serve` serves it locally and refreshes the
-page while you edit.
+If you change dependency declarations in `pyproject.toml`, regenerate the lock file and include both files in your change:
 
-### Generated code
+```bash
+uv lock
+```
 
-`kirugram/raw/{types,functions,base,all.py}` and `kirugram/errors/exceptions/` are generated from
-TL schema files and are not tracked in git. Run the generator before working on anything that
-touches type checking or code that imports from `kirugram.raw`, and again after any change
-under `compiler/api/source`:
+Do not manually edit dependency entries in `uv.lock`.
+
+## 3. Generated API files
+
+Some parts of the Telegram API implementation are generated from the schema and compiler templates. These include:
+
+- `kirugram/raw/types/`
+- `kirugram/raw/functions/`
+- `kirugram/raw/base/`
+- `kirugram/raw/all.py`
+- `kirugram/errors/exceptions/`
+
+Generate these files with:
 
 ```bash
 make api
 ```
 
-Never hand-edit files under these paths. If a change appears to require editing generated code,
-the actual fix belongs in the compiler/templates under `compiler/`, or in the code that consumes
-the generated types.
+Do not make manual fixes inside generated output. If generated code needs to change, investigate the source schema, compiler, templates, or handwritten code that consumes the generated API. Changes under `compiler/api/source` should be followed by another `make api` run.
 
-## Development workflow
+A fresh checkout may not contain all generated files. Run the generator before type checking or when working on code that imports generated `kirugram.raw` modules.
 
-Run these before opening a pull request:
+## 4. Checks to run before a pull request
 
-```bash
-make lint          # ruff check, plus ruff format --check
-make typecheck     # ty check (requires `make api` to have been run first)
-make test-unit     # the offline suite, no relay or session needed
-```
-
-`make test-unit` reports coverage of `kirugram/` as it runs. Which paths are measured, whether a
-minimum is enforced, and why, all live in the `[tool.coverage]` blocks of `pyproject.toml`.
-
-`make format` rewrites the tree and `make lint` fails on anything it would still change, so
-formatting is not something review has to raise. The line length is 100; `pyproject.toml` carries
-the reasoning next to it.
-
-That 100 is a target for the formatter, not a checked limit, so keep new code inside it by hand.
-The formatter only asks whether a file matches its own output, and a literal already alone on its
-line has no break point left, so an over-long string or f-string passes. `E501` is the rule that
-would measure the column, and it is deliberately not selected: it reports around 2260 lines, and
-all but a handful of them are docstrings copied from the Telegram API documentation.
-
-`make test` runs the full suite, including the integration tests. Those open real sockets and
-take every endpoint from a git-ignored `.env.test` file: a live MTProto or web proxy relay and a
-prepared session, listed in `.env.test.example`. Each one skips by name when its variable is
-absent, so a checkout without that file still runs the whole offline suite.
-
-A test's directory decides its marker, so put it in the tree that matches what it needs:
-`tests/integrations/` when it opens a socket or talks to a real service, `tests/guards/` when it
-sweeps the whole repository instead of exercising one module, `tests/unit/` otherwise. A test
-outside all three is not collected as unmarked, it fails the run:
-
-```
-ERROR: test_example.py is outside tests/guards, tests/integrations, tests/unit - every test lives in one of them.
-```
-
-`make test-guards` runs the guard layer on its own, for working on it; `make test-unit` already
-includes it.
-
-### Dependency ranges
-
-Everything above installs from `uv.lock`, so it only ever exercises one point inside each
-declared range. Two more recipes cover the ends of it, each in an environment of its own
-(`.venv-floor`, `.venv-ceil`) built from `pyproject.toml` rather than the lock file:
+Run the relevant checks after making your changes:
 
 ```bash
-make test-floor    # oldest allowed version of every dependency, on the oldest supported Python
-make test-ceil     # newest released version of every dependency, on the newest supported Python
+make lint
+make api
+make typecheck
+make test-unit
 ```
 
-CI runs both on every push and again weekly, which is what catches a release published after the
-last `uv lock`. Neither recipe writes `uv.lock`. Run `make test-floor` after raising a floor in
-`pyproject.toml`, and note that the interpreter versions live at the top of the `Makefile` and
-have to move with `requires-python` and the CI matrix.
+What these commands do:
 
-### Optional: pre-commit hook
+| Command | Purpose |
+| --- | --- |
+| `make lint` | Runs Ruff checks and verifies formatting. |
+| `make format` | Applies the repository's Ruff formatting. |
+| `make api` | Regenerates Telegram API and exception modules. |
+| `make typecheck` | Runs the configured `ty` type checker. |
+| `make test-unit` | Runs the non-integration test suite, including guard tests, with coverage. |
+| `make test-guards` | Runs repository-wide guard tests. |
+| `make test` | Runs the full test suite, including integration tests. |
 
-The repository ships a `pre-commit` config that runs `make lint` and `make typecheck` on commit,
-the same two checks CI runs, so a breach never reaches review:
+Run `make format` when formatting is needed, then run `make lint` again. Avoid formatting unrelated files.
+
+### Integration tests
+
+The integration suite can connect to real services and needs the relevant test configuration. Local values belong in the git-ignored `.env.test` file. Use `.env.test.example` to see which settings the suite expects.
+
+Never commit real API credentials, Telegram session files, private endpoints, or personal data. Integration tests that do not have their required configuration are skipped by the test suite.
+
+### Test placement
+
+Place new tests in the directory that matches their purpose:
+
+- `tests/unit/` for isolated behavior and module-level tests.
+- `tests/guards/` for checks that enforce repository-wide rules.
+- `tests/integrations/` for tests that communicate with Telegram or another live service.
+
+Every test should belong to one of these test areas. Add or update tests whenever a change affects behavior.
+
+### Dependency compatibility
+
+The repository also provides two dependency-range checks:
 
 ```bash
-pre-commit install
+make test-floor
+make test-ceil
 ```
 
-### Linting and type checking policy
+These test the lowest declared dependency versions and the newest compatible releases in separate environments. They are useful when changing dependency constraints or investigating compatibility issues. They do not replace the normal locked-environment checks.
 
-`ruff`'s selected rule set and `ty`'s rule overrides in `pyproject.toml` are both intentionally
-narrower than "everything the tool can check": they're expanded incrementally, one rule at a
-time, as the codebase is brought into compliance with it. When contributing:
+## 5. Documentation
 
-- Don't widen an ignored `ty` rule or narrow the `ruff` rule set just to make a change pass.
-- Fix the underlying issue instead.
-- Don't make unrelated style changes to code outside the rules already enforced; keep pull
-  requests focused on their stated purpose.
+Documentation sources live in `docs/`. Generated API documentation is prepared by the documentation compiler.
 
-## Code style conventions
+Build the documentation:
 
-A few conventions that have come up repeatedly in code review but aren't enforced by `ruff` or
-`ty`, so they're written down here instead:
+```bash
+make docs
+```
 
-- **Every new `.py` file carries the licence header** that the rest of the tree carries: copy it
-  from a module in the same package. The only files without one are the empty package
-  `__init__.py` files. Nothing checks this, so a missing header only surfaces in review.
-- **Always use `list[str]` and `int | None`, never `List[str]` and `Optional[int]`.** The
-  `typing` generics are deprecated aliases of the builtins.
-  https://docs.python.org/3/library/typing.html#deprecated-aliases
-- **Every module carries `from __future__ import annotations as _annotations`**, directly below
-  the docstring. The import is what lets an annotation name a type the module imports only under
-  `TYPE_CHECKING`, so nothing in the tree quotes an annotation and `UP037` can stay selected;
-  `tests/guards/test_future_annotations.py` fails on a package module that writes one without it.
-  Keep the alias: the name is never used, and the underscore says the import is there for its
-  side effect alone.
-- **A dependency is declared with a floor, never a ceiling.** `pyproject.toml` carries the
-  reasoning beside the declarations. Where a major version genuinely breaks us, add the upper
-  bound and name the breakage in a comment next to it.
-- **No `assert` for runtime guards in library code.** `assert` statements are stripped when
-  Python runs with `-O`, and raise a bare `AssertionError` with no context for library consumers.
-  Raise `RuntimeError` (or a more specific exception) instead.
-- **When raising with a message, assign it to a variable first**, then raise it, rather than
-  writing the message inline in the `raise` statement:
+Start the local documentation server with automatic rebuilds:
 
-  ```python
-  msg = f"connection not open (state={self._state})"
-  raise RuntimeError(msg)
-  ```
+```bash
+make docs-serve
+```
 
-- **All code references in comments use backticks**, and every reference in the comment, not
-  just the first one. Write ``Call `Client.stop()` before `Client.start()`.``, not
-  `Call Client.stop() before Client.start().`
-- **No em dashes or `--` as punctuation in comments.** Use a comma, colon, parentheses, or a
-  single `-` instead. `tests/guards/test_comment_dashes.py` fails on one, so this is checked
-  rather than caught in review; a `--` that is a flag (`--fix`) or the end-of-options marker
-  (`grep -v -- -`) keeps its dashes. Docstrings are out of scope. The guard reads `#` comments in
-  `.toml`, `.yml`, `.yaml`, the `Makefile` and `.gitignore` as well as `.py`, because a config
-  comment went out with an em dash while the suite was green; the sweep asserts it reached one
-  file of each format, so dropping one fails rather than passing quietly.
-- **Every `# noqa: CODE` carries a reason** after a single `-`, as in
-  ``# noqa: F403 - generated by `make api`, absent from a fresh checkout``. Same shape and
-  same reason as the `# ty: ignore` rule below: `ruff` reads the codes and stops, so the text
-  after them is ours to spend on why the suppression is there.
-- **A re-export is spelled `# noqa: F401` with a reason, never `from .x import Name as Name`.**
-  The redundant alias silences `F401` by looking like a typing convention, and a reader has to
-  know that convention to see it is deliberate at all. Where the module has an `__all__`,
-  listing the name there is better still: nothing is suppressed and the export is declared.
-- **A module's `__all__` covers everything the module defines.** `ruff` holds one half of this:
-  `F401` fails on a name imported and neither used nor listed, `F822` on a listed name that
-  resolves to nothing. Neither looks at a class or function the module defines itself, so a
-  barrel that grows one beside its imports drops it from the public API and nothing says so.
-  `tests/guards/test_public_exports.py` fails on that, on a repeated entry, and on an `__all__`
-  built by concatenation or comprehension, which reads as a declaration while leaving the other
-  two checks nothing to read. Declaring one is not required: the aggregator `__init__.py` files
-  under `kirugram/methods/` collect mixins for `Client` rather than exporting an API.
-- **Every `# ty: ignore[rule]` carries a reason** after a single `-`, as in
-  `# ty: ignore[unresolved-import] - optional, not a project dependency`. Only the `[rule]`
-  bracket is `ty`'s own syntax; the reason is ours, so nobody has to reconstruct why the
-  ignore is there.
-- **A parameter that needs to distinguish "not passed" from a meaningful `None`** (for example,
-  a `reply_markup` parameter where `None` means "remove the markup") should default to the
-  `object` class itself (not an instance of it) as the "not specified" sentinel, keeping `None`
-  free to carry its own meaning. Check for existing uses of this pattern elsewhere in the method
-  or type before introducing a new one.
-- **Test doubles that stand in for `Client`** are named `FakeClient`, not `Client` or `TestClient`
-  (pytest warns about `Test*` classes that define `__init__`). Most of the test suite already
-  does this: reuse the name rather than inventing one per test file.
-- **Module-level constants that never change** should be annotated `Final`.
-- **An optional third-party import** (a package the project doesn't depend on, used defensively
-  behind a feature that needs it) is marked `# ty: ignore[unresolved-import]`, with the reason
-  saying it's optional and linking to the [docs](https://docs.kurigram.icu) section covering
-  that feature, if there is one.
-- **Never write `or None` on a `raw.*` field the schema declares `flags.N?true`.** That field has
-  no payload: the flag bit is the value, and the generated writer sets the bit from a plain
-  truthiness test, so `False` and `None` write the same bytes and the `or None` reads as a guard
-  that guards nothing. `tests/guards/test_flag_only_fields.py` fails on one, naming the file and
-  the field. The other optional types (`flags.N?Bool`, `?string`, `?Vector<T>`) carry their value
-  separately from the bit, so `or None` there is a real choice and stays.
+When changing public behavior, update the relevant documentation and examples in the same pull request where practical. Keep examples consistent with the current `kirugram` import namespace.
 
-## Commit and pull request guidelines
+## 6. Code quality and style
 
-- Write commit messages using [Conventional Commits](https://www.conventionalcommits.org/),
-  matching the existing git history: `fix(session): ...`, `feat(deps): ...`, `docs(api): ...`.
-  Name a scope; almost every commit on `dev` carries one, and the few that don't are the ones
-  nobody can place afterwards.
-- **The pull request title matters, not just commit messages.** The project squash-merges, so
-  the PR title becomes the actual commit message on `dev`. Title it the same way you would a
-  commit: `type(scope): description`, describing what the change actually does rather than a
-  generic label. If the branch gains more commits or changes scope before merge, update the title
-  to match; don't leave it describing an earlier, narrower version of the change.
-- Keep pull requests focused on one logical change. Unrelated fixes should be separate PRs.
-- Reference any related issue in the pull request description.
+The project uses Ruff for linting and formatting, and `ty` for type checking. Their active rules are configured in `pyproject.toml`.
 
-### Before submitting, make sure that
+Please follow these conventions:
 
-- [ ] `make lint` passes
-- [ ] `make typecheck` passes (after `make api`)
-- [ ] `make test-unit` passes
-- [ ] Tests were added or updated for behavioral changes
-- [ ] The commit message(s) follow Conventional Commits
+- Use modern built-in type annotations, such as `list[str]` and `int | None`.
+- Add the repository's existing license header to new Python modules. Empty package `__init__.py` files are the exception where the surrounding package follows that pattern.
+- Follow the module annotation conventions already used by the package, including `from __future__ import annotations as _annotations` where required.
+- Prefer clear, specific exceptions for runtime validation. Do not rely on `assert` for checks that library users depend on.
+- Keep public exports deliberate. When a module defines `__all__`, keep it complete and explicit.
+- Add a short explanation to any `# noqa` or `# ty: ignore` suppression. Avoid adding suppressions simply to silence a new issue.
+- Keep dependencies as broadly compatible as the project can safely support. If an upper version bound is necessary, explain the compatibility reason next to it.
+- Use `Final` for module-level constants that are not meant to change.
+- Avoid unrelated refactors, broad formatting changes, or speculative abstractions in a focused bug fix.
 
-## Questions
+The repository contains guard tests for selected conventions. If a guard reports a violation, fix the underlying code rather than weakening the guard to make the check pass.
 
-If something is unclear, reach out on the [official chat](https://t.me/kurigram_chat) or follow
-news and announcements on the [official channel](https://t.me/kurigram_news).
+## 7. Commit messages
+
+Use [Conventional Commits](https://www.conventionalcommits.org/) for commit messages. Include a scope that describes the affected area.
+
+Examples:
+
+```text
+fix(session): handle reconnect timeout
+feat(client): add message helper
+docs(readme): clarify installation steps
+test(filters): cover empty input
+```
+
+Keep the subject concise and describe the actual change.
+
+## 8. Pull request checklist
+
+Before requesting review, make sure that:
+
+- [ ] The pull request addresses one main purpose.
+- [ ] The description explains the problem and the chosen solution.
+- [ ] Related issues are linked.
+- [ ] Tests cover changed or newly added behavior.
+- [ ] `make lint` passes.
+- [ ] `make api` and `make typecheck` pass when generated API or typed code is involved.
+- [ ] `make test-unit` passes.
+- [ ] Documentation and examples are updated when needed.
+- [ ] No credentials, session files, generated local artifacts, or unrelated changes are included.
+- [ ] Commit messages follow Conventional Commits.
+- [ ] Existing copyright and license notices remain intact.
+
+A pull request may need changes before it can be merged. Please respond to review feedback and keep the discussion focused on the technical change.
+
+## 9. Reporting bugs and requesting features
+
+When reporting a bug, include:
+
+- The Kirugram version or commit you are using.
+- Your Python version and operating system.
+- A short description of the expected and actual behavior.
+- A minimal reproduction, traceback, or relevant test where possible.
+
+Remove secrets and private account information from all logs before sharing them.
+
+For feature requests, explain the use case and the behavior you would expect. This helps maintainers evaluate the change without guessing at the intended result.
+
+## 10. Community and project identity
+
+For project discussions and announcements, use the Kirugram community spaces:
+
+- [Community chat](https://t.me/kirugram_chat)
+- [News and announcements](https://t.me/kirugram_news)
+- [GitHub issues](https://github.com/KIRU-OP/Kirugram/issues)
+
+Kirugram is an independent community-maintained project. It is not affiliated with or endorsed by Telegram.
+
+Thank you for helping make Kirugram better.
