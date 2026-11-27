@@ -19,7 +19,7 @@ PATTERNS = (
 
 changed = []
 for path in ROOT.rglob("*"):
-    if not path.is_file() or ".git" in path.parts or path.name in EXCLUDED:
+    if not path.is_file() or ".git" in path.parts or ".github" in path.parts or path.name in EXCLUDED:
         continue
     try:
         original = path.read_text(encoding="utf-8")
