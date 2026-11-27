@@ -11,35 +11,13 @@
     <br />
     <a href="https://github.com/KIRU-OP/Kirugram"> Homepage </a>
     •
-    <a href="https://github.com/KIRU-OP/Kirugram"> Documentation </a>
-    •
-    <a href="https://t.me/kurigram_news"> News </a>
-    •
-    <a href="https://t.me/kurigram_chat"> Chat </a>
+    <a href="https://github.com/KIRU-OP/Kirugram/issues"> Issues </a>
     <br />
     <br />
     <img
         src="https://img.shields.io/github/actions/workflow/status/KIRU-OP/Kirugram/python.yml?branch=dev&logo=github&label=CI"
         alt="CI Tests"
     />
-    <a href="https://pypi.python.org/pypi/kurigram">
-        <img
-            src="https://img.shields.io/pypi/v/kurigram.svg?logo=pypi&logoColor=white&color=%23f55b25"
-            alt="PyPI package version"
-        />
-    </a>
-    <a href="https://pypi.python.org/pypi/kurigram">
-        <img
-            src="https://static.pepy.tech/badge/kurigram/month"
-            alt="Downloads"
-        />
-    </a>
-    <a href="https://pypi.python.org/pypi/kurigram">
-        <img
-            src="https://img.shields.io/pypi/pyversions/kurigram.svg?logo=python&logoColor=white&color=%23fd5216"
-            alt="Python versions"
-        />
-    </a>
     <a href="https://github.com/KIRU-OP/Kirugram/blob/dev/COPYING">
         <img
             src="https://img.shields.io/github/license/KIRU-OP/Kirugram.svg?color=%23fd5216"
@@ -73,14 +51,9 @@ app.run()
 framework. It enables you to easily interact with the main Telegram API through a user account (custom client) or a bot
 identity (bot API alternative) using Python.
 
-### Support
+### Project lineage
 
-Kirugram is an open source project. Your support helps us maintain and improve the library, consider supporting its development:
-
-- `kurimuzonakuma.ton` - TON
-- `TYAY3cVST3NY5mqs1M2qGV6PjXDjLLeC6v` - USDT TRC20
-
-Thank you for supporting Kirugram ❤️
+Kirugram keeps the original upstream copyright notices and LGPL-3.0-or-later license. It is a community-maintained rebrand; it does not claim the original authorship of Pyrogram or Kurigram.
 
 ### Key Features
 
@@ -103,7 +76,7 @@ pip install kirugram
 Dev version
 
 ``` bash
-pip install https://github.com/KIRU-OP/Kirugram/archive/main.zip --force-reinstall
+pip install https://github.com/KIRU-OP/Kirugram/archive/refs/heads/rebrand/kirugram.zip --force-reinstall
 ```
 
 Optional dependencies
@@ -117,5 +90,4 @@ pip install kirugram[qrcode]   # QR code login support
 
 - Check out the [docs](https://github.com/KIRU-OP/Kirugram) to learn more about Kirugram, get started right
 away and discover more in-depth material for building your client applications.
-- Join the [official channel](https://t.me/kurigram_news) and stay tuned for news, updates and announcements.
-- Join the [official chat](https://t.me/kurigram_chat) to communicate with people.
+- Report bugs and request features through the [GitHub issue tracker](https://github.com/KIRU-OP/Kirugram/issues).
