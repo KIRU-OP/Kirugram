@@ -79,21 +79,25 @@ The Kirugram PyPI release has not yet been published. Until an official release 
 ### Install the latest source from GitHub
 
 ```bash
-python -m pip install "https://github.com/KIRU-OP/Kirugram/archive/refs/heads/main.zip"
+git clone https://github.com/KIRU-OP/Kirugram.git
+cd Kirugram
+python -m pip install .
 ```
 
 ### Optional dependencies
 
+Run these commands from the cloned repository directory.
+
 Install optional performance dependencies:
 
 ```bash
-python -m pip install "kirugram[fast]"
+python -m pip install ".[fast]"
 ```
 
 Install QR-code login dependencies:
 
 ```bash
-python -m pip install "kirugram[qrcode]"
+python -m pip install ".[qrcode]"
 ```
 
 > Optional extras are not required for a basic installation. The fast extra includes Kuricrypt and, on supported platforms, uvloop.
