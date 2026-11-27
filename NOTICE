@@ -19,3 +19,16 @@ You should have received a copy of the GNU Lesser General Public License
 along with Kurigram. If not, see <https://www.gnu.org/licenses/>.
 
 Kirugram rebrand notice (2026): This repository is a rebranded continuation of the Kurigram source tree. Original copyright holders and LGPL-3.0-or-later licensing remain unchanged. Repository maintainer: KIRU-OP.
+
+Kirugram project-specific contributions (2026)
+Copyright (C) 2026 KIRU-OP
+
+This copyright notice applies only to original Kirugram-specific modifications
+and contributions made by KIRU-OP, to the extent permitted by applicable law.
+It does not claim ownership of the upstream Kurigram or Pyrogram code, nor
+does it replace or remove the original copyright notices above.
+
+The project continues to include components distributed under the GNU Lesser
+General Public License, version 3 or (at your option) any later version.
+The accompanying GNU GPL and GNU LGPL license texts are reproduced in
+COPYING and COPYING.lesser respectively and remain unmodified.
