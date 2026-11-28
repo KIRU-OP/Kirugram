@@ -73,8 +73,7 @@ async def test_difference_retry_is_bounded_for_both_timestamp_errors(
     assert probe.calls == probe.MAX_TIMESTAMP_RETRIES + 1
     assert len(delays) == probe.MAX_TIMESTAMP_RETRIES
     assert delays == [
-        probe.TIMESTAMP_RETRY_DELAY * (2**attempt)
-        for attempt in range(probe.MAX_TIMESTAMP_RETRIES)
+        probe.TIMESTAMP_RETRY_DELAY * (2**attempt) for attempt in range(probe.MAX_TIMESTAMP_RETRIES)
     ]
 
 
