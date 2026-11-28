@@ -434,7 +434,9 @@ async def test_set_dc_requires_an_active_client_session(*, connected: bool) -> N
         pytest.param({"port": 0}, "Port must be an integer", id="zero-port"),
         pytest.param({"port": 65536}, "Port must be an integer", id="large-port"),
         pytest.param({"port": True}, "Port must be an integer", id="boolean-port"),
-        pytest.param({"server_address": "   "}, "Server address cannot be empty", id="blank-address"),
+        pytest.param(
+            {"server_address": "   "}, "Server address cannot be empty", id="blank-address"
+        ),
     ],
 )
 async def test_set_dc_rejects_invalid_configuration_before_network_io(
