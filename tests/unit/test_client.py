@@ -33,6 +33,7 @@ from __future__ import annotations as _annotations
 import asyncio
 import errno
 import logging
+from types import SimpleNamespace
 from contextlib import aclosing
 from pathlib import Path
 from typing import TYPE_CHECKING, Final, Protocol
@@ -43,6 +44,7 @@ import kirugram.client
 from kirugram import Client, StopTransmission, filters, raw
 from kirugram.client import _plugin_handlers
 from kirugram.connection.proxy import HTTPProxy, SOCKS5Proxy
+from kirugram.errors import AuthBytesInvalid
 from kirugram.file_id import FileId, FileType
 from kirugram.handlers import MessageHandler
 
@@ -412,3 +414,234 @@ async def test_a_failed_write_releases_the_download_slot_at_once(
         await downloader.handle_download(packet)
 
     assert not downloader.get_file_semaphore.locked()
+
+
+@pytest.mark.parametrize(
+    "connected",
+    [False, True],
+    ids=["disconnected", "missing-session"],
+)
+async def test_set_dc_requires_an_active_client_session(*, connected: bool) -> None:
+    client = Client("dc_guard", in_memory=True)
+    client.is_connected = connected
+    client.session = None
+
+    with pytest.raises(ConnectionError, match="must be connected"):
+        await client.set_dc(2)
+
+
+@pytest.mark.parametrize(
+    ("kwargs", "message"),
+    [
+        pytest.param({"dc_id": 0}, "DC ID must be a positive integer", id="zero-dc"),
+        pytest.param({"dc_id": -2}, "DC ID must be a positive integer", id="negative-dc"),
+        pytest.param({"dc_id": True}, "DC ID must be a positive integer", id="boolean-dc"),
+        pytest.param({"port": 0}, "Port must be an integer", id="zero-port"),
+        pytest.param({"port": 65536}, "Port must be an integer", id="large-port"),
+        pytest.param({"port": True}, "Port must be an integer", id="boolean-port"),
+        pytest.param(
+            {"server_address": "   "}, "Server address cannot be empty", id="blank-address"
+        ),
+    ],
+)
+async def test_set_dc_rejects_invalid_configuration_before_network_io(
+    *, kwargs: dict, message: str
+) -> None:
+    client = Client("dc_validation", in_memory=True)
+    client.is_connected = True
+    client.session = object()
+
+    with pytest.raises(ValueError, match=message):
+        await client.set_dc(**kwargs)
+
+
+@pytest.mark.parametrize(
+    ("failure_stage", "error"),
+    [
+        pytest.param("start", RuntimeError, id="session-start-failure"),
+        pytest.param("authorization", AuthBytesInvalid, id="authorization-import-failure"),
+    ],
+)
+async def test_failed_dc_session_initialization_is_stopped_and_removed_from_cache(
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    failure_stage: str,
+    error: type[Exception],
+) -> None:
+    client = Client("dc_session_cleanup", in_memory=True)
+    stopped: list[bool] = []
+    exported: list[int] = []
+
+    class Storage:
+        async def dc_id(self) -> int:
+            return 2
+
+        async def test_mode(self) -> bool:
+            return False
+
+    class FakeAuth:
+        def __init__(self, *args) -> None:
+            pass
+
+        async def create(self) -> bytes:
+            return b"auth-key"
+
+    class FakeSession:
+        def __init__(self, *args, **kwargs) -> None:
+            pass
+
+        async def start(self) -> None:
+            if failure_stage == "start":
+                raise RuntimeError("session start failed")
+
+        async def invoke(self, query) -> None:
+            raise AuthBytesInvalid
+
+        async def stop(self) -> None:
+            stopped.append(True)
+
+    async def get_dc_option(dc_id: int, **kwargs):
+        return SimpleNamespace(ip_address="149.154.167.91", port=443)
+
+    async def export_authorization(query):
+        exported.append(query.dc_id)
+        return SimpleNamespace(id=1, bytes=b"exported-auth")
+
+    client.storage = Storage()
+    monkeypatch.setattr(kirugram.client, "Auth", FakeAuth)
+    monkeypatch.setattr(kirugram.client, "Session", FakeSession)
+    monkeypatch.setattr(client, "get_dc_option", get_dc_option)
+    monkeypatch.setattr(client, "invoke", export_authorization)
+
+    with pytest.raises(error):
+        await client.get_session(dc_id=3)
+
+    assert 3 not in client.sessions
+    assert stopped == [True]
+    assert exported == ([] if failure_stage == "start" else [3, 3, 3])
+
+
+async def test_dc_migration_swaps_session_and_clears_stale_dc_sessions(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    client = Client("dc_migration", in_memory=True)
+
+    class MigrationStorage:
+        def __init__(self) -> None:
+            self.dc_id_value = 2
+            self.server_address_value = "149.154.167.51"
+            self.port_value = 443
+            self.auth_key_value = b"old-auth-key"
+
+        async def dc_id(self, value: int | None = None) -> int:
+            if value is not None:
+                self.dc_id_value = value
+            return self.dc_id_value
+
+        async def server_address(self, value: str | None = None) -> str:
+            if value is not None:
+                self.server_address_value = value
+            return self.server_address_value
+
+        async def port(self, value: int | None = None) -> int:
+            if value is not None:
+                self.port_value = value
+            return self.port_value
+
+        async def auth_key(self, value: bytes | None = None) -> bytes:
+            if value is not None:
+                self.auth_key_value = value
+            return self.auth_key_value
+
+    class FakeSession:
+        def __init__(self, dc_id: int, auth_key: bytes) -> None:
+            self.dc_id = dc_id
+            self.auth_key = auth_key
+            self.stopped = False
+
+        async def stop(self) -> None:
+            self.stopped = True
+
+    old_session = FakeSession(2, b"old-auth-key")
+    stale_target_session = FakeSession(3, b"stale-auth-key")
+    migrated_session = FakeSession(3, b"new-auth-key")
+
+    async def get_dc_option(dc_id: int, **kwargs) -> SimpleNamespace:
+        return SimpleNamespace(ip_address="149.154.167.91", port=443)
+
+    async def get_session(**kwargs) -> FakeSession:
+        assert kwargs == {
+            "dc_id": 3,
+            "server_address": "149.154.167.91",
+            "port": 443,
+            "export_authorization": False,
+            "temporary": True,
+        }
+        return migrated_session
+
+    client.storage = MigrationStorage()
+    client.session = old_session
+    client.sessions = {2: old_session, 3: stale_target_session}
+    monkeypatch.setattr(client, "get_dc_option", get_dc_option)
+    monkeypatch.setattr(client, "get_session", get_session)
+
+    await client._migrate_to_dc(3)
+
+    assert client.session is migrated_session
+    assert client.sessions == {}
+    assert old_session.stopped
+    assert stale_target_session.stopped
+    assert not migrated_session.stopped
+    assert (
+        client.storage.dc_id_value,
+        client.storage.server_address_value,
+        client.storage.port_value,
+        client.storage.auth_key_value,
+    ) == (3, "149.154.167.91", 443, b"new-auth-key")
+
+
+async def test_dc_migration_keeps_old_session_when_new_session_creation_fails(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    client = Client("dc_migration_failure", in_memory=True)
+
+    class MigrationStorage:
+        async def dc_id(self) -> int:
+            return 2
+
+        async def server_address(self) -> str:
+            return "149.154.167.51"
+
+        async def port(self) -> int:
+            return 443
+
+        async def auth_key(self) -> bytes:
+            return b"old-auth-key"
+
+    class FakeSession:
+        dc_id = 2
+        stopped = False
+
+        async def stop(self) -> None:
+            self.stopped = True
+
+    old_session = FakeSession()
+
+    async def get_dc_option(dc_id: int, **kwargs) -> SimpleNamespace:
+        return SimpleNamespace(ip_address="149.154.167.91", port=443)
+
+    async def fail_to_create_session(**kwargs):
+        raise RuntimeError("new DC connection failed")
+
+    client.storage = MigrationStorage()
+    client.session = old_session
+    client.sessions = {2: old_session}
+    monkeypatch.setattr(client, "get_dc_option", get_dc_option)
+    monkeypatch.setattr(client, "get_session", fail_to_create_session)
+
+    with pytest.raises(RuntimeError, match="new DC connection failed"):
+        await client._migrate_to_dc(3)
+
+    assert client.session is old_session
+    assert client.sessions == {2: old_session}
+    assert not old_session.stopped

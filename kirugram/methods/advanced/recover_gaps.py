@@ -18,6 +18,7 @@
 
 from __future__ import annotations as _annotations
 
+import asyncio
 import logging
 from typing import TYPE_CHECKING
 
@@ -39,7 +40,42 @@ log = logging.getLogger(__name__)
 
 
 class RecoverGaps:
+    MAX_TIMESTAMP_RETRIES = 3
+    TIMESTAMP_RETRY_DELAY = 0.25
+
+    async def _invoke_difference(self, request, state_id: int):
+        for attempt in range(self.MAX_TIMESTAMP_RETRIES + 1):
+            try:
+                return await self.invoke(request)
+            except (PersistentTimestampOutdated, PersistentTimestampInvalid):
+                if attempt >= self.MAX_TIMESTAMP_RETRIES:
+                    raise
+
+                delay = self.TIMESTAMP_RETRY_DELAY * (2**attempt)
+                log.warning(
+                    "Update difference timestamp rejected for state %s; retrying in %.2fs (%s/%s)",
+                    state_id,
+                    delay,
+                    attempt + 1,
+                    self.MAX_TIMESTAMP_RETRIES,
+                )
+                await asyncio.sleep(delay)
+
+        raise RuntimeError("Update difference retry loop exited unexpectedly")
+
     async def recover_gaps(
+        self: kirugram.Client, ids: int | Iterable[int] | None = None
+    ) -> tuple[int, int]:
+        """Recover update gaps once at a time per client.
+
+        The watchdog and the initial dispatcher startup can both request recovery.
+        Serializing them prevents two difference requests from advancing the same
+        persisted pts state concurrently.
+        """
+        async with self.recover_gaps_lock:
+            return await self._recover_gaps(ids)
+
+    async def _recover_gaps(
         self: kirugram.Client, ids: int | Iterable[int] | None = None
     ) -> tuple[int, int]:
         """Restores updates for the time while the client was offline.
@@ -81,26 +117,26 @@ class RecoverGaps:
             while True:
                 request_pts = local_pts
 
-                try:
-                    diff = await self.invoke(
-                        raw.functions.updates.GetChannelDifference(
-                            channel=await self.resolve_peer(id),
-                            filter=raw.types.ChannelMessagesFilterEmpty(),
-                            pts=request_pts,
-                            limit=10000,
-                            force=False,
-                        )
-                        if id < ZERO_CHANNEL_ID
-                        else raw.functions.updates.GetDifference(
-                            pts=request_pts, date=local_date, qts=0
-                        )
+                request = (
+                    raw.functions.updates.GetChannelDifference(
+                        channel=await self.resolve_peer(id),
+                        filter=raw.types.ChannelMessagesFilterEmpty(),
+                        pts=request_pts,
+                        limit=10000,
+                        force=False,
                     )
+                    if id < ZERO_CHANNEL_ID
+                    else raw.functions.updates.GetDifference(
+                        pts=request_pts, date=local_date, qts=0
+                    )
+                )
+
+                try:
+                    diff = await self._invoke_difference(request, id)
                 except (ChannelPrivate, ChannelInvalid):
                     await self.storage.delete_update_state(id)
                     state_deleted = True
                     break
-                except (PersistentTimestampOutdated, PersistentTimestampInvalid):
-                    continue
 
                 if isinstance(diff, raw.types.updates.DifferenceEmpty):
                     await self.storage.set_update_state(

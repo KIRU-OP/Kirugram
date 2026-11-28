@@ -60,7 +60,7 @@ class Invoke:
                 The API Schema function filled with proper arguments.
 
             retries (``int``, *optional*):
-                Number of retries.
+                Number of retries. Pass ``0`` to disable retries for this invocation.
 
             timeout (``float``, *optional*):
                 Timeout in seconds.
