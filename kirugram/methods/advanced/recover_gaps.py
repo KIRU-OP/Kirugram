@@ -53,8 +53,7 @@ class RecoverGaps:
 
                 delay = self.TIMESTAMP_RETRY_DELAY * (2**attempt)
                 log.warning(
-                    "Update difference timestamp rejected for state %s; "
-                    "retrying in %.2fs (%s/%s)",
+                    "Update difference timestamp rejected for state %s; retrying in %.2fs (%s/%s)",
                     state_id,
                     delay,
                     attempt + 1,
