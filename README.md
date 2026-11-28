@@ -40,6 +40,7 @@
   <a href="#quick-start">Quick start</a> ·
   <a href="#migration-from-kurigram">Migration</a> ·
   <a href="#development">Development</a> ·
+  <a href="ROADMAP.md">Engineering Roadmap</a> ·
   <a href="#license-and-attribution">License</a>
 </p>
 
