@@ -727,7 +727,8 @@ class Session:
 
         query_name = ".".join(inner_query.QUALNAME.split(".")[1:])
 
-        for attempt in range(1, retries + 1):
+        # `retries` counts additional attempts after the initial request.
+        for attempt in range(1, retries + 2):
             # A failed send can wake up while restart() is still reconnecting.
             try:
                 await asyncio.wait_for(self.is_started.wait(), self.WAIT_TIMEOUT)
