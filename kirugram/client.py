@@ -1744,6 +1744,22 @@ class Client(Methods):
             port (``int``, *optional*):
                 Custom port.
         """
+        if not self.is_connected or self.session is None:
+            raise ConnectionError("Client must be connected before changing its DC")
+
+        if dc_id is not None and (
+            isinstance(dc_id, bool) or not isinstance(dc_id, int) or dc_id <= 0
+        ):
+            raise ValueError("DC ID must be a positive integer")
+
+        if port is not None and (
+            isinstance(port, bool) or not isinstance(port, int) or not 1 <= port <= 65535
+        ):
+            raise ValueError("Port must be an integer between 1 and 65535")
+
+        if server_address is not None and not server_address.strip():
+            raise ValueError("Server address cannot be empty")
+
         if not self.__config:
             self.__config = await self.invoke(raw.functions.help.GetConfig())
 
