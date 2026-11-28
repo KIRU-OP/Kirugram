@@ -1589,7 +1589,9 @@ class Client(Methods):
                 await self.storage.port(previous_port)
                 await self.storage.auth_key(previous_auth_key)
             except Exception:
-                log.exception("Failed to restore session storage after DC%s migration failed", dc_id)
+                log.exception(
+                    "Failed to restore session storage after DC%s migration failed", dc_id
+                )
 
             try:
                 await migrated_session.stop()
@@ -1616,7 +1618,9 @@ class Client(Methods):
             try:
                 await stale_session.stop()
             except Exception:
-                log.exception("Failed to stop stale DC%s session after migration", stale_session.dc_id)
+                log.exception(
+                    "Failed to stop stale DC%s session after migration", stale_session.dc_id
+                )
 
     async def get_session(
         self,
