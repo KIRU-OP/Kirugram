@@ -496,7 +496,7 @@ async def test_failed_dc_session_initialization_is_stopped_and_removed_from_cach
                 raise RuntimeError("session start failed")
 
         async def invoke(self, query) -> None:
-            raise AuthBytesInvalid()
+            raise AuthBytesInvalid
 
         async def stop(self) -> None:
             stopped.append(True)
