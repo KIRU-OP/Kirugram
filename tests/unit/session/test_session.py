@@ -708,6 +708,13 @@ async def test_invoke_resends_a_request_the_server_rejected_for_its_identity(
     assert result == pong
 
 
+async def test_invoke_rejects_negative_retry_counts() -> None:
+    session = _started_session()
+
+    with pytest.raises(ValueError, match="retries must be non-negative"):
+        await session.invoke(raw.functions.Ping(ping_id=0), retries=-1)
+
+
 async def test_invoke_with_zero_retries_still_makes_the_initial_request() -> None:
     session = _started_session()
     pong = raw.types.Pong(msg_id=0, ping_id=0)
