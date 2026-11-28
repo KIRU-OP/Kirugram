@@ -521,6 +521,7 @@ class Client(Methods):
     #  https://github.com/python/cpython/blob/323c59a5e348347be2ce2b7ea55fcb30bf68b2d3/Lib/asyncio/mixins.py#L19
     def _rebuild_loop_bound_state(self) -> None:
         self.sessions_lock = asyncio.Lock()
+        self.recover_gaps_lock = asyncio.Lock()
 
         self.save_file_semaphore = asyncio.Semaphore(self.max_concurrent_transmissions)
         self.get_file_semaphore = asyncio.Semaphore(self.max_concurrent_transmissions)
