@@ -529,32 +529,30 @@ async def test_dc_migration_swaps_session_and_clears_stale_dc_sessions(
 
     class MigrationStorage:
         def __init__(self) -> None:
-            self.values = {
-                "dc_id": 2,
-                "server_address": "149.154.167.51",
-                "port": 443,
-                "auth_key": b"old-auth-key",
-            }
+            self.dc_id_value = 2
+            self.server_address_value = "149.154.167.51"
+            self.port_value = 443
+            self.auth_key_value = b"old-auth-key"
 
         async def dc_id(self, value: int | None = None) -> int:
             if value is not None:
-                self.values["dc_id"] = value
-            return self.values["dc_id"]
+                self.dc_id_value = value
+            return self.dc_id_value
 
         async def server_address(self, value: str | None = None) -> str:
             if value is not None:
-                self.values["server_address"] = value
-            return self.values["server_address"]
+                self.server_address_value = value
+            return self.server_address_value
 
         async def port(self, value: int | None = None) -> int:
             if value is not None:
-                self.values["port"] = value
-            return self.values["port"]
+                self.port_value = value
+            return self.port_value
 
         async def auth_key(self, value: bytes | None = None) -> bytes:
             if value is not None:
-                self.values["auth_key"] = value
-            return self.values["auth_key"]
+                self.auth_key_value = value
+            return self.auth_key_value
 
     class FakeSession:
         def __init__(self, dc_id: int, auth_key: bytes) -> None:
@@ -595,12 +593,12 @@ async def test_dc_migration_swaps_session_and_clears_stale_dc_sessions(
     assert old_session.stopped
     assert stale_target_session.stopped
     assert not migrated_session.stopped
-    assert client.storage.values == {
-        "dc_id": 3,
-        "server_address": "149.154.167.91",
-        "port": 443,
-        "auth_key": b"new-auth-key",
-    }
+    assert (
+        client.storage.dc_id_value,
+        client.storage.server_address_value,
+        client.storage.port_value,
+        client.storage.auth_key_value,
+    ) == (3, "149.154.167.91", 443, b"new-auth-key")
 
 
 async def test_dc_migration_keeps_old_session_when_new_session_creation_fails(
