@@ -455,7 +455,6 @@ async def test_set_dc_rejects_invalid_configuration_before_network_io(
         await client.set_dc(**kwargs)
 
 
-
 @pytest.mark.parametrize(
     ("failure_stage", "error"),
     [
