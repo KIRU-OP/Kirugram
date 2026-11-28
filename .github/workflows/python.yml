@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Set up uv and Python ${{ matrix.python-version }}
-        uses: astral-sh/setup-uv@v10.0.1
+        uses: astral-sh/setup-uv@v10.4.0
         with:
           python-version: ${{ matrix.python-version }}
           enable-cache: true
@@ -58,7 +58,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Set up uv
-        uses: astral-sh/setup-uv@v10.0.1
+        uses: astral-sh/setup-uv@v10.4.0
       - name: Build wheel and source distribution
         run: make build
       - name: Verify build artifacts
@@ -71,7 +71,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Set up uv and Python
-        uses: astral-sh/setup-uv@v10.0.1
+        uses: astral-sh/setup-uv@v10.4.0
         with:
           python-version: "3.15"
           enable-cache: true
@@ -88,7 +88,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Set up uv and Python
-        uses: astral-sh/setup-uv@v10.0.1
+        uses: astral-sh/setup-uv@v10.4.0
         with:
           python-version: "3.15"
           enable-cache: true
@@ -107,7 +107,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Set up uv
-        uses: astral-sh/setup-uv@v10.0.1
+        uses: astral-sh/setup-uv@v10.4.0
         with:
           enable-cache: true
           cache-dependency-glob: |
@@ -121,7 +121,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Set up uv
-        uses: astral-sh/setup-uv@v10.0.1
+        uses: astral-sh/setup-uv@v10.4.0
         with:
           enable-cache: true
           cache-dependency-glob: |
