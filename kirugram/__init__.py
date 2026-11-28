@@ -50,3 +50,10 @@ __all__ = [
     "raw",
     "types",
 ]
+
+
+# Optional PyTgCalls integration: compatibility stays inside Kirugram.
+from .compat.pytgcalls import install as _install_pytgcalls_compat
+
+_install_pytgcalls_compat()
+del _install_pytgcalls_compat
