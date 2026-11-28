@@ -33,6 +33,7 @@ from __future__ import annotations as _annotations
 import asyncio
 import errno
 import logging
+from types import SimpleNamespace
 from contextlib import aclosing
 from pathlib import Path
 from typing import TYPE_CHECKING, Final, Protocol
@@ -43,6 +44,7 @@ import kirugram.client
 from kirugram import Client, StopTransmission, filters, raw
 from kirugram.client import _plugin_handlers
 from kirugram.connection.proxy import HTTPProxy, SOCKS5Proxy
+from kirugram.errors import AuthBytesInvalid
 from kirugram.file_id import FileId, FileType
 from kirugram.handlers import MessageHandler
 
@@ -451,3 +453,70 @@ async def test_set_dc_rejects_invalid_configuration_before_network_io(
 
     with pytest.raises(ValueError, match=message):
         await client.set_dc(**kwargs)
+
+
+
+@pytest.mark.parametrize(
+    ("failure_stage", "error"),
+    [
+        pytest.param("start", RuntimeError, id="session-start-failure"),
+        pytest.param("authorization", AuthBytesInvalid, id="authorization-import-failure"),
+    ],
+)
+async def test_failed_dc_session_initialization_is_stopped_and_removed_from_cache(
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    failure_stage: str,
+    error: type[Exception],
+) -> None:
+    client = Client("dc_session_cleanup", in_memory=True)
+    stopped: list[bool] = []
+    exported: list[int] = []
+
+    class Storage:
+        async def dc_id(self) -> int:
+            return 2
+
+        async def test_mode(self) -> bool:
+            return False
+
+    class FakeAuth:
+        def __init__(self, *args) -> None:
+            pass
+
+        async def create(self) -> bytes:
+            return b"auth-key"
+
+    class FakeSession:
+        def __init__(self, *args, **kwargs) -> None:
+            pass
+
+        async def start(self) -> None:
+            if failure_stage == "start":
+                raise RuntimeError("session start failed")
+
+        async def invoke(self, query) -> None:
+            raise AuthBytesInvalid()
+
+        async def stop(self) -> None:
+            stopped.append(True)
+
+    async def get_dc_option(dc_id: int, **kwargs):
+        return SimpleNamespace(ip_address="149.154.167.91", port=443)
+
+    async def export_authorization(query):
+        exported.append(query.dc_id)
+        return SimpleNamespace(id=1, bytes=b"exported-auth")
+
+    client.storage = Storage()
+    monkeypatch.setattr(kirugram.client, "Auth", FakeAuth)
+    monkeypatch.setattr(kirugram.client, "Session", FakeSession)
+    monkeypatch.setattr(client, "get_dc_option", get_dc_option)
+    monkeypatch.setattr(client, "invoke", export_authorization)
+
+    with pytest.raises(error):
+        await client.get_session(dc_id=3)
+
+    assert 3 not in client.sessions
+    assert stopped == [True]
+    assert exported == ([] if failure_stage == "start" else [3, 3, 3])
