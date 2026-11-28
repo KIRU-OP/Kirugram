@@ -708,6 +708,18 @@ async def test_invoke_resends_a_request_the_server_rejected_for_its_identity(
     assert result == pong
 
 
+async def test_invoke_with_zero_retries_still_makes_the_initial_request() -> None:
+    session = _started_session()
+    pong = raw.types.Pong(msg_id=0, ping_id=0)
+    connection = AnsweringConnection(session=session, answers=[pong])
+    session.connection = connection
+
+    result = await session.invoke(raw.functions.Ping(ping_id=0), retries=0)
+
+    assert result == pong
+    assert len(connection.sent) == 1
+
+
 async def test_invoke_waits_for_the_session_to_reconnect_before_retrying(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
