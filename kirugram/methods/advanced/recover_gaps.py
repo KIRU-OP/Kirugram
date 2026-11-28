@@ -43,6 +43,27 @@ class RecoverGaps:
     MAX_TIMESTAMP_RETRIES = 3
     TIMESTAMP_RETRY_DELAY = 0.25
 
+    async def _invoke_difference(self, request, state_id: int):
+        for attempt in range(self.MAX_TIMESTAMP_RETRIES + 1):
+            try:
+                return await self.invoke(request)
+            except (PersistentTimestampOutdated, PersistentTimestampInvalid):
+                if attempt >= self.MAX_TIMESTAMP_RETRIES:
+                    raise
+
+                delay = self.TIMESTAMP_RETRY_DELAY * (2**attempt)
+                log.warning(
+                    "Update difference timestamp rejected for state %s; "
+                    "retrying in %.2fs (%s/%s)",
+                    state_id,
+                    delay,
+                    attempt + 1,
+                    self.MAX_TIMESTAMP_RETRIES,
+                )
+                await asyncio.sleep(delay)
+
+        raise RuntimeError("Update difference retry loop exited unexpectedly")
+
     async def recover_gaps(
         self: kirugram.Client, ids: int | Iterable[int] | None = None
     ) -> tuple[int, int]:
@@ -112,27 +133,7 @@ class RecoverGaps:
                 )
 
                 try:
-                    for attempt in range(self.MAX_TIMESTAMP_RETRIES + 1):
-                        try:
-                            diff = await self.invoke(request)
-                        except (PersistentTimestampOutdated, PersistentTimestampInvalid):
-                            if attempt >= self.MAX_TIMESTAMP_RETRIES:
-                                raise
-
-                            delay = self.TIMESTAMP_RETRY_DELAY * (2**attempt)
-                            log.warning(
-                                "Update difference timestamp rejected for state %s; "
-                                "retrying in %.2fs (%s/%s)",
-                                id,
-                                delay,
-                                attempt + 1,
-                                self.MAX_TIMESTAMP_RETRIES,
-                            )
-                            await asyncio.sleep(delay)
-                        else:
-                            break
-                    else:  # pragma: no cover - the loop either breaks or raises
-                        raise RuntimeError("Update difference retry loop exited unexpectedly")
+                    diff = await self._invoke_difference(request, id)
                 except (ChannelPrivate, ChannelInvalid):
                     await self.storage.delete_update_state(id)
                     state_deleted = True
