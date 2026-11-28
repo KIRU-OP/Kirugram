@@ -128,3 +128,43 @@ def test_connection_keeps_the_requested_transport_without_a_padded_secret() -> N
     )
 
     assert connection.protocol_factory is TCPFull
+
+
+async def test_connection_close_is_safe_before_connecting() -> None:
+    connection = Connection(dc_id=2, server_address="unused", port=443, test_mode=False)
+
+    await connection.close()
+
+    assert connection.protocol is None
+
+
+async def test_connection_close_is_idempotent() -> None:
+    class FakeProtocol:
+        close_calls = 0
+
+        async def close(self) -> None:
+            self.close_calls += 1
+
+    connection = Connection(dc_id=2, server_address="unused", port=443, test_mode=False)
+    protocol = FakeProtocol()
+    connection.protocol = protocol  # type: ignore[assignment]
+
+    await connection.close()
+    await connection.close()
+
+    assert protocol.close_calls == 1
+    assert connection.protocol is None
+
+
+async def test_connection_send_before_connecting_raises_clear_error() -> None:
+    connection = Connection(dc_id=2, server_address="unused", port=443, test_mode=False)
+
+    with pytest.raises(ConnectionError, match="Connection is not established"):
+        await connection.send(b"payload")
+
+
+async def test_connection_recv_before_connecting_raises_clear_error() -> None:
+    connection = Connection(dc_id=2, server_address="unused", port=443, test_mode=False)
+
+    with pytest.raises(ConnectionError, match="Connection is not established"):
+        await connection.recv()
