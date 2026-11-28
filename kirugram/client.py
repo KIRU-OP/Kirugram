@@ -455,6 +455,7 @@ class Client(Methods):
         self.sessions = {}
         self.media_sessions = {}
         self.sessions_lock = asyncio.Lock()
+        self.recover_gaps_lock = asyncio.Lock()
 
         self.save_file_semaphore = asyncio.Semaphore(self.max_concurrent_transmissions)
         self.get_file_semaphore = asyncio.Semaphore(self.max_concurrent_transmissions)
