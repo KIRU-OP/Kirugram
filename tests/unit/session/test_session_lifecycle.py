@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import asyncio
+from typing import TYPE_CHECKING
 
-import pytest
+if TYPE_CHECKING:
+    import pytest
 
 from kirugram import Client
 from kirugram.session.session import Result, Session, SessionState
