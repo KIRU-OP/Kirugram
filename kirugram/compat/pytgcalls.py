@@ -3,6 +3,7 @@
 This adapter keeps Pyrogram-compatibility details inside Kirugram rather than
 requiring every application to monkey-patch PyTgCalls itself.
 """
+
 from __future__ import annotations
 
 import importlib
@@ -43,12 +44,10 @@ def install() -> bool:
 
     for module_name, module in tuple(sys.modules.items()):
         if module_name == "kirugram" or module_name.startswith("kirugram."):
-            sys.modules["pyrogram" + module_name[len("kirugram"):]] = module
+            sys.modules["pyrogram" + module_name[len("kirugram") :]] = module
 
     try:
-        bridged_client_module = importlib.import_module(
-            "pytgcalls.mtproto.bridged_client"
-        )
+        bridged_client_module = importlib.import_module("pytgcalls.mtproto.bridged_client")
     except ImportError:
         return False
 
