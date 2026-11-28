@@ -4,10 +4,14 @@ on:
   push:
     tags:
       - 'v*'
+      - '2.2.*'
+  release:
+    types: [published]
   workflow_dispatch: {}
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   build-n-publish:
@@ -23,8 +27,5 @@ jobs:
       - name: Build package
         run: make build
 
-      - name: Publish package
+      - name: Publish package to PyPI using trusted publishing
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
