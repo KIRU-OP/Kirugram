@@ -130,7 +130,6 @@ def test_connection_keeps_the_requested_transport_without_a_padded_secret() -> N
     assert connection.protocol_factory is TCPFull
 
 
-
 async def test_connection_close_is_safe_before_connecting() -> None:
     connection = Connection(dc_id=2, server_address="unused", port=443, test_mode=False)
 
