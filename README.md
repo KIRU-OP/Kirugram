@@ -42,6 +42,7 @@
   <a href="#development">Development</a> ·
   <a href="ROADMAP.md">Engineering Roadmap</a> ·
   <a href="UPSTREAM.md">Upstream Maintenance Policy</a> ·
+  <a href="SECURITY.md">Security Policy</a> ·
   <a href="#license-and-attribution">License</a>
 </p>
 
