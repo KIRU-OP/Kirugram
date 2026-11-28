@@ -163,6 +163,7 @@ def test_the_sweep_finds_the_primitives_it_is_about() -> None:
     assert built_by_the_constructor == {
         "Cache._lock",
         "Client.get_file_semaphore",
+        "Client.recover_gaps_lock",
         "Client.save_file_semaphore",
         "Client.sessions_lock",
         "Client.updates_watchdog_event",
