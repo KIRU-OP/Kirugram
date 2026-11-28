@@ -414,8 +414,11 @@ async def test_a_failed_write_releases_the_download_slot_at_once(
     assert not downloader.get_file_semaphore.locked()
 
 
-
-@pytest.mark.parametrize("connected", [False, True], ids=["disconnected", "missing-session"])
+@pytest.mark.parametrize(
+    "connected",
+    [False, True],
+    ids=["disconnected", "missing-session"],
+)
 async def test_set_dc_requires_an_active_client_session(*, connected: bool) -> None:
     client = Client("dc_guard", in_memory=True)
     client.is_connected = connected
