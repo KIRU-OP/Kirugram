@@ -720,6 +720,9 @@ class Session:
         sleep_threshold: float = SLEEP_THRESHOLD,
         retry_delay: float = RETRY_DELAY,
     ):
+        if retries < 0:
+            raise ValueError("retries must be non-negative")
+
         if isinstance(query, (raw.functions.InvokeWithoutUpdates, raw.functions.InvokeWithTakeout)):
             inner_query = query.query
         else:
