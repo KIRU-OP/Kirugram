@@ -46,16 +46,19 @@ def install() -> bool:
             sys.modules["pyrogram" + module_name[len("kirugram"):]] = module
 
     try:
-        from pytgcalls.mtproto.bridged_client import BridgedClient
+        bridged_client_module = importlib.import_module(
+            "pytgcalls.mtproto.bridged_client"
+        )
     except ImportError:
         return False
 
-    original_package_name = BridgedClient.package_name
+    bridged_client = bridged_client_module.BridgedClient
+    original_package_name = bridged_client.package_name
 
     def package_name(client):
         if client.__class__.__module__.split(".", 1)[0] == "kirugram":
             return "pyrogram"
         return original_package_name(client)
 
-    BridgedClient.package_name = staticmethod(package_name)
+    bridged_client.package_name = staticmethod(package_name)
     return True
