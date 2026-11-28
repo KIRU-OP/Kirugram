@@ -1658,27 +1658,39 @@ class Client(Methods):
         if not temporary:
             sessions[dc_id] = session
 
-        await session.start()
+        try:
+            await session.start()
 
-        if not is_current_dc and export_authorization:
-            for _ in range(3):
-                exported_auth = await self.invoke(
-                    raw.functions.auth.ExportAuthorization(dc_id=dc_id)
-                )
-
-                try:
-                    await session.invoke(
-                        raw.functions.auth.ImportAuthorization(
-                            id=exported_auth.id, bytes=exported_auth.bytes
-                        )
+            if not is_current_dc and export_authorization:
+                for _ in range(3):
+                    exported_auth = await self.invoke(
+                        raw.functions.auth.ExportAuthorization(dc_id=dc_id)
                     )
-                except AuthBytesInvalid:
-                    continue
+
+                    try:
+                        await session.invoke(
+                            raw.functions.auth.ImportAuthorization(
+                                id=exported_auth.id, bytes=exported_auth.bytes
+                            )
+                        )
+                    except AuthBytesInvalid:
+                        continue
+                    else:
+                        break
                 else:
-                    break
-            else:
+                    raise AuthBytesInvalid
+        except BaseException:
+            # A partially initialized or unauthorized session must never remain cached.
+            # Keep the original exception while still attempting to release its transport.
+            if not temporary and sessions.get(dc_id) is session:
+                del sessions[dc_id]
+
+            try:
                 await session.stop()
-                raise AuthBytesInvalid
+            except Exception:
+                log.exception("Failed to clean up DC%s session after initialization failed", dc_id)
+
+            raise
 
         return session
 
