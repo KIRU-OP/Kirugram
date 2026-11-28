@@ -16,7 +16,7 @@ class RetryProbe(RecoverGaps):
     async def invoke(self, request):
         self.calls += 1
         if self.calls <= self.failures:
-            raise PersistentTimestampOutdated()
+            raise PersistentTimestampOutdated
         return "recovered"
 
 
