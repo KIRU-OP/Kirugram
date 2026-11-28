@@ -94,6 +94,10 @@ class Connection:
         self._protocol_dc_id = _protocol_dc_id(dc_id, test_mode=test_mode, media=media)
 
     async def connect(self) -> None:
+        # Reconnecting an existing Connection must not leak its previous transport.
+        if self.protocol is not None:
+            await self.close()
+
         for _ in range(Connection.MAX_CONNECTION_ATTEMPTS):
             self.protocol = self.protocol_factory(
                 ipv6=self.ipv6,
@@ -107,8 +111,14 @@ class Connection:
                 await self.protocol.connect((self.server_address, self.port))
             except OSError as e:
                 log.warning("Unable to connect due to network issues: %s", e)
-                await self.protocol.close()
+                await self.close()
                 await asyncio.sleep(1)
+            except asyncio.CancelledError:
+                await self.close()
+                raise
+            except Exception:
+                await self.close()
+                raise
             else:
                 log.info(
                     "Connected! %s DC%s%s - IPv%s",
@@ -123,11 +133,24 @@ class Connection:
             raise ConnectionError
 
     async def close(self) -> None:
-        await self.protocol.close()
+        protocol, self.protocol = self.protocol, None
+
+        if protocol is None:
+            return
+
+        await protocol.close()
         log.info("Disconnected")
 
+    def _require_protocol(self) -> TCP:
+        protocol = self.protocol
+
+        if protocol is None:
+            raise ConnectionError("Connection is not established")
+
+        return protocol
+
     async def send(self, data: bytes) -> None:
-        await self.protocol.send(data)
+        await self._require_protocol().send(data)
 
     async def recv(self) -> bytes | None:
-        return await self.protocol.recv()
+        return await self._require_protocol().recv()
