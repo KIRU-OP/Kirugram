@@ -1554,6 +1554,74 @@ class Client(Methods):
             except Exception as e:
                 raise e
 
+    async def _migrate_to_dc(self, dc_id: int) -> None:
+        """Move the active session to a DC selected by Telegram during authorization."""
+        current_session = self.session
+
+        if current_session is None:
+            raise ConnectionError("Client is not connected")
+
+        dc_option = await self.get_dc_option(dc_id, ipv6=self.ipv6)
+
+        previous_dc_id = await self.storage.dc_id()
+        previous_server_address = await self.storage.server_address()
+        previous_port = await self.storage.port()
+        previous_auth_key = await self.storage.auth_key()
+
+        migrated_session = await self.get_session(
+            dc_id=dc_id,
+            server_address=dc_option.ip_address,
+            port=dc_option.port,
+            export_authorization=False,
+            temporary=True,
+        )
+
+        try:
+            await self.storage.dc_id(dc_id)
+            await self.storage.server_address(dc_option.ip_address)
+            await self.storage.port(dc_option.port)
+            await self.storage.auth_key(migrated_session.auth_key)
+        except BaseException:
+            # Keep the old session usable if persisting the migration fails.
+            try:
+                await self.storage.dc_id(previous_dc_id)
+                await self.storage.server_address(previous_server_address)
+                await self.storage.port(previous_port)
+                await self.storage.auth_key(previous_auth_key)
+            except Exception:
+                log.exception(
+                    "Failed to restore session storage after DC%s migration failed", dc_id
+                )
+
+            try:
+                await migrated_session.stop()
+            except Exception:
+                log.exception("Failed to stop the new DC%s session after migration failed", dc_id)
+
+            raise
+
+        self.session = migrated_session
+
+        stale_sessions: list[Session] = []
+        for stale_dc_id in {current_session.dc_id, dc_id}:
+            cached_session = self.sessions.pop(stale_dc_id, None)
+            if cached_session is not None and cached_session not in stale_sessions:
+                stale_sessions.append(cached_session)
+
+        if current_session not in stale_sessions:
+            stale_sessions.append(current_session)
+
+        for stale_session in stale_sessions:
+            if stale_session is migrated_session:
+                continue
+
+            try:
+                await stale_session.stop()
+            except Exception:
+                log.exception(
+                    "Failed to stop stale DC%s session after migration", stale_session.dc_id
+                )
+
     async def get_session(
         self,
         dc_id: int | None = None,
@@ -1658,27 +1726,39 @@ class Client(Methods):
         if not temporary:
             sessions[dc_id] = session
 
-        await session.start()
+        try:
+            await session.start()
 
-        if not is_current_dc and export_authorization:
-            for _ in range(3):
-                exported_auth = await self.invoke(
-                    raw.functions.auth.ExportAuthorization(dc_id=dc_id)
-                )
-
-                try:
-                    await session.invoke(
-                        raw.functions.auth.ImportAuthorization(
-                            id=exported_auth.id, bytes=exported_auth.bytes
-                        )
+            if not is_current_dc and export_authorization:
+                for _ in range(3):
+                    exported_auth = await self.invoke(
+                        raw.functions.auth.ExportAuthorization(dc_id=dc_id)
                     )
-                except AuthBytesInvalid:
-                    continue
+
+                    try:
+                        await session.invoke(
+                            raw.functions.auth.ImportAuthorization(
+                                id=exported_auth.id, bytes=exported_auth.bytes
+                            )
+                        )
+                    except AuthBytesInvalid:
+                        continue
+                    else:
+                        break
                 else:
-                    break
-            else:
+                    raise AuthBytesInvalid
+        except BaseException:
+            # A partially initialized or unauthorized session must never remain cached.
+            # Keep the original exception while still attempting to release its transport.
+            if not temporary and sessions.get(dc_id) is session:
+                del sessions[dc_id]
+
+            try:
                 await session.stop()
-                raise AuthBytesInvalid
+            except Exception:
+                log.exception("Failed to clean up DC%s session after initialization failed", dc_id)
+
+            raise
 
         return session
 
