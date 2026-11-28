@@ -6,6 +6,7 @@ requiring every application to monkey-patch PyTgCalls itself.
 from __future__ import annotations
 
 import importlib
+import importlib.util
 import sys
 
 
@@ -31,16 +32,23 @@ def install() -> bool:
     supported without the optional voice-chat integration.
     """
     try:
-        from pytgcalls.mtproto.bridged_client import BridgedClient
-    except ImportError:
+        if importlib.util.find_spec("pytgcalls") is None:
+            return False
+    except (ImportError, ValueError):
         return False
 
+    # Load Kirugram's equivalents before PyTgCalls imports its Pyrogram bridge.
     for module_name in _MODULES:
         importlib.import_module(f"kirugram.{module_name}")
 
     for module_name, module in tuple(sys.modules.items()):
         if module_name == "kirugram" or module_name.startswith("kirugram."):
             sys.modules["pyrogram" + module_name[len("kirugram"):]] = module
+
+    try:
+        from pytgcalls.mtproto.bridged_client import BridgedClient
+    except ImportError:
+        return False
 
     original_package_name = BridgedClient.package_name
 
