@@ -519,3 +519,132 @@ async def test_failed_dc_session_initialization_is_stopped_and_removed_from_cach
     assert 3 not in client.sessions
     assert stopped == [True]
     assert exported == ([] if failure_stage == "start" else [3, 3, 3])
+
+
+
+async def test_dc_migration_swaps_session_and_clears_stale_dc_sessions(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    client = Client("dc_migration", in_memory=True)
+
+    class MigrationStorage:
+        def __init__(self) -> None:
+            self.values = {
+                "dc_id": 2,
+                "server_address": "149.154.167.51",
+                "port": 443,
+                "auth_key": b"old-auth-key",
+            }
+
+        async def dc_id(self, value: int | None = None) -> int:
+            if value is not None:
+                self.values["dc_id"] = value
+            return self.values["dc_id"]
+
+        async def server_address(self, value: str | None = None) -> str:
+            if value is not None:
+                self.values["server_address"] = value
+            return self.values["server_address"]
+
+        async def port(self, value: int | None = None) -> int:
+            if value is not None:
+                self.values["port"] = value
+            return self.values["port"]
+
+        async def auth_key(self, value: bytes | None = None) -> bytes:
+            if value is not None:
+                self.values["auth_key"] = value
+            return self.values["auth_key"]
+
+    class FakeSession:
+        def __init__(self, dc_id: int, auth_key: bytes) -> None:
+            self.dc_id = dc_id
+            self.auth_key = auth_key
+            self.stopped = False
+
+        async def stop(self) -> None:
+            self.stopped = True
+
+    old_session = FakeSession(2, b"old-auth-key")
+    stale_target_session = FakeSession(3, b"stale-auth-key")
+    migrated_session = FakeSession(3, b"new-auth-key")
+
+    async def get_dc_option(dc_id: int, **kwargs) -> SimpleNamespace:
+        return SimpleNamespace(ip_address="149.154.167.91", port=443)
+
+    async def get_session(**kwargs) -> FakeSession:
+        assert kwargs == {
+            "dc_id": 3,
+            "server_address": "149.154.167.91",
+            "port": 443,
+            "export_authorization": False,
+            "temporary": True,
+        }
+        return migrated_session
+
+    client.storage = MigrationStorage()
+    client.session = old_session
+    client.sessions = {2: old_session, 3: stale_target_session}
+    monkeypatch.setattr(client, "get_dc_option", get_dc_option)
+    monkeypatch.setattr(client, "get_session", get_session)
+
+    await client._migrate_to_dc(3)
+
+    assert client.session is migrated_session
+    assert client.sessions == {}
+    assert old_session.stopped
+    assert stale_target_session.stopped
+    assert not migrated_session.stopped
+    assert client.storage.values == {
+        "dc_id": 3,
+        "server_address": "149.154.167.91",
+        "port": 443,
+        "auth_key": b"new-auth-key",
+    }
+
+
+async def test_dc_migration_keeps_old_session_when_new_session_creation_fails(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    client = Client("dc_migration_failure", in_memory=True)
+
+    class MigrationStorage:
+        async def dc_id(self) -> int:
+            return 2
+
+        async def server_address(self) -> str:
+            return "149.154.167.51"
+
+        async def port(self) -> int:
+            return 443
+
+        async def auth_key(self) -> bytes:
+            return b"old-auth-key"
+
+    class FakeSession:
+        dc_id = 2
+        stopped = False
+
+        async def stop(self) -> None:
+            self.stopped = True
+
+    old_session = FakeSession()
+
+    async def get_dc_option(dc_id: int, **kwargs) -> SimpleNamespace:
+        return SimpleNamespace(ip_address="149.154.167.91", port=443)
+
+    async def fail_to_create_session(**kwargs):
+        raise RuntimeError("new DC connection failed")
+
+    client.storage = MigrationStorage()
+    client.session = old_session
+    client.sessions = {2: old_session}
+    monkeypatch.setattr(client, "get_dc_option", get_dc_option)
+    monkeypatch.setattr(client, "get_session", fail_to_create_session)
+
+    with pytest.raises(RuntimeError, match="new DC connection failed"):
+        await client._migrate_to_dc(3)
+
+    assert client.session is old_session
+    assert client.sessions == {2: old_session}
+    assert not old_session.stopped
