@@ -60,7 +60,7 @@ class Invoke:
                 The API Schema function filled with proper arguments.
 
             retries (``int``, *optional*):
-                Number of retries.
+                Number of retries. Pass ``0`` to disable retries for this invocation.
 
             timeout (``float``, *optional*):
                 Timeout in seconds.
@@ -106,7 +106,7 @@ class Invoke:
 
         r = await session.invoke(
             query=query,
-            retries=retries or self.retries,
+            retries=retries if retries is not None else self.retries,
             timeout=timeout if timeout is not None else self.timeout,
             sleep_threshold=(
                 sleep_threshold if sleep_threshold is not None else self.sleep_threshold
