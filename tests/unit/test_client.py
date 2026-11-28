@@ -521,7 +521,6 @@ async def test_failed_dc_session_initialization_is_stopped_and_removed_from_cach
     assert exported == ([] if failure_stage == "start" else [3, 3, 3])
 
 
-
 async def test_dc_migration_swaps_session_and_clears_stale_dc_sessions(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
