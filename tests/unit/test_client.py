@@ -412,3 +412,37 @@ async def test_a_failed_write_releases_the_download_slot_at_once(
         await downloader.handle_download(packet)
 
     assert not downloader.get_file_semaphore.locked()
+
+
+
+@pytest.mark.parametrize("connected", [False, True], ids=["disconnected", "missing-session"])
+async def test_set_dc_requires_an_active_client_session(*, connected: bool) -> None:
+    client = Client("dc_guard", in_memory=True)
+    client.is_connected = connected
+    client.session = None
+
+    with pytest.raises(ConnectionError, match="must be connected"):
+        await client.set_dc(2)
+
+
+@pytest.mark.parametrize(
+    ("kwargs", "message"),
+    [
+        pytest.param({"dc_id": 0}, "DC ID must be a positive integer", id="zero-dc"),
+        pytest.param({"dc_id": -2}, "DC ID must be a positive integer", id="negative-dc"),
+        pytest.param({"dc_id": True}, "DC ID must be a positive integer", id="boolean-dc"),
+        pytest.param({"port": 0}, "Port must be an integer", id="zero-port"),
+        pytest.param({"port": 65536}, "Port must be an integer", id="large-port"),
+        pytest.param({"port": True}, "Port must be an integer", id="boolean-port"),
+        pytest.param({"server_address": "   "}, "Server address cannot be empty", id="blank-address"),
+    ],
+)
+async def test_set_dc_rejects_invalid_configuration_before_network_io(
+    *, kwargs: dict, message: str
+) -> None:
+    client = Client("dc_validation", in_memory=True)
+    client.is_connected = True
+    client.session = object()
+
+    with pytest.raises(ValueError, match=message):
+        await client.set_dc(**kwargs)
